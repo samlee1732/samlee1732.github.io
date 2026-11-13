@@ -1,21 +1,5 @@
 [
   {
-    "id": "torsionally-tristable-metastructure",
-    "title": "A Torsionally Tristable Metastructure with In-Plane Translational Actuation and Post-Fabrication Angle Tuning",
-    "journal": "Materials & Design",
-    "authors": [
-      "Ruyang Yu",
-      "Sen Li",
-      "Tao Luo"
-    ],
-    "author_conjunction": true,
-    "image": "tristable-metastructure-concept.png",
-    "image_alt": "Hand-drawn conceptual illustration of a concentric-ring compliant metastructure in three stable rotational configurations.",
-    "image_width": 1619,
-    "image_height": 971,
-    "image_caption": "Conceptual illustration only; manuscript under review."
-  },
-  {
     "id": "vista",
     "title": "ViSTA: Coarse-to-Fine Visuotactile Deformation Servoing for Online Robotic Weld-Seam Trajectory Adjustment",
     "journal": "IEEE Robotics and Automation Letters (RA-L)",
@@ -29,6 +13,22 @@
     "image_alt": "Conceptual illustration of robotic weld-seam sensing and trajectory adjustment using a compliant tactile sensor.",
     "image_width": 1448,
     "image_height": 1086,
+    "image_caption": "Conceptual illustration only; manuscript under review."
+  },
+  {
+    "id": "torsionally-tristable-metastructure",
+    "title": "A Torsionally Tristable Metastructure with In-Plane Translational Actuation and Post-Fabrication Angle Tuning",
+    "journal": "Materials & Design",
+    "authors": [
+      "Ruyang Yu",
+      "Sen Li",
+      "Tao Luo"
+    ],
+    "author_conjunction": true,
+    "image": "tristable-metastructure-concept.png",
+    "image_alt": "Hand-drawn conceptual illustration of a concentric-ring compliant metastructure in three stable rotational configurations.",
+    "image_width": 1619,
+    "image_height": 971,
     "image_caption": "Conceptual illustration only; manuscript under review."
   }
 ]
