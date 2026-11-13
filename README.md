@@ -57,9 +57,9 @@ News 位于 Competitions 之后，点击进入独立的 `/news/` 页面；首页
 `data/under-review.json` 单独维护在审稿件，页面内与下方 8 篇已发表论文按状态分组。目前有 2 篇：
 
 - Materials & Design 投稿：**A Torsionally Tristable Metastructure with In-Plane Translational Actuation and Post-Fabrication Angle Tuning**。通讯作者为 Tao Luo，共同作者为 Ruyang Yu、Sen Li；按角色展示，不推断正式作者排序。
-- IEEE Robotics and Automation Letters (RA-L) 投稿：**ViSTA: Coarse-to-Fine Visuotactile Deformation Servoing for Online Robotic Weld-Seam Trajectory Adjustment**，稿号 `26-6318`。作者按用户提供的投稿系统截图依次为 Sen Li、Tuo Zhang、Chaoyang Song、Fang Wan*。保留截图中的星号；因未提供星号图例，暂不额外解释作者角色。不展示投稿系统中的作者编号。
+- IEEE Robotics and Automation Letters (RA-L) 投稿：**ViSTA: Coarse-to-Fine Visuotactile Deformation Servoing for Online Robotic Weld-Seam Trajectory Adjustment**。作者按用户提供的投稿系统截图依次为 Sen Li、Tuo Zhang、Chaoyang Song、Fang Wan*。保留截图中的星号；因未提供星号图例，暂不额外解释作者角色。不展示投稿系统中的作者编号。
 
-两篇均仅标为 Under Review，未填写正式发表年份、DOI、卷期或录用信息。`authors` 用于已知排序的作者列表；顺序不确定时，使用 `co_authors` 与可选的 `corresponding_author` 按角色显示。每篇有独立页内锚点，搜索结果直接跳到对应稿件。
+在审稿件不公开投稿系统稿件编号；生成器不将此类编号写入页面或站内搜索。两篇均仅标为 Under Review，未填写正式发表年份、DOI、卷期或录用信息。`authors` 用于已知排序的作者列表；顺序不确定时，使用 `co_authors` 与可选的 `corresponding_author` 按角色显示。每篇有独立页内锚点，搜索结果直接跳到对应稿件。
 
 摘要、BibTeX 和图片/视频保留待补充位置，缺失资源不生成链接。当前不生成该稿件的独立详情页或引用文件。补充图片时可使用与已发表论文相同的 `image`、`image_alt`、`image_width`、`image_height` 字段，将文件放入 `assets/publications/`。新增或修改在审稿件后运行下方生成命令，同步更新首页和站内搜索；后续补齐摘要、引用等资源时再启用对应入口。
 
@@ -111,7 +111,7 @@ Publication 下方新增 Patents（专利）板块，数据源为 `data/patents.
 
 导航右侧原 Contact 按钮已替换为放大镜。点击展开搜索框，输入内容即时匹配，按 Enter 或右侧箭头确认并聚焦首条结果；点击结果打开论文、跳转首页对应区域，或打开 Team / Teaching 面板。按 Esc、点击外部或 Tab 移出搜索区域可收起。手机端放大镜始终可见，不必先打开导航菜单。
 
-搜索覆盖 8 篇已发表论文的标题、作者、年份、DOI、摘要，在审稿件的标题、期刊、作者角色与稿号，以及中英文简介、联系方式、Competitions、News、Team 和两门课程。在审搜索结果单独标注 Under Review。支持中英文关键词和多个词同时匹配，结果按标题相关度排序。无匹配时显示提示。搜索在浏览器本地完成，不调用外部搜索服务，不保存或上传查询词。
+搜索覆盖 8 篇已发表论文的标题、作者、年份、DOI、摘要，在审稿件的标题、期刊与作者角色，以及中英文简介、联系方式、Competitions、News、Team 和两门课程。在审搜索结果单独标注 Under Review。支持中英文关键词和多个词同时匹配，结果按标题相关度排序。无匹配时显示提示。搜索在浏览器本地完成，不调用外部搜索服务，不保存或上传查询词。
 
 新闻与学生竞赛搜索结果分别打开独立 `/news/` 和 `/competitions/` 页面。修改简介、联系方式、课程、学生竞赛、新闻或论文后运行 `python3 tools/build_publications.py`，并提交生成的 `assets/search-index.json` 和页面。索引中的搜索文本来自实际页面内容；显示摘要与辅助匹配关键词分开。新内容不会在发布时自动抓取。直接双击 HTML 时，浏览器可能限制索引读取，请通过上面的本地 HTTP 服务预览。
 

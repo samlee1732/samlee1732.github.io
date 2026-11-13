@@ -92,8 +92,6 @@ def search_index(papers, reviews, patents, homepage, news_content, competitions_
         if paper.get('corresponding_author'):
             description += ' · Corresponding author: ' + paper['corresponding_author']
         description += ' · Submitted to ' + paper['journal']
-        if paper.get('manuscript_number'):
-            description += ' · ' + paper['manuscript_number']
         description += ' · Under Review'
         entries.append({
             'title': paper['title'],
@@ -244,8 +242,6 @@ def review_overview(papers):
     for p in papers:
         author_line = (authors(p) if p.get('authors') else 'Co-authors: ' + '; '.join(
             '<strong>Sen Li</strong>' if name == 'Sen Li' else esc(name) for name in p['co_authors']))
-        manuscript = ('\n                <p>Manuscript no.: <span class="manuscript-number">'
-                      + esc(p['manuscript_number']) + '</span></p>') if p.get('manuscript_number') else ''
         corresponding = ('\n                <p>Corresponding author: '
                          + esc(p['corresponding_author']) + '</p>') if p.get('corresponding_author') else ''
         rows.append(f'''          <li>
@@ -253,7 +249,7 @@ def review_overview(papers):
               <div class="publication-details">
                 <p class="publication-authors">{author_line}</p>
                 <h4 id="{p['id']}-title" class="publication-title">{esc(p['title'])} <span class="publication-type review-status">Under Review</span></h4>
-                <p class="publication-citation">Submitted to <cite>{esc(p['journal'])}</cite>.</p>{corresponding}{manuscript}
+                <p class="publication-citation">Submitted to <cite>{esc(p['journal'])}</cite>.</p>{corresponding}
                 <ul class="publication-resources" aria-label="Pending manuscript resources">
                   <li><span aria-disabled="true">Abstract <span class="resource-pending">(to be added)</span></span></li>
                   <li><span aria-disabled="true">BibTeX <span class="resource-pending">(to be added)</span></span></li>
