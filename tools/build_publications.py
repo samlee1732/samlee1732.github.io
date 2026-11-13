@@ -188,7 +188,7 @@ def image(paper, prefix, lazy=True):
             f' alt="{esc(paper["image_alt"])}" decoding="async"{attrs}>')
 
 
-def overview(papers):
+def published_overview(papers):
     rows = []
     for p in papers:
         url = './publications/' + p['id'] + '/'
@@ -203,7 +203,7 @@ def overview(papers):
             <article class="publication-row" aria-labelledby="{p['id']}-title">
               <div class="publication-details">
                 <p class="publication-authors">{authors(p)}</p>
-                <h3 id="{p['id']}-title" class="publication-title"><a href="{url}">{esc(p['title'])}</a> <span class="publication-type">{esc(p['type'])}</span></h3>
+                <h4 id="{p['id']}-title" class="publication-title"><a href="{url}">{esc(p['title'])}</a> <span class="publication-type">{esc(p['type'])}</span></h4>
                 <p class="publication-citation">{citation(p)}</p>
                 <ul class="publication-resources" aria-label="Resources for {esc(p['marker'])}">
 {resources}
@@ -214,8 +214,8 @@ def overview(papers):
               </div>
             </article>
           </li>''')
-    return '''      <section id="publication" class="publications" aria-labelledby="publication-heading" tabindex="-1">
-        <h2 id="publication-heading">Publication</h2>
+    return '''      <section id="published-papers" class="publication-group" aria-labelledby="published-papers-heading" tabindex="-1">
+        <h3 id="published-papers-heading">Published Papers</h3>
         <!-- Generated from data/publications.json by tools/build_publications.py. -->
         <ol class="publication-list">
 ''' + '\n'.join(rows) + '''
@@ -236,7 +236,7 @@ def review_overview(papers):
             <article id="{p['id']}" class="publication-row" aria-labelledby="{p['id']}-title" tabindex="-1">
               <div class="publication-details">
                 <p class="publication-authors">{author_line}</p>
-                <h3 id="{p['id']}-title" class="publication-title">{esc(p['title'])} <span class="publication-type review-status">Under Review</span></h3>
+                <h4 id="{p['id']}-title" class="publication-title">{esc(p['title'])} <span class="publication-type review-status">Under Review</span></h4>
                 <p class="publication-citation">Submitted to <cite>{esc(p['journal'])}</cite>.</p>{corresponding}{manuscript}
                 <ul class="publication-resources" aria-label="Pending manuscript resources">
                   <li><span aria-disabled="true">Abstract <span class="resource-pending">(to be added)</span></span></li>
@@ -246,13 +246,23 @@ def review_overview(papers):
               <div class="publication-media">{image(p, './')}</div>
             </article>
           </li>''')
-    return '''      <section id="under-review" class="publications under-review" aria-labelledby="under-review-heading" tabindex="-1">
-        <h2 id="under-review-heading">Under Review</h2>
+    return '''      <section id="under-review" class="publication-group under-review" aria-labelledby="under-review-heading" tabindex="-1">
+        <h3 id="under-review-heading">Under Review</h3>
         <!-- Generated from data/under-review.json by tools/build_publications.py. -->
         <ol class="publication-list">
 ''' + '\n'.join(rows) + '''
         </ol>
       </section>'''
+
+
+def publication_overview(papers, reviews):
+    groups = review_overview(reviews) + '\n' + published_overview(papers)
+    groups = '\n'.join('  ' + line for line in groups.splitlines())
+    return ('      <!-- PUBLICATION CONTENT START -->\n'
+            '      <section id="publication" class="publications" aria-labelledby="publication-heading" tabindex="-1">\n'
+            '        <h2 id="publication-heading">Publication</h2>\n'
+            + groups + '\n      </section>\n'
+            + '      <!-- PUBLICATION CONTENT END -->')
 
 
 def site_header(homepage, prefix, current):
@@ -405,14 +415,11 @@ def main():
                 raise FileNotFoundError(paper[key])
     homepage_path = ROOT / 'index.html'
     homepage = homepage_path.read_text()
-    homepage, count = re.subn(r'      <section id="under-review".*?</section>',
-                             lambda _: review_overview(reviews), homepage, count=1, flags=re.S)
+    homepage, count = re.subn(
+        r'      <!-- PUBLICATION CONTENT START -->.*?<!-- PUBLICATION CONTENT END -->',
+        lambda _: publication_overview(papers, reviews), homepage, count=1, flags=re.S)
     if count != 1:
-        raise ValueError('Expected one under-review section in index.html.')
-    homepage, count = re.subn(r'      <section id="publication".*?</section>',
-                             lambda _: overview(papers), homepage, count=1, flags=re.S)
-    if count != 1:
-        raise ValueError('Expected one publication section in index.html.')
+        raise ValueError('Expected one marked Publication content block in index.html.')
     homepage_path.write_text(homepage)
     news_content = (ROOT / 'data/news.html').read_text()
     news_folder = ROOT / 'news'

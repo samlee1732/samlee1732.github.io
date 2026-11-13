@@ -51,7 +51,9 @@ News 位于 Competitions 之后，点击进入独立的 `/news/` 页面；首页
 
 ### 在审稿件
 
-`data/under-review.json` 单独维护在审稿件，与下方 8 篇已发表论文分开展示。目前有 2 篇：
+顶部只保留 Publication 入口；点击后进入同一栏目，依次展示 Under Review（在审稿件）与 Published Papers（已发表论文）两个分组。原 `/#under-review` 链接仍可直达在审分组。
+
+`data/under-review.json` 单独维护在审稿件，页面内与下方 8 篇已发表论文按状态分组。目前有 2 篇：
 
 - Materials & Design 投稿：**A Torsionally Tristable Metastructure with In-Plane Translational Actuation and Post-Fabrication Angle Tuning**。通讯作者为 Tao Luo，共同作者为 Ruyang Yu、Sen Li；按角色展示，不推断正式作者排序。
 - IEEE Robotics and Automation Letters (RA-L) 投稿：**ViSTA: Coarse-to-Fine Visuotactile Deformation Servoing for Online Robotic Weld-Seam Trajectory Adjustment**，稿号 `26-6318`。作者按用户提供的投稿系统截图依次为 Sen Li、Tuo Zhang、Chaoyang Song、Fang Wan*。保留截图中的星号；因未提供星号图例，暂不额外解释作者角色。不展示投稿系统中的作者编号。
@@ -90,7 +92,7 @@ News 位于 Competitions 之后，点击进入独立的 `/news/` 页面；首页
    python3 tools/build_publications.py
    ```
 
-   脚本仅依赖 Python 3 标准库，更新首页的 Under Review 和 Publication 区域，并为已发表论文生成 `publications/<id>/index.html` 与 `citation.bib`。同时从 `data/news.html` 和 `data/competitions.html` 生成对应的 `news/index.html` 和 `competitions/index.html`。简介、联系方式和域名文件均保留。不要直接修改生成的论文条目、详情页或独立内容页，否则下次生成会覆盖修改。
+   脚本仅依赖 Python 3 标准库，更新首页 Publication 栏目内的 Under Review 和 Published Papers 分组，并为已发表论文生成 `publications/<id>/index.html` 与 `citation.bib`。同时从 `data/news.html` 和 `data/competitions.html` 生成对应的 `news/index.html` 和 `competitions/index.html`。简介、联系方式和域名文件均保留。不要直接修改生成的论文条目、详情页或独立内容页，否则下次生成会覆盖修改。
 
 5. 本地预览后，将 JSON、素材、生成的 HTML / BibTeX 一起提交到 `main`。GitHub Pages 直接发布生成好的文件，无需在服务器运行 Python。
 
