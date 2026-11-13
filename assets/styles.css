@@ -107,6 +107,8 @@ a { color: inherit; }
 .project-meta { display: flex; flex-wrap: wrap; gap: 4px 24px; }
 .project-status { background: #eaf4ee; color: #276342; }
 .under-review .publication-title { color: #302c38; }
+.under-review .publication-media { margin: 0; }
+.under-review .publication-media-caption { margin-top: 8px; color: var(--muted); font-size: .75em; line-height: 1.5; text-align: center; }
 .manuscript-number { font-variant-numeric: tabular-nums; }
 .resource-pending { font-size: .8em; }
 .publication-citation cite { font-style: normal; }

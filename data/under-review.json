@@ -12,7 +12,8 @@
     "image": "tristable-metastructure-concept.png",
     "image_alt": "Hand-drawn conceptual illustration of a concentric-ring compliant metastructure in three stable rotational configurations.",
     "image_width": 1619,
-    "image_height": 971
+    "image_height": 971,
+    "image_caption": "Conceptual illustration only; manuscript under review."
   },
   {
     "id": "vista",
@@ -27,6 +28,7 @@
     "image": "vista-concept.png",
     "image_alt": "Conceptual illustration of robotic weld-seam sensing and trajectory adjustment using a compliant tactile sensor.",
     "image_width": 1448,
-    "image_height": 1086
+    "image_height": 1086,
+    "image_caption": "Conceptual illustration only; manuscript under review."
   }
 ]

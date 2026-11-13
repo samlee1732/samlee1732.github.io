@@ -264,6 +264,8 @@ def review_overview(papers):
             '<strong>Sen Li</strong>' if name == 'Sen Li' else esc(name) for name in p['co_authors']))
         corresponding = ('\n                <p>Corresponding author: '
                          + esc(p['corresponding_author']) + '</p>') if p.get('corresponding_author') else ''
+        caption = ('\n                <figcaption class="publication-media-caption">'
+                   + esc(p['image_caption']) + '</figcaption>') if p.get('image_caption') else ''
         rows.append(f'''          <li>
             <article id="{p['id']}" class="publication-row" aria-labelledby="{p['id']}-title" tabindex="-1">
               <div class="publication-details">
@@ -271,7 +273,7 @@ def review_overview(papers):
                 <h4 id="{p['id']}-title" class="publication-title">{esc(p['title'])} <span class="publication-type review-status">Under Review</span></h4>
                 <p class="publication-citation">Submitted to <cite>{esc(p['journal'])}</cite>.</p>{corresponding}
               </div>
-              <div class="publication-media">{image(p, './')}</div>
+              <figure class="publication-media">{image(p, './')}{caption}</figure>
             </article>
           </li>''')
     return '''      <section id="under-review" class="publication-group under-review" aria-labelledby="under-review-heading" tabindex="-1">
