@@ -1,6 +1,6 @@
-# PerDex Lab 首页
+# SenseDex Lab 首页
 
-PerDex Lab（Perception and Dexterous Manipulation，感知与灵巧操作实验室）的静态首页，适合直接部署到 GitHub Pages。没有构建步骤，无须安装 Node.js 或任何依赖。页面不依赖第三方字体、脚本或图片服务。
+SenseDex Lab（Sensing and Dexterous Manipulation，感知与灵巧操作实验室）的静态首页，适合直接部署到 GitHub Pages。没有构建步骤，无须安装 Node.js 或任何依赖。页面不依赖第三方字体、脚本或图片服务。
 
 ## 本地查看
 
@@ -53,3 +53,10 @@ python3 -m http.server 8080 --bind 127.0.0.1
 - http://www.senli.site/index_zh.html
 
 姓名显示为 Sen LI, Ph.D.（李森）。邮箱由作者直接提供，使用 `lisen3@szpu.edu.cn`，并让 `mailto:` 与显示地址一致。办公地址由作者直接提供，为“深圳职业技术大学西丽校区厚德楼4楼”，同时显示对应英文地址。未提供电话，页面没有添加电话。学校名称及职称已在简介和相关概览中同步统一。
+
+## 品牌资源
+
+- `assets/sensedex-mark.png`：透明背景的独立图形，用于页头与浏览器标签页图标。
+- `assets/sensedex-logo-v2.png`：包含 SenseDex Lab、Sensing and Dexterous Manipulation 与中文名称的完整透明 Logo。
+
+图形由内置 image_gen 工具生成；页头品牌文字使用 HTML，以保证小屏显示清晰。
