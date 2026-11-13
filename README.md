@@ -1,6 +1,6 @@
 # SenseDex Lab 首页
 
-SenseDex Lab（Sensing and Dexterous Manipulation，感知与灵巧操作实验室）的静态首页，适合直接部署到 GitHub Pages。没有构建步骤，无须安装 Node.js 或任何依赖。页面不依赖第三方字体、脚本或图片服务。
+SenseDex Lab（Sensing and Dexterous Manipulation，感知与灵巧操作实验室）的静态首页，适合直接部署到 GitHub Pages。没有构建步骤，无须安装 Node.js 或任何依赖。页面内容、字体和图片使用本地资源；访问统计使用第三方不蒜子服务，统计失败不影响页面主体。
 
 ## 本地查看
 
@@ -32,15 +32,20 @@ python3 -m http.server 8080 --bind 127.0.0.1
 - `index.html`：实验室名称、简介、导航和弹窗内容。
 - `data/news.html`：独立 News 页的内容源；修改后运行生成脚本。
 - `news/index.html`：生成的独立新闻页面。
+- `data/competitions.html`：指导学生竞赛页面的内容源；修改后运行生成脚本。
+- `competitions/index.html`：生成的独立学生竞赛页面。
 - `assets/styles.css`：配色、字体、间距、桌面和手机布局。
 - `assets/main.js`：手机菜单、Teaching 下拉菜单、信息弹窗和站内搜索。
+- `assets/visits.js`：仅在正式域名加载访问统计，处理首页计数加载与失败提示。
 - `assets/search-index.json`：由生成脚本提取页面内容生成的站内搜索索引。
 
 页面视觉参考用户提供的截图。中英文简介按作者新提供的个人经历更新，英文为对应译文；中文修正了“EEE → IEEE”和“2026毕业 → 2026年毕业”两处笔误，并依据作者个人站点统一了职称与学校名称。履历、论文数量及项目经历由作者提供，未做外部核实。
 
 Under Review 导航位于 Publication 前，跳转到联系方式下方的在审稿件区；Publication 导航跳转到其后的已发表论文展示区，点击已发表论文标题可打开独立详情页；Team 展示作者提供的概览信息，成员名单仍需补充；Teaching 展示《机器人学及应用》和《自动控制原理》两门课程，课程资料仍需补充。右上角放大镜打开站内搜索，联系方式仍保留在首页 `#contact` 区域，可搜索“邮箱”或“联系方式”进入；手机端点击页内导航后会先收起导航菜单。网站采用玫红、紫色到深蓝的渐变，实验室标题、导航选中线、搜索图标与下拉面板顶边保持一致。
 
-顶部导航的 News 位于 Teaching 之后，点击进入独立的 `/news/` 页面；首页 Publication 下方不再显示 News。新闻页沿用固定导航、搜索和 Team / Teaching 弹窗，当前导航项高亮为 News。旧的首页 `/#news` 链接自动跳转到新页面。当前保留待更新提示，后续编辑 `data/news.html`，运行 `python3 tools/build_publications.py` 并提交生成文件即可。窄屏导航在 1200px 及以下收进菜单，点击 News 直接进入新页面。
+顶部导航在 Teaching 与 News 之间新增 Competitions，点击进入独立的 `/competitions/` 页面。页面标题为 Student Competitions / 指导学生竞赛，目前仅说明赛事信息、学生团队、指导教师、竞赛成果与图片待补充，没有添加未经提供的比赛或成绩。后续编辑 `data/competitions.html` 并运行生成脚本，即可同步页面和站内搜索。
+
+News 位于 Competitions 之后，点击进入独立的 `/news/` 页面；首页 Publication 下方不再显示 News。竞赛与新闻页沿用固定导航、搜索和 Team / Teaching 弹窗，当前页面的导航项单独高亮。旧的首页 `/#news` 链接自动跳转到新页面。新闻页当前保留待更新提示，后续编辑 `data/news.html`，运行 `python3 tools/build_publications.py` 并提交生成文件即可。窄屏导航在 1200px 及以下收进菜单，点击 Competitions 或 News 直接进入对应页面。
 
 ## 论文展示与维护
 
@@ -85,19 +90,31 @@ Under Review 导航位于 Publication 前，跳转到联系方式下方的在审
    python3 tools/build_publications.py
    ```
 
-   脚本仅依赖 Python 3 标准库，更新首页的 Under Review 和 Publication 区域，并为已发表论文生成 `publications/<id>/index.html` 与 `citation.bib`。同时从 `data/news.html` 生成 `news/index.html`。简介、联系方式和域名文件均保留。不要直接修改生成的论文条目或详情页，否则下次生成会覆盖修改。
+   脚本仅依赖 Python 3 标准库，更新首页的 Under Review 和 Publication 区域，并为已发表论文生成 `publications/<id>/index.html` 与 `citation.bib`。同时从 `data/news.html` 和 `data/competitions.html` 生成对应的 `news/index.html` 和 `competitions/index.html`。简介、联系方式和域名文件均保留。不要直接修改生成的论文条目、详情页或独立内容页，否则下次生成会覆盖修改。
 
 5. 本地预览后，将 JSON、素材、生成的 HTML / BibTeX 一起提交到 `main`。GitHub Pages 直接发布生成好的文件，无需在服务器运行 Python。
 
-样式在 `assets/styles.css`；详情页复用首页导航与弹窗。首页导航改动后重新运行脚本即可同步到所有论文详情页和 News 页面。删除论文时也应手动清理其旧详情页目录，避免旧链接继续保留。
+样式在 `assets/styles.css`；详情页复用首页导航与弹窗。首页导航改动后重新运行脚本即可同步到所有论文详情页、News 和 Competitions 页面。删除论文时也应手动清理其旧详情页目录，避免旧链接继续保留。
 
 ## 站内搜索
 
 导航右侧原 Contact 按钮已替换为放大镜。点击展开搜索框，输入内容即时匹配，按 Enter 或右侧箭头确认并聚焦首条结果；点击结果打开论文、跳转首页对应区域，或打开 Team / Teaching 面板。按 Esc、点击外部或 Tab 移出搜索区域可收起。手机端放大镜始终可见，不必先打开导航菜单。
 
-搜索覆盖 8 篇已发表论文的标题、作者、年份、DOI、摘要，在审稿件的标题、期刊、作者角色与稿号，以及中英文简介、联系方式、News、Team 和两门课程。在审搜索结果单独标注 Under Review。支持中英文关键词和多个词同时匹配，结果按标题相关度排序。无匹配时显示提示。搜索在浏览器本地完成，不调用外部搜索服务，不保存或上传查询词。
+搜索覆盖 8 篇已发表论文的标题、作者、年份、DOI、摘要，在审稿件的标题、期刊、作者角色与稿号，以及中英文简介、联系方式、Competitions、News、Team 和两门课程。在审搜索结果单独标注 Under Review。支持中英文关键词和多个词同时匹配，结果按标题相关度排序。无匹配时显示提示。搜索在浏览器本地完成，不调用外部搜索服务，不保存或上传查询词。
 
-新闻搜索结果打开独立 `/news/` 页面。修改简介、联系方式、课程、新闻或论文后运行 `python3 tools/build_publications.py`，并提交生成的 `assets/search-index.json` 和详情页。索引中的搜索文本来自实际页面内容；显示摘要与辅助匹配关键词分开。新内容不会在发布时自动抓取。直接双击 HTML 时，浏览器可能限制索引读取，请通过上面的本地 HTTP 服务预览。
+新闻与学生竞赛搜索结果分别打开独立 `/news/` 和 `/competitions/` 页面。修改简介、联系方式、课程、学生竞赛、新闻或论文后运行 `python3 tools/build_publications.py`，并提交生成的 `assets/search-index.json` 和页面。索引中的搜索文本来自实际页面内容；显示摘要与辅助匹配关键词分开。新内容不会在发布时自动抓取。直接双击 HTML 时，浏览器可能限制索引读取，请通过上面的本地 HTTP 服务预览。
+
+## 访问统计
+
+首页最下方显示一行“总访问量 / 访客数”。使用 [自建不蒜子公开服务](https://busuanzi.9420.ltd/)（[开源项目 soxft/busuanzi](https://github.com/soxft/busuanzi)）；不是浏览器本地自增的模拟数字。原版服务在接入验证中返回 502，因此采用开源项目作者提供、已验证返回有效数据的公开服务。
+
+- 总访问量（PV）累计本站各页面的加载次数；刷新或打开另一页可增加次数。访客数（UV）按统计服务识别规则去重，不等于可精确识别的真实人数；清理浏览器存储或使用不同设备可能影响去重。
+- 统计从接入时开始，包含接入验证产生的少量访问；不能自动恢复接入前的访问记录。
+- 首页、News、Competitions 和论文详情页均只加载一次 `assets/visits.js`；只有首页展示数字。`www.sensedex.online` 以外的域名和本地预览不请求统计服务，旧 News 锚点的跳转不重复计数。
+- 统计脚本为 `https://busuanzi.9420.ltd/js`，当前服务接口为 `https://bsz.iirose.cn/api`。请求包含当前页面地址及常规连接信息，提供方按其规则统计并使用 `bsz-id` 本地标识去重；页面底部保留服务来源链接。站内搜索词保留在页面内，不加入 URL，因此不会随页面地址发送。
+- 未加载时数字为“—”；超时或脚本加载失败显示“统计暂不可用”，不把失败伪装成 0。接口稍后返回时仍可恢复显示。公开服务不提供 SLA 或完整性保证；拦截器、网络和服务维护可能影响统计。
+
+网站无需账号、数据库或 GitHub Token。不要向前端添加任何私密凭据。后续更换域名时，需要同步修改 `assets/visits.js` 的域名判断；迁移统计服务时需另外处理历史数据，不能将不同服务的数字直接相加。
 
 ## 本项目的部署位置
 

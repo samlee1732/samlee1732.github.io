@@ -67,6 +67,12 @@ a { color: inherit; }
 .biography p { margin: 0; }
 .section-divider { border: 0; border-top: 3px solid var(--line); margin: clamp(31px, 2.27vw, 62px) 0 clamp(31px, 2.27vw, 62px); }
 .closing-divider { margin-bottom: 0; }
+.site-footer { padding-block: 8px 30px; color: var(--muted); font-size: 13px; line-height: 1.8; text-align: center; }
+.visit-counter { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 4px 16px; }
+.visit-metric { white-space: nowrap; }
+.visit-value { color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 600; }
+.visit-credit { color: var(--muted); text-underline-offset: .2em; font-size: 12px; }
+.visit-status { font-size: 12px; }
 .contact-card { padding: clamp(22px, 3vw, 72px) 8%; overflow-wrap: anywhere; }
 .contact-card h2 { margin: 0; font-size: inherit; line-height: inherit; font-weight: 700; }
 .contact-card address { font-style: normal; }

@@ -10,6 +10,7 @@
     <link rel="apple-touch-icon" href="./assets/sensedex-mark.png">
     <link rel="stylesheet" href="./assets/styles.css">
     <script src="./assets/main.js" defer></script>
+    <script src="./assets/visits.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -38,6 +39,7 @@
               <button type="button" data-panel="automatic-control" aria-label="Principles of Automatic Control · 自动控制原理">Principles of Automatic Control<span lang="zh-CN">自动控制原理</span></button>
             </div>
           </details>
+          <a class="nav-link" href="./competitions/">Competitions</a>
           <a class="nav-link" href="./news/">News</a>
         </nav>
         <div class="site-search">
@@ -269,6 +271,16 @@
       </section>
       <hr class="section-divider closing-divider">
     </main>
+
+    <footer id="visit-statistics" class="container site-footer" lang="zh-CN">
+      <div class="visit-counter" data-visit-counter data-state="loading" aria-label="网站访问统计" aria-live="polite" aria-atomic="true">
+        <span class="visit-metric">总访问量 <span class="visit-value" id="busuanzi_value_site_pv">—</span> 次</span>
+        <span class="visit-metric">访客数 <span class="visit-value" id="busuanzi_value_site_uv">—</span> 人次</span>
+        <a class="visit-credit" href="https://busuanzi.9420.ltd/" target="_blank" rel="noopener noreferrer" aria-label="访问统计服务：不蒜子">不蒜子统计</a>
+        <span class="visit-status" data-visit-status>统计加载中…</span>
+      </div>
+      <noscript>启用 JavaScript 后可查看访问统计。</noscript>
+    </footer>
 
     <dialog class="content-dialog" aria-labelledby="dialog-title">
       <button class="dialog-close" type="button" aria-label="Close dialog"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>

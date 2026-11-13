@@ -84,6 +84,13 @@
     "kind": "Contact"
   },
   {
+    "title": "Student Competitions · 指导学生竞赛",
+    "text": "Student Competitions 指导学生竞赛 Competition details, student teams, faculty mentors, results, and photos will be added here. 赛事信息、学生团队、指导教师、竞赛成果与图片将陆续补充。 比赛 竞赛 学生 团队 指导教师 成果 图片",
+    "description": "Student Competitions 指导学生竞赛 Competition details, student teams, faculty mentors, results, and photos will be added here. 赛事信息、学生团队、指导教师、竞赛成果与图片将陆续补充。",
+    "url": "competitions/",
+    "kind": "Competitions"
+  },
+  {
     "title": "News · 最新动态",
     "text": "News Lab news and updates coming soon. 实验室动态将陆续更新。 新闻 动态 消息",
     "description": "News Lab news and updates coming soon. 实验室动态将陆续更新。",

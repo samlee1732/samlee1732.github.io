@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build publication and news pages, BibTeX, and the site search index."""
+"""Build publication, news, and competition pages, BibTeX, and site search."""
 import html
 import json
 import re
@@ -30,7 +30,7 @@ class SearchTextParser(HTMLParser):
         if self.active is None:
             block = None
             if tag == 'section':
-                if attrs.get('id') in {'contact', 'news'}:
+                if attrs.get('id') in {'contact', 'news', 'competitions'}:
                     block = attrs['id']
                 elif 'biography' in attrs.get('class', '').split():
                     block = 'about'
@@ -64,7 +64,7 @@ class SearchTextParser(HTMLParser):
             self.blocks[self.active].append(data)
 
 
-def search_index(papers, reviews, homepage, news_content):
+def search_index(papers, reviews, homepage, news_content, competitions_content):
     """Use one shared index on the homepage and all publication detail pages."""
     entries = []
     for paper in papers:
@@ -107,10 +107,12 @@ def search_index(papers, reviews, homepage, news_content):
     parser = SearchTextParser()
     parser.feed(homepage)
     parser.feed(news_content)
+    parser.feed(competitions_content)
     parser.close()
     sections = (
         ('about', 'About SenseDex Lab · 实验室简介', 'About', '简介 关于 履历 教育 经历 科研 项目'),
         ('contact', 'Contact · 联系方式', 'Contact', '联系 联系方式 邮箱 邮件 地址 办公室'),
+        ('competitions', 'Student Competitions · 指导学生竞赛', 'Competitions', '比赛 竞赛 学生 团队 指导教师 成果 图片'),
         ('news', 'News · 最新动态', 'News', '新闻 动态 消息'),
         ('team', 'Team · 团队', 'Team', '团队 成员 实验室'),
         ('robotics-applications', 'Robotics and Applications · 机器人学及应用', 'Teaching', '教学 课程 机器人学及应用'),
@@ -126,7 +128,7 @@ def search_index(papers, reviews, homepage, news_content):
             if emails:
                 description = ' · '.join(emails) + ' · ' + text
         entry = {'title': title, 'text': text + ' ' + keywords, 'description': description,
-                 'url': 'news/' if block == 'news' else '#' + block, 'kind': kind}
+                 'url': block + '/' if block in {'news', 'competitions'} else '#' + block, 'kind': kind}
         if block in parser.PANELS:
             entry['panel'] = block
         entries.append(entry)
@@ -263,33 +265,44 @@ def site_header(homepage, prefix, current):
     return header
 
 
-def news_page(homepage, content):
-    header = site_header(homepage, '../', 'news/')
+def content_page(homepage, content, slug, title, description):
+    header = site_header(homepage, '../', slug + '/')
     dialogs = homepage[homepage.index('    <dialog'):homepage.index('  </body>')]
     return f'''<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="News and updates from SenseDex Lab — Sensing and Dexterous Manipulation.">
+    <meta name="description" content="{esc(description)}">
     <meta name="theme-color" content="#92316f">
-    <title>News | SenseDex Lab</title>
+    <title>{esc(title)} | SenseDex Lab</title>
     <link rel="icon" href="../assets/sensedex-mark.png" type="image/png">
     <link rel="apple-touch-icon" href="../assets/sensedex-mark.png">
     <link rel="stylesheet" href="../assets/styles.css">
     <script src="../assets/main.js" defer></script>
+    <script src="../assets/visits.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 {header}
     <main id="main-content" class="container main-content news-page">
       <a class="paper-back" href="../">← Homepage</a>
-      <!-- News content is maintained in data/news.html. -->
+      <!-- Page content is maintained in data/{esc(slug)}.html. -->
 {content.rstrip()}
     </main>
 {dialogs}  </body>
 </html>
 '''
+
+
+def news_page(homepage, content):
+    return content_page(homepage, content, 'news', 'News',
+                        'News and updates from SenseDex Lab — Sensing and Dexterous Manipulation.')
+
+
+def competitions_page(homepage, content):
+    return content_page(homepage, content, 'competitions', 'Student Competitions',
+                        'Student competitions and faculty mentorship at SenseDex Lab. Details will be added as they become available.')
 
 
 def detail(p, homepage):
@@ -335,6 +348,7 @@ def detail(p, homepage):
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark.png">
     <link rel="stylesheet" href="../../assets/styles.css">
     <script src="../../assets/main.js" defer></script>
+    <script src="../../assets/visits.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -404,15 +418,19 @@ def main():
     news_folder = ROOT / 'news'
     news_folder.mkdir(exist_ok=True)
     (news_folder / 'index.html').write_text(news_page(homepage, news_content))
+    competitions_content = (ROOT / 'data/competitions.html').read_text()
+    competitions_folder = ROOT / 'competitions'
+    competitions_folder.mkdir(exist_ok=True)
+    (competitions_folder / 'index.html').write_text(competitions_page(homepage, competitions_content))
     for paper in papers:
         folder = ROOT / 'publications' / paper['id']
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(detail(paper, homepage))
         (folder / 'citation.bib').write_text(bibtex(paper))
-    entries = search_index(papers, reviews, homepage, news_content)
+    entries = search_index(papers, reviews, homepage, news_content, competitions_content)
     (ROOT / 'assets/search-index.json').write_text(
         json.dumps(entries, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f'Generated News page, {len(reviews)} under-review entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
+    print(f'Generated News and Competitions pages, {len(reviews)} under-review entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
 
 
 if __name__ == '__main__':
