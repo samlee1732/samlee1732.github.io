@@ -357,7 +357,7 @@ def project_overview(projects):
     return ('      <!-- PROJECT CONTENT START -->\n'
             '      <section id="projects" class="publications projects" aria-labelledby="projects-heading" tabindex="-1">\n'
             '        <h2 id="projects-heading">Projects <span lang="zh-CN">· 科研项目</span></h2>\n'
-            '        <p class="projects-intro" lang="zh-CN">李森近年作为项目骨干参与国家自然科学基金及深圳市科技计划项目，并在深圳职业技术大学主持横向科研项目。</p>\n'
+            '        <p class="projects-intro" lang="zh-CN">近年主持及参与的纵向与横向科研项目。</p>\n'
             '        <!-- Generated from data/projects.json by tools/build_publications.py. -->\n'
             '        <ol class="publication-list">\n'
             + '\n'.join(rows) + '\n        </ol>\n      </section>\n'
