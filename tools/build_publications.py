@@ -529,7 +529,7 @@ def main():
     reviews = json.loads((ROOT / 'data/under-review.json').read_text())
     patents = json.loads((ROOT / 'data/patents.json').read_text())
     projects = json.loads((ROOT / 'data/projects.json').read_text())
-    papers.sort(key=lambda p: -int(p['year']))
+    # Preserve the curated display order in data/publications.json.
     ids = [p['id'] for p in papers + reviews + patents + projects]
     if len(ids) != len(set(ids)) or any(not re.fullmatch(r'[a-z0-9-]+', i) for i in ids):
         raise ValueError('Publication IDs must be unique lowercase URL slugs.')

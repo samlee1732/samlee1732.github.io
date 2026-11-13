@@ -14,10 +14,10 @@
     "kind": "Publication"
   },
   {
-    "title": "Teaching oral care via vision-based deformation perception",
-    "text": "Teaching oral care via vision-based deformation perception Chengxiao Dong Xuanyi Dai Yu Pan Wanghongjie Qiu Sen Li Tianyu Wu Yijie Jin He Wang Chaoyang Song Fang Wan VBDeformP Soft Science 2025 10.20517/ss.2025.14 This study presents a novel, cost-effective sensor platform based on Vision-based Deformation Perception for community oral health education. The system integrates a 3D-printed thermoplastic polyurethane soft structure with a rigid resin frame and an ArUco marker to encode interaction information, including the contact region and six-dimensional force and torque. Journal Article Published 论文 发表 文献 研究成果 作者 摘要 李森",
-    "description": "Chengxiao Dong, Xuanyi Dai, Yu Pan, Wanghongjie Qiu, Sen Li, Tianyu Wu, Yijie Jin, He Wang, Chaoyang Song, Fang Wan · Soft Science · 2025",
-    "url": "publications/oral-care/",
+    "title": "Active Surface with Passive Omni-Directional Adaptation for In-Hand Manipulation",
+    "text": "Active Surface with Passive Omni-Directional Adaptation for In-Hand Manipulation Sen Li Fang Wan Chaoyang Song ActiveSPN0 2024 6th International Conference on Reconfigurable Mechanisms and Robots (ReMAR) 2024 10.1109/ReMAR61031.2024.10619925 In this study, we present the design of a soft robotic finger with an active surface on an omni-adaptive structure, which can be easily installed on existing grippers and achieve stability and dexterity for in-hand manipulation. Soft fingers with omni-directional adaptability excel in 3D twisting, outperforming two-dimensional self-adaptive hands using a finger rotation mechanism to achieve similar adaptability. In this study, we present the design of a soft robotic finger with an active surface on an omni-adaptive structure, which can be easily installed on existing grippers and achieve stability and dexterity for in-hand manipulation. The system’s active surfaces initially transfer the object from the fingertip segment with less compliance to the middle segment of the finger with superior adaptability. Despite the omni-directional deformation of the finger, in-hand manipulation can still be executed with controlled active surfaces. We characterized the soft finger’s stiffness distribution and simplified models to assess the feasibility of lifting and reorienting a grasped object in a 3D twisting state. A set of experiments on in-hand manipulation was performed with the proposed fingers, demonstrating the dexterity and robustness of the strategy. Conference Paper Published 论文 发表 文献 研究成果 作者 摘要 李森",
+    "description": "Sen Li, Fang Wan, Chaoyang Song · 2024 6th International Conference on Reconfigurable Mechanisms and Robots (ReMAR) · 2024",
+    "url": "publications/active-surface/",
     "kind": "Publication"
   },
   {
@@ -25,13 +25,6 @@
     "text": "ADAP: Adaptive & Dynamic Arc Padding for predicting seam profiles in Multi-Layer-Multi-Pass robotic welding He Wang Sen Li Xiaobo Liu Chengxiao Dong Fang Wan ADAP AI Open 2025 10.1016/j.aiopen.2025.10.003 This study introduces the Adaptive & Dynamic Arc Padding (ADAP) approach. ADAP employs a novel representation of weld bead profiles using image-based boundary and primitive arc geometries defined by arc center and radius. Journal Article Published 论文 发表 文献 研究成果 作者 摘要 李森",
     "description": "He Wang, Sen Li, Xiaobo Liu, Chengxiao Dong, Fang Wan · AI Open · 2025",
     "url": "publications/adap/",
-    "kind": "Publication"
-  },
-  {
-    "title": "Active Surface with Passive Omni-Directional Adaptation for In-Hand Manipulation",
-    "text": "Active Surface with Passive Omni-Directional Adaptation for In-Hand Manipulation Sen Li Fang Wan Chaoyang Song ActiveSPN0 2024 6th International Conference on Reconfigurable Mechanisms and Robots (ReMAR) 2024 10.1109/ReMAR61031.2024.10619925 In this study, we present the design of a soft robotic finger with an active surface on an omni-adaptive structure, which can be easily installed on existing grippers and achieve stability and dexterity for in-hand manipulation. Soft fingers with omni-directional adaptability excel in 3D twisting, outperforming two-dimensional self-adaptive hands using a finger rotation mechanism to achieve similar adaptability. In this study, we present the design of a soft robotic finger with an active surface on an omni-adaptive structure, which can be easily installed on existing grippers and achieve stability and dexterity for in-hand manipulation. The system’s active surfaces initially transfer the object from the fingertip segment with less compliance to the middle segment of the finger with superior adaptability. Despite the omni-directional deformation of the finger, in-hand manipulation can still be executed with controlled active surfaces. We characterized the soft finger’s stiffness distribution and simplified models to assess the feasibility of lifting and reorienting a grasped object in a 3D twisting state. A set of experiments on in-hand manipulation was performed with the proposed fingers, demonstrating the dexterity and robustness of the strategy. Conference Paper Published 论文 发表 文献 研究成果 作者 摘要 李森",
-    "description": "Sen Li, Fang Wan, Chaoyang Song · 2024 6th International Conference on Reconfigurable Mechanisms and Robots (ReMAR) · 2024",
-    "url": "publications/active-surface/",
     "kind": "Publication"
   },
   {
@@ -53,6 +46,13 @@
     "text": "Parameter Adaptive Control for a Quadrotor With a Suspended Unknown Payload Under External Disturbance Ying Wu Yun Xie Sen Li Parameter Adaptive Control IEEE Access 2021 10.1109/ACCESS.2021.3119396 Parameter-adaptive control for a quadrotor carrying a suspended unknown payload under external disturbances. This paper focuses on the disturbance attenuation control of the quadrotor suspended payload system with unknown payload mass. Since the quadrotor transportation system is an eight-degree-of-freedom system with only four actuated degrees, it is difficult to achieve rapid stabilization of the quadrotor under varying payload and external disturbances. In this paper, a nonlinear controller based on rotation matrix is designed to rapid stabilization of attitude. By analyzing the effect of load mass on the trajectory tracking control, a parameter adaptive controller is proposed for position control. A mass estimation algorithm is established to estimate the payload mass in the air, which improves the robustness of the system. This approach can maximize load-bearing capacity within the thrust range of the quadrotor. The Lyapunov-based analysis proves the exponential convergence of the attitude error and the stability of the whole system. The contrast simulations demonstrate that the controller is superior to the sliding-mode controller incorporating input shaping on mass estimation, trajectory tracking, and disturbance resistance. Journal Article Published 论文 发表 文献 研究成果 作者 摘要 李森",
     "description": "Ying Wu, Yun Xie, Sen Li · IEEE Access · 2021",
     "url": "publications/parameter-adaptive-control/",
+    "kind": "Publication"
+  },
+  {
+    "title": "Teaching oral care via vision-based deformation perception",
+    "text": "Teaching oral care via vision-based deformation perception Chengxiao Dong Xuanyi Dai Yu Pan Wanghongjie Qiu Sen Li Tianyu Wu Yijie Jin He Wang Chaoyang Song Fang Wan VBDeformP Soft Science 2025 10.20517/ss.2025.14 This study presents a novel, cost-effective sensor platform based on Vision-based Deformation Perception for community oral health education. The system integrates a 3D-printed thermoplastic polyurethane soft structure with a rigid resin frame and an ArUco marker to encode interaction information, including the contact region and six-dimensional force and torque. Journal Article Published 论文 发表 文献 研究成果 作者 摘要 李森",
+    "description": "Chengxiao Dong, Xuanyi Dai, Yu Pan, Wanghongjie Qiu, Sen Li, Tianyu Wu, Yijie Jin, He Wang, Chaoyang Song, Fang Wan · Soft Science · 2025",
+    "url": "publications/oral-care/",
     "kind": "Publication"
   },
   {
