@@ -270,10 +270,6 @@ def review_overview(papers):
                 <p class="publication-authors">{author_line}</p>
                 <h4 id="{p['id']}-title" class="publication-title">{esc(p['title'])} <span class="publication-type review-status">Under Review</span></h4>
                 <p class="publication-citation">Submitted to <cite>{esc(p['journal'])}</cite>.</p>{corresponding}
-                <ul class="publication-resources" aria-label="Pending manuscript resources">
-                  <li><span aria-disabled="true">Abstract <span class="resource-pending">(to be added)</span></span></li>
-                  <li><span aria-disabled="true">BibTeX <span class="resource-pending">(to be added)</span></span></li>
-                </ul>
               </div>
               <div class="publication-media">{image(p, './')}</div>
             </article>
