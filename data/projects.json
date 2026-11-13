@@ -15,8 +15,7 @@
     "end_date": "2025-09",
     "status": "已结题",
     "funding_wan_cny": 40,
-    "role": "项目骨干（项目组排名第2的参与人员）",
-    "contribution": "主要参与人—机—环境共融设计、感知交互学习及实验验证等工作。"
+    "role": "项目骨干（项目组排名第2的参与人员）"
   },
   {
     "id": "vision-guided-welding-robotics",
@@ -26,8 +25,7 @@
     "end_date": "2025-10",
     "status": "已结题",
     "funding_wan_cny": 80,
-    "role": "项目骨干（项目组排名第2的参与人员）",
-    "contribution": "主要参与焊缝视觉感知、焊缝轮廓智能预测、算法开发及系统实验验证等工作。"
+    "role": "项目骨干（项目组排名第2的参与人员）"
   },
   {
     "id": "visuotactile-force-perception",
@@ -37,7 +35,6 @@
     "end_date": "2025-12",
     "status": "已结题",
     "funding_wan_cny": 30,
-    "role": "项目骨干（项目组排名第2的参与人员）",
-    "contribution": "主要参与视触融合感知、精细力触觉建模、学习算法研究及实验验证等工作。"
+    "role": "项目骨干（项目组排名第2的参与人员）"
   }
 ]
