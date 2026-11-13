@@ -1,7 +1,5 @@
 const menuToggle = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.main-navigation');
-const teachingMenu = document.querySelector('.teaching-menu');
-const dialog = document.querySelector('.content-dialog');
 const search = document.querySelector('.site-search');
 const searchToggle = document.querySelector('.search-toggle');
 const searchPanel = document.querySelector('.search-panel');
@@ -10,10 +8,15 @@ const searchForm = document.querySelector('.search-form');
 const searchStatus = document.querySelector('.search-status');
 const searchResults = document.querySelector('.search-results');
 const siteRoot = new URL('../', document.currentScript.src);
+const legacyPageRoutes = new Map([
+  ['team', 'team/'],
+  ['teaching', 'teaching/'],
+  ['robotics-applications', 'teaching/robotics-applications/'],
+  ['automatic-control', 'teaching/automatic-control/'],
+]);
 const searchIndexURL = new URL('search-index.json', document.currentScript.src);
 // Refresh search records alongside the versioned navigation script.
 searchIndexURL.search = new URL(document.currentScript.src).search;
-let dialogTrigger;
 let searchIndexPromise;
 let searchRequest = 0;
 
@@ -29,7 +32,6 @@ function closeMenu() {
   menuToggle.setAttribute('aria-expanded', 'false');
   menuToggle.setAttribute('aria-label', 'Open navigation');
   navigation.classList.remove('is-open');
-  teachingMenu.open = false;
   closeSearch();
 }
 
@@ -39,7 +41,6 @@ menuToggle.addEventListener('click', () => {
   menuToggle.setAttribute('aria-expanded', String(expanded));
   menuToggle.setAttribute('aria-label', expanded ? 'Close navigation' : 'Open navigation');
   navigation.classList.toggle('is-open', expanded);
-  if (!expanded) teachingMenu.open = false;
 });
 
 document.querySelectorAll('.main-navigation a[href^="#"]').forEach(link => {
@@ -50,58 +51,15 @@ document.querySelectorAll('.main-navigation a[href^="#"]').forEach(link => {
   });
 });
 
-function openPanel(id, trigger) {
-    // Old cached search records may still identify Team as a dialog panel.
-    if (id === 'team') {
-      location.assign(new URL('team/', siteRoot));
-      return;
-    }
-    const template = document.getElementById(id);
-    if (!(template instanceof HTMLTemplateElement)) return;
-    const content = template.content.cloneNode(true);
-    const heading = content.querySelector('h2');
-    document.getElementById('dialog-title').textContent = heading.textContent;
-    heading.remove();
-    document.querySelector('.dialog-body').replaceChildren(content);
-    dialogTrigger = trigger;
-    teachingMenu.open = false;
-    closeSearch();
-    dialog.showModal();
-    document.body.style.overflow = 'hidden';
-}
-
-document.querySelectorAll('[data-panel]').forEach(button => {
-  button.addEventListener('click', () => openPanel(button.dataset.panel, button));
-});
-
-document.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
-dialog.addEventListener('close', () => {
-  document.body.style.overflow = '';
-  if (dialogTrigger?.closest('.teaching-dropdown')) {
-    teachingMenu.querySelector('summary').focus();
-  } else {
-    dialogTrigger?.focus();
-  }
-});
-
-dialog.addEventListener('click', event => {
-  const bounds = dialog.getBoundingClientRect();
-  if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) dialog.close();
-});
-
 document.addEventListener('click', event => {
-  if (!teachingMenu.contains(event.target)) teachingMenu.open = false;
   if (!search.contains(event.target)) closeSearch();
 });
 
 document.addEventListener('keydown', event => {
-  if (event.key !== 'Escape' || dialog.open) return;
+  if (event.key !== 'Escape') return;
   if (!searchPanel.hidden) {
     event.preventDefault();
     closeSearch(true);
-  } else if (teachingMenu.open) {
-    teachingMenu.open = false;
-    teachingMenu.querySelector('summary').focus();
   } else if (navigation.classList.contains('is-open')) {
     closeMenu();
     menuToggle.focus();
@@ -164,7 +122,8 @@ async function showSearchResults() {
     const matches = matchSearch(records, query);
     searchStatus.textContent = matches.length ? `${matches.length} result${matches.length === 1 ? '' : 's'}` : 'No results found. Try another keyword. / 未找到结果，请换个关键词。';
     for (const record of matches) {
-      const url = new URL(record.url, siteRoot);
+      // Cached panel records receive real page URLs for every click type.
+      const url = new URL(legacyPageRoutes.get(record.panel) || record.url, siteRoot);
       if (url.origin !== siteRoot.origin) continue;
       const item = document.createElement('li');
       const link = document.createElement('a');
@@ -182,14 +141,9 @@ async function showSearchResults() {
       }
       link.addEventListener('click', event => {
         if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-        if (record.panel) {
-          event.preventDefault();
-          openPanel(record.panel, searchToggle);
-        } else {
-          closeSearch();
-          if (url.pathname === location.pathname && url.hash) {
-            document.getElementById(url.hash.slice(1))?.focus({ preventScroll: true });
-          }
+        closeSearch();
+        if (url.pathname === location.pathname && url.hash) {
+          document.getElementById(url.hash.slice(1))?.focus({ preventScroll: true });
         }
       });
       item.append(link);
@@ -243,21 +197,16 @@ new ResizeObserver(entries => {
   document.documentElement.style.setProperty('--header-offset', `${Math.ceil(entries[0].target.getBoundingClientRect().height)}px`);
 }).observe(document.querySelector('.site-header'));
 
-// Template search results also work when opened in a separate tab.
-function openLinkedPanel() {
+// Preserve bookmarks and cached links to former homepage sections and panels.
+function redirectLegacyHash() {
   const id = location.hash.slice(1);
-  // Preserve bookmarks and cached search results for the former homepage section.
+  let route = legacyPageRoutes.get(id);
   if (id === 'news' && (location.pathname === siteRoot.pathname || location.pathname === siteRoot.pathname + 'index.html')) {
-    location.replace(new URL('news/', siteRoot));
-    return;
+    route = 'news/';
   }
-  if (id === 'team') {
-    location.replace(new URL('team/', siteRoot));
-    return;
-  }
-  if (['robotics-applications', 'automatic-control'].includes(id)) {
-    openPanel(id, searchToggle);
-  }
+  if (!route) return;
+  const target = new URL(route, siteRoot);
+  if (target.href !== location.href) location.replace(target);
 }
-window.addEventListener('hashchange', openLinkedPanel);
-openLinkedPanel();
+window.addEventListener('hashchange', redirectLegacyHash);
+redirectLegacyHash();

@@ -36,7 +36,7 @@ python3 -m http.server 8080 --bind 127.0.0.1
 - `data/competitions.html`：指导学生竞赛页面的内容源；修改后运行生成脚本。
 - `competitions/index.html`：生成的独立学生竞赛页面。
 - `assets/styles.css`：配色、字体、间距、桌面和手机布局。
-- `assets/main.js`：手机菜单、Teaching 下拉菜单、信息弹窗和站内搜索。
+- `assets/main.js`：手机菜单、站内搜索和旧链接跳转。
 - `assets/visits.js`：仅在正式域名加载访问统计，处理首页计数加载与失败提示。
 - `assets/search-index.json`：由生成脚本提取页面内容生成的站内搜索索引。
 
@@ -46,7 +46,7 @@ Publication 导航进入包含 Under Review 和 Published Papers 分组的论文
 
 顶部导航在 Teaching 与 News 之间新增 Competitions，点击进入独立的 `/competitions/` 页面。页面标题为 Student Competitions / 指导学生竞赛，目前仅说明赛事信息、学生团队、指导教师、竞赛成果与图片待补充，没有添加未经提供的比赛或成绩。后续编辑 `data/competitions.html` 并运行生成脚本，即可同步页面和站内搜索。
 
-News 位于 Competitions 之后，点击进入独立的 `/news/` 页面；首页 Publication 下方不再显示 News。竞赛与新闻页沿用固定导航、搜索和 Teaching 弹窗，当前页面的导航项单独高亮。旧的首页 `/#news` 链接自动跳转到新页面。新闻页当前保留待更新提示，后续编辑 `data/news.html`，运行 `python3 tools/build_publications.py` 并提交生成文件即可。窄屏导航在 1200px 及以下收进菜单，点击 Competitions 或 News 直接进入对应页面。
+News 位于 Competitions 之后，点击进入独立的 `/news/` 页面；首页 Publication 下方不再显示 News。竞赛与新闻页沿用固定导航、搜索和独立课程入口，当前页面的导航项单独高亮。旧的首页 `/#news` 链接自动跳转到新页面。新闻页当前保留待更新提示，后续编辑 `data/news.html`，运行 `python3 tools/build_publications.py` 并提交生成文件即可。窄屏导航在 1200px 及以下收进菜单，点击 Competitions 或 News 直接进入对应页面。
 
 ## 团队信息
 
@@ -54,7 +54,21 @@ Team 使用独立页面 `/team/`，顶部导航为普通链接，可直接打开
 
 合作者组位于负责人之后，先预留 3 个姓名与单位位置；后续按实际人数增减，不推断姓名、单位、职称或合作关系。毕业设计学生组保留 4 个在读学生姓名位置；不推断学生的学历层次。
 
-后续编辑 `data/team.html`，运行 `python3 tools/build_publications.py`，并提交生成的页面与搜索索引。各页面的 Team 导航和站内搜索统一指向 `/team/`；Teaching 继续使用弹窗。
+后续编辑 `data/team.html`，运行 `python3 tools/build_publications.py`，并提交生成的页面与搜索索引。各页面的 Team 导航和站内搜索统一指向 `/team/`。
+
+## 教学页面
+
+顶部 Teaching 直接进入 `/teaching/` 课程列表，不使用弹窗或下拉菜单。两门课程各有独立详情页，保留中英文课程名称、学校和资料待补充提示：
+
+| 页面 | 地址 | 维护源文件 |
+| --- | --- | --- |
+| Teaching 课程列表 | `/teaching/` | `data/teaching.html` |
+| 机器人学及应用 | `/teaching/robotics-applications/` | `data/robotics-applications.html` |
+| 自动控制原理 | `/teaching/automatic-control/` | `data/automatic-control.html` |
+
+修改源文件后运行 `python3 tools/build_publications.py`，同步提交生成的页面和搜索索引。课程详情页的“← Teaching”返回课程列表，课程列表的“← Homepage”返回首页。所有层级页面的导航、样式、脚本和搜索地址均按实际目录生成；课程页高亮 Teaching。
+
+旧的 `/#robotics-applications`、`/#automatic-control`、`/#teaching` 链接及缓存中的课程搜索结果会转到新页面。导航脚本、样式与搜索索引带更新版本参数，避免新页面使用旧弹窗脚本。未提供的课程介绍、课件和下载材料继续留空，不添加虚构内容。
 
 ## 论文展示与维护
 
@@ -125,7 +139,7 @@ Publication 下方新增 Patents（专利）板块，数据源为 `data/patents.
 
 ## 站内搜索
 
-导航右侧原 Contact 按钮已替换为放大镜。点击展开搜索框，输入内容即时匹配，按 Enter 或右侧箭头确认并聚焦首条结果；点击结果打开论文、跳转首页对应区域，或打开 Team / Teaching 面板。按 Esc、点击外部或 Tab 移出搜索区域可收起。手机端放大镜始终可见，不必先打开导航菜单。
+导航右侧原 Contact 按钮已替换为放大镜。点击展开搜索框，输入内容即时匹配，按 Enter 或右侧箭头确认并聚焦首条结果；点击结果打开论文、跳转首页对应区域，或进入 Team / Teaching 独立页面。按 Esc、点击外部或 Tab 移出搜索区域可收起。手机端放大镜始终可见，不必先打开导航菜单。
 
 搜索覆盖 8 篇已发表论文的标题、作者、年份、DOI、摘要，在审稿件的标题、期刊与作者角色，以及中英文简介、联系方式、Competitions、News、Team 和两门课程。在审搜索结果单独标注 Under Review。支持中英文关键词和多个词同时匹配，结果按标题相关度排序。无匹配时显示提示。搜索在浏览器本地完成，不调用外部搜索服务，不保存或上传查询词。
 
@@ -137,7 +151,7 @@ Publication 下方新增 Patents（专利）板块，数据源为 `data/patents.
 
 - 总访问量（PV）累计本站各页面的加载次数；刷新或打开另一页可增加次数。访客数（UV）按统计服务识别规则去重，不等于可精确识别的真实人数；清理浏览器存储或使用不同设备可能影响去重。
 - 统计从接入时开始，包含接入验证产生的少量访问；不能自动恢复接入前的访问记录。
-- 首页、News、Competitions 和论文详情页均只加载一次 `assets/visits.js`；只有首页展示数字。`www.sensedex.online` 以外的域名和本地预览不请求统计服务，旧 News 锚点的跳转不重复计数。
+- 首页、Team、Teaching 课程列表与详情页、News、Competitions 和论文详情页均只加载一次 `assets/visits.js`；只有首页展示数字。`www.sensedex.online` 以外的域名和本地预览不请求统计服务，旧 News 锚点的跳转不重复计数。
 - 统计脚本为 `https://busuanzi.9420.ltd/js`，当前服务接口为 `https://bsz.iirose.cn/api`。请求包含当前页面地址及常规连接信息，提供方按其规则统计并使用 `bsz-id` 本地标识去重；页面底部保留服务来源链接。站内搜索词保留在页面内，不加入 URL，因此不会随页面地址发送。
 - 未加载时数字为“—”；超时或脚本加载失败显示“统计暂不可用”，不把失败伪装成 0。接口稍后返回时仍可恢复显示。公开服务不提供 SLA 或完整性保证；拦截器、网络和服务维护可能影响统计。
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build publication, patent, project, team, news, and competition content, BibTeX, and site search."""
+"""Build publication, patent, project, team, teaching, news, and competition content, BibTeX, and site search."""
 import html
 import json
 import re
@@ -12,11 +12,10 @@ esc = html.escape
 
 
 class SearchTextParser(HTMLParser):
-    """Collect actual homepage section and dialog-template text for search."""
+    """Collect actual page section text for search."""
 
     VOID_TAGS = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
                  'link', 'meta', 'param', 'source', 'track', 'wbr'}
-    PANELS = {'robotics-applications', 'automatic-control'}
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -30,12 +29,10 @@ class SearchTextParser(HTMLParser):
         if self.active is None:
             block = None
             if tag == 'section':
-                if attrs.get('id') in {'contact', 'news', 'competitions', 'team'}:
+                if attrs.get('id') in {'contact', 'news', 'competitions', 'team', 'teaching', 'robotics-applications', 'automatic-control'}:
                     block = attrs['id']
                 elif 'biography' in attrs.get('class', '').split():
                     block = 'about'
-            elif tag == 'template' and attrs.get('id') in self.PANELS:
-                block = attrs['id']
             if block:
                 self.active = block
                 self.blocks.setdefault(block, [])
@@ -64,7 +61,7 @@ class SearchTextParser(HTMLParser):
             self.blocks[self.active].append(data)
 
 
-def search_index(papers, reviews, patents, projects, homepage, news_content, competitions_content, team_content):
+def search_index(papers, reviews, patents, projects, homepage, news_content, competitions_content, team_content, teaching_content):
     """Use one shared index on the homepage and all publication detail pages."""
     entries = []
     for paper in papers:
@@ -134,6 +131,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
     parser.feed(news_content)
     parser.feed(competitions_content)
     parser.feed(team_content)
+    parser.feed(teaching_content)
     parser.close()
     sections = (
         ('about', 'About SenseDex Lab · 实验室简介', 'About', '简介 关于 履历 教育 经历 科研 项目'),
@@ -141,6 +139,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
         ('competitions', 'Student Competitions · 指导学生竞赛', 'Competitions', '比赛 竞赛 学生 团队 指导教师 成果 图片'),
         ('news', 'News · 最新动态', 'News', '新闻 动态 消息'),
         ('team', 'Team · 团队', 'Team', '团队 成员 实验室 合作者 合作 collaborators affiliation'),
+        ('teaching', 'Teaching · 教学', 'Teaching', '教学 课程 授课 责任教师'),
         ('robotics-applications', 'Robotics and Applications · 机器人学及应用', 'Teaching', '教学 课程 机器人学及应用'),
         ('automatic-control', 'Principles of Automatic Control · 自动控制原理', 'Teaching', '教学 课程 自动控制原理'),
     )
@@ -153,10 +152,12 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
             emails = re.findall(r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}', text)
             if emails:
                 description = ' · '.join(emails) + ' · ' + text
+        if block in {'robotics-applications', 'automatic-control'}:
+            url = 'teaching/' + block + '/'
+        else:
+            url = block + '/' if block in {'news', 'competitions', 'team', 'teaching'} else '#' + block
         entry = {'title': title, 'text': text + ' ' + keywords, 'description': description,
-                 'url': block + '/' if block in {'news', 'competitions', 'team'} else '#' + block, 'kind': kind}
-        if block in parser.PANELS:
-            entry['panel'] = block
+                 'url': url, 'kind': kind}
         entries.append(entry)
     return entries
 
@@ -354,9 +355,14 @@ def site_header(homepage, prefix, current):
     return header
 
 
-def content_page(homepage, content, slug, title, description):
-    header = site_header(homepage, '../', slug + '/')
-    dialogs = homepage[homepage.index('    <dialog'):homepage.index('  </body>')]
+def content_page(homepage, content, slug, title, description, source=None):
+    prefix = '../' * (slug.count('/') + 1)
+    is_course = slug.startswith('teaching/')
+    current = 'teaching/' if is_course else slug + '/'
+    header = site_header(homepage, prefix, current)
+    back_url = prefix + 'teaching/' if is_course else prefix
+    back_label = 'Teaching' if is_course else 'Homepage'
+    source = source or slug
     return f'''<!doctype html>
 <html lang="en">
   <head>
@@ -365,21 +371,21 @@ def content_page(homepage, content, slug, title, description):
     <meta name="description" content="{esc(description)}">
     <meta name="theme-color" content="#92316f">
     <title>{esc(title)} | SenseDex Lab</title>
-    <link rel="icon" href="../assets/sensedex-mark.png" type="image/png">
-    <link rel="apple-touch-icon" href="../assets/sensedex-mark.png">
-    <link rel="stylesheet" href="../assets/styles.css?v=20261113-projects">
-    <script src="../assets/main.js?v=20261113-projects" defer></script>
-    <script src="../assets/visits.js" defer></script>
+    <link rel="icon" href="{prefix}assets/sensedex-mark.png" type="image/png">
+    <link rel="apple-touch-icon" href="{prefix}assets/sensedex-mark.png">
+    <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261113-teaching">
+    <script src="{prefix}assets/main.js?v=20261113-teaching" defer></script>
+    <script src="{prefix}assets/visits.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 {header}
     <main id="main-content" class="container main-content news-page">
-      <a class="paper-back" href="../">← Homepage</a>
-      <!-- Page content is maintained in data/{esc(slug)}.html. -->
+      <a class="paper-back" href="{back_url}">← {back_label}</a>
+      <!-- Page content is maintained in data/{esc(source)}.html. -->
 {content.rstrip()}
     </main>
-{dialogs}  </body>
+  </body>
 </html>
 '''
 
@@ -396,7 +402,6 @@ def competitions_page(homepage, content):
 
 def detail(p, homepage):
     header = site_header(homepage, '../../', '#publication')
-    dialogs = homepage[homepage.index('    <dialog'):homepage.index('  </body>')]
     section_name = 'Abstract' if p.get('abstract') else 'Summary'
     paragraphs = p.get('abstract') or [p['summary']]
     if isinstance(paragraphs, str):
@@ -435,8 +440,8 @@ def detail(p, homepage):
     <title>{esc(p['marker'])} | SenseDex Lab</title>
     <link rel="icon" href="../../assets/sensedex-mark.png" type="image/png">
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark.png">
-    <link rel="stylesheet" href="../../assets/styles.css?v=20261113-projects">
-    <script src="../../assets/main.js?v=20261113-projects" defer></script>
+    <link rel="stylesheet" href="../../assets/styles.css?v=20261113-teaching">
+    <script src="../../assets/main.js?v=20261113-teaching" defer></script>
     <script src="../../assets/visits.js" defer></script>
   </head>
   <body>
@@ -476,7 +481,7 @@ def detail(p, homepage):
       </article>
       <a class="paper-back paper-back-bottom" href="../../#publication">← All publications</a>
     </main>
-{dialogs}  </body>
+  </body>
 </html>
 '''
 
@@ -525,15 +530,29 @@ def main():
     team_folder.mkdir(exist_ok=True)
     (team_folder / 'index.html').write_text(content_page(homepage, team_content, 'team', 'Team',
         'People at SenseDex Lab: principal investigator, collaborators, and graduation project students.'))
+    teaching_content = (ROOT / 'data/teaching.html').read_text()
+    teaching_folder = ROOT / 'teaching'
+    teaching_folder.mkdir(exist_ok=True)
+    (teaching_folder / 'index.html').write_text(content_page(homepage, teaching_content, 'teaching', 'Teaching',
+        'Courses taught by Sen Li at Shenzhen Polytechnic University.'))
+    for course_id, title in (
+            ('robotics-applications', 'Robotics and Applications'),
+            ('automatic-control', 'Principles of Automatic Control')):
+        course_content = (ROOT / 'data' / (course_id + '.html')).read_text()
+        course_folder = teaching_folder / course_id
+        course_folder.mkdir(exist_ok=True)
+        (course_folder / 'index.html').write_text(content_page(homepage, course_content,
+            'teaching/' + course_id, title, title + ' at Shenzhen Polytechnic University. Course details and materials will be added.', source=course_id))
+        teaching_content += '\n' + course_content
     for paper in papers:
         folder = ROOT / 'publications' / paper['id']
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(detail(paper, homepage))
         (folder / 'citation.bib').write_text(bibtex(paper))
-    entries = search_index(papers, reviews, patents, projects, homepage, news_content, competitions_content, team_content)
+    entries = search_index(papers, reviews, patents, projects, homepage, news_content, competitions_content, team_content, teaching_content)
     (ROOT / 'assets/search-index.json').write_text(
         json.dumps(entries, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f'Generated Team, News and Competitions pages, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(projects)} project entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
+    print(f'Generated Team, Teaching, two course, News and Competitions pages, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(projects)} project entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
 
 
 if __name__ == '__main__':
