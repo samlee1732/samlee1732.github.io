@@ -37,6 +37,12 @@ a { color: inherit; }
 .biography p { margin: 0; }
 .section-divider { border: 0; border-top: 3px solid var(--line); margin: clamp(31px, 2.27vw, 62px) 0 clamp(31px, 2.27vw, 62px); }
 .closing-divider { margin-bottom: 0; }
+.contact-card { padding: clamp(22px, 3vw, 72px) 8%; overflow-wrap: anywhere; }
+.contact-card h2 { margin: 0; font-size: inherit; line-height: inherit; font-weight: 700; }
+.contact-card address { font-style: normal; }
+.contact-card a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.contact-card a:hover { color: var(--accent); }
+.contact-card .contact-email { font-style: italic; }
 .teaching-menu { position: relative; }
 .teaching-menu summary { list-style: none; cursor: pointer; }
 .teaching-menu summary::-webkit-details-marker { display: none; }
@@ -89,6 +95,7 @@ a { color: inherit; }
   .biography { font-size: 16px; line-height: 1.85; }
   .section-divider { margin-block: 30px; border-top-width: 2px; }
   .closing-divider { margin-bottom: 0; }
+  .contact-card { padding: 16px 0; }
   .content-dialog { padding: 38px 26px 26px; }
 }
 
