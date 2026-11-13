@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build publication, patent, team, news, and competition content, BibTeX, and site search."""
+"""Build publication, patent, project, team, news, and competition content, BibTeX, and site search."""
 import html
 import json
 import re
@@ -64,7 +64,7 @@ class SearchTextParser(HTMLParser):
             self.blocks[self.active].append(data)
 
 
-def search_index(papers, reviews, patents, homepage, news_content, competitions_content, team_content):
+def search_index(papers, reviews, patents, projects, homepage, news_content, competitions_content, team_content):
     """Use one shared index on the homepage and all publication detail pages."""
     entries = []
     for paper in papers:
@@ -113,6 +113,20 @@ def search_index(papers, reviews, patents, homepage, news_content, competitions_
             'description': description,
             'url': '#' + patent['id'],
             'kind': 'Patent Application',
+        })
+
+    for project in projects:
+        description = (project['program'] + ' · ' + project['status']
+                       + ' · 执行期：' + project_period(project)
+                       + ' · 项目经费：' + str(project['funding_wan_cny']) + '万元'
+                       + ' · 参与角色：' + project['role']
+                       + ' · ' + project['contribution'])
+        entries.append({
+            'title': project['title'],
+            'text': description + ' 李森 Sen Li 科研项目 国家 市科技计划 项目骨干 Research Projects',
+            'description': description,
+            'url': '#' + project['id'],
+            'kind': 'Research Project',
         })
 
     parser = SearchTextParser()
@@ -296,6 +310,37 @@ def patent_overview(patents):
             + '      <!-- PATENT CONTENT END -->')
 
 
+def project_month(value):
+    year, month = value.split('-')
+    return f'{year}年{int(month)}月'
+
+
+def project_period(project):
+    return project_month(project['start_date']) + '—' + project_month(project['end_date'])
+
+
+def project_overview(projects):
+    rows = []
+    for project in projects:
+        rows.append(f'''          <li>
+            <article id="{esc(project['id'])}" class="project-entry" aria-labelledby="{esc(project['id'])}-title" tabindex="-1" lang="zh-CN">
+              <p class="project-program">{esc(project['program'])}</p>
+              <h3 id="{esc(project['id'])}-title" class="publication-title">{esc(project['title'])} <span class="publication-type project-status">{esc(project['status'])}</span></h3>
+              <p class="project-meta"><span>执行期：<time datetime="{esc(project['start_date'])}">{esc(project_month(project['start_date']))}</time>—<time datetime="{esc(project['end_date'])}">{esc(project_month(project['end_date']))}</time></span><span>项目经费：{esc(str(project['funding_wan_cny']))}万元</span></p>
+              <p>参与角色：{esc(project['role'])}</p>
+              <p>{esc(project['contribution'])}</p>
+            </article>
+          </li>''')
+    return ('      <!-- PROJECT CONTENT START -->\n'
+            '      <section id="projects" class="publications projects" aria-labelledby="projects-heading" tabindex="-1">\n'
+            '        <h2 id="projects-heading">Projects <span lang="zh-CN">· 科研项目</span></h2>\n'
+            f'        <p class="projects-intro" lang="zh-CN">李森近年作为项目骨干参与以下{len(projects)}项国家自然科学基金及深圳市科技计划项目。</p>\n'
+            '        <!-- Generated from data/projects.json by tools/build_publications.py. -->\n'
+            '        <ol class="publication-list">\n'
+            + '\n'.join(rows) + '\n        </ol>\n      </section>\n'
+            + '      <!-- PROJECT CONTENT END -->')
+
+
 def site_header(homepage, prefix, current):
     header = re.search(r'    <header\b.*?</header>', homepage, re.S).group()
     header = header.replace('href="./', f'href="{prefix}')
@@ -319,8 +364,8 @@ def content_page(homepage, content, slug, title, description):
     <title>{esc(title)} | SenseDex Lab</title>
     <link rel="icon" href="../assets/sensedex-mark.png" type="image/png">
     <link rel="apple-touch-icon" href="../assets/sensedex-mark.png">
-    <link rel="stylesheet" href="../assets/styles.css?v=20261113-team">
-    <script src="../assets/main.js?v=20261113-team" defer></script>
+    <link rel="stylesheet" href="../assets/styles.css?v=20261113-projects">
+    <script src="../assets/main.js?v=20261113-projects" defer></script>
     <script src="../assets/visits.js" defer></script>
   </head>
   <body>
@@ -387,8 +432,8 @@ def detail(p, homepage):
     <title>{esc(p['marker'])} | SenseDex Lab</title>
     <link rel="icon" href="../../assets/sensedex-mark.png" type="image/png">
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark.png">
-    <link rel="stylesheet" href="../../assets/styles.css?v=20261113-team">
-    <script src="../../assets/main.js?v=20261113-team" defer></script>
+    <link rel="stylesheet" href="../../assets/styles.css?v=20261113-projects">
+    <script src="../../assets/main.js?v=20261113-projects" defer></script>
     <script src="../../assets/visits.js" defer></script>
   </head>
   <body>
@@ -437,8 +482,9 @@ def main():
     papers = json.loads(DATA.read_text())
     reviews = json.loads((ROOT / 'data/under-review.json').read_text())
     patents = json.loads((ROOT / 'data/patents.json').read_text())
+    projects = json.loads((ROOT / 'data/projects.json').read_text())
     papers.sort(key=lambda p: -int(p['year']))
-    ids = [p['id'] for p in papers + reviews + patents]
+    ids = [p['id'] for p in papers + reviews + patents + projects]
     if len(ids) != len(set(ids)) or any(not re.fullmatch(r'[a-z0-9-]+', i) for i in ids):
         raise ValueError('Publication IDs must be unique lowercase URL slugs.')
     for paper in papers + reviews:
@@ -457,6 +503,11 @@ def main():
         lambda _: patent_overview(patents), homepage, count=1, flags=re.S)
     if count != 1:
         raise ValueError('Expected one marked patent content block in index.html.')
+    homepage, count = re.subn(
+        r'      <!-- PROJECT CONTENT START -->.*?<!-- PROJECT CONTENT END -->',
+        lambda _: project_overview(projects), homepage, count=1, flags=re.S)
+    if count != 1:
+        raise ValueError('Expected one marked project content block in index.html.')
     homepage_path.write_text(homepage)
     news_content = (ROOT / 'data/news.html').read_text()
     news_folder = ROOT / 'news'
@@ -476,10 +527,10 @@ def main():
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(detail(paper, homepage))
         (folder / 'citation.bib').write_text(bibtex(paper))
-    entries = search_index(papers, reviews, patents, homepage, news_content, competitions_content, team_content)
+    entries = search_index(papers, reviews, patents, projects, homepage, news_content, competitions_content, team_content)
     (ROOT / 'assets/search-index.json').write_text(
         json.dumps(entries, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f'Generated Team, News and Competitions pages, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
+    print(f'Generated Team, News and Competitions pages, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(projects)} project entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
 
 
 if __name__ == '__main__':

@@ -99,6 +99,12 @@ a { color: inherit; }
 .publication-title a:hover { text-decoration: underline; text-underline-offset: .15em; }
 .publication-type { display: inline-block; margin-left: .3em; padding: .12em .5em; border-radius: 3px; background: var(--brand-gradient); color: #fff; font-size: .7em; line-height: 1.5; vertical-align: .1em; white-space: nowrap; }
 .review-status { background: #fff0d4; color: #825006; }
+.projects-intro { margin: 0 0 24px; color: var(--muted); }
+.project-entry { overflow-wrap: anywhere; }
+.project-entry p { margin: 10px 0 0; }
+.project-entry .project-program { margin: 0 0 8px; color: var(--muted); font-size: .9em; }
+.project-meta { display: flex; flex-wrap: wrap; gap: 4px 24px; }
+.project-status { background: #eaf4ee; color: #276342; }
 .under-review .publication-title { color: #302c38; }
 .manuscript-number { font-variant-numeric: tabular-nums; }
 .resource-pending { font-size: .8em; }
