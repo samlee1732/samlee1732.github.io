@@ -163,6 +163,11 @@ a { color: inherit; }
 .dialog-body p { margin: 0 0 16px; }
 .dialog-body ul { padding-left: 22px; }
 .dialog-body li { margin: 8px 0; }
+.team-section h3 { margin: 0 0 14px; color: #302c38; font-size: 22px; line-height: 1.35; font-weight: 600; }
+.team-section + .team-section { margin-top: 26px; padding-top: 26px; border-top: 1px solid #e8e2eb; }
+.team-section ul, .team-students { margin: 0; padding-left: 22px; }
+.team-section-note { color: var(--muted); font-size: 14px; }
+.team-students { color: var(--muted); }
 .dialog-body .availability-note { padding-top: 18px; margin-top: 22px; border-top: 1px solid #e8e2eb; color: var(--muted); font-size: 14px; }
 
 @media (max-width: 1400px) {

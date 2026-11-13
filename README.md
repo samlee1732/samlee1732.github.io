@@ -42,11 +42,17 @@ python3 -m http.server 8080 --bind 127.0.0.1
 
 页面视觉参考用户提供的截图。中英文简介按作者新提供的个人经历更新，英文为对应译文；中文修正了“EEE → IEEE”和“2026毕业 → 2026年毕业”两处笔误，并依据作者个人站点统一了职称与学校名称。履历、论文数量及项目经历由作者提供，未做外部核实。
 
-Under Review 导航位于 Publication 前，跳转到联系方式下方的在审稿件区；Publication 导航跳转到其后的已发表论文展示区，点击已发表论文标题可打开独立详情页；Team 展示作者提供的概览信息，成员名单仍需补充；Teaching 展示《机器人学及应用》和《自动控制原理》两门课程，课程资料仍需补充。右上角放大镜打开站内搜索，联系方式仍保留在首页 `#contact` 区域，可搜索“邮箱”或“联系方式”进入；手机端点击页内导航后会先收起导航菜单。网站采用玫红、紫色到深蓝的渐变，实验室标题、导航选中线、搜索图标与下拉面板顶边保持一致。
+Publication 导航进入包含 Under Review 和 Published Papers 分组的论文栏目，点击已发表论文标题可打开独立详情页；Team 展示负责人和在读毕业设计学生；Teaching 展示《机器人学及应用》和《自动控制原理》两门课程，课程资料仍需补充。右上角放大镜打开站内搜索，联系方式仍保留在首页 `#contact` 区域，可搜索“邮箱”或“联系方式”进入；手机端点击页内导航后会先收起导航菜单。网站采用玫红、紫色到深蓝的渐变，实验室标题、导航选中线、搜索图标与下拉面板顶边保持一致。
 
 顶部导航在 Teaching 与 News 之间新增 Competitions，点击进入独立的 `/competitions/` 页面。页面标题为 Student Competitions / 指导学生竞赛，目前仅说明赛事信息、学生团队、指导教师、竞赛成果与图片待补充，没有添加未经提供的比赛或成绩。后续编辑 `data/competitions.html` 并运行生成脚本，即可同步页面和站内搜索。
 
 News 位于 Competitions 之后，点击进入独立的 `/news/` 页面；首页 Publication 下方不再显示 News。竞赛与新闻页沿用固定导航、搜索和 Team / Teaching 弹窗，当前页面的导航项单独高亮。旧的首页 `/#news` 链接自动跳转到新页面。新闻页当前保留待更新提示，后续编辑 `data/news.html`，运行 `python3 tools/build_publications.py` 并提交生成文件即可。窄屏导航在 1200px 及以下收进菜单，点击 Competitions 或 News 直接进入对应页面。
+
+## 团队信息
+
+Team 沿用弹窗展示，分为 Principal Investigator 与 Graduation Project Students 两组。负责人为 Dr. Sen Li（李森），深圳职业技术大学机电工程学院讲师，2026 年 7 月入职。此处职称为 Lecturer，不使用参考截图中的 Assistant Professor。
+
+毕业设计学生组预留 4 个在读学生姓名位置，姓名、专业及预计毕业年份尚未提供；不推断学生的学历层次。后续编辑 `index.html` 中的 `<template id="team">`，将对应列表项替换为真实信息，然后运行 `python3 tools/build_publications.py`。生成脚本会将 Team 内容同步到 News、Competitions、8 篇论文详情页与站内搜索。
 
 ## 论文展示与维护
 
