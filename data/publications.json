@@ -1,0 +1,199 @@
+[
+  {
+    "id": "activespn",
+    "marker": "ActiveSPN",
+    "title": "ActiveSPN: Active Soft Polyhedral Networks With Pose Estimation for In-Finger Object Manipulation",
+    "authors": [
+      "Sen Li",
+      "Chengxiao Dong",
+      "Chaoyang Song",
+      "Fang Wan"
+    ],
+    "venue": "IEEE Robotics and Automation Letters",
+    "year": 2025,
+    "type": "Journal Article",
+    "status": "Published",
+    "paper": "https://ieeexplore.ieee.org/document/11052661",
+    "pdf": "activespn.pdf",
+    "video": "https://youtu.be/2TNRdQrWji0",
+    "image": "activespn.gif",
+    "summary": "This letter introduces Active Soft Polyhedral Networks (ActiveSPN), a gripper design that leverages an active, non-biomimetic surface for precise in-hand manipulation. A vision system integrated directly into the fingers further facilitates accurate pose estimation of the in-finger object.",
+    "image_width": 413,
+    "image_height": 259,
+    "image_alt": "ActiveSPN demonstration of in-finger object manipulation",
+    "source": "http://www.senli.site/",
+    "abstract": "Robotic grippers aim to replicate the remarkable functionalities of the human hand by providing advanced perception, adaptability, stability, and dexterity for complex tasks. Achieving these capabilities demands a sophisticated design hierarchy and robust perception mechanisms that ensure accurate manipulation. This letter introduces Active Soft Polyhedral Networks (ActiveSPN), a gripper design that leverages an active, non-biomimetic surface for precise in-hand manipulation. A vision system integrated directly into the fingers further facilitates accurate pose estimation of the in-finger object. The proposed system includes: (i) a soft polyhedral network featuring a transparent active belt to deliver complete three-dimensional adaptation and dexterous in-finger motion, and (ii) a generative learning-based pipeline for in-finger pose estimation. Experimental results demonstrate the ability of ActiveSPN to execute multi-degree-of-freedom in-finger manipulations, including two-axis rotation and one-axis translation. Moreover, the integrated vision-based pose estimation provides robust, real-time predictions, supporting consistent closed-loop control. Across diverse objects, the system achieves mean translational errors of 2.59 mm and rotational errors of 7°, highlighting a promising paradigm for compact, efficient, and dexterous robotic manipulation.",
+    "volume": "10",
+    "number": "8",
+    "pages": "8115--8122",
+    "doi": "10.1109/LRA.2025.3583616",
+    "code": "https://github.com/ancorasir/ActiveSPN",
+    "publication_date": "2025-06-26",
+    "metadata_sources": [
+      "./assets/publications/activespn.pdf"
+    ]
+  },
+  {
+    "id": "activespn2",
+    "marker": "ActiveSPN2",
+    "title": "Multi-modal vision-based deformable perception for in-finger manipulation with soft active surfaces",
+    "authors": [
+      "Sen Li",
+      "Chaoyang Song",
+      "Fang Wan"
+    ],
+    "venue": "Biomimetic Intelligence and Robotics",
+    "year": 2026,
+    "type": "Journal Article",
+    "status": "Published online",
+    "paper": "https://doi.org/10.1016/j.birob.2026.100326",
+    "pdf": "activespn2.pdf",
+    "image": "activespn2.gif",
+    "summary": "We propose ActiveSPN2, a robot gripper with a soft active surface designed for in-finger manipulation in constrained environments, featuring multi-modal perception through a vision-based deformable perception architecture. By tracking the real-time deformation of the internal Soft Polyhedral Network, we achieve real-time, multi-modal vision-based perception that provides 6D forces and object pose estimation during in-hand manipulation.",
+    "image_width": 1203,
+    "image_height": 602,
+    "image_alt": "ActiveSPN2 soft active surface gripper demonstration",
+    "source": "http://www.senli.site/",
+    "abstract": "Enabling robots to manipulate objects dexterously within their grasp often requires complex multi-fingered hands with dense, multi-modal sensor arrays. This complexity can limit practicality and robustness, especially in confined spaces. This study challenges that paradigm by introducing a robust multi-modal perception method that derives 6D forces and poses from the large-scale deformation of a soft finger, using only a single internal camera. We propose ActiveSPN2, a robot gripper with a soft active surface designed for in-finger manipulation in constrained environments, featuring multi-modal perception through a vision-based deformable perception architecture. By tracking the real-time deformation of the internal Soft Polyhedral Network, we achieve real-time, multi-modal vision-based perception that provides 6D forces and object pose estimation during in-finger manipulation. Quantitatively, the proposed force perception model achieves an average accuracy of approximately 0.286 N on the test set, indicating reliable generalization under unseen manipulation conditions. A series of experiments were conducted on the ActiveSPN2 gripper using the proposed vision-based deformable perception approach, demonstrating the effectiveness and robustness of the strategy.",
+    "doi": "10.1016/j.birob.2026.100326",
+    "article_number": "100326",
+    "publication_date": "2026-03-14",
+    "metadata_sources": [
+      "https://www.sciencedirect.com/science/article/pii/S2667379726000549",
+      "https://api.crossref.org/works/10.1016/j.birob.2026.100326",
+      "./assets/publications/activespn2.pdf"
+    ],
+    "pdf_label": "PDF (preprint)"
+  },
+  {
+    "id": "oral-care",
+    "marker": "VBDeformP",
+    "title": "Teaching oral care via vision-based deformation perception",
+    "authors": [
+      "Chengxiao Dong",
+      "Xuanyi Dai",
+      "Yu Pan",
+      "Wanghongjie Qiu",
+      "Sen Li",
+      "Tianyu Wu",
+      "Yijie Jin",
+      "He Wang",
+      "Chaoyang Song",
+      "Fang Wan"
+    ],
+    "venue": "Soft Science",
+    "year": 2025,
+    "type": "Journal Article",
+    "status": "Published",
+    "paper": "https://www.oaepublish.com/articles/ss.2025.14",
+    "image": "oral-care.gif",
+    "summary": "This study presents a novel, cost-effective sensor platform based on Vision-based Deformation Perception for community oral health education. The system integrates a 3D-printed thermoplastic polyurethane soft structure with a rigid resin frame and an ArUco marker to encode interaction information, including the contact region and six-dimensional force and torque.",
+    "image_width": 1230,
+    "image_height": 708,
+    "image_alt": "Vision-based deformation perception for oral care demonstration",
+    "source": "http://www.senli.site/",
+    "doi": "10.20517/ss.2025.14",
+    "volume": "5",
+    "number": "3",
+    "article_number": "36",
+    "publication_date": "2025-07-30",
+    "metadata_sources": [
+      "https://www.oaepublish.com/articles/ss.2025.14"
+    ]
+  },
+  {
+    "id": "adap",
+    "marker": "ADAP",
+    "title": "ADAP: Adaptive & Dynamic Arc Padding for predicting seam profiles in Multi-Layer-Multi-Pass robotic welding",
+    "authors": [
+      "He Wang",
+      "Sen Li",
+      "Xiaobo Liu",
+      "Chengxiao Dong",
+      "Fang Wan"
+    ],
+    "venue": "AI Open",
+    "year": 2025,
+    "type": "Journal Article",
+    "status": "Published",
+    "paper": "https://doi.org/10.1016/j.aiopen.2025.10.003",
+    "image": "adap.png",
+    "summary": "This study introduces the Adaptive & Dynamic Arc Padding (ADAP) approach. ADAP employs a novel representation of weld bead profiles using image-based boundary and primitive arc geometries defined by arc center and radius.",
+    "image_width": 983,
+    "image_height": 680,
+    "image_alt": "ADAP weld seam profile prediction research figure",
+    "source": "http://www.senli.site/",
+    "doi": "10.1016/j.aiopen.2025.10.003",
+    "volume": "6",
+    "pages": "204--219",
+    "metadata_sources": [
+      "https://www.sciencedirect.com/science/article/pii/S266665102500018X",
+      "https://www.keaipublishing.com/en/journals/ai-open/recent-articles/?pageNumber=2",
+      "https://api.crossref.org/works/10.1016/j.aiopen.2025.10.003"
+    ]
+  },
+  {
+    "id": "active-surface",
+    "marker": "ActiveSPN0",
+    "title": "Active Surface with Passive Omni-Directional Adaptation for In-Hand Manipulation",
+    "authors": [
+      "Sen Li",
+      "Fang Wan",
+      "Chaoyang Song"
+    ],
+    "venue": "2024 6th International Conference on Reconfigurable Mechanisms and Robots (ReMAR)",
+    "year": 2024,
+    "type": "Conference Paper",
+    "status": "Published",
+    "paper": "https://ieeexplore.ieee.org/document/10619925",
+    "pdf": "active-surface.pdf",
+    "video": "https://youtu.be/8DpCgMlrLU4",
+    "image": "active-surface.png",
+    "summary": "In this study, we present the design of a soft robotic finger with an active surface on an omni-adaptive structure, which can be easily installed on existing grippers and achieve stability and dexterity for in-hand manipulation.",
+    "image_width": 1476,
+    "image_height": 945,
+    "image_alt": "Soft active surface gripper design and in-hand manipulation",
+    "source": "http://www.senli.site/",
+    "abstract": "Soft fingers with omni-directional adaptability excel in 3D twisting, outperforming two-dimensional self-adaptive hands using a finger rotation mechanism to achieve similar adaptability. In this study, we present the design of a soft robotic finger with an active surface on an omni-adaptive structure, which can be easily installed on existing grippers and achieve stability and dexterity for in-hand manipulation. The system’s active surfaces initially transfer the object from the fingertip segment with less compliance to the middle segment of the finger with superior adaptability. Despite the omni-directional deformation of the finger, in-hand manipulation can still be executed with controlled active surfaces. We characterized the soft finger’s stiffness distribution and simplified models to assess the feasibility of lifting and reorienting a grasped object in a 3D twisting state. A set of experiments on in-hand manipulation was performed with the proposed fingers, demonstrating the dexterity and robustness of the strategy.",
+    "doi": "10.1109/ReMAR61031.2024.10619925",
+    "pages": "627--632",
+    "metadata_sources": [
+      "./assets/publications/active-surface.pdf"
+    ]
+  },
+  {
+    "id": "flip-and-flap",
+    "marker": "FLIP-AND-FLAP",
+    "title": "Biomimetic Flip-and-Flap Strategy of Flying Objects for Perching on Inclined Surfaces",
+    "authors": [
+      "Zhifeng Huang",
+      "Sen Li",
+      "Jungao Jiang",
+      "Ying Wu",
+      "Liang Yang",
+      "Yun Zhang"
+    ],
+    "venue": "IEEE Robotics and Automation Letters",
+    "year": 2021,
+    "type": "Journal Article",
+    "status": "Published",
+    "paper": "https://ieeexplore.ieee.org/document/9392363",
+    "pdf": "flip-and-flap.pdf",
+    "video": "https://youtu.be/f70uy_iv52A",
+    "image": "flip-and-flap.gif",
+    "summary": "A flip-and-flap biomimetic strategy is presented that enables a high-speed flying object to perch on inclined surfaces without speed reduction before touchdown.",
+    "image_width": 471,
+    "image_height": 360,
+    "image_alt": "Flip-and-flap perching demonstration",
+    "source": "http://www.senli.site/",
+    "abstract": "Animals can use the maneuver of a flipping body and flapping wings to reduce the normal rebound force of impact during landing, decreasing the adsorption force required by the contact point. This capability aids aerial vehicles with landing not only on vertical surfaces, but also on inclined surfaces. In this study, a “flip-and-flap” biomimetic strategy is presented that enables a high-speed flying object to perch on inclined surfaces without speed reduction before touchdown. During perching, the kinetic energy of the aerial vehicle is first converted to potential energy by flipping upward with a customized extended leg. Then, with a controlled thrust, the potential energy is consumed during the downward-swing phase. Thus, the aerial vehicle can land smoothly on a wall. Simplified and multilink models were designed to simulate the landing of a flying object, and the dynamic interaction between the flying object with an extended-leg mechanism and the surface was elaborated. A set of experiments on perching performed with the proposed strategy and customized extended leg, demonstrating the effectiveness and robustness of the strategy.",
+    "doi": "10.1109/LRA.2021.3070254",
+    "volume": "6",
+    "number": "3",
+    "pages": "5199--5206",
+    "publication_date": "2021-03-31",
+    "metadata_sources": [
+      "./assets/publications/flip-and-flap.pdf"
+    ]
+  }
+]

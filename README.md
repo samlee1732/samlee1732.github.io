@@ -35,18 +35,43 @@ python3 -m http.server 8080 --bind 127.0.0.1
 
 页面视觉参考用户提供的截图。中英文简介按作者新提供的个人经历更新，英文为对应译文；中文修正了“EEE → IEEE”和“2026毕业 → 2026年毕业”两处笔误，并依据作者个人站点统一了职称与学校名称。履历、论文数量及项目经历由作者提供，未做外部核实。
 
-目前交付范围是首页。Publication 导航跳转到联系方式下方的论文展示区；Team 展示作者提供的概览信息，完整论文与成员名单仍需补充；Teaching 展示《机器人学及应用》和《自动控制原理》两门课程，课程资料仍需补充。右上角 Contact 链接跳转到个人信息与联系方式；手机端点击页内导航后会先收起导航菜单。网站采用玫红、紫色到深蓝的渐变，实验室标题、导航选中线、Contact 按钮与图标保持一致。
+Publication 导航跳转到联系方式下方的论文展示区，点击论文标题可打开独立详情页；Team 展示作者提供的概览信息，成员名单仍需补充；Teaching 展示《机器人学及应用》和《自动控制原理》两门课程，课程资料仍需补充。右上角 Contact 链接跳转到个人信息与联系方式；手机端点击页内导航后会先收起导航菜单。网站采用玫红、紫色到深蓝的渐变，实验室标题、导航选中线、Contact 按钮与图标保持一致。
 
 顶部导航的 News 位于 Teaching 之后，跳转到页面下方的 `#news` 动态区。目前显示待更新提示；后续在 `index.html` 的该区域替换为真实的日期和动态内容即可。窄屏导航在 1000px 及以下收进菜单，点击 News 会收起菜单并跳转。
 
-## 补充论文与素材
+## 论文展示与维护
 
-`index.html` 的 `#publication` 区域按“左侧论文信息、右侧图片或视频”排版，手机端改为上下排列。目前录入的 ActiveSPN 作者、题目、刊物、卷期页码、年份和 Accepted 状态均来自作者提供的截图；没有添加未提供的 DOI、摘要或引用数据。
+论文采用“主页概览 + 独立详情页”的结构。主页保留左侧引用信息、右侧图片或动图，手机端上下排列；详情页包含作者、发表信息、DOI、Abstract / Summary、Links 和可下载的 BibTeX。设计参考：https://bionicdl.ancorasir.com/?p=2124 。
 
-- 新增论文：复制 `.publication-list` 下的一个 `<li>`，修改作者、标题和发表信息，并同步修改标题的 `id` 与文章的 `aria-labelledby`，保持 ID 唯一。编号会自动生成。
-- 补图片：将素材放入 `assets/publications/`（需要时创建），用带有准确 `alt` 描述的 `<img src="./assets/publications/文件名.png" alt="论文方法示意图的描述" loading="lazy">` 替换 `.publication-placeholder`。
-- 补视频：在同一位置使用 `<video controls preload="metadata" src="./assets/publications/文件名.mp4"></video>`；有封面时可增加 `poster` 属性。
-- 补资料：将 Abstract、Links、BibTeX 的不可点击占位文字替换为对应的真实链接或有实际内容的展开区。资料齐全后删除该论文的 “Materials coming soon” 提示。
+已从作者个人网站 http://www.senli.site/ 迁入公开展示的 6 篇期刊与会议论文，按年份降序排列，保留 6 项配图、4 份 PDF 和 3 个视频链接。没有导入注释中隐藏的论文、学位论文或非论文项目。图片和 PDF 存放在本仓库，加载时不依赖原站；列表图片使用懒加载并保留原始 GIF 动画。
+
+引用信息已用论文原文、出版社页面及出版社提交的 Crossref 元数据复核：
+
+- ActiveSPN：2025，10(8)，8115–8122，已发表。
+- ActiveSPN2：2026 年在线发表，文章号 100326；尚未确认的卷期留空。提供的 PDF 为作者预印本，链接已标明。
+- Teaching oral care：2025，5(3)，文章号 36。
+- ADAP：2025，6，204–219。
+- Active Surface：2024 ReMAR，627–632；作者顺序依据论文原文。
+- Flip-and-Flap：2021，6(3)，5199–5206；补齐原站遗漏的两位共同作者。
+
+4 份现有 PDF 的正式摘要已录入 Abstract；Oral care 和 ADAP 暂保留作者个人站的简介，标为 Summary，并保留完整摘要、PDF 和视频的待补充提示。没有用简介冒充正式摘要。BibTeX 只写入已核对的字段；每篇的来源链接记录在 `data/publications.json` 的 `metadata_sources` 中。个人简介中的论文总数仍按作者提供的 8 篇保留，展示列表不宣称完整。
+
+维护步骤：
+
+1. 修改 `data/publications.json` 中对应论文；新增论文时复制一个对象，使用唯一的 `id`（小写字母、数字和连字符），填写真实作者顺序、标题、刊物、年份和资源信息。
+2. 将图片或 GIF、PDF 放入 `assets/publications/`，在 `image` / `pdf` 中填写文件名。图片应同时填写 `image_alt`、`image_width`、`image_height`；视频填真实的 `video` 链接。
+3. 正式摘要填入 `abstract`；只有简介时保留 `summary`。补齐资料后，待补充提示会自动消失。引用可使用 `volume`、`number`、`pages`、`article_number`、`doi` 等字段；没有确认的信息不要猜填。
+4. 在仓库根目录运行：
+
+   ```sh
+   python3 tools/build_publications.py
+   ```
+
+   脚本仅依赖 Python 3 标准库，更新首页的 Publication 区域，并生成 `publications/<id>/index.html` 与 `citation.bib`。简介、联系方式、News 和域名文件均保留。不要直接修改生成的论文条目或详情页，否则下次生成会覆盖修改。
+
+5. 本地预览后，将 JSON、素材、生成的 HTML / BibTeX 一起提交到 `main`。GitHub Pages 直接发布生成好的文件，无需在服务器运行 Python。
+
+样式在 `assets/styles.css`；详情页复用首页导航与弹窗。首页导航改动后重新运行脚本即可同步。删除论文时也应手动清理其旧详情页目录，避免旧链接继续保留。
 
 ## 本项目的部署位置
 
