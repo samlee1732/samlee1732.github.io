@@ -51,8 +51,9 @@ a { color: inherit; }
 .contact-card a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
 .contact-card a:hover { color: var(--accent); }
 .contact-card .contact-email { font-style: italic; }
-.publications { padding-block: clamp(8px, 1vw, 24px); font-size: clamp(16px, 1.15vw, 31.4px); line-height: 1.7; }
-.publications > h2 { margin: 0 0 clamp(26px, 2vw, 48px); color: #302c38; font-size: clamp(26px, 1.8vw, 44px); line-height: 1.25; font-weight: 600; }
+.publications, .news { padding-block: clamp(8px, 1vw, 24px); font-size: clamp(16px, 1.15vw, 31.4px); line-height: 1.7; }
+.publications > h2, .news > h2 { margin: 0 0 clamp(26px, 2vw, 48px); color: #302c38; font-size: clamp(26px, 1.8vw, 44px); line-height: 1.25; font-weight: 600; }
+.news p { margin: 0; color: var(--muted); }
 .publication-list { margin: 0; padding-left: 2em; }
 .publication-list > li { padding-left: .5em; }
 .publication-list > li + li { margin-top: clamp(32px, 3vw, 64px); padding-top: clamp(32px, 3vw, 64px); border-top: 1px solid #e8e2eb; }
@@ -108,7 +109,7 @@ a { color: inherit; }
   .biography { font-size: 17px; line-height: 1.8; }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   :root { --header-height: 132px; }
   .container { width: calc(100% - 40px); }
   .header-inner { position: relative; flex-wrap: wrap; gap: 0; padding-block: 20px; }
@@ -126,6 +127,9 @@ a { color: inherit; }
   .contact-button { padding: 10px 20px; }
   .teaching-menu { position: static; }
   .teaching-dropdown { left: 0; right: 0; top: calc(100% + 12px); width: 100%; }
+}
+
+@media (max-width: 800px) {
   .main-content { padding-top: 34px; padding-bottom: 24px; }
   .biography { font-size: 16px; line-height: 1.85; }
   .section-divider { margin-block: 30px; border-top-width: 2px; }
