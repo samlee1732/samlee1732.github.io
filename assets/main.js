@@ -101,7 +101,7 @@ document.addEventListener('keydown', event => {
   }
 });
 
-window.matchMedia('(min-width: 1001px)').addEventListener('change', closeMenu);
+window.matchMedia('(min-width: 1201px)').addEventListener('change', closeMenu);
 
 // Resolve URLs from this script so search works on the homepage and paper pages.
 function loadSearchIndex() {

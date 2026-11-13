@@ -87,6 +87,10 @@ a { color: inherit; }
 .publication-title a { text-decoration: none; }
 .publication-title a:hover { text-decoration: underline; text-underline-offset: .15em; }
 .publication-type { display: inline-block; margin-left: .3em; padding: .12em .5em; border-radius: 3px; background: var(--brand-gradient); color: #fff; font-size: .7em; line-height: 1.5; vertical-align: .1em; white-space: nowrap; }
+.review-status { background: #fff0d4; color: #825006; }
+.under-review .publication-title { color: #302c38; }
+.manuscript-number { font-variant-numeric: tabular-nums; }
+.resource-pending { font-size: .8em; }
 .publication-citation cite { font-style: normal; }
 .publication-resources { display: flex; flex-wrap: wrap; align-items: center; gap: .3em 0; margin: .5em 0 0; padding: 0; list-style: none; }
 .publication-resources li + li::before { content: "|"; padding-inline: .45em; color: #a8a1ad; }
@@ -150,16 +154,19 @@ a { color: inherit; }
 .dialog-body li { margin: 8px 0; }
 .dialog-body .availability-note { padding-top: 18px; margin-top: 22px; border-top: 1px solid #e8e2eb; color: var(--muted); font-size: 14px; }
 
-@media (max-width: 1100px) {
-  .container { width: 88%; }
+@media (max-width: 1400px) {
   .header-inner { gap: 24px; }
   .brand-name { font-size: 30px; }
   .brand-subtitle { font-size: 14px; }
   .main-navigation { gap: 20px; font-size: 15px; }
+}
+
+@media (max-width: 1100px) {
+  .container { width: 88%; }
   .biography { font-size: 17px; line-height: 1.8; }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   :root { --header-height: 132px; }
   .container { width: calc(100% - 40px); }
   .header-inner { flex-wrap: wrap; gap: 0 10px; padding-block: 20px; }

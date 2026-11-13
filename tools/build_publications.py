@@ -64,7 +64,7 @@ class SearchTextParser(HTMLParser):
             self.blocks[self.active].append(data)
 
 
-def search_index(papers, homepage):
+def search_index(papers, reviews, homepage):
     """Use one shared index on the homepage and all publication detail pages."""
     entries = []
     for paper in papers:
@@ -84,6 +84,20 @@ def search_index(papers, homepage):
             'description': ', '.join(paper['authors']) + ' · ' + paper['venue'] + ' · ' + str(paper['year']),
             'url': 'publications/' + paper['id'] + '/',
             'kind': 'Publication',
+        })
+
+    for paper in reviews:
+        description = ('Co-authors: ' + '; '.join(paper['co_authors'])
+                       + ' · Corresponding author: ' + paper['corresponding_author']
+                       + ' · Submitted to ' + paper['journal']
+                       + ' · ' + paper['manuscript_number'] + ' · Under Review')
+        entries.append({
+            'title': paper['title'],
+            'text': description + ' 在审 投稿 论文 稿件 通讯作者 共同作者'
+                    + (' 李森' if 'Sen Li' in paper['co_authors'] else ''),
+            'description': description,
+            'url': '#under-review',
+            'kind': 'Under Review',
         })
 
     parser = SearchTextParser()
@@ -202,6 +216,36 @@ def overview(papers):
       </section>'''
 
 
+def review_overview(papers):
+    rows = []
+    for p in papers:
+        coauthors = '; '.join('<strong>Sen Li</strong>' if name == 'Sen Li' else esc(name)
+                              for name in p['co_authors'])
+        rows.append(f'''          <li>
+            <article class="publication-row" aria-labelledby="{p['id']}-title">
+              <div class="publication-details">
+                <p class="publication-authors">Co-authors: {coauthors}</p>
+                <h3 id="{p['id']}-title" class="publication-title">{esc(p['title'])} <span class="publication-type review-status">Under Review</span></h3>
+                <p class="publication-citation">Submitted to <cite>{esc(p['journal'])}</cite>.</p>
+                <p>Corresponding author: {esc(p['corresponding_author'])}</p>
+                <p>Manuscript no.: <span class="manuscript-number">{esc(p['manuscript_number'])}</span></p>
+                <ul class="publication-resources" aria-label="Pending manuscript resources">
+                  <li><span aria-disabled="true">Abstract <span class="resource-pending">(to be added)</span></span></li>
+                  <li><span aria-disabled="true">BibTeX <span class="resource-pending">(to be added)</span></span></li>
+                </ul>
+              </div>
+              <div class="publication-media">{image(p, './')}</div>
+            </article>
+          </li>''')
+    return '''      <section id="under-review" class="publications under-review" aria-labelledby="under-review-heading" tabindex="-1">
+        <h2 id="under-review-heading">Under Review</h2>
+        <!-- Generated from data/under-review.json by tools/build_publications.py. -->
+        <ol class="publication-list">
+''' + '\n'.join(rows) + '''
+        </ol>
+      </section>'''
+
+
 def detail(p, homepage):
     header = re.search(r'    <header\b.*?</header>', homepage, re.S).group()
     header = header.replace('href="./"', 'href="../../"')
@@ -295,16 +339,21 @@ def detail(p, homepage):
 
 def main():
     papers = json.loads(DATA.read_text())
+    reviews = json.loads((ROOT / 'data/under-review.json').read_text())
     papers.sort(key=lambda p: -int(p['year']))
-    ids = [p['id'] for p in papers]
+    ids = [p['id'] for p in papers + reviews]
     if len(ids) != len(set(ids)) or any(not re.fullmatch(r'[a-z0-9-]+', i) for i in ids):
         raise ValueError('Publication IDs must be unique lowercase URL slugs.')
-    for paper in papers:
+    for paper in papers + reviews:
         for key in ('image', 'pdf'):
             if paper.get(key) and not (ROOT / 'assets/publications' / paper[key]).is_file():
                 raise FileNotFoundError(paper[key])
     homepage_path = ROOT / 'index.html'
     homepage = homepage_path.read_text()
+    homepage, count = re.subn(r'      <section id="under-review".*?</section>',
+                             lambda _: review_overview(reviews), homepage, count=1, flags=re.S)
+    if count != 1:
+        raise ValueError('Expected one under-review section in index.html.')
     homepage, count = re.subn(r'      <section id="publication".*?</section>',
                              lambda _: overview(papers), homepage, count=1, flags=re.S)
     if count != 1:
@@ -315,10 +364,10 @@ def main():
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(detail(paper, homepage))
         (folder / 'citation.bib').write_text(bibtex(paper))
-    entries = search_index(papers, homepage)
+    entries = search_index(papers, reviews, homepage)
     (ROOT / 'assets/search-index.json').write_text(
         json.dumps(entries, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f'Generated overview, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
+    print(f'Generated {len(reviews)} under-review entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
 
 
 if __name__ == '__main__':
