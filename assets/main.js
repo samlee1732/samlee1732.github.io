@@ -19,6 +19,12 @@ menuToggle.addEventListener('click', () => {
   if (!expanded) teachingMenu.open = false;
 });
 
+document.querySelector('.contact-button').addEventListener('click', event => {
+  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  closeMenu();
+  document.getElementById('contact').focus({ preventScroll: true });
+});
+
 document.querySelectorAll('[data-panel]').forEach(button => {
   button.addEventListener('click', () => {
     const template = document.getElementById(button.dataset.panel);
