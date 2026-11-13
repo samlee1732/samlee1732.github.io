@@ -4,10 +4,12 @@
     "title": "A Torsionally Tristable Metastructure with In-Plane Translational Actuation and Post-Fabrication Angle Tuning",
     "journal": "Materials & Design",
     "corresponding_author": "Tao Luo",
-    "co_authors": [
+    "authors": [
       "Ruyang Yu",
-      "Sen Li"
-    ]
+      "Sen Li",
+      "Tao Luo"
+    ],
+    "author_conjunction": true
   },
   {
     "id": "vista",

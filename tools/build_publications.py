@@ -162,8 +162,11 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
 
 
 def authors(paper):
-    return ', '.join('<strong>Sen Li</strong>' if name == 'Sen Li' else esc(name)
-                     for name in paper['authors'])
+    names = ['<strong>Sen Li</strong>' if name == 'Sen Li' else esc(name)
+             for name in paper['authors']]
+    if paper.get('author_conjunction') and len(names) > 1:
+        return ', '.join(names[:-1]) + (', and ' if len(names) > 2 else ' and ') + names[-1]
+    return ', '.join(names)
 
 
 def citation(paper):
