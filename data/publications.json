@@ -95,38 +95,6 @@
     ]
   },
   {
-    "id": "adap",
-    "marker": "ADAP",
-    "title": "ADAP: Adaptive & Dynamic Arc Padding for predicting seam profiles in Multi-Layer-Multi-Pass robotic welding",
-    "authors": [
-      "He Wang",
-      "Sen Li",
-      "Xiaobo Liu",
-      "Chengxiao Dong",
-      "Fang Wan"
-    ],
-    "venue": "AI Open",
-    "year": 2025,
-    "type": "Journal Article",
-    "status": "Published",
-    "paper": "https://doi.org/10.1016/j.aiopen.2025.10.003",
-    "image": "adap.png",
-    "summary": "This study introduces the Adaptive & Dynamic Arc Padding (ADAP) approach. ADAP employs a novel representation of weld bead profiles using image-based boundary and primitive arc geometries defined by arc center and radius.",
-    "image_width": 983,
-    "image_height": 680,
-    "image_alt": "ADAP weld seam profile prediction research figure",
-    "source": "http://www.senli.site/",
-    "doi": "10.1016/j.aiopen.2025.10.003",
-    "volume": "6",
-    "pages": "204--219",
-    "metadata_sources": [
-      "https://www.sciencedirect.com/science/article/pii/S266665102500018X",
-      "https://www.keaipublishing.com/en/journals/ai-open/recent-articles/?pageNumber=2",
-      "https://api.crossref.org/works/10.1016/j.aiopen.2025.10.003"
-    ],
-    "pdf": "adap.pdf"
-  },
-  {
     "id": "flip-and-flap",
     "marker": "FLIP-AND-FLAP",
     "title": "Biomimetic Flip-and-Flap Strategy of Flying Objects for Perching on Inclined Surfaces",
@@ -160,6 +128,38 @@
     "metadata_sources": [
       "./assets/publications/flip-and-flap.pdf"
     ]
+  },
+  {
+    "id": "adap",
+    "marker": "ADAP",
+    "title": "ADAP: Adaptive & Dynamic Arc Padding for predicting seam profiles in Multi-Layer-Multi-Pass robotic welding",
+    "authors": [
+      "He Wang",
+      "Sen Li",
+      "Xiaobo Liu",
+      "Chengxiao Dong",
+      "Fang Wan"
+    ],
+    "venue": "AI Open",
+    "year": 2025,
+    "type": "Journal Article",
+    "status": "Published",
+    "paper": "https://doi.org/10.1016/j.aiopen.2025.10.003",
+    "image": "adap.png",
+    "summary": "This study introduces the Adaptive & Dynamic Arc Padding (ADAP) approach. ADAP employs a novel representation of weld bead profiles using image-based boundary and primitive arc geometries defined by arc center and radius.",
+    "image_width": 983,
+    "image_height": 680,
+    "image_alt": "ADAP weld seam profile prediction research figure",
+    "source": "http://www.senli.site/",
+    "doi": "10.1016/j.aiopen.2025.10.003",
+    "volume": "6",
+    "pages": "204--219",
+    "metadata_sources": [
+      "https://www.sciencedirect.com/science/article/pii/S266665102500018X",
+      "https://www.keaipublishing.com/en/journals/ai-open/recent-articles/?pageNumber=2",
+      "https://api.crossref.org/works/10.1016/j.aiopen.2025.10.003"
+    ],
+    "pdf": "adap.pdf"
   },
   {
     "id": "stable-quadrotor",
