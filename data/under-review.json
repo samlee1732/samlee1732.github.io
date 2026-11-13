@@ -20,9 +20,9 @@
       "Chaoyang Song",
       "Fang Wan*"
     ],
-    "image": "vista-experimental-setup.png",
-    "image_alt": "ViSTA experimental setup with a UR10e robot, 3D scanner, welding torch, soft robotic metamaterial sensor, and welding seam.",
-    "image_width": 1772,
-    "image_height": 1890
+    "image": "vista-concept.png",
+    "image_alt": "Conceptual illustration of robotic weld-seam sensing and trajectory adjustment using a compliant tactile sensor.",
+    "image_width": 1448,
+    "image_height": 1086
   }
 ]
