@@ -78,7 +78,7 @@ Team 使用独立页面 `/team/`，顶部导航为普通链接，可直接打开
 
 `data/under-review.json` 单独维护在审稿件，页面内与下方 8 篇已发表论文按状态分组。目前有 2 篇：
 
-- Materials & Design 投稿：**A Torsionally Tristable Metastructure with In-Plane Translational Actuation and Post-Fabrication Angle Tuning**。按作者确认的顺序展示 Ruyang Yu、Sen Li、Tao Luo，作者行使用“Ruyang Yu, Sen Li, and Tao Luo”，其中 Sen Li 加粗；下方保留通讯作者 Tao Luo。
+- Materials & Design 投稿：**A Torsionally Tristable Metastructure with In-Plane Translational Actuation and Post-Fabrication Angle Tuning**。按作者确认的顺序展示 Ruyang Yu、Sen Li、Tao Luo，作者行使用“Ruyang Yu, Sen Li, and Tao Luo”，其中 Sen Li 加粗；不再单独显示通讯作者行。
 - IEEE Robotics and Automation Letters (RA-L) 投稿：**ViSTA: Coarse-to-Fine Visuotactile Deformation Servoing for Online Robotic Weld-Seam Trajectory Adjustment**。作者按用户提供的投稿系统截图依次为 Sen Li、Tuo Zhang、Chaoyang Song、Fang Wan*。保留截图中的星号；因未提供星号图例，暂不额外解释作者角色。不展示投稿系统中的作者编号。
 
 在审稿件不公开投稿系统稿件编号；生成器不将此类编号写入页面或站内搜索。两篇均仅标为 Under Review，未填写正式发表年份、DOI、卷期或录用信息。`authors` 用于已知排序的作者列表；可选 `author_conjunction: true` 让显示行在最后一位作者前加入英文 and；顺序不确定时，使用 `co_authors` 与可选的 `corresponding_author` 按角色显示。每篇有独立页内锚点，搜索结果直接跳到对应稿件。
