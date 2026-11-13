@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This study designed a rotation matrix-based adaptive controller to address the issue of quadrotor high-speed flight (velocity &gt; 8 m/s). By reducing the velocity when the attitude error is large, the quadrotor can achieve high-speed stable flight. The simulation results demonstrate that the control method can stabilize the quadrotor flight up to 10.5 m/s.">
+    <meta name="theme-color" content="#92316f">
+    <title>Stable Quadrotor Flight | SenseDex Lab</title>
+    <link rel="icon" href="../../assets/sensedex-mark.png" type="image/png">
+    <link rel="apple-touch-icon" href="../../assets/sensedex-mark.png">
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <script src="../../assets/main.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="SenseDex Lab homepage">
+          <span class="brand-heading">
+            <img class="brand-mark" src="../../assets/sensedex-mark.png" alt="" width="1254" height="1254">
+            <span class="brand-name">SenseDex Lab</span>
+          </span>
+          <span class="brand-subtitle">Sensing and Dexterous Manipulation</span>
+          <span class="brand-subtitle-zh" lang="zh-CN">感知与灵巧操作实验室</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" aria-label="Open navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <nav id="main-navigation" class="main-navigation" aria-label="Main navigation">
+          <a class="nav-link" href="../../">Homepage</a>
+          <a class="nav-link is-current" href="../../#publication" aria-current="page">Publication</a>
+          <button class="nav-link" type="button" data-panel="team">Team</button>
+          <details class="teaching-menu">
+            <summary class="nav-link">Teaching <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary>
+            <div class="teaching-dropdown">
+              <button type="button" data-panel="robotics-applications" aria-label="Robotics and Applications · 机器人学及应用">Robotics and Applications<span lang="zh-CN">机器人学及应用</span></button>
+              <button type="button" data-panel="automatic-control" aria-label="Principles of Automatic Control · 自动控制原理">Principles of Automatic Control<span lang="zh-CN">自动控制原理</span></button>
+            </div>
+          </details>
+          <a class="nav-link" href="../../#news">News</a>
+          <a class="contact-button" href="../../#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main-content" class="container paper-page">
+      <a class="paper-back" href="../../#publication">← All publications</a>
+      <article>
+        <header class="paper-heading">
+          <p class="paper-eyebrow">2021 <span aria-hidden="true">·</span> Journal Article</p>
+          <h1>Stable High-Speed Quadrotor Flight using Differential Trajectory</h1>
+          <p class="paper-authors">Ying Wu, Yun Xie, <strong>Sen Li</strong>, Depei Wang</p>
+          <p class="paper-citation"><cite>Mathematical Problems in Engineering</cite>, vol. 2021, no. 1, article 9825790, 2021.</p>
+          <p class="paper-doi">DOI: <a href="https://doi.org/10.1155/2021/9825790">10.1155/2021/9825790</a></p>
+        </header>
+        <figure class="paper-figure">
+          <img src="../../assets/publications/stable-quadrotor.gif" alt="Simulation of stable high-speed quadrotor flight using differential trajectory" decoding="async" width="512" height="327">
+        </figure>
+        <section id="abstract" class="paper-section" aria-labelledby="abstract-heading" tabindex="-1">
+          <h2 id="abstract-heading">Abstract</h2>
+          <p>This paper addresses the trajectory tracking control issue of a quadrotor with environmental disturbances, which particularly focuses on attitude correction during flight and response speed improvement. In this paper, the proposed control method uses the differential equation to transform the desired trajectory for improving the robustness of a quadrotor during high-speed flight. Meanwhile, a nonlinear controller based on the rotation matrix is designed to avoid singularities of Euler angles. The controller can also stabilize the position error to zero without reducing the control thrust when the attitude error is large. Finally, we conduct simulations on a tethered quadrotor to achieve high-speed flight in limited space. The simulation results show that the control method can stabilize a quadrotor at high-speed trajectory flight and keep a quadrotor stable when it is disturbed by aerodynamic drag and mass change.</p>
+          <p class="paper-note"><a href="https://api.crossref.org/works/10.1155/2021/9825790">Abstract source</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+        </section>
+        <section id="links" class="paper-section" aria-labelledby="links-heading" tabindex="-1">
+          <h2 id="links-heading">Links</h2>
+          <ul class="paper-links">
+            <li><a href="https://onlinelibrary.wiley.com/doi/10.1155/2021/9825790">Publisher</a></li>
+            <li><a href="https://doi.org/10.1155/2021/9825790">DOI: 10.1155/2021/9825790</a></li>
+          </ul>
+          <p class="paper-note">PDF / Video to be added.</p>
+        </section>
+        <section id="bibtex" class="paper-section" aria-labelledby="bibtex-heading" tabindex="-1">
+          <div class="paper-section-heading">
+            <h2 id="bibtex-heading">BibTeX</h2>
+            <a href="./citation.bib" download="stable-quadrotor.bib">Download .bib</a>
+          </div>
+          <pre class="bibtex"><code>@article{Wu2021StableQuadrotorFlight,
+  title = {{Stable High-Speed Quadrotor Flight using Differential Trajectory}},
+  author = {Ying Wu and Yun Xie and Sen Li and Depei Wang},
+  journal = {Mathematical Problems in Engineering},
+  year = {2021},
+  volume = {2021},
+  number = {1},
+  doi = {10.1155/2021/9825790},
+  pages = {9825790},
+  url = {https://onlinelibrary.wiley.com/doi/10.1155/2021/9825790}
+}
+</code></pre>
+        </section>
+      </article>
+      <a class="paper-back paper-back-bottom" href="../../#publication">← All publications</a>
+    </main>
+    <dialog class="content-dialog" aria-labelledby="dialog-title">
+      <button class="dialog-close" type="button" aria-label="Close dialog"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+      <span class="dialog-eyebrow">SenseDex Lab</span>
+      <h2 id="dialog-title"></h2>
+      <div class="dialog-body"></div>
+    </dialog>
+
+    <template id="team">
+      <h2>Team</h2>
+      <p>Sensing and Dexterous Manipulation Lab (SenseDex Lab)</p>
+      <p>Shenzhen Polytechnic University</p>
+      <p lang="zh-CN">深圳职业技术大学<br>感知与灵巧操作实验室</p>
+      <p class="availability-note">The member directory has not been added yet.</p>
+    </template>
+    <template id="robotics-applications">
+      <h2>Robotics and Applications</h2>
+      <p lang="zh-CN">机器人学及应用</p>
+      <p>Shenzhen Polytechnic University</p>
+      <p class="availability-note">Course details and materials have not been added yet.</p>
+    </template>
+    <template id="automatic-control">
+      <h2>Principles of Automatic Control</h2>
+      <p lang="zh-CN">自动控制原理</p>
+      <p>Shenzhen Polytechnic University</p>
+      <p class="availability-note">Course details and materials have not been added yet.</p>
+    </template>
+  </body>
+</html>

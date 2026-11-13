@@ -52,6 +52,10 @@ def bibtex(paper):
 
 
 def image(paper, prefix, lazy=True):
+    if not paper.get('image'):
+        return ('<div class="publication-placeholder">'
+                '<span>Image / video coming soon</span>'
+                '<span lang="zh-CN">论文图片或视频待补充</span></div>')
     attrs = ' loading="lazy"' if lazy else ''
     if paper.get('image_width') and paper.get('image_height'):
         attrs += f' width="{paper["image_width"]}" height="{paper["image_height"]}"'
@@ -109,6 +113,10 @@ def detail(p, homepage):
     paragraphs_html = '\n'.join('          <p>' + esc(text) + '</p>' for text in paragraphs)
     if not p.get('abstract'):
         paragraphs_html += '\n          <p class="paper-note">Full abstract to be added.</p>'
+    elif p.get('abstract_license') and p.get('abstract_source'):
+        paragraphs_html += ('\n          <p class="paper-note"><a href="' + esc(p['abstract_source'])
+                            + '">Abstract source</a> · <a href="' + esc(p['abstract_license'])
+                            + '">CC BY 4.0</a></p>')
     links = [('Publisher', p['paper'])]
     if p.get('doi'):
         links.append(('DOI: ' + p['doi'], 'https://doi.org/' + p['doi']))

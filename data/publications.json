@@ -195,5 +195,73 @@
     "metadata_sources": [
       "./assets/publications/flip-and-flap.pdf"
     ]
+  },
+  {
+    "id": "stable-quadrotor",
+    "marker": "Stable Quadrotor Flight",
+    "title": "Stable High-Speed Quadrotor Flight using Differential Trajectory",
+    "authors": [
+      "Ying Wu",
+      "Yun Xie",
+      "Sen Li",
+      "Depei Wang"
+    ],
+    "venue": "Mathematical Problems in Engineering",
+    "year": 2021,
+    "volume": "2021",
+    "article_number": "9825790",
+    "type": "Journal Article",
+    "status": "Published",
+    "doi": "10.1155/2021/9825790",
+    "paper": "https://onlinelibrary.wiley.com/doi/10.1155/2021/9825790",
+    "image": "stable-quadrotor.gif",
+    "image_alt": "Simulation of stable high-speed quadrotor flight using differential trajectory",
+    "image_width": 512,
+    "image_height": 327,
+    "summary": "This study designed a rotation matrix-based adaptive controller to address the issue of quadrotor high-speed flight (velocity > 8 m/s). By reducing the velocity when the attitude error is large, the quadrotor can achieve high-speed stable flight. The simulation results demonstrate that the control method can stabilize the quadrotor flight up to 10.5 m/s.",
+    "source": "https://orcid.org/0000-0002-4436-9294",
+    "metadata_sources": [
+      "https://pub.orcid.org/v3.0/0000-0002-4436-9294/works",
+      "https://api.crossref.org/works/10.1155/2021/9825790",
+      "https://onlinelibrary.wiley.com/doi/10.1155/2021/9825790"
+    ],
+    "number": "1",
+    "page_count": 11,
+    "publication_date": "2021-01-08",
+    "abstract": "This paper addresses the trajectory tracking control issue of a quadrotor with environmental disturbances, which particularly focuses on attitude correction during flight and response speed improvement. In this paper, the proposed control method uses the differential equation to transform the desired trajectory for improving the robustness of a quadrotor during high-speed flight. Meanwhile, a nonlinear controller based on the rotation matrix is designed to avoid singularities of Euler angles. The controller can also stabilize the position error to zero without reducing the control thrust when the attitude error is large. Finally, we conduct simulations on a tethered quadrotor to achieve high-speed flight in limited space. The simulation results show that the control method can stabilize a quadrotor at high-speed trajectory flight and keep a quadrotor stable when it is disturbed by aerodynamic drag and mass change.",
+    "abstract_source": "https://api.crossref.org/works/10.1155/2021/9825790",
+    "abstract_license": "https://creativecommons.org/licenses/by/4.0/",
+    "crossref_pages": "1--11"
+  },
+  {
+    "id": "parameter-adaptive-control",
+    "marker": "Parameter Adaptive Control",
+    "title": "Parameter Adaptive Control for a Quadrotor With a Suspended Unknown Payload Under External Disturbance",
+    "authors": [
+      "Ying Wu",
+      "Yun Xie",
+      "Sen Li"
+    ],
+    "venue": "IEEE Access",
+    "year": 2021,
+    "volume": "9",
+    "pages": "139958--139967",
+    "type": "Journal Article",
+    "status": "Published",
+    "doi": "10.1109/ACCESS.2021.3119396",
+    "paper": "https://ieeexplore.ieee.org/document/9567677",
+    "summary": "Parameter-adaptive control for a quadrotor carrying a suspended unknown payload under external disturbances.",
+    "source": "https://orcid.org/0000-0002-4436-9294",
+    "metadata_sources": [
+      "https://pub.orcid.org/v3.0/0000-0002-4436-9294/works",
+      "https://api.crossref.org/works/10.1109/ACCESS.2021.3119396",
+      "https://ieeexplore.ieee.org/document/9567677",
+      "https://www.researchgate.net/publication/355275732_Parameter_Adaptive_Control_for_a_Quadrotor_With_a_Suspended_Unknown_Payload_Under_External_Disturbance/fulltext/6172828b0be8ec17a90ce7e6/Parameter-Adaptive-Control-for-a-Quadrotor-With-a-Suspended-Unknown-Payload-Under-External-Disturbance.pdf?origin=scientificContributions"
+    ],
+    "page_count": 10,
+    "publication_date": "2021-10-11",
+    "abstract": "This paper focuses on the disturbance attenuation control of the quadrotor suspended payload system with unknown payload mass. Since the quadrotor transportation system is an eight-degree-of-freedom system with only four actuated degrees, it is difficult to achieve rapid stabilization of the quadrotor under varying payload and external disturbances. In this paper, a nonlinear controller based on rotation matrix is designed to rapid stabilization of attitude. By analyzing the effect of load mass on the trajectory tracking control, a parameter adaptive controller is proposed for position control. A mass estimation algorithm is established to estimate the payload mass in the air, which improves the robustness of the system. This approach can maximize load-bearing capacity within the thrust range of the quadrotor. The Lyapunov-based analysis proves the exponential convergence of the attitude error and the stability of the whole system. The contrast simulations demonstrate that the controller is superior to the sliding-mode controller incorporating input shaping on mass estimation, trajectory tracking, and disturbance resistance.",
+    "abstract_source": "https://www.researchgate.net/publication/355275732_Parameter_Adaptive_Control_for_a_Quadrotor_With_a_Suspended_Unknown_Payload_Under_External_Disturbance/fulltext/6172828b0be8ec17a90ce7e6/Parameter-Adaptive-Control-for-a-Quadrotor-With-a-Suspended-Unknown-Payload-Under-External-Disturbance.pdf?origin=scientificContributions",
+    "abstract_license": "https://creativecommons.org/licenses/by/4.0/"
   }
 ]

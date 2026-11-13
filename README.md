@@ -43,9 +43,9 @@ Publication 导航跳转到联系方式下方的论文展示区，点击论文�
 
 论文采用“主页概览 + 独立详情页”的结构。主页保留左侧引用信息、右侧图片或动图，手机端上下排列；详情页包含作者、发表信息、DOI、Abstract / Summary、Links 和可下载的 BibTeX。设计参考：https://bionicdl.ancorasir.com/?p=2124 。
 
-已从作者个人网站 http://www.senli.site/ 迁入公开展示的 6 篇期刊与会议论文，按年份降序排列，保留 6 项配图、4 份 PDF 和 3 个视频链接。没有导入注释中隐藏的论文、学位论文或非论文项目。图片和 PDF 存放在本仓库，加载时不依赖原站；列表图片使用懒加载并保留原始 GIF 动画。
+已从作者个人网站 http://www.senli.site/ 迁入 6 篇期刊与会议论文，并根据作者指定的 [ORCID 记录](https://orcid.org/0000-0002-4436-9294) 补入 2 篇，共 8 篇，按年份降序排列。现有 7 项配图、4 份 PDF 和 3 个视频链接。没有导入学位论文或非论文项目。图片和 PDF 存放在本仓库，加载时不依赖原站；列表图片使用懒加载并保留原始 GIF 动画。
 
-引用信息已用论文原文、出版社页面及出版社提交的 Crossref 元数据复核：
+引用信息已用论文原文、出版社页面及出版社提交的 Crossref 元数据复核；新增两篇的摘要保留原文，并附 CC BY 4.0 来源链接：
 
 - ActiveSPN：2025，10(8)，8115–8122，已发表。
 - ActiveSPN2：2026 年在线发表，文章号 100326；尚未确认的卷期留空。提供的 PDF 为作者预印本，链接已标明。
@@ -53,13 +53,15 @@ Publication 导航跳转到联系方式下方的论文展示区，点击论文�
 - ADAP：2025，6，204–219。
 - Active Surface：2024 ReMAR，627–632；作者顺序依据论文原文。
 - Flip-and-Flap：2021，6(3)，5199–5206；补齐原站遗漏的两位共同作者。
+- Stable High-Speed Quadrotor Flight：2021，Mathematical Problems in Engineering，文章号 9825790。
+- Parameter Adaptive Control：2021，IEEE Access 9，139958–139967；配图保留待补充位置。新增两篇暂无本地 PDF / 视频文件，保留待补充提示和出版社入口。
 
-4 份现有 PDF 的正式摘要已录入 Abstract；Oral care 和 ADAP 暂保留作者个人站的简介，标为 Summary，并保留完整摘要、PDF 和视频的待补充提示。没有用简介冒充正式摘要。BibTeX 只写入已核对的字段；每篇的来源链接记录在 `data/publications.json` 的 `metadata_sources` 中。个人简介中的论文总数仍按作者提供的 8 篇保留，展示列表不宣称完整。
+4 份现有 PDF，以及新增两篇论文的出版社/发表版本原文中的正式摘要已录入 Abstract；Oral care 和 ADAP 暂保留作者个人站的简介，标为 Summary，并保留完整摘要、PDF 和视频的待补充提示。没有用简介冒充正式摘要。BibTeX 只写入已核对的字段；每篇的来源链接记录在 `data/publications.json` 的 `metadata_sources` 中。目前展示的 8 篇与本次核对的 ORCID 公开论文记录一致；后续新增论文仍需单独维护。
 
 维护步骤：
 
 1. 修改 `data/publications.json` 中对应论文；新增论文时复制一个对象，使用唯一的 `id`（小写字母、数字和连字符），填写真实作者顺序、标题、刊物、年份和资源信息。
-2. 将图片或 GIF、PDF 放入 `assets/publications/`，在 `image` / `pdf` 中填写文件名。图片应同时填写 `image_alt`、`image_width`、`image_height`；视频填真实的 `video` 链接。
+2. 将图片或 GIF、PDF 放入 `assets/publications/`，在 `image` / `pdf` 中填写文件名。没有配图时省略 `image`，页面自动显示待补充位置。有图片时应同时填写 `image_alt`、`image_width`、`image_height`；视频填真实的 `video` 链接。
 3. 正式摘要填入 `abstract`；只有简介时保留 `summary`。补齐资料后，待补充提示会自动消失。引用可使用 `volume`、`number`、`pages`、`article_number`、`doi` 等字段；没有确认的信息不要猜填。
 4. 在仓库根目录运行：
 
