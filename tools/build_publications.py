@@ -105,14 +105,11 @@ def search_index(papers, reviews, patents, homepage, news_content, competitions_
     for patent in patents:
         description = ('发明人：' + '、'.join(patent['inventors'])
                        + ' · 申请人：' + patent['applicant']
-                       + ' · 申请号：' + patent['application_number']
-                       + ' · 申请日：' + patent['application_date']
                        + ' · ' + patent['type'] + '（' + patent['status'] + '）')
         entries.append({
             'title': patent['title'],
             'text': description + ' 专利 发明 申请 Patents Patent application'
-                    + (' Sen Li' if '李森' in patent['inventors'] else '')
-                    + ' ' + patent['application_number'].replace('.', ''),
+                    + (' Sen Li' if '李森' in patent['inventors'] else ''),
             'description': description,
             'url': '#' + patent['id'],
             'kind': 'Patent Application',
@@ -287,8 +284,6 @@ def patent_overview(patents):
               <p class="publication-authors">发明人：{inventors}</p>
               <h3 id="{esc(patent['id'])}-title" class="publication-title">{esc(patent['title'])} <span class="publication-type">{esc(patent['type'])}</span> <span class="publication-type review-status">{esc(patent['status'])}</span></h3>
               <p>申请人：{esc(patent['applicant'])}</p>
-              <p>申请号：<span class="manuscript-number">{esc(patent['application_number'])}</span></p>
-              <p>申请日：<time datetime="{esc(patent['application_date'])}">{esc(patent['application_date'])}</time></p>
             </article>
           </li>''')
     return ('      <!-- PATENT CONTENT START -->\n'
