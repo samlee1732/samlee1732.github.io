@@ -45,6 +45,43 @@ python3 -m http.server 8080 --bind 127.0.0.1
 
 推送到 `main` 后，GitHub Pages 自动发布更新。部署进度可在仓库的 Actions 或 Settings → Pages 查看。
 
+## 购买域名后的解析与绑定
+
+以 `sensedex.online` 为例，下面的配置将 `www.sensedex.online` 绑定到本项目的 GitHub Pages。
+
+1. **先在 GitHub 绑定域名**：打开本仓库 **Settings → Pages**，在 **Custom domain** 填写 `www.sensedex.online`（不带 `https://`），点击 **Save**。本项目从分支发布，保存后 GitHub 会在仓库根目录生成 `CNAME` 文件；后续更新网站时保留此文件，并先拉取 GitHub 上的新提交。
+2. **再添加 DNS 解析**：进入域名服务商的 DNS 管理页面（截图使用 DNSPod），按下表添加记录。
+
+   | 主机记录 | 记录类型 | 线路类型 | 记录值 | TTL（秒） |
+   | --- | --- | --- | --- | --- |
+   | `www` | `CNAME` | 默认 | `samlee1732.github.io.` | `600` |
+
+   记录值只填写 GitHub Pages 主机名，不加协议、路径或仓库名。末尾的 `.` 表示完整域名；部分控制台会自动补上或省略它。同一个 `www` 主机记录不要同时保留冲突的 A、AAAA 或其他 CNAME 记录。
+
+3. **等待生效并开启 HTTPS**：回到 **Settings → Pages** 查看 DNS 检查结果。DNS 传播和 HTTPS 证书准备都可能需要等待，最长各约 24 小时。待 **Enforce HTTPS** 可用后勾选，再访问 `https://www.sensedex.online/` 确认页面和 HTTPS 正常。
+
+上述 CNAME 仅配置了带 `www` 的地址。如果也希望通过裸域 `sensedex.online` 访问，在 DNS 管理页面额外添加下面四条 A 记录（线路均选“默认”，TTL 均可设为 `600`）：
+
+| 主机记录 | 记录类型 | 记录值 |
+| --- | --- | --- |
+| `@` | `A` | `185.199.108.153` |
+| `@` | `A` | `185.199.109.153` |
+| `@` | `A` | `185.199.110.153` |
+| `@` | `A` | `185.199.111.153` |
+
+两者都正确配置后，GitHub Pages 会将裸域跳转到设置的主域名 `www.sensedex.online`。可在终端核对 DNS 返回值：
+
+```sh
+dig www.sensedex.online CNAME +short
+# 预期：samlee1732.github.io.
+
+# 仅在添加了上述裸域 A 记录后检查：
+dig sensedex.online A +short
+# 预期：上表中的四个 IP，顺序可能不同。
+```
+
+DNS 查询只用于核对解析记录，最终还需在浏览器中确认网站能通过 HTTPS 打开。操作步骤及 IP 地址可对照 [GitHub Pages 自定义域名官方说明](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)。
+
 ## 个人信息区
 
 首页简介下方新增个人信息与联系方式，采用参考图中的逐行布局。姓名、讲师职称、机电工程学院和深圳职业技术大学的单位信息，来自作者指定的个人站点：
