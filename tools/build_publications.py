@@ -113,14 +113,18 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
         })
 
     for project in projects:
-        description = (project['program'] + ' · ' + project['status']
-                       + ' · 执行期：' + project_period(project)
-                       + ' · 项目经费：' + str(project['funding_wan_cny']) + '万元'
-                       + ' · 参与角色：' + project['role']
-                       + ' · ' + project['contribution'])
+        parts = [project['program'], project['status']]
+        period = project_period(project)
+        if period:
+            parts.append('执行期：' + period)
+        parts.extend(['项目经费：' + str(project['funding_wan_cny']) + '万元',
+                      project_role(project)])
+        if project.get('contribution'):
+            parts.append(project['contribution'])
+        description = ' · '.join(parts)
         entries.append({
             'title': project['title'],
-            'text': description + ' 李森 Sen Li 科研项目 国家 市科技计划 项目骨干 Research Projects',
+            'text': description + ' 李森 Sen Li 科研项目 Research Projects',
             'description': description,
             'url': '#' + project['id'],
             'kind': 'Research Project',
@@ -320,25 +324,40 @@ def project_month(value):
 
 
 def project_period(project):
+    if not (project.get('start_date') and project.get('end_date')):
+        return ''
     return project_month(project['start_date']) + '—' + project_month(project['end_date'])
+
+
+def project_role(project):
+    if project.get('principal_investigator'):
+        return '主持：' + project['principal_investigator']
+    return '参与角色：' + project['role']
 
 
 def project_overview(projects):
     rows = []
     for project in projects:
+        period = ''
+        if project_period(project):
+            period = (f'<span>执行期：<time datetime="{esc(project["start_date"])}">'
+                      f'{esc(project_month(project["start_date"]))}</time>—'
+                      f'<time datetime="{esc(project["end_date"])}">'
+                      f'{esc(project_month(project["end_date"]))}</time></span>')
+        contribution = ('\n              <p>' + esc(project['contribution']) + '</p>'
+                        if project.get('contribution') else '')
         rows.append(f'''          <li>
             <article id="{esc(project['id'])}" class="project-entry" aria-labelledby="{esc(project['id'])}-title" tabindex="-1" lang="zh-CN">
               <p class="project-program">{esc(project['program'])}</p>
               <h3 id="{esc(project['id'])}-title" class="publication-title">{esc(project['title'])} <span class="publication-type project-status">{esc(project['status'])}</span></h3>
-              <p class="project-meta"><span>执行期：<time datetime="{esc(project['start_date'])}">{esc(project_month(project['start_date']))}</time>—<time datetime="{esc(project['end_date'])}">{esc(project_month(project['end_date']))}</time></span><span>项目经费：{esc(str(project['funding_wan_cny']))}万元</span></p>
-              <p>参与角色：{esc(project['role'])}</p>
-              <p>{esc(project['contribution'])}</p>
+              <p class="project-meta">{period}<span>项目经费：{esc(str(project['funding_wan_cny']))}万元</span></p>
+              <p>{esc(project_role(project))}</p>{contribution}
             </article>
           </li>''')
     return ('      <!-- PROJECT CONTENT START -->\n'
             '      <section id="projects" class="publications projects" aria-labelledby="projects-heading" tabindex="-1">\n'
             '        <h2 id="projects-heading">Projects <span lang="zh-CN">· 科研项目</span></h2>\n'
-            f'        <p class="projects-intro" lang="zh-CN">李森近年作为项目骨干参与以下{len(projects)}项国家自然科学基金及深圳市科技计划项目。</p>\n'
+            '        <p class="projects-intro" lang="zh-CN">李森近年作为项目骨干参与国家自然科学基金及深圳市科技计划项目，并在深圳职业技术大学主持横向科研项目。</p>\n'
             '        <!-- Generated from data/projects.json by tools/build_publications.py. -->\n'
             '        <ol class="publication-list">\n'
             + '\n'.join(rows) + '\n        </ol>\n      </section>\n'
