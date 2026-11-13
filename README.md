@@ -51,14 +51,21 @@ python3 -m http.server 8080 --bind 127.0.0.1
 ## 本项目的部署位置
 
 - 仓库：https://github.com/samlee1732/samlee1732.github.io
-- 主页：https://samlee1732.github.io/
+- 自定义域名：https://www.sensedex.online/
+- GitHub Pages 默认地址：https://samlee1732.github.io/
 - 发布来源：`main` 分支的仓库根目录（`/`）。
 
 推送到 `main` 后，GitHub Pages 自动发布更新。部署进度可在仓库的 Actions 或 Settings → Pages 查看。
 
 ## 购买域名后的解析与绑定
 
-以 `sensedex.online` 为例，下面的配置将 `www.sensedex.online` 绑定到本项目的 GitHub Pages。
+本项目已通过根目录的 `CNAME` 文件绑定 `www.sensedex.online`。文件只填写域名，不包含协议或路径：
+
+```text
+www.sensedex.online
+```
+
+保留该文件即可在后续发布时保持域名配置；它不会代替域名服务商的 DNS 记录。以下记录完整的绑定与解析步骤。
 
 1. **先在 GitHub 绑定域名**：打开本仓库 **Settings → Pages**，在 **Custom domain** 填写 `www.sensedex.online`（不带 `https://`），点击 **Save**。本项目从分支发布，保存后 GitHub 会在仓库根目录生成 `CNAME` 文件；后续更新网站时保留此文件，并先拉取 GitHub 上的新提交。
 2. **再添加 DNS 解析**：进入域名服务商的 DNS 管理页面（截图使用 DNSPod），按下表添加记录。
