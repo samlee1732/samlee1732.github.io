@@ -478,7 +478,7 @@ def detail(p, homepage):
     <title>{esc(p['marker'])} | SenseDex Lab</title>
     <link rel="icon" href="../../assets/sensedex-mark.png" type="image/png">
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark.png">
-    <link rel="stylesheet" href="../../assets/styles.css?v=20261113-pdf-readers">
+    <link rel="stylesheet" href="../../assets/styles.css?v=20261113-quadrotor-image">
     <script src="../../assets/main.js?v=20261113-publication-nav" defer></script>
     <script src="../../assets/visits.js" defer></script>
   </head>

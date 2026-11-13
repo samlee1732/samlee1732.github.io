@@ -265,6 +265,10 @@
     "abstract": "This paper focuses on the disturbance attenuation control of the quadrotor suspended payload system with unknown payload mass. Since the quadrotor transportation system is an eight-degree-of-freedom system with only four actuated degrees, it is difficult to achieve rapid stabilization of the quadrotor under varying payload and external disturbances. In this paper, a nonlinear controller based on rotation matrix is designed to rapid stabilization of attitude. By analyzing the effect of load mass on the trajectory tracking control, a parameter adaptive controller is proposed for position control. A mass estimation algorithm is established to estimate the payload mass in the air, which improves the robustness of the system. This approach can maximize load-bearing capacity within the thrust range of the quadrotor. The Lyapunov-based analysis proves the exponential convergence of the attitude error and the stability of the whole system. The contrast simulations demonstrate that the controller is superior to the sliding-mode controller incorporating input shaping on mass estimation, trajectory tracking, and disturbance resistance.",
     "abstract_source": "https://www.researchgate.net/publication/355275732_Parameter_Adaptive_Control_for_a_Quadrotor_With_a_Suspended_Unknown_Payload_Under_External_Disturbance/fulltext/6172828b0be8ec17a90ce7e6/Parameter-Adaptive-Control-for-a-Quadrotor-With-a-Suspended-Unknown-Payload-Under-External-Disturbance.pdf?origin=scientificContributions",
     "abstract_license": "https://creativecommons.org/licenses/by/4.0/",
-    "pdf": "parameter-adaptive-control.pdf"
+    "pdf": "parameter-adaptive-control.pdf",
+    "image": "parameter-adaptive-control.png",
+    "image_width": 946,
+    "image_height": 696,
+    "image_alt": "Quadrotor with a suspended payload, showing the body and earth coordinate frames, cable length, swing angles, and payload weight."
   }
 ]
