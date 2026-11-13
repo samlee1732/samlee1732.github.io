@@ -30,6 +30,8 @@ python3 -m http.server 8080 --bind 127.0.0.1
 ## 修改内容
 
 - `index.html`：实验室名称、简介、导航和弹窗内容。
+- `data/news.html`：独立 News 页的内容源；修改后运行生成脚本。
+- `news/index.html`：生成的独立新闻页面。
 - `assets/styles.css`：配色、字体、间距、桌面和手机布局。
 - `assets/main.js`：手机菜单、Teaching 下拉菜单、信息弹窗和站内搜索。
 - `assets/search-index.json`：由生成脚本提取页面内容生成的站内搜索索引。
@@ -38,7 +40,7 @@ python3 -m http.server 8080 --bind 127.0.0.1
 
 Under Review 导航位于 Publication 前，跳转到联系方式下方的在审稿件区；Publication 导航跳转到其后的已发表论文展示区，点击已发表论文标题可打开独立详情页；Team 展示作者提供的概览信息，成员名单仍需补充；Teaching 展示《机器人学及应用》和《自动控制原理》两门课程，课程资料仍需补充。右上角放大镜打开站内搜索，联系方式仍保留在首页 `#contact` 区域，可搜索“邮箱”或“联系方式”进入；手机端点击页内导航后会先收起导航菜单。网站采用玫红、紫色到深蓝的渐变，实验室标题、导航选中线、搜索图标与下拉面板顶边保持一致。
 
-顶部导航的 News 位于 Teaching 之后，跳转到页面下方的 `#news` 动态区。目前显示待更新提示；后续在 `index.html` 的该区域替换为真实的日期和动态内容即可。窄屏导航在 1200px 及以下收进菜单，点击 News 会收起菜单并跳转。
+顶部导航的 News 位于 Teaching 之后，点击进入独立的 `/news/` 页面；首页 Publication 下方不再显示 News。新闻页沿用固定导航、搜索和 Team / Teaching 弹窗，当前导航项高亮为 News。旧的首页 `/#news` 链接自动跳转到新页面。当前保留待更新提示，后续编辑 `data/news.html`，运行 `python3 tools/build_publications.py` 并提交生成文件即可。窄屏导航在 1200px 及以下收进菜单，点击 News 直接进入新页面。
 
 ## 论文展示与维护
 
@@ -83,11 +85,11 @@ Under Review 导航位于 Publication 前，跳转到联系方式下方的在审
    python3 tools/build_publications.py
    ```
 
-   脚本仅依赖 Python 3 标准库，更新首页的 Under Review 和 Publication 区域，并为已发表论文生成 `publications/<id>/index.html` 与 `citation.bib`。简介、联系方式、News 和域名文件均保留。不要直接修改生成的论文条目或详情页，否则下次生成会覆盖修改。
+   脚本仅依赖 Python 3 标准库，更新首页的 Under Review 和 Publication 区域，并为已发表论文生成 `publications/<id>/index.html` 与 `citation.bib`。同时从 `data/news.html` 生成 `news/index.html`。简介、联系方式和域名文件均保留。不要直接修改生成的论文条目或详情页，否则下次生成会覆盖修改。
 
 5. 本地预览后，将 JSON、素材、生成的 HTML / BibTeX 一起提交到 `main`。GitHub Pages 直接发布生成好的文件，无需在服务器运行 Python。
 
-样式在 `assets/styles.css`；详情页复用首页导航与弹窗。首页导航改动后重新运行脚本即可同步。删除论文时也应手动清理其旧详情页目录，避免旧链接继续保留。
+样式在 `assets/styles.css`；详情页复用首页导航与弹窗。首页导航改动后重新运行脚本即可同步到所有论文详情页和 News 页面。删除论文时也应手动清理其旧详情页目录，避免旧链接继续保留。
 
 ## 站内搜索
 
@@ -95,7 +97,7 @@ Under Review 导航位于 Publication 前，跳转到联系方式下方的在审
 
 搜索覆盖 8 篇已发表论文的标题、作者、年份、DOI、摘要，在审稿件的标题、期刊、作者角色与稿号，以及中英文简介、联系方式、News、Team 和两门课程。在审搜索结果单独标注 Under Review。支持中英文关键词和多个词同时匹配，结果按标题相关度排序。无匹配时显示提示。搜索在浏览器本地完成，不调用外部搜索服务，不保存或上传查询词。
 
-修改简介、联系方式、课程、新闻或论文后运行 `python3 tools/build_publications.py`，并提交生成的 `assets/search-index.json` 和详情页。索引中的搜索文本来自实际页面内容；显示摘要与辅助匹配关键词分开。新内容不会在发布时自动抓取。直接双击 HTML 时，浏览器可能限制索引读取，请通过上面的本地 HTTP 服务预览。
+新闻搜索结果打开独立 `/news/` 页面。修改简介、联系方式、课程、新闻或论文后运行 `python3 tools/build_publications.py`，并提交生成的 `assets/search-index.json` 和详情页。索引中的搜索文本来自实际页面内容；显示摘要与辅助匹配关键词分开。新内容不会在发布时自动抓取。直接双击 HTML 时，浏览器可能限制索引读取，请通过上面的本地 HTTP 服务预览。
 
 ## 本项目的部署位置
 

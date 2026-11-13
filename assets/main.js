@@ -239,6 +239,11 @@ new ResizeObserver(entries => {
 // Template search results also work when opened in a separate tab.
 function openLinkedPanel() {
   const id = location.hash.slice(1);
+  // Preserve bookmarks and cached search results for the former homepage section.
+  if (id === 'news' && (location.pathname === siteRoot.pathname || location.pathname === siteRoot.pathname + 'index.html')) {
+    location.replace(new URL('news/', siteRoot));
+    return;
+  }
   if (['team', 'robotics-applications', 'automatic-control'].includes(id)) {
     openPanel(id, searchToggle);
   }

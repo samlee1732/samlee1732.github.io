@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build publication pages, BibTeX, and the site search index using Python 3."""
+"""Build publication and news pages, BibTeX, and the site search index."""
 import html
 import json
 import re
@@ -64,7 +64,7 @@ class SearchTextParser(HTMLParser):
             self.blocks[self.active].append(data)
 
 
-def search_index(papers, reviews, homepage):
+def search_index(papers, reviews, homepage, news_content):
     """Use one shared index on the homepage and all publication detail pages."""
     entries = []
     for paper in papers:
@@ -104,6 +104,7 @@ def search_index(papers, reviews, homepage):
 
     parser = SearchTextParser()
     parser.feed(homepage)
+    parser.feed(news_content)
     parser.close()
     sections = (
         ('about', 'About SenseDex Lab · 实验室简介', 'About', '简介 关于 履历 教育 经历 科研 项目'),
@@ -116,14 +117,14 @@ def search_index(papers, reviews, homepage):
     for block, title, kind, keywords in sections:
         text = ' '.join(' '.join(parser.blocks.get(block, [])).split())
         if not text:
-            raise ValueError('Missing homepage search content: ' + block)
+            raise ValueError('Missing site search content: ' + block)
         description = text
         if block == 'contact':
             emails = re.findall(r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}', text)
             if emails:
                 description = ' · '.join(emails) + ' · ' + text
         entry = {'title': title, 'text': text + ' ' + keywords, 'description': description,
-                 'url': '#' + block, 'kind': kind}
+                 'url': 'news/' if block == 'news' else '#' + block, 'kind': kind}
         if block in parser.PANELS:
             entry['panel'] = block
         entries.append(entry)
@@ -249,13 +250,47 @@ def review_overview(papers):
       </section>'''
 
 
-def detail(p, homepage):
+def site_header(homepage, prefix, current):
     header = re.search(r'    <header\b.*?</header>', homepage, re.S).group()
-    header = header.replace('href="./"', 'href="../../"')
-    header = header.replace('href="#', 'href="../../#')
-    header = header.replace('src="./assets/', 'src="../../assets/')
-    header = header.replace('class="nav-link is-current" href="../../" aria-current="page"', 'class="nav-link" href="../../"')
-    header = header.replace('class="nav-link" href="../../#publication"', 'class="nav-link is-current" href="../../#publication" aria-current="page"')
+    header = header.replace('href="./', f'href="{prefix}')
+    header = header.replace('href="#', f'href="{prefix}#')
+    header = header.replace('src="./assets/', f'src="{prefix}assets/')
+    header = header.replace(f'class="nav-link is-current" href="{prefix}" aria-current="page"', f'class="nav-link" href="{prefix}"')
+    header = header.replace(f'class="nav-link" href="{prefix}{current}"', f'class="nav-link is-current" href="{prefix}{current}" aria-current="page"')
+    return header
+
+
+def news_page(homepage, content):
+    header = site_header(homepage, '../', 'news/')
+    dialogs = homepage[homepage.index('    <dialog'):homepage.index('  </body>')]
+    return f'''<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="News and updates from SenseDex Lab — Sensing and Dexterous Manipulation.">
+    <meta name="theme-color" content="#92316f">
+    <title>News | SenseDex Lab</title>
+    <link rel="icon" href="../assets/sensedex-mark.png" type="image/png">
+    <link rel="apple-touch-icon" href="../assets/sensedex-mark.png">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <script src="../assets/main.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+{header}
+    <main id="main-content" class="container main-content news-page">
+      <a class="paper-back" href="../">← Homepage</a>
+      <!-- News content is maintained in data/news.html. -->
+{content.rstrip()}
+    </main>
+{dialogs}  </body>
+</html>
+'''
+
+
+def detail(p, homepage):
+    header = site_header(homepage, '../../', '#publication')
     dialogs = homepage[homepage.index('    <dialog'):homepage.index('  </body>')]
     section_name = 'Abstract' if p.get('abstract') else 'Summary'
     paragraphs = p.get('abstract') or [p['summary']]
@@ -362,15 +397,19 @@ def main():
     if count != 1:
         raise ValueError('Expected one publication section in index.html.')
     homepage_path.write_text(homepage)
+    news_content = (ROOT / 'data/news.html').read_text()
+    news_folder = ROOT / 'news'
+    news_folder.mkdir(exist_ok=True)
+    (news_folder / 'index.html').write_text(news_page(homepage, news_content))
     for paper in papers:
         folder = ROOT / 'publications' / paper['id']
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(detail(paper, homepage))
         (folder / 'citation.bib').write_text(bibtex(paper))
-    entries = search_index(papers, reviews, homepage)
+    entries = search_index(papers, reviews, homepage, news_content)
     (ROOT / 'assets/search-index.json').write_text(
         json.dumps(entries, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f'Generated {len(reviews)} under-review entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
+    print(f'Generated News page, {len(reviews)} under-review entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
 
 
 if __name__ == '__main__':

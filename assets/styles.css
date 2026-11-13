@@ -74,7 +74,9 @@ a { color: inherit; }
 .contact-card a:hover { color: var(--accent); }
 .contact-card .contact-email { font-style: italic; }
 .publications, .news { padding-block: clamp(8px, 1vw, 24px); font-size: clamp(16px, 1.15vw, 31.4px); line-height: 1.7; }
-.publications > h2, .news > h2 { margin: 0 0 clamp(26px, 2vw, 48px); color: #302c38; font-size: clamp(26px, 1.8vw, 44px); line-height: 1.25; font-weight: 600; }
+.publications > h2, .news > h1 { margin: 0 0 clamp(26px, 2vw, 48px); color: #302c38; font-size: clamp(26px, 1.8vw, 44px); line-height: 1.25; font-weight: 600; }
+.news-page { min-height: calc(100svh - var(--header-offset, var(--header-height))); padding-bottom: 64px; }
+.news-page > .news { margin-top: 28px; }
 .news p { margin: 0; color: var(--muted); }
 .publication-list { margin: 0; padding-left: 2em; }
 .publication-list > li { padding-left: .5em; }
