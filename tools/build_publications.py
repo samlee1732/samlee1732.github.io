@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build publication, news, and competition pages, BibTeX, and site search."""
+"""Build publication, patent, news, and competition content, BibTeX, and site search."""
 import html
 import json
 import re
@@ -64,7 +64,7 @@ class SearchTextParser(HTMLParser):
             self.blocks[self.active].append(data)
 
 
-def search_index(papers, reviews, homepage, news_content, competitions_content):
+def search_index(papers, reviews, patents, homepage, news_content, competitions_content):
     """Use one shared index on the homepage and all publication detail pages."""
     entries = []
     for paper in papers:
@@ -102,6 +102,22 @@ def search_index(papers, reviews, homepage, news_content, competitions_content):
             'description': description,
             'url': '#' + paper['id'],
             'kind': 'Under Review',
+        })
+
+    for patent in patents:
+        description = ('发明人：' + '、'.join(patent['inventors'])
+                       + ' · 申请人：' + patent['applicant']
+                       + ' · 申请号：' + patent['application_number']
+                       + ' · 申请日：' + patent['application_date']
+                       + ' · ' + patent['type'] + '（' + patent['status'] + '）')
+        entries.append({
+            'title': patent['title'],
+            'text': description + ' 专利 发明 申请 Patents Patent application'
+                    + (' Sen Li' if '李森' in patent['inventors'] else '')
+                    + ' ' + patent['application_number'].replace('.', ''),
+            'description': description,
+            'url': '#' + patent['id'],
+            'kind': 'Patent Application',
         })
 
     parser = SearchTextParser()
@@ -265,6 +281,29 @@ def publication_overview(papers, reviews):
             + '      <!-- PUBLICATION CONTENT END -->')
 
 
+def patent_overview(patents):
+    rows = []
+    for patent in patents:
+        inventors = '、'.join('<strong>李森</strong>' if name == '李森' else esc(name)
+                            for name in patent['inventors'])
+        rows.append(f'''          <li>
+            <article id="{esc(patent['id'])}" class="patent-entry" aria-labelledby="{esc(patent['id'])}-title" tabindex="-1" lang="zh-CN">
+              <p class="publication-authors">发明人：{inventors}</p>
+              <h3 id="{esc(patent['id'])}-title" class="publication-title">{esc(patent['title'])} <span class="publication-type">{esc(patent['type'])}</span> <span class="publication-type review-status">{esc(patent['status'])}</span></h3>
+              <p>申请人：{esc(patent['applicant'])}</p>
+              <p>申请号：<span class="manuscript-number">{esc(patent['application_number'])}</span></p>
+              <p>申请日：<time datetime="{esc(patent['application_date'])}">{esc(patent['application_date'])}</time></p>
+            </article>
+          </li>''')
+    return ('      <!-- PATENT CONTENT START -->\n'
+            '      <section id="patents" class="publications patents" aria-labelledby="patents-heading" tabindex="-1">\n'
+            '        <h2 id="patents-heading">Patents <span lang="zh-CN">· 专利</span></h2>\n'
+            '        <!-- Generated from data/patents.json by tools/build_publications.py. -->\n'
+            '        <ol class="publication-list">\n'
+            + '\n'.join(rows) + '\n        </ol>\n      </section>\n'
+            + '      <!-- PATENT CONTENT END -->')
+
+
 def site_header(homepage, prefix, current):
     header = re.search(r'    <header\b.*?</header>', homepage, re.S).group()
     header = header.replace('href="./', f'href="{prefix}')
@@ -405,8 +444,9 @@ def detail(p, homepage):
 def main():
     papers = json.loads(DATA.read_text())
     reviews = json.loads((ROOT / 'data/under-review.json').read_text())
+    patents = json.loads((ROOT / 'data/patents.json').read_text())
     papers.sort(key=lambda p: -int(p['year']))
-    ids = [p['id'] for p in papers + reviews]
+    ids = [p['id'] for p in papers + reviews + patents]
     if len(ids) != len(set(ids)) or any(not re.fullmatch(r'[a-z0-9-]+', i) for i in ids):
         raise ValueError('Publication IDs must be unique lowercase URL slugs.')
     for paper in papers + reviews:
@@ -420,6 +460,11 @@ def main():
         lambda _: publication_overview(papers, reviews), homepage, count=1, flags=re.S)
     if count != 1:
         raise ValueError('Expected one marked Publication content block in index.html.')
+    homepage, count = re.subn(
+        r'      <!-- PATENT CONTENT START -->.*?<!-- PATENT CONTENT END -->',
+        lambda _: patent_overview(patents), homepage, count=1, flags=re.S)
+    if count != 1:
+        raise ValueError('Expected one marked patent content block in index.html.')
     homepage_path.write_text(homepage)
     news_content = (ROOT / 'data/news.html').read_text()
     news_folder = ROOT / 'news'
@@ -434,10 +479,10 @@ def main():
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(detail(paper, homepage))
         (folder / 'citation.bib').write_text(bibtex(paper))
-    entries = search_index(papers, reviews, homepage, news_content, competitions_content)
+    entries = search_index(papers, reviews, patents, homepage, news_content, competitions_content)
     (ROOT / 'assets/search-index.json').write_text(
         json.dumps(entries, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f'Generated News and Competitions pages, {len(reviews)} under-review entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
+    print(f'Generated News and Competitions pages, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
 
 
 if __name__ == '__main__':

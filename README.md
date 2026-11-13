@@ -32,6 +32,7 @@ python3 -m http.server 8080 --bind 127.0.0.1
 - `index.html`：实验室名称、简介、导航和弹窗内容。
 - `data/news.html`：独立 News 页的内容源；修改后运行生成脚本。
 - `news/index.html`：生成的独立新闻页面。
+- `data/patents.json`：专利申请条目；首页 Patents 板块与搜索索引从此生成。
 - `data/competitions.html`：指导学生竞赛页面的内容源；修改后运行生成脚本。
 - `competitions/index.html`：生成的独立学生竞赛页面。
 - `assets/styles.css`：配色、字体、间距、桌面和手机布局。
@@ -97,6 +98,14 @@ News 位于 Competitions 之后，点击进入独立的 `/news/` 页面；首页
 5. 本地预览后，将 JSON、素材、生成的 HTML / BibTeX 一起提交到 `main`。GitHub Pages 直接发布生成好的文件，无需在服务器运行 Python。
 
 样式在 `assets/styles.css`；详情页复用首页导航与弹窗。首页导航改动后重新运行脚本即可同步到所有论文详情页、News 和 Competitions 页面。删除论文时也应手动清理其旧详情页目录，避免旧链接继续保留。
+
+## 专利申请展示与维护
+
+Publication 下方新增 Patents（专利）板块，数据源为 `data/patents.json`。目前录入“一种柔性视触觉指尖及多指灵巧手传感系统”，发明人按截图顺序为李森、韩旭东、张拓，申请人为深圳职业技术大学，申请日为 2026-10-30。
+
+根据用户提供的代理机构邮件截图中“附件为受理通知书”的表述，状态写为“发明专利申请（已受理）”；这不是独立查询到的实时法律状态，不表示已公开、已进入实质审查或已授权。申请号由截图中的 `2026117046630` 按[国家知识产权局申请号标准](https://www.cnipa.gov.cn/art/2003/7/14/art_526_145959.html)整理为 `202611704663.0`（12 位申请号 + 分隔点 + 1 位校验位）。不添加 `ZL` 前缀，不把申请人写成专利权人。参见[国家知识产权局关于申请号与专利号的说明](https://www.cnipa.gov.cn/jact/front/mailpubdetail.do?sysid=12&transactId=536672)。
+
+新增条目时填写真实 `id`、`title`、`inventors`、`applicant`、`application_number`、`application_date`、`type` 和 `status`，运行 `python3 tools/build_publications.py` 后提交数据、首页和生成的搜索索引。作者顺序依通知书维护；取得新的正式通知后再更新状态。申请日不作为受理日或授权日使用。本站不展示代理机构内部文号，也不上传邮件截图；尚无的公开号、授权号和全文链接不编造。站内搜索可按标题、发明人、申请号及“专利”等关键词找到该条目。
 
 ## 站内搜索
 

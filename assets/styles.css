@@ -92,7 +92,8 @@ a { color: inherit; }
 .publication-row { display: grid; grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr); align-items: start; gap: clamp(24px, 2.5vw, 60px); }
 .publication-details, .publication-media { min-width: 0; }
 .publication-details { overflow-wrap: anywhere; }
-.publication-details p { margin: 0; }
+.publication-details p, .patent-entry p { margin: 0; }
+.patent-entry { overflow-wrap: anywhere; }
 .publication-title { margin: .35em 0; color: var(--accent); font-size: 1.05em; line-height: 1.65; font-weight: 700; }
 .publication-title a { text-decoration: none; }
 .publication-title a:hover { text-decoration: underline; text-underline-offset: .15em; }
