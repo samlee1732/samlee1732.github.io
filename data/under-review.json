@@ -6,5 +6,12 @@
     "corresponding_author": "Tao Luo",
     "co_authors": ["Ruyang Yu", "Sen Li"],
     "manuscript_number": "JMADE-D-26-07879"
+  },
+  {
+    "id": "vista",
+    "title": "ViSTA: Coarse-to-Fine Visuotactile Deformation Servoing for Online Robotic Weld-Seam Trajectory Adjustment",
+    "journal": "IEEE Robotics and Automation Letters (RA-L)",
+    "authors": ["Sen Li", "Tuo Zhang", "Chaoyang Song", "Fang Wan*"],
+    "manuscript_number": "26-6318"
   }
 ]

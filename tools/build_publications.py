@@ -87,16 +87,18 @@ def search_index(papers, reviews, homepage):
         })
 
     for paper in reviews:
-        description = ('Co-authors: ' + '; '.join(paper['co_authors'])
-                       + ' · Corresponding author: ' + paper['corresponding_author']
-                       + ' · Submitted to ' + paper['journal']
+        description = ('Authors: ' + ', '.join(paper['authors']) if paper.get('authors')
+                       else 'Co-authors: ' + '; '.join(paper['co_authors']))
+        if paper.get('corresponding_author'):
+            description += ' · Corresponding author: ' + paper['corresponding_author']
+        description += (' · Submitted to ' + paper['journal']
                        + ' · ' + paper['manuscript_number'] + ' · Under Review')
         entries.append({
             'title': paper['title'],
             'text': description + ' 在审 投稿 论文 稿件 通讯作者 共同作者'
-                    + (' 李森' if 'Sen Li' in paper['co_authors'] else ''),
+                    + (' 李森' if 'Sen Li' in paper.get('authors', paper.get('co_authors', [])) else ''),
             'description': description,
-            'url': '#under-review',
+            'url': '#' + paper['id'],
             'kind': 'Under Review',
         })
 
@@ -219,15 +221,16 @@ def overview(papers):
 def review_overview(papers):
     rows = []
     for p in papers:
-        coauthors = '; '.join('<strong>Sen Li</strong>' if name == 'Sen Li' else esc(name)
-                              for name in p['co_authors'])
+        author_line = (authors(p) if p.get('authors') else 'Co-authors: ' + '; '.join(
+            '<strong>Sen Li</strong>' if name == 'Sen Li' else esc(name) for name in p['co_authors']))
+        corresponding = ('\n                <p>Corresponding author: '
+                         + esc(p['corresponding_author']) + '</p>') if p.get('corresponding_author') else ''
         rows.append(f'''          <li>
-            <article class="publication-row" aria-labelledby="{p['id']}-title">
+            <article id="{p['id']}" class="publication-row" aria-labelledby="{p['id']}-title" tabindex="-1">
               <div class="publication-details">
-                <p class="publication-authors">Co-authors: {coauthors}</p>
+                <p class="publication-authors">{author_line}</p>
                 <h3 id="{p['id']}-title" class="publication-title">{esc(p['title'])} <span class="publication-type review-status">Under Review</span></h3>
-                <p class="publication-citation">Submitted to <cite>{esc(p['journal'])}</cite>.</p>
-                <p>Corresponding author: {esc(p['corresponding_author'])}</p>
+                <p class="publication-citation">Submitted to <cite>{esc(p['journal'])}</cite>.</p>{corresponding}
                 <p>Manuscript no.: <span class="manuscript-number">{esc(p['manuscript_number'])}</span></p>
                 <ul class="publication-resources" aria-label="Pending manuscript resources">
                   <li><span aria-disabled="true">Abstract <span class="resource-pending">(to be added)</span></span></li>

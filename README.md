@@ -44,7 +44,12 @@ Under Review 导航位于 Publication 前，跳转到联系方式下方的在审
 
 ### 在审稿件
 
-`data/under-review.json` 单独维护在审稿件，与下方 8 篇已发表论文分开展示。目前录入作者提供的 Materials & Design 投稿：**A Torsionally Tristable Metastructure with In-Plane Translational Actuation and Post-Fabrication Angle Tuning**，稿号 `JMADE-D-26-07879`。通讯作者为 Tao Luo，共同作者为 Ruyang Yu、Sen Li；按角色展示，不推断正式作者排序。状态仅标为 Under Review，未填写发表年份、DOI、卷期或录用信息。
+`data/under-review.json` 单独维护在审稿件，与下方 8 篇已发表论文分开展示。目前有 2 篇：
+
+- Materials & Design 投稿：**A Torsionally Tristable Metastructure with In-Plane Translational Actuation and Post-Fabrication Angle Tuning**，稿号 `JMADE-D-26-07879`。通讯作者为 Tao Luo，共同作者为 Ruyang Yu、Sen Li；按角色展示，不推断正式作者排序。
+- IEEE Robotics and Automation Letters (RA-L) 投稿：**ViSTA: Coarse-to-Fine Visuotactile Deformation Servoing for Online Robotic Weld-Seam Trajectory Adjustment**，稿号 `26-6318`。作者按用户提供的投稿系统截图依次为 Sen Li、Tuo Zhang、Chaoyang Song、Fang Wan*。保留截图中的星号；因未提供星号图例，暂不额外解释作者角色。不展示投稿系统中的作者编号。
+
+两篇均仅标为 Under Review，未填写正式发表年份、DOI、卷期或录用信息。`authors` 用于已知排序的作者列表；顺序不确定时，使用 `co_authors` 与可选的 `corresponding_author` 按角色显示。每篇有独立页内锚点，搜索结果直接跳到对应稿件。
 
 摘要、BibTeX 和图片/视频保留待补充位置，缺失资源不生成链接。当前不生成该稿件的独立详情页或引用文件。补充图片时可使用与已发表论文相同的 `image`、`image_alt`、`image_width`、`image_height` 字段，将文件放入 `assets/publications/`。新增或修改在审稿件后运行下方生成命令，同步更新首页和站内搜索；后续补齐摘要、引用等资源时再启用对应入口。
 
