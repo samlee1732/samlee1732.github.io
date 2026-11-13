@@ -391,7 +391,7 @@ def content_page(homepage, content, slug, title, description, source=None):
     <link rel="icon" href="{prefix}assets/sensedex-mark.png" type="image/png">
     <link rel="apple-touch-icon" href="{prefix}assets/sensedex-mark.png">
     <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261113-teaching">
-    <script src="{prefix}assets/main.js?v=20261113-teaching" defer></script>
+    <script src="{prefix}assets/main.js?v=20261113-publication-nav" defer></script>
     <script src="{prefix}assets/visits.js" defer></script>
   </head>
   <body>
@@ -479,7 +479,7 @@ def detail(p, homepage):
     <link rel="icon" href="../../assets/sensedex-mark.png" type="image/png">
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark.png">
     <link rel="stylesheet" href="../../assets/styles.css?v=20261113-pdf-readers">
-    <script src="../../assets/main.js?v=20261113-teaching" defer></script>
+    <script src="../../assets/main.js?v=20261113-publication-nav" defer></script>
     <script src="../../assets/visits.js" defer></script>
   </head>
   <body>

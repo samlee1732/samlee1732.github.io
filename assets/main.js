@@ -68,6 +68,32 @@ document.addEventListener('keydown', event => {
 
 window.matchMedia('(min-width: 1201px)').addEventListener('change', closeMenu);
 
+// The homepage shares one document with Publication and its subsection anchors.
+function syncHomepageNavigation() {
+  const publication = document.getElementById('publication');
+  const publicationLink = navigation.querySelector('a[href="#publication"]');
+  const homepageLink = navigation.querySelector('a[href="./"]');
+  if (!publication || !publicationLink || !homepageLink) return;
+
+  let targetId = location.hash.slice(1);
+  try { targetId = decodeURIComponent(targetId); } catch { /* Keep malformed hashes harmless. */ }
+  const target = document.getElementById(targetId);
+  const inPublication = Boolean(target && publication.contains(target));
+  const current = inPublication ? publicationLink : homepageLink;
+  navigation.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.toggle('is-current', link === current);
+    if (link === current) {
+      link.setAttribute('aria-current', inPublication ? 'location' : 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+}
+
+window.addEventListener('hashchange', syncHomepageNavigation);
+window.addEventListener('pageshow', syncHomepageNavigation);
+syncHomepageNavigation();
+
 // Resolve URLs from this script so search works on the homepage and paper pages.
 function loadSearchIndex() {
   if (!searchIndexPromise) {
