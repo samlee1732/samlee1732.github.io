@@ -28,7 +28,7 @@
         </button>
         <nav id="main-navigation" class="main-navigation" aria-label="Main navigation">
           <a class="nav-link is-current" href="./" aria-current="page">Homepage</a>
-          <button class="nav-link" type="button" data-panel="publication">Publication</button>
+          <a class="nav-link" href="#publication">Publication</a>
           <button class="nav-link" type="button" data-panel="team">Team</button>
           <details class="teaching-menu">
             <summary class="nav-link">Teaching <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary>
@@ -65,6 +65,37 @@
           <p><a href="http://www.senli.site/">www.senli.site</a></p>
         </address>
       </section>
+      <hr class="section-divider">
+      <section id="publication" class="publications" aria-labelledby="publication-heading" tabindex="-1">
+        <h2 id="publication-heading">Publication</h2>
+        <ol class="publication-list">
+          <!-- Duplicate this list item to add a paper; keep heading IDs unique. -->
+          <li>
+            <article class="publication-row" aria-labelledby="activespn-title">
+              <div class="publication-details">
+                <p class="publication-authors"><strong>Sen Li</strong>, Chengxiao Dong, Chaoyang Song, Fang Wan</p>
+                <h3 id="activespn-title" class="publication-title">ActiveSPN: Active Soft Polyhedral Networks with Pose Estimation for In-Finger Object Manipulation <span class="publication-type">Journal Article</span></h3>
+                <p class="publication-citation">In: <cite>IEEE Robotics and Automation Letters</cite>, vol. 10, no. 8, pp. 8115–8122, 2025, (Accepted).</p>
+                <!-- Replace these disabled labels with real links when materials are supplied. -->
+                <ul class="publication-resources" aria-label="Paper materials, coming soon">
+                  <li><span aria-disabled="true">Abstract</span></li>
+                  <li><span aria-disabled="true">Links</span></li>
+                  <li><span aria-disabled="true">BibTeX</span></li>
+                </ul>
+                <p class="publication-note">Materials coming soon <span lang="zh-CN">· 资料待补充</span></p>
+              </div>
+              <div class="publication-media">
+                <!-- Replace the placeholder with an image or a video with native controls. -->
+                <div class="publication-placeholder">
+                  <svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true"><rect x="6" y="8" width="36" height="32" rx="3"/><circle cx="17" cy="19" r="3"/><path d="m7 34 11-10 8 7 7-8 8 10"/></svg>
+                  <span>Image / video coming soon</span>
+                  <span lang="zh-CN">论文图片或视频待补充</span>
+                </div>
+              </div>
+            </article>
+          </li>
+        </ol>
+      </section>
       <hr class="section-divider closing-divider">
     </main>
 
@@ -75,13 +106,6 @@
       <div class="dialog-body"></div>
     </dialog>
 
-    <template id="publication">
-      <h2>Publication</h2>
-      <p>Eight papers published in AI and robotics journals and international conferences.</p>
-      <p>Publication venues include:</p>
-      <ul><li>IEEE Robotics and Automation Letters (IEEE RA-L)</li><li>IEEE International Conference on Robotics and Automation (IEEE ICRA)</li></ul>
-      <p class="availability-note">The full publication list has not been added yet.</p>
-    </template>
     <template id="team">
       <h2>Team</h2>
       <p>Sensing and Dexterous Manipulation Lab (SenseDex Lab)</p>

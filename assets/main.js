@@ -19,10 +19,12 @@ menuToggle.addEventListener('click', () => {
   if (!expanded) teachingMenu.open = false;
 });
 
-document.querySelector('.contact-button').addEventListener('click', event => {
-  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-  closeMenu();
-  document.getElementById('contact').focus({ preventScroll: true });
+document.querySelectorAll('.main-navigation a[href^="#"]').forEach(link => {
+  link.addEventListener('click', event => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    closeMenu();
+    document.getElementById(link.hash.slice(1))?.focus({ preventScroll: true });
+  });
 });
 
 document.querySelectorAll('[data-panel]').forEach(button => {

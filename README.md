@@ -35,7 +35,16 @@ python3 -m http.server 8080 --bind 127.0.0.1
 
 页面视觉参考用户提供的截图。中英文简介按作者新提供的个人经历更新，英文为对应译文；中文修正了“EEE → IEEE”和“2026毕业 → 2026年毕业”两处笔误，并依据作者个人站点统一了职称与学校名称。履历、论文数量及项目经历由作者提供，未做外部核实。
 
-目前交付范围是首页。Publication 和 Team 展示作者提供的概览信息，完整论文与成员名单仍需补充；Teaching 展示《机器人学及应用》和《自动控制原理》两门课程，课程资料仍需补充。右上角 Contact 链接跳转到个人信息与联系方式；手机端点击后会先收起导航菜单。网站采用玫红、紫色到深蓝的渐变，实验室标题、导航选中线、Contact 按钮与图标保持一致。
+目前交付范围是首页。Publication 导航跳转到联系方式下方的论文展示区；Team 展示作者提供的概览信息，完整论文与成员名单仍需补充；Teaching 展示《机器人学及应用》和《自动控制原理》两门课程，课程资料仍需补充。右上角 Contact 链接跳转到个人信息与联系方式；手机端点击页内导航后会先收起导航菜单。网站采用玫红、紫色到深蓝的渐变，实验室标题、导航选中线、Contact 按钮与图标保持一致。
+
+## 补充论文与素材
+
+`index.html` 的 `#publication` 区域按“左侧论文信息、右侧图片或视频”排版，手机端改为上下排列。目前录入的 ActiveSPN 作者、题目、刊物、卷期页码、年份和 Accepted 状态均来自作者提供的截图；没有添加未提供的 DOI、摘要或引用数据。
+
+- 新增论文：复制 `.publication-list` 下的一个 `<li>`，修改作者、标题和发表信息，并同步修改标题的 `id` 与文章的 `aria-labelledby`，保持 ID 唯一。编号会自动生成。
+- 补图片：将素材放入 `assets/publications/`（需要时创建），用带有准确 `alt` 描述的 `<img src="./assets/publications/文件名.png" alt="论文方法示意图的描述" loading="lazy">` 替换 `.publication-placeholder`。
+- 补视频：在同一位置使用 `<video controls preload="metadata" src="./assets/publications/文件名.mp4"></video>`；有封面时可增加 `poster` 属性。
+- 补资料：将 Abstract、Links、BibTeX 的不可点击占位文字替换为对应的真实链接或有实际内容的展开区。资料齐全后删除该论文的 “Materials coming soon” 提示。
 
 ## 本项目的部署位置
 
