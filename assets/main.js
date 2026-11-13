@@ -11,6 +11,8 @@ const searchStatus = document.querySelector('.search-status');
 const searchResults = document.querySelector('.search-results');
 const siteRoot = new URL('../', document.currentScript.src);
 const searchIndexURL = new URL('search-index.json', document.currentScript.src);
+// Refresh search records alongside the versioned navigation script.
+searchIndexURL.search = new URL(document.currentScript.src).search;
 let dialogTrigger;
 let searchIndexPromise;
 let searchRequest = 0;
@@ -49,6 +51,11 @@ document.querySelectorAll('.main-navigation a[href^="#"]').forEach(link => {
 });
 
 function openPanel(id, trigger) {
+    // Old cached search records may still identify Team as a dialog panel.
+    if (id === 'team') {
+      location.assign(new URL('team/', siteRoot));
+      return;
+    }
     const template = document.getElementById(id);
     if (!(template instanceof HTMLTemplateElement)) return;
     const content = template.content.cloneNode(true);
@@ -244,7 +251,11 @@ function openLinkedPanel() {
     location.replace(new URL('news/', siteRoot));
     return;
   }
-  if (['team', 'robotics-applications', 'automatic-control'].includes(id)) {
+  if (id === 'team') {
+    location.replace(new URL('team/', siteRoot));
+    return;
+  }
+  if (['robotics-applications', 'automatic-control'].includes(id)) {
     openPanel(id, searchToggle);
   }
 }

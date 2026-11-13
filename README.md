@@ -46,13 +46,15 @@ Publication 导航进入包含 Under Review 和 Published Papers 分组的论文
 
 顶部导航在 Teaching 与 News 之间新增 Competitions，点击进入独立的 `/competitions/` 页面。页面标题为 Student Competitions / 指导学生竞赛，目前仅说明赛事信息、学生团队、指导教师、竞赛成果与图片待补充，没有添加未经提供的比赛或成绩。后续编辑 `data/competitions.html` 并运行生成脚本，即可同步页面和站内搜索。
 
-News 位于 Competitions 之后，点击进入独立的 `/news/` 页面；首页 Publication 下方不再显示 News。竞赛与新闻页沿用固定导航、搜索和 Team / Teaching 弹窗，当前页面的导航项单独高亮。旧的首页 `/#news` 链接自动跳转到新页面。新闻页当前保留待更新提示，后续编辑 `data/news.html`，运行 `python3 tools/build_publications.py` 并提交生成文件即可。窄屏导航在 1200px 及以下收进菜单，点击 Competitions 或 News 直接进入对应页面。
+News 位于 Competitions 之后，点击进入独立的 `/news/` 页面；首页 Publication 下方不再显示 News。竞赛与新闻页沿用固定导航、搜索和 Teaching 弹窗，当前页面的导航项单独高亮。旧的首页 `/#news` 链接自动跳转到新页面。新闻页当前保留待更新提示，后续编辑 `data/news.html`，运行 `python3 tools/build_publications.py` 并提交生成文件即可。窄屏导航在 1200px 及以下收进菜单，点击 Competitions 或 News 直接进入对应页面。
 
 ## 团队信息
 
-Team 沿用弹窗展示，分为 Principal Investigator 与 Graduation Project Students 两组。负责人为 Dr. Sen Li（李森），深圳职业技术大学机电工程学院讲师，2026 年 7 月入职。此处职称为 Lecturer，不使用参考截图中的 Assistant Professor。
+Team 使用独立页面 `/team/`，顶部导航为普通链接，可直接打开。旧的 `/#team` 链接与缓存中的 Team 弹窗搜索结果会跳转到新页面。页面分为 Principal Investigator、Collaborators（合作者）与 Graduation Project Students 三组。负责人为 Dr. Sen Li（李森），深圳职业技术大学机电工程学院讲师，2026 年 7 月入职。
 
-毕业设计学生组预留 4 个在读学生姓名位置，姓名、专业及预计毕业年份尚未提供；不推断学生的学历层次。后续编辑 `index.html` 中的 `<template id="team">`，将对应列表项替换为真实信息，然后运行 `python3 tools/build_publications.py`。生成脚本会将 Team 内容同步到 News、Competitions、8 篇论文详情页与站内搜索。
+合作者组位于负责人之后，先预留 3 个姓名与单位位置；后续按实际人数增减，不推断姓名、单位、职称或合作关系。毕业设计学生组保留 4 个在读学生姓名位置；不推断学生的学历层次。
+
+后续编辑 `data/team.html`，运行 `python3 tools/build_publications.py`，并提交生成的页面与搜索索引。各页面的 Team 导航和站内搜索统一指向 `/team/`；Teaching 继续使用弹窗。
 
 ## 论文展示与维护
 

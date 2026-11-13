@@ -106,11 +106,10 @@
   },
   {
     "title": "Team · 团队",
-    "text": "Team Principal Investigator Dr. Sen Li （李森） (Lecturer at the School of Mechanical and Electrical Engineering, Shenzhen Polytechnic University since July 2026) Graduation Project Students Current students · 在读毕业设计学生（4名） 姓名待补充 / Name to be added 姓名待补充 / Name to be added 姓名待补充 / Name to be added 姓名待补充 / Name to be added 团队 成员 实验室",
-    "description": "Team Principal Investigator Dr. Sen Li （李森） (Lecturer at the School of Mechanical and Electrical Engineering, Shenzhen Polytechnic University since July 2026) Graduation Project Students Current students · 在读毕业设计学生（4名） 姓名待补充 / Name to be added 姓名待补充 / Name to be added 姓名待补充 / Name to be added 姓名待补充 / Name to be added",
-    "url": "#team",
-    "kind": "Team",
-    "panel": "team"
+    "text": "Team Principal Investigator Dr. Sen Li （李森） (Lecturer at the School of Mechanical and Electrical Engineering, Shenzhen Polytechnic University since July 2026) Collaborators · 合作者 姓名待补充 / Name to be added 单位待补充 / Affiliation to be added 姓名待补充 / Name to be added 单位待补充 / Affiliation to be added 姓名待补充 / Name to be added 单位待补充 / Affiliation to be added Graduation Project Students Current students · 在读毕业设计学生（4名） 姓名待补充 / Name to be added 姓名待补充 / Name to be added 姓名待补充 / Name to be added 姓名待补充 / Name to be added 团队 成员 实验室 合作者 合作 collaborators affiliation",
+    "description": "Team Principal Investigator Dr. Sen Li （李森） (Lecturer at the School of Mechanical and Electrical Engineering, Shenzhen Polytechnic University since July 2026) Collaborators · 合作者 姓名待补充 / Name to be added 单位待补充 / Affiliation to be added 姓名待补充 / Name to be added 单位待补充 / Affiliation to be added 姓名待补充 / Name to be added 单位待补充 / Affiliation to be added Graduation Project Students Current students · 在读毕业设计学生（4名） 姓名待补充 / Name to be added 姓名待补充 / Name to be added 姓名待补充 / Name to be added 姓名待补充 / Name to be added",
+    "url": "team/",
+    "kind": "Team"
   },
   {
     "title": "Robotics and Applications · 机器人学及应用",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build publication, patent, news, and competition content, BibTeX, and site search."""
+"""Build publication, patent, team, news, and competition content, BibTeX, and site search."""
 import html
 import json
 import re
@@ -16,7 +16,7 @@ class SearchTextParser(HTMLParser):
 
     VOID_TAGS = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
                  'link', 'meta', 'param', 'source', 'track', 'wbr'}
-    PANELS = {'team', 'robotics-applications', 'automatic-control'}
+    PANELS = {'robotics-applications', 'automatic-control'}
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -30,7 +30,7 @@ class SearchTextParser(HTMLParser):
         if self.active is None:
             block = None
             if tag == 'section':
-                if attrs.get('id') in {'contact', 'news', 'competitions'}:
+                if attrs.get('id') in {'contact', 'news', 'competitions', 'team'}:
                     block = attrs['id']
                 elif 'biography' in attrs.get('class', '').split():
                     block = 'about'
@@ -64,7 +64,7 @@ class SearchTextParser(HTMLParser):
             self.blocks[self.active].append(data)
 
 
-def search_index(papers, reviews, patents, homepage, news_content, competitions_content):
+def search_index(papers, reviews, patents, homepage, news_content, competitions_content, team_content):
     """Use one shared index on the homepage and all publication detail pages."""
     entries = []
     for paper in papers:
@@ -119,13 +119,14 @@ def search_index(papers, reviews, patents, homepage, news_content, competitions_
     parser.feed(homepage)
     parser.feed(news_content)
     parser.feed(competitions_content)
+    parser.feed(team_content)
     parser.close()
     sections = (
         ('about', 'About SenseDex Lab · 实验室简介', 'About', '简介 关于 履历 教育 经历 科研 项目'),
         ('contact', 'Contact · 联系方式', 'Contact', '联系 联系方式 邮箱 邮件 地址 办公室'),
         ('competitions', 'Student Competitions · 指导学生竞赛', 'Competitions', '比赛 竞赛 学生 团队 指导教师 成果 图片'),
         ('news', 'News · 最新动态', 'News', '新闻 动态 消息'),
-        ('team', 'Team · 团队', 'Team', '团队 成员 实验室'),
+        ('team', 'Team · 团队', 'Team', '团队 成员 实验室 合作者 合作 collaborators affiliation'),
         ('robotics-applications', 'Robotics and Applications · 机器人学及应用', 'Teaching', '教学 课程 机器人学及应用'),
         ('automatic-control', 'Principles of Automatic Control · 自动控制原理', 'Teaching', '教学 课程 自动控制原理'),
     )
@@ -139,7 +140,7 @@ def search_index(papers, reviews, patents, homepage, news_content, competitions_
             if emails:
                 description = ' · '.join(emails) + ' · ' + text
         entry = {'title': title, 'text': text + ' ' + keywords, 'description': description,
-                 'url': block + '/' if block in {'news', 'competitions'} else '#' + block, 'kind': kind}
+                 'url': block + '/' if block in {'news', 'competitions', 'team'} else '#' + block, 'kind': kind}
         if block in parser.PANELS:
             entry['panel'] = block
         entries.append(entry)
@@ -318,8 +319,8 @@ def content_page(homepage, content, slug, title, description):
     <title>{esc(title)} | SenseDex Lab</title>
     <link rel="icon" href="../assets/sensedex-mark.png" type="image/png">
     <link rel="apple-touch-icon" href="../assets/sensedex-mark.png">
-    <link rel="stylesheet" href="../assets/styles.css">
-    <script src="../assets/main.js" defer></script>
+    <link rel="stylesheet" href="../assets/styles.css?v=20261113-team">
+    <script src="../assets/main.js?v=20261113-team" defer></script>
     <script src="../assets/visits.js" defer></script>
   </head>
   <body>
@@ -386,8 +387,8 @@ def detail(p, homepage):
     <title>{esc(p['marker'])} | SenseDex Lab</title>
     <link rel="icon" href="../../assets/sensedex-mark.png" type="image/png">
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark.png">
-    <link rel="stylesheet" href="../../assets/styles.css">
-    <script src="../../assets/main.js" defer></script>
+    <link rel="stylesheet" href="../../assets/styles.css?v=20261113-team">
+    <script src="../../assets/main.js?v=20261113-team" defer></script>
     <script src="../../assets/visits.js" defer></script>
   </head>
   <body>
@@ -465,15 +466,20 @@ def main():
     competitions_folder = ROOT / 'competitions'
     competitions_folder.mkdir(exist_ok=True)
     (competitions_folder / 'index.html').write_text(competitions_page(homepage, competitions_content))
+    team_content = (ROOT / 'data/team.html').read_text()
+    team_folder = ROOT / 'team'
+    team_folder.mkdir(exist_ok=True)
+    (team_folder / 'index.html').write_text(content_page(homepage, team_content, 'team', 'Team',
+        'People at SenseDex Lab: principal investigator, collaborators, and graduation project students.'))
     for paper in papers:
         folder = ROOT / 'publications' / paper['id']
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(detail(paper, homepage))
         (folder / 'citation.bib').write_text(bibtex(paper))
-    entries = search_index(papers, reviews, patents, homepage, news_content, competitions_content)
+    entries = search_index(papers, reviews, patents, homepage, news_content, competitions_content, team_content)
     (ROOT / 'assets/search-index.json').write_text(
         json.dumps(entries, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f'Generated News and Competitions pages, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
+    print(f'Generated Team, News and Competitions pages, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
 
 
 if __name__ == '__main__':
