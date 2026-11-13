@@ -1,6 +1,6 @@
-# mainDL Lab 首页
+# PerDex Lab 首页
 
-根据提供的截图还原的静态首页，适合直接部署到 GitHub Pages。没有构建步骤，无须安装 Node.js 或任何依赖。页面不依赖第三方字体、脚本或图片服务。
+PerDex Lab（Perception and Dexterous Manipulation，感知与灵巧操作实验室）的静态首页，适合直接部署到 GitHub Pages。没有构建步骤，无须安装 Node.js 或任何依赖。页面不依赖第三方字体、脚本或图片服务。
 
 ## 本地查看
 
