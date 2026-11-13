@@ -1,13 +1,117 @@
 #!/usr/bin/env python3
-"""Build the publication overview, detail pages, and BibTeX using only Python 3."""
+"""Build publication pages, BibTeX, and the site search index using Python 3."""
 import html
 import json
 import re
+from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
 esc = html.escape
+
+
+class SearchTextParser(HTMLParser):
+    """Collect actual homepage section and dialog-template text for search."""
+
+    VOID_TAGS = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
+                 'link', 'meta', 'param', 'source', 'track', 'wbr'}
+    PANELS = {'team', 'robotics-applications', 'automatic-control'}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.blocks = {}
+        self.active = None
+        self.depth = 0
+        self.ignored_depth = 0
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if self.active is None:
+            block = None
+            if tag == 'section':
+                if attrs.get('id') in {'contact', 'news'}:
+                    block = attrs['id']
+                elif 'biography' in attrs.get('class', '').split():
+                    block = 'about'
+            elif tag == 'template' and attrs.get('id') in self.PANELS:
+                block = attrs['id']
+            if block:
+                self.active = block
+                self.blocks.setdefault(block, [])
+                self.depth = 1
+        elif tag not in self.VOID_TAGS:
+            self.depth += 1
+            if tag in {'script', 'style'} or self.ignored_depth:
+                self.ignored_depth += 1
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if tag not in self.VOID_TAGS:
+            self.handle_endtag(tag)
+
+    def handle_endtag(self, tag):
+        if self.active is None or tag in self.VOID_TAGS:
+            return
+        if self.ignored_depth:
+            self.ignored_depth -= 1
+        self.depth -= 1
+        if self.depth == 0:
+            self.active = None
+
+    def handle_data(self, data):
+        if self.active is not None and not self.ignored_depth:
+            self.blocks[self.active].append(data)
+
+
+def search_index(papers, homepage):
+    """Use one shared index on the homepage and all publication detail pages."""
+    entries = []
+    for paper in papers:
+        terms = []
+        for field in ('title', 'authors', 'marker', 'venue', 'year', 'doi',
+                      'summary', 'abstract', 'type', 'status'):
+            value = paper.get(field)
+            if value:
+                if isinstance(value, list):
+                    terms.extend(str(item) for item in value)
+                else:
+                    terms.append(str(value))
+        entries.append({
+            'title': paper['title'],
+            'text': ' '.join(terms + ['论文 发表 文献 研究成果 作者 摘要']
+                             + (['李森'] if 'Sen Li' in paper['authors'] else [])),
+            'description': ', '.join(paper['authors']) + ' · ' + paper['venue'] + ' · ' + str(paper['year']),
+            'url': 'publications/' + paper['id'] + '/',
+            'kind': 'Publication',
+        })
+
+    parser = SearchTextParser()
+    parser.feed(homepage)
+    parser.close()
+    sections = (
+        ('about', 'About SenseDex Lab · 实验室简介', 'About', '简介 关于 履历 教育 经历 科研 项目'),
+        ('contact', 'Contact · 联系方式', 'Contact', '联系 联系方式 邮箱 邮件 地址 办公室'),
+        ('news', 'News · 最新动态', 'News', '新闻 动态 消息'),
+        ('team', 'Team · 团队', 'Team', '团队 成员 实验室'),
+        ('robotics-applications', 'Robotics and Applications · 机器人学及应用', 'Teaching', '教学 课程 机器人学及应用'),
+        ('automatic-control', 'Principles of Automatic Control · 自动控制原理', 'Teaching', '教学 课程 自动控制原理'),
+    )
+    for block, title, kind, keywords in sections:
+        text = ' '.join(' '.join(parser.blocks.get(block, [])).split())
+        if not text:
+            raise ValueError('Missing homepage search content: ' + block)
+        description = text
+        if block == 'contact':
+            emails = re.findall(r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}', text)
+            if emails:
+                description = ' · '.join(emails) + ' · ' + text
+        entry = {'title': title, 'text': text + ' ' + keywords, 'description': description,
+                 'url': '#' + block, 'kind': kind}
+        if block in parser.PANELS:
+            entry['panel'] = block
+        entries.append(entry)
+    return entries
 
 
 def authors(paper):
@@ -211,7 +315,10 @@ def main():
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(detail(paper, homepage))
         (folder / 'citation.bib').write_text(bibtex(paper))
-    print(f'Generated overview, {len(papers)} detail pages, and {len(papers)} BibTeX files.')
+    entries = search_index(papers, homepage)
+    (ROOT / 'assets/search-index.json').write_text(
+        json.dumps(entries, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    print(f'Generated overview, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,103 @@
+[
+  {
+    "title": "Multi-modal vision-based deformable perception for in-finger manipulation with soft active surfaces",
+    "text": "Multi-modal vision-based deformable perception for in-finger manipulation with soft active surfaces Sen Li Chaoyang Song Fang Wan ActiveSPN2 Biomimetic Intelligence and Robotics 2026 10.1016/j.birob.2026.100326 We propose ActiveSPN2, a robot gripper with a soft active surface designed for in-finger manipulation in constrained environments, featuring multi-modal perception through a vision-based deformable perception architecture. By tracking the real-time deformation of the internal Soft Polyhedral Network, we achieve real-time, multi-modal vision-based perception that provides 6D forces and object pose estimation during in-hand manipulation. Enabling robots to manipulate objects dexterously within their grasp often requires complex multi-fingered hands with dense, multi-modal sensor arrays. This complexity can limit practicality and robustness, especially in confined spaces. This study challenges that paradigm by introducing a robust multi-modal perception method that derives 6D forces and poses from the large-scale deformation of a soft finger, using only a single internal camera. We propose ActiveSPN2, a robot gripper with a soft active surface designed for in-finger manipulation in constrained environments, featuring multi-modal perception through a vision-based deformable perception architecture. By tracking the real-time deformation of the internal Soft Polyhedral Network, we achieve real-time, multi-modal vision-based perception that provides 6D forces and object pose estimation during in-finger manipulation. Quantitatively, the proposed force perception model achieves an average accuracy of approximately 0.286 N on the test set, indicating reliable generalization under unseen manipulation conditions. A series of experiments were conducted on the ActiveSPN2 gripper using the proposed vision-based deformable perception approach, demonstrating the effectiveness and robustness of the strategy. Journal Article Published online 论文 发表 文献 研究成果 作者 摘要 李森",
+    "description": "Sen Li, Chaoyang Song, Fang Wan · Biomimetic Intelligence and Robotics · 2026",
+    "url": "publications/activespn2/",
+    "kind": "Publication"
+  },
+  {
+    "title": "ActiveSPN: Active Soft Polyhedral Networks With Pose Estimation for In-Finger Object Manipulation",
+    "text": "ActiveSPN: Active Soft Polyhedral Networks With Pose Estimation for In-Finger Object Manipulation Sen Li Chengxiao Dong Chaoyang Song Fang Wan ActiveSPN IEEE Robotics and Automation Letters 2025 10.1109/LRA.2025.3583616 This letter introduces Active Soft Polyhedral Networks (ActiveSPN), a gripper design that leverages an active, non-biomimetic surface for precise in-hand manipulation. A vision system integrated directly into the fingers further facilitates accurate pose estimation of the in-finger object. Robotic grippers aim to replicate the remarkable functionalities of the human hand by providing advanced perception, adaptability, stability, and dexterity for complex tasks. Achieving these capabilities demands a sophisticated design hierarchy and robust perception mechanisms that ensure accurate manipulation. This letter introduces Active Soft Polyhedral Networks (ActiveSPN), a gripper design that leverages an active, non-biomimetic surface for precise in-hand manipulation. A vision system integrated directly into the fingers further facilitates accurate pose estimation of the in-finger object. The proposed system includes: (i) a soft polyhedral network featuring a transparent active belt to deliver complete three-dimensional adaptation and dexterous in-finger motion, and (ii) a generative learning-based pipeline for in-finger pose estimation. Experimental results demonstrate the ability of ActiveSPN to execute multi-degree-of-freedom in-finger manipulations, including two-axis rotation and one-axis translation. Moreover, the integrated vision-based pose estimation provides robust, real-time predictions, supporting consistent closed-loop control. Across diverse objects, the system achieves mean translational errors of 2.59 mm and rotational errors of 7°, highlighting a promising paradigm for compact, efficient, and dexterous robotic manipulation. Journal Article Published 论文 发表 文献 研究成果 作者 摘要 李森",
+    "description": "Sen Li, Chengxiao Dong, Chaoyang Song, Fang Wan · IEEE Robotics and Automation Letters · 2025",
+    "url": "publications/activespn/",
+    "kind": "Publication"
+  },
+  {
+    "title": "Teaching oral care via vision-based deformation perception",
+    "text": "Teaching oral care via vision-based deformation perception Chengxiao Dong Xuanyi Dai Yu Pan Wanghongjie Qiu Sen Li Tianyu Wu Yijie Jin He Wang Chaoyang Song Fang Wan VBDeformP Soft Science 2025 10.20517/ss.2025.14 This study presents a novel, cost-effective sensor platform based on Vision-based Deformation Perception for community oral health education. The system integrates a 3D-printed thermoplastic polyurethane soft structure with a rigid resin frame and an ArUco marker to encode interaction information, including the contact region and six-dimensional force and torque. Journal Article Published 论文 发表 文献 研究成果 作者 摘要 李森",
+    "description": "Chengxiao Dong, Xuanyi Dai, Yu Pan, Wanghongjie Qiu, Sen Li, Tianyu Wu, Yijie Jin, He Wang, Chaoyang Song, Fang Wan · Soft Science · 2025",
+    "url": "publications/oral-care/",
+    "kind": "Publication"
+  },
+  {
+    "title": "ADAP: Adaptive & Dynamic Arc Padding for predicting seam profiles in Multi-Layer-Multi-Pass robotic welding",
+    "text": "ADAP: Adaptive & Dynamic Arc Padding for predicting seam profiles in Multi-Layer-Multi-Pass robotic welding He Wang Sen Li Xiaobo Liu Chengxiao Dong Fang Wan ADAP AI Open 2025 10.1016/j.aiopen.2025.10.003 This study introduces the Adaptive & Dynamic Arc Padding (ADAP) approach. ADAP employs a novel representation of weld bead profiles using image-based boundary and primitive arc geometries defined by arc center and radius. Journal Article Published 论文 发表 文献 研究成果 作者 摘要 李森",
+    "description": "He Wang, Sen Li, Xiaobo Liu, Chengxiao Dong, Fang Wan · AI Open · 2025",
+    "url": "publications/adap/",
+    "kind": "Publication"
+  },
+  {
+    "title": "Active Surface with Passive Omni-Directional Adaptation for In-Hand Manipulation",
+    "text": "Active Surface with Passive Omni-Directional Adaptation for In-Hand Manipulation Sen Li Fang Wan Chaoyang Song ActiveSPN0 2024 6th International Conference on Reconfigurable Mechanisms and Robots (ReMAR) 2024 10.1109/ReMAR61031.2024.10619925 In this study, we present the design of a soft robotic finger with an active surface on an omni-adaptive structure, which can be easily installed on existing grippers and achieve stability and dexterity for in-hand manipulation. Soft fingers with omni-directional adaptability excel in 3D twisting, outperforming two-dimensional self-adaptive hands using a finger rotation mechanism to achieve similar adaptability. In this study, we present the design of a soft robotic finger with an active surface on an omni-adaptive structure, which can be easily installed on existing grippers and achieve stability and dexterity for in-hand manipulation. The system’s active surfaces initially transfer the object from the fingertip segment with less compliance to the middle segment of the finger with superior adaptability. Despite the omni-directional deformation of the finger, in-hand manipulation can still be executed with controlled active surfaces. We characterized the soft finger’s stiffness distribution and simplified models to assess the feasibility of lifting and reorienting a grasped object in a 3D twisting state. A set of experiments on in-hand manipulation was performed with the proposed fingers, demonstrating the dexterity and robustness of the strategy. Conference Paper Published 论文 发表 文献 研究成果 作者 摘要 李森",
+    "description": "Sen Li, Fang Wan, Chaoyang Song · 2024 6th International Conference on Reconfigurable Mechanisms and Robots (ReMAR) · 2024",
+    "url": "publications/active-surface/",
+    "kind": "Publication"
+  },
+  {
+    "title": "Biomimetic Flip-and-Flap Strategy of Flying Objects for Perching on Inclined Surfaces",
+    "text": "Biomimetic Flip-and-Flap Strategy of Flying Objects for Perching on Inclined Surfaces Zhifeng Huang Sen Li Jungao Jiang Ying Wu Liang Yang Yun Zhang FLIP-AND-FLAP IEEE Robotics and Automation Letters 2021 10.1109/LRA.2021.3070254 A flip-and-flap biomimetic strategy is presented that enables a high-speed flying object to perch on inclined surfaces without speed reduction before touchdown. Animals can use the maneuver of a flipping body and flapping wings to reduce the normal rebound force of impact during landing, decreasing the adsorption force required by the contact point. This capability aids aerial vehicles with landing not only on vertical surfaces, but also on inclined surfaces. In this study, a “flip-and-flap” biomimetic strategy is presented that enables a high-speed flying object to perch on inclined surfaces without speed reduction before touchdown. During perching, the kinetic energy of the aerial vehicle is first converted to potential energy by flipping upward with a customized extended leg. Then, with a controlled thrust, the potential energy is consumed during the downward-swing phase. Thus, the aerial vehicle can land smoothly on a wall. Simplified and multilink models were designed to simulate the landing of a flying object, and the dynamic interaction between the flying object with an extended-leg mechanism and the surface was elaborated. A set of experiments on perching performed with the proposed strategy and customized extended leg, demonstrating the effectiveness and robustness of the strategy. Journal Article Published 论文 发表 文献 研究成果 作者 摘要 李森",
+    "description": "Zhifeng Huang, Sen Li, Jungao Jiang, Ying Wu, Liang Yang, Yun Zhang · IEEE Robotics and Automation Letters · 2021",
+    "url": "publications/flip-and-flap/",
+    "kind": "Publication"
+  },
+  {
+    "title": "Stable High-Speed Quadrotor Flight using Differential Trajectory",
+    "text": "Stable High-Speed Quadrotor Flight using Differential Trajectory Ying Wu Yun Xie Sen Li Depei Wang Stable Quadrotor Flight Mathematical Problems in Engineering 2021 10.1155/2021/9825790 This study designed a rotation matrix-based adaptive controller to address the issue of quadrotor high-speed flight (velocity > 8 m/s). By reducing the velocity when the attitude error is large, the quadrotor can achieve high-speed stable flight. The simulation results demonstrate that the control method can stabilize the quadrotor flight up to 10.5 m/s. This paper addresses the trajectory tracking control issue of a quadrotor with environmental disturbances, which particularly focuses on attitude correction during flight and response speed improvement. In this paper, the proposed control method uses the differential equation to transform the desired trajectory for improving the robustness of a quadrotor during high-speed flight. Meanwhile, a nonlinear controller based on the rotation matrix is designed to avoid singularities of Euler angles. The controller can also stabilize the position error to zero without reducing the control thrust when the attitude error is large. Finally, we conduct simulations on a tethered quadrotor to achieve high-speed flight in limited space. The simulation results show that the control method can stabilize a quadrotor at high-speed trajectory flight and keep a quadrotor stable when it is disturbed by aerodynamic drag and mass change. Journal Article Published 论文 发表 文献 研究成果 作者 摘要 李森",
+    "description": "Ying Wu, Yun Xie, Sen Li, Depei Wang · Mathematical Problems in Engineering · 2021",
+    "url": "publications/stable-quadrotor/",
+    "kind": "Publication"
+  },
+  {
+    "title": "Parameter Adaptive Control for a Quadrotor With a Suspended Unknown Payload Under External Disturbance",
+    "text": "Parameter Adaptive Control for a Quadrotor With a Suspended Unknown Payload Under External Disturbance Ying Wu Yun Xie Sen Li Parameter Adaptive Control IEEE Access 2021 10.1109/ACCESS.2021.3119396 Parameter-adaptive control for a quadrotor carrying a suspended unknown payload under external disturbances. This paper focuses on the disturbance attenuation control of the quadrotor suspended payload system with unknown payload mass. Since the quadrotor transportation system is an eight-degree-of-freedom system with only four actuated degrees, it is difficult to achieve rapid stabilization of the quadrotor under varying payload and external disturbances. In this paper, a nonlinear controller based on rotation matrix is designed to rapid stabilization of attitude. By analyzing the effect of load mass on the trajectory tracking control, a parameter adaptive controller is proposed for position control. A mass estimation algorithm is established to estimate the payload mass in the air, which improves the robustness of the system. This approach can maximize load-bearing capacity within the thrust range of the quadrotor. The Lyapunov-based analysis proves the exponential convergence of the attitude error and the stability of the whole system. The contrast simulations demonstrate that the controller is superior to the sliding-mode controller incorporating input shaping on mass estimation, trajectory tracking, and disturbance resistance. Journal Article Published 论文 发表 文献 研究成果 作者 摘要 李森",
+    "description": "Ying Wu, Yun Xie, Sen Li · IEEE Access · 2021",
+    "url": "publications/parameter-adaptive-control/",
+    "kind": "Publication"
+  },
+  {
+    "title": "About SenseDex Lab · 实验室简介",
+    "text": "自2026年7月至今，加入深圳职业技术大学，担任机械电子工程技术专业讲师，组建感知与灵巧操作实验室（SenseDex Lab），是IEEE会员、Design Society会员，任机器人顶刊TRO审稿人。先后在国际机器人产业基地Xbotpark、港科大机器人研究所从事人工智能与机器人算法研究与应用开发。2019年毕业于广东工业大学粤港机器人学院获得本科学位，2022年毕业于广东工业大学自动化学院控制科学与工程获得硕士学位，2026年毕业于南方科技大学智能制造与机器人专业获得工学博士学位。近五年，作为项目骨干参与国家自然科学基金青年科学基金项目、深圳市科技创新委员会稳定支持计划面上项目及技术攻关重点项目，并在深圳职业技术大学签署横向项目1项。在包括IEEE Robotics and Automation Letters (IEEE RA-L)、IEEE International Conference on Robotics and Automation (IEEE ICRA)等人工智能与机器人期刊与国际会议上发表高水平论文8篇。担任《机器人学及应用》、《自动控制原理》等课程教师。 Since July 2026, I have been a lecturer in the Mechatronics Engineering Technology program at Shenzhen Polytechnic University, where I established the Sensing and Dexterous Manipulation Lab (SenseDex Lab). I am a member of IEEE and the Design Society, and serve as a reviewer for IEEE Transactions on Robotics (TRO). I previously worked on research and application development in artificial intelligence and robotics algorithms at Xbotpark, an international robotics industry hub, and the HKUST Robotics Institute. I received my bachelor’s degree from the Guangdong-Hong Kong Institute of Robotics at Guangdong University of Technology in 2019, my master’s degree in Control Science and Engineering from its School of Automation in 2022, and my Ph.D. in Engineering, specializing in Intelligent Manufacturing and Robotics, from Southern University of Science and Technology in 2026. Over the past five years, I have contributed as a core team member to projects supported by the National Natural Science Foundation of China’s Young Scientists Fund, general projects under the Shenzhen Science and Technology Innovation Commission’s Stable Support Program, and the Commission’s key technology research projects. I have also signed one contract research agreement at Shenzhen Polytechnic University. I have published eight papers in AI and robotics journals and international conferences, including IEEE Robotics and Automation Letters (IEEE RA-L) and the IEEE International Conference on Robotics and Automation (IEEE ICRA). I teach courses including Robotics and Applications and Principles of Automatic Control. 简介 关于 履历 教育 经历 科研 项目",
+    "description": "自2026年7月至今，加入深圳职业技术大学，担任机械电子工程技术专业讲师，组建感知与灵巧操作实验室（SenseDex Lab），是IEEE会员、Design Society会员，任机器人顶刊TRO审稿人。先后在国际机器人产业基地Xbotpark、港科大机器人研究所从事人工智能与机器人算法研究与应用开发。2019年毕业于广东工业大学粤港机器人学院获得本科学位，2022年毕业于广东工业大学自动化学院控制科学与工程获得硕士学位，2026年毕业于南方科技大学智能制造与机器人专业获得工学博士学位。近五年，作为项目骨干参与国家自然科学基金青年科学基金项目、深圳市科技创新委员会稳定支持计划面上项目及技术攻关重点项目，并在深圳职业技术大学签署横向项目1项。在包括IEEE Robotics and Automation Letters (IEEE RA-L)、IEEE International Conference on Robotics and Automation (IEEE ICRA)等人工智能与机器人期刊与国际会议上发表高水平论文8篇。担任《机器人学及应用》、《自动控制原理》等课程教师。 Since July 2026, I have been a lecturer in the Mechatronics Engineering Technology program at Shenzhen Polytechnic University, where I established the Sensing and Dexterous Manipulation Lab (SenseDex Lab). I am a member of IEEE and the Design Society, and serve as a reviewer for IEEE Transactions on Robotics (TRO). I previously worked on research and application development in artificial intelligence and robotics algorithms at Xbotpark, an international robotics industry hub, and the HKUST Robotics Institute. I received my bachelor’s degree from the Guangdong-Hong Kong Institute of Robotics at Guangdong University of Technology in 2019, my master’s degree in Control Science and Engineering from its School of Automation in 2022, and my Ph.D. in Engineering, specializing in Intelligent Manufacturing and Robotics, from Southern University of Science and Technology in 2026. Over the past five years, I have contributed as a core team member to projects supported by the National Natural Science Foundation of China’s Young Scientists Fund, general projects under the Shenzhen Science and Technology Innovation Commission’s Stable Support Program, and the Commission’s key technology research projects. I have also signed one contract research agreement at Shenzhen Polytechnic University. I have published eight papers in AI and robotics journals and international conferences, including IEEE Robotics and Automation Letters (IEEE RA-L) and the IEEE International Conference on Robotics and Automation (IEEE ICRA). I teach courses including Robotics and Applications and Principles of Automatic Control.",
+    "url": "#about",
+    "kind": "About"
+  },
+  {
+    "title": "Contact · 联系方式",
+    "text": "Sen LI, Ph.D. （李森） Lecturer, Mechatronics Engineering Technology Sensing and Dexterous Manipulation Lab (SenseDex Lab) School of Mechanical and Electrical Engineering Shenzhen Polytechnic University 4th Floor, Houde Building, Xili Campus 深圳职业技术大学西丽校区厚德楼4楼 lisen3@szpu.edu.cn www.senli.site 联系 联系方式 邮箱 邮件 地址 办公室",
+    "description": "lisen3@szpu.edu.cn · Sen LI, Ph.D. （李森） Lecturer, Mechatronics Engineering Technology Sensing and Dexterous Manipulation Lab (SenseDex Lab) School of Mechanical and Electrical Engineering Shenzhen Polytechnic University 4th Floor, Houde Building, Xili Campus 深圳职业技术大学西丽校区厚德楼4楼 lisen3@szpu.edu.cn www.senli.site",
+    "url": "#contact",
+    "kind": "Contact"
+  },
+  {
+    "title": "News · 最新动态",
+    "text": "News Lab news and updates coming soon. 实验室动态将陆续更新。 新闻 动态 消息",
+    "description": "News Lab news and updates coming soon. 实验室动态将陆续更新。",
+    "url": "#news",
+    "kind": "News"
+  },
+  {
+    "title": "Team · 团队",
+    "text": "Team Sensing and Dexterous Manipulation Lab (SenseDex Lab) Shenzhen Polytechnic University 深圳职业技术大学 感知与灵巧操作实验室 The member directory has not been added yet. 团队 成员 实验室",
+    "description": "Team Sensing and Dexterous Manipulation Lab (SenseDex Lab) Shenzhen Polytechnic University 深圳职业技术大学 感知与灵巧操作实验室 The member directory has not been added yet.",
+    "url": "#team",
+    "kind": "Team",
+    "panel": "team"
+  },
+  {
+    "title": "Robotics and Applications · 机器人学及应用",
+    "text": "Robotics and Applications 机器人学及应用 Shenzhen Polytechnic University Course details and materials have not been added yet. 教学 课程 机器人学及应用",
+    "description": "Robotics and Applications 机器人学及应用 Shenzhen Polytechnic University Course details and materials have not been added yet.",
+    "url": "#robotics-applications",
+    "kind": "Teaching",
+    "panel": "robotics-applications"
+  },
+  {
+    "title": "Principles of Automatic Control · 自动控制原理",
+    "text": "Principles of Automatic Control 自动控制原理 Shenzhen Polytechnic University Course details and materials have not been added yet. 教学 课程 自动控制原理",
+    "description": "Principles of Automatic Control 自动控制原理 Shenzhen Polytechnic University Course details and materials have not been added yet.",
+    "url": "#automatic-control",
+    "kind": "Teaching",
+    "panel": "automatic-control"
+  }
+]
