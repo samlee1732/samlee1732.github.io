@@ -48,7 +48,7 @@ Under Review 导航位于 Publication 前，跳转到联系方式下方的在审
 
 `data/under-review.json` 单独维护在审稿件，与下方 8 篇已发表论文分开展示。目前有 2 篇：
 
-- Materials & Design 投稿：**A Torsionally Tristable Metastructure with In-Plane Translational Actuation and Post-Fabrication Angle Tuning**，稿号 `JMADE-D-26-07879`。通讯作者为 Tao Luo，共同作者为 Ruyang Yu、Sen Li；按角色展示，不推断正式作者排序。
+- Materials & Design 投稿：**A Torsionally Tristable Metastructure with In-Plane Translational Actuation and Post-Fabrication Angle Tuning**。通讯作者为 Tao Luo，共同作者为 Ruyang Yu、Sen Li；按角色展示，不推断正式作者排序。
 - IEEE Robotics and Automation Letters (RA-L) 投稿：**ViSTA: Coarse-to-Fine Visuotactile Deformation Servoing for Online Robotic Weld-Seam Trajectory Adjustment**，稿号 `26-6318`。作者按用户提供的投稿系统截图依次为 Sen Li、Tuo Zhang、Chaoyang Song、Fang Wan*。保留截图中的星号；因未提供星号图例，暂不额外解释作者角色。不展示投稿系统中的作者编号。
 
 两篇均仅标为 Under Review，未填写正式发表年份、DOI、卷期或录用信息。`authors` 用于已知排序的作者列表；顺序不确定时，使用 `co_authors` 与可选的 `corresponding_author` 按角色显示。每篇有独立页内锚点，搜索结果直接跳到对应稿件。
