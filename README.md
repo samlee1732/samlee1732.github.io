@@ -196,6 +196,10 @@ DNS 查询只用于核对解析记录，最终还需在浏览器中确认网站�
 
 姓名显示为 Sen LI, Ph.D.（李森）。邮箱由作者直接提供，使用 `lisen3@szpu.edu.cn`，并让 `mailto:` 与显示地址一致。办公地址由作者直接提供，为“深圳职业技术大学西丽校区厚德楼4楼”，同时显示对应英文地址。未提供电话，页面没有添加电话。学校名称及职称已在简介和相关概览中同步统一。
 
+联系方式区保留姓名、`Lecturer`、学院、学校、办公地址及邮箱，补充 `Shenzhen, Guangdong, China`。这里不重复实验室名称或专业名称，实验室名称继续在页眉及简介展示。
+
+学院与学校英文名沿用[学校英文官网的学院页面](https://english.szpu.edu.cn/Faculties/Xili_Campus/School_of_Mechanical_and_Electrical_Engineering.htm)。专业译名 `Mechatronics Engineering Technology` 与[学校 2026 年 8 月 14 日英文新闻](https://english.szpu.edu.cn/info/1161/2655.htm)一致，在英文简介中保留；联系方式区省略专业是为了精简展示。
+
 ## 品牌资源
 
 - `assets/sensedex-mark.png`：透明背景的独立图形，用于页头与浏览器标签页图标。
