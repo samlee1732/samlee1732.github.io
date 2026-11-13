@@ -229,7 +229,7 @@ def published_overview(papers):
         description = 'Abstract' if p.get('abstract') else 'Summary'
         links = [(description, url + '#abstract'), ('Links', url + '#links'), ('BibTeX', url + '#bibtex')]
         if p.get('pdf'):
-            links.append((p.get('pdf_label', 'PDF'), './assets/publications/' + p['pdf']))
+            links.append((p.get('pdf_label', 'PDF'), url + '#pdf'))
         if p.get('video'):
             links.append(('Video', p['video']))
         resources = '\n'.join(f'                  <li><a href="{esc(href)}">{label}</a></li>' for label, href in links)
@@ -417,6 +417,27 @@ def competitions_page(homepage, content):
                         'Student competitions and faculty mentorship at SenseDex Lab. Details will be added as they become available.')
 
 
+
+def pdf_section(p):
+    if not p.get('pdf'):
+        return ''
+    pdf_url = '../../assets/publications/' + p['pdf']
+    version_label = ('<p class="paper-note">Article in press (2026).</p>' if p.get('pdf_label') == 'PDF (article in press)' else '')
+    return f'''        <section id="pdf" class="paper-section" aria-labelledby="pdf-heading" tabindex="-1">
+          <div class="paper-section-heading">
+            <h2 id="pdf-heading">PDF</h2>
+            <ul class="paper-links paper-pdf-actions" aria-label="PDF options">
+              <li><a href="{esc(pdf_url)}" target="_blank" rel="noopener">Open PDF</a></li>
+              <li><a href="{esc(pdf_url)}" download="{esc(p['pdf'])}">Download PDF</a></li>
+            </ul>
+          </div>
+          {version_label}
+          <iframe class="paper-pdf-viewer" src="../../assets/pdfjs/web/viewer.html?file=../../publications/{esc(p['pdf'])}#zoom=page-width" title="PDF: {esc(p['title'])}" loading="lazy"></iframe>
+          <p class="paper-note">If the preview does not load, <a href="{esc(pdf_url)}" target="_blank" rel="noopener">open the PDF in a new tab</a> or download it.</p>
+        </section>
+'''
+
+
 def detail(p, homepage):
     header = site_header(homepage, '../../', '#publication')
     section_name = 'Abstract' if p.get('abstract') else 'Summary'
@@ -434,7 +455,7 @@ def detail(p, homepage):
     if p.get('doi'):
         links.append(('DOI: ' + p['doi'], 'https://doi.org/' + p['doi']))
     if p.get('pdf'):
-        links.append((p.get('pdf_label', 'PDF'), '../../assets/publications/' + p['pdf']))
+        links.append((p.get('pdf_label', 'PDF'), '#pdf'))
     if p.get('video'):
         links.append(('Video', p['video']))
     if p.get('code'):
@@ -457,7 +478,7 @@ def detail(p, homepage):
     <title>{esc(p['marker'])} | SenseDex Lab</title>
     <link rel="icon" href="../../assets/sensedex-mark.png" type="image/png">
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark.png">
-    <link rel="stylesheet" href="../../assets/styles.css?v=20261113-teaching">
+    <link rel="stylesheet" href="../../assets/styles.css?v=20261113-pdf-readers">
     <script src="../../assets/main.js?v=20261113-teaching" defer></script>
     <script src="../../assets/visits.js" defer></script>
   </head>
@@ -495,7 +516,7 @@ def detail(p, homepage):
           </div>
           <pre class="bibtex"><code>{esc(bibtex(p))}</code></pre>
         </section>
-      </article>
+{pdf_section(p)}      </article>
       <a class="paper-back paper-back-bottom" href="../../#publication">← All publications</a>
     </main>
   </body>

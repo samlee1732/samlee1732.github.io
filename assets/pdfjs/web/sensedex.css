@@ -1,0 +1,5 @@
+/* SenseDex Lab paper reader, built on Mozilla PDF.js. */
+:root { --body-bg-color: #e9e7ec; --toolbar-bg-color: #f7f4f8; --toolbar-border-color: #d9c9d6; --toolbar-icon-bg-color: #5b4456; --toolbar-icon-hover-bg-color: #92316f; --main-color: #302c38; }
+#toolbarContainer { border-bottom: 2px solid #92316f; }
+#viewerContainer { background: #e9e7ec; }
+#viewer .page { border-color: transparent; }
