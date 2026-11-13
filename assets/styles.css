@@ -121,6 +121,7 @@ a { color: inherit; }
 .paper-figure img[src$="activespn2.gif"] { clip-path: inset(1.329% .582% .997% .666%); }
 /* Keep the ViSTA image within the original 4:3 media slot without cropping. */
 #vista .publication-media img { aspect-ratio: 4 / 3; object-position: center; background: #fff; }
+#torsionally-tristable-metastructure .publication-media img { aspect-ratio: 5 / 3; object-fit: contain; object-position: center; }
 .publication-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; aspect-ratio: 4 / 3; padding: 20px; border: 1px dashed #c9bfce; background: #faf8fb; color: var(--muted); text-align: center; font-size: clamp(13px, .9vw, 23px); line-height: 1.5; }
 .publication-placeholder svg { flex-shrink: 0; width: 40px; height: 40px; margin-bottom: 8px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .publication-placeholder span[lang] { font-size: .9em; }

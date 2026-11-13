@@ -8,7 +8,11 @@
       "Sen Li",
       "Tao Luo"
     ],
-    "author_conjunction": true
+    "author_conjunction": true,
+    "image": "tristable-metastructure-concept.png",
+    "image_alt": "Hand-drawn conceptual illustration of a concentric-ring compliant metastructure in three stable rotational configurations.",
+    "image_width": 1619,
+    "image_height": 971
   },
   {
     "id": "vista",
