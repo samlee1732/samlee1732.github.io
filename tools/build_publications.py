@@ -401,7 +401,8 @@ def content_page(homepage, content, slug, title, description, source=None):
     back_url = prefix + 'teaching/' if is_course else prefix
     back_label = 'Teaching' if is_course else 'Homepage'
     source = source or slug
-    course_styles = (f'\n    <link rel="stylesheet" href="{prefix}assets/course-syllabus.css?v=20261114">'
+    course_layout = ' course-document' if source == 'robotics-applications' else ''
+    course_styles = (f'\n    <link rel="stylesheet" href="{prefix}assets/course-syllabus.css?v=20261114-simple">'
                      if source == 'robotics-applications' else '')
     return f'''<!doctype html>
 <html lang="en">
@@ -420,7 +421,7 @@ def content_page(homepage, content, slug, title, description, source=None):
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 {header}
-    <main id="main-content" class="container main-content news-page">
+    <main id="main-content" class="container main-content news-page{course_layout}">
       <a class="paper-back" href="{back_url}">← {back_label}</a>
       <!-- Page content is maintained in data/{esc(source)}.html. -->
 {content.rstrip()}

@@ -1,48 +1,35 @@
-.course-syllabus { max-width: 1080px; }
-.course-syllabus .course-institution { margin-top: 0; }
-.course-syllabus .course-draft-note { max-width: 82ch; margin: 26px 0; padding-left: 18px; border-left: 3px solid #d8c9d6; font-size: .88em; line-height: 1.7; }
-.course-contents { display: flex; flex-wrap: wrap; gap: 10px 24px; padding: 20px 0; border-top: 1px solid #e8e2eb; border-bottom: 1px solid #e8e2eb; font-size: .9em; }
-.course-contents a { text-underline-offset: 4px; }
-.course-syllabus .course-materials { margin-top: 42px; padding-top: 28px; scroll-margin-top: 160px; }
-.course-syllabus .course-materials > p { max-width: 84ch; }
-.course-syllabus h3 { margin: 25px 0 12px; color: #302c38; font-size: 1.05em; font-weight: 600; line-height: 1.5; }
-.course-syllabus .platform-model { color: var(--accent); font-size: 1.2em; }
-.course-outcomes, .course-reading-list { padding-left: 1.45em; }
-.course-outcomes li, .course-reading-list li { margin: 10px 0; }
-.course-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 36px; margin: 24px 0; }
-.course-facts > div, .course-staff > div { display: grid; grid-template-columns: minmax(170px, .9fr) minmax(0, 1fr); gap: 18px; padding: 10px 0; border-bottom: 1px solid #f0ecf1; }
-.course-syllabus dt { color: #494351; font-weight: 600; }
-.course-syllabus dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
-.course-staff { max-width: 690px; margin: 16px 0; }
-.course-pending { color: #797481; }
-.course-table-wrap { overflow-x: auto; margin: 22px 0 4px; }
-.course-table-wrap:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-.course-table { border-collapse: collapse; width: 100%; font-size: .92em; line-height: 1.6; text-align: left; }
-.course-table th, .course-table td { padding: 14px 16px; border-bottom: 1px solid #e8e2eb; vertical-align: top; }
-.course-table thead th { background: #faf7fa; color: #494351; font-weight: 600; }
-.course-table tbody th { color: #494351; font-weight: 500; }
-.platform-resources th:first-child { width: 23%; }
-.platform-resources th:last-child { width: 24%; }
-.course-schedule-table { min-width: 600px; }
-.course-schedule-table th:first-child { width: 18%; }
-.course-schedule-table th:nth-child(2) { width: 54%; }
-.course-schedule-table th:nth-child(3), .course-schedule-table th:nth-child(4) { width: 14%; }
-.course-milestone { background: #fcfafc; }
-.course-task-list { list-style: none; margin: 22px 0 0; padding: 0; }
-.course-task-list > li { padding: 20px 0; border-bottom: 1px solid #e8e2eb; }
-.course-task-list > li:first-child { padding-top: 0; }
-.course-task-list > li:last-child { border-bottom: 0; }
-.course-task-list h3 { margin-top: 0; }
-.course-task-list p { margin: 10px 0; max-width: 84ch; }
-.course-task-list .course-pending { font-size: .9em; }
-@media (max-width: 800px) {
-  .course-facts { grid-template-columns: minmax(0, 1fr); }
-  .course-syllabus .course-materials { scroll-margin-top: 130px; }
-  .course-contents { gap: 10px 18px; }
-}
-@media (max-width: 480px) {
-  .course-facts > div, .course-staff > div { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
-  .course-table th, .course-table td { padding: 12px 10px; }
-  .platform-resources { min-width: 520px; }
-  .course-syllabus .course-materials { margin-top: 32px; }
+/* A quiet, single-column reading layout for Robotics and Applications. */
+.course-document.container { width: calc(100% - 48px); max-width: 840px; padding-top: 48px; padding-bottom: 88px; }
+.course-document .paper-back { font-size: 15px; }
+.course-document > .course-syllabus { margin-top: 30px; padding: 0; color: #35333b; font-size: 18px; line-height: 1.75; overflow-wrap: break-word; }
+.course-syllabus > h1 { margin: 0 0 12px; color: #28262d; font-size: clamp(30px, 3vw, 42px); font-weight: 700; line-height: 1.2; letter-spacing: -.025em; text-wrap: balance; }
+.course-syllabus p { margin: 0 0 16px; color: inherit; }
+.course-syllabus > .course-subtitle { margin: 0 0 3px; font-size: 21px; color: #48434f; }
+.course-syllabus > .course-institution { margin: 0; color: #6e6874; font-size: 16px; }
+.course-syllabus > .course-draft-note { margin: 22px 0 0; font-size: 15px; color: #6e6874; }
+.course-syllabus .course-materials { margin-top: 44px; padding: 0; border: 0; scroll-margin-top: calc(var(--header-offset, var(--header-height)) + 24px); }
+.course-syllabus .course-materials h2 { margin: 0 0 18px; color: #28262d; font-size: 27px; line-height: 1.3; font-weight: 700; letter-spacing: -.015em; }
+.course-syllabus h3 { margin: 26px 0 8px; color: #35333b; font-size: 18px; font-weight: 700; line-height: 1.6; }
+.course-syllabus ul, .course-syllabus ol { margin: 14px 0 0; padding-left: 1.5em; }
+.course-syllabus li { margin: 9px 0; padding-left: .2em; }
+.course-syllabus li::marker { color: #76707c; }
+.course-syllabus li > ul { margin-top: 2px; }
+.course-syllabus li > ul > li { margin-top: 0; }
+.course-syllabus a { color: #6f2d63; text-decoration-thickness: 1px; text-underline-offset: .2em; }
+.course-syllabus a:hover { color: #92316f; }
+.course-syllabus .course-note { margin-top: 12px; color: #6e6874; font-size: 15px; line-height: 1.7; }
+.course-syllabus .course-task p { margin-bottom: 0; }
+.course-syllabus .course-resource-list { margin-bottom: 14px; }
+.course-syllabus .course-schedule-list { margin: 24px 0 0; padding: 0; list-style: none; }
+.course-syllabus .course-schedule-list > li { margin: 0 0 24px; padding: 0; }
+.course-syllabus .course-schedule-list .course-milestone { margin: 30px 0; }
+.course-syllabus .course-milestone p { margin: 3px 0 0; color: #6e6874; font-size: 16px; }
+@media (max-width: 600px) {
+  .course-document.container { width: calc(100% - 40px); padding-top: 30px; padding-bottom: 56px; }
+  .course-document > .course-syllabus { margin-top: 24px; font-size: 16px; line-height: 1.75; }
+  .course-syllabus .course-materials { margin-top: 36px; }
+  .course-syllabus .course-materials h2 { font-size: 23px; margin-bottom: 14px; }
+  .course-syllabus h3 { font-size: 16px; }
+  .course-syllabus > .course-subtitle { font-size: 19px; }
+  .course-syllabus .course-schedule-list > li { margin-bottom: 21px; }
 }
