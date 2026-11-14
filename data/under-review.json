@@ -7,14 +7,18 @@
       "Sen Li",
       "Tuo Zhang",
       "Chaoyang Song",
-      "Fang Wan*"
+      "Fang Wan"
     ],
     "image": "vista-concept.png",
     "image_alt": "Conceptual illustration of robotic weld-seam sensing and trajectory adjustment using a compliant tactile sensor.",
     "image_width": 1448,
     "image_height": 1086,
     "image_caption": "Conceptual illustration only; manuscript under review.",
-    "preview_image": "previews/vista.webp"
+    "preview_image": "previews/vista.webp",
+    "corresponding_authors": [
+      "Fang Wan"
+    ],
+    "equal_contributors": []
   },
   {
     "id": "torsionally-tristable-metastructure",
@@ -31,7 +35,11 @@
     "image_width": 1619,
     "image_height": 971,
     "image_caption": "Conceptual illustration only; manuscript under review.",
-    "preview_image": "previews/torsionally-tristable-metastructure.webp"
+    "preview_image": "previews/torsionally-tristable-metastructure.webp",
+    "corresponding_authors": [
+      "Tao Luo"
+    ],
+    "equal_contributors": []
   },
   {
     "id": "intrinsic-ai-industry-challenge",
@@ -54,6 +62,11 @@
     "image_width": 1619,
     "image_height": 971,
     "image_caption": "Conceptual illustration only; manuscript under review.",
-    "preview_image": "previews/intrinsic-ai-industry-challenge.webp"
+    "preview_image": "previews/intrinsic-ai-industry-challenge.webp",
+    "corresponding_authors": [
+      "Fang Wan",
+      "Chaoyang Song"
+    ],
+    "equal_contributors": []
   }
 ]

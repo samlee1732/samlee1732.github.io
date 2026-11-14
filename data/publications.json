@@ -36,7 +36,11 @@
     "overview_image": "collages/activespn.png",
     "overview_width": 1500,
     "overview_height": 900,
-    "overview_alt": "Collage of original figures from ActiveSPN: Active Soft Polyhedral Networks With Pose Estimation for In-Finger Object Manipulation."
+    "overview_alt": "Collage of original figures from ActiveSPN: Active Soft Polyhedral Networks With Pose Estimation for In-Finger Object Manipulation.",
+    "corresponding_authors": [
+      "Fang Wan"
+    ],
+    "equal_contributors": []
   },
   {
     "id": "activespn2",
@@ -73,7 +77,11 @@
     "overview_image": "collages/activespn2.png",
     "overview_width": 1500,
     "overview_height": 900,
-    "overview_alt": "Collage of original figures from Multi-modal vision-based deformable perception for in-finger manipulation with soft active surfaces."
+    "overview_alt": "Collage of original figures from Multi-modal vision-based deformable perception for in-finger manipulation with soft active surfaces.",
+    "corresponding_authors": [
+      "Fang Wan"
+    ],
+    "equal_contributors": []
   },
   {
     "id": "active-surface",
@@ -107,7 +115,12 @@
     "overview_image": "collages/active-surface.png",
     "overview_width": 1500,
     "overview_height": 900,
-    "overview_alt": "Collage of original figures from Active Surface with Passive Omni-Directional Adaptation for In-Hand Manipulation."
+    "overview_alt": "Collage of original figures from Active Surface with Passive Omni-Directional Adaptation for In-Hand Manipulation.",
+    "corresponding_authors": [
+      "Fang Wan",
+      "Chaoyang Song"
+    ],
+    "equal_contributors": []
   },
   {
     "id": "flip-and-flap",
@@ -147,7 +160,11 @@
     "overview_image": "collages/flip-and-flap.png",
     "overview_width": 1500,
     "overview_height": 900,
-    "overview_alt": "Collage of original figures from Biomimetic Flip-and-Flap Strategy of Flying Objects for Perching on Inclined Surfaces."
+    "overview_alt": "Collage of original figures from Biomimetic Flip-and-Flap Strategy of Flying Objects for Perching on Inclined Surfaces.",
+    "corresponding_authors": [
+      "Zhifeng Huang"
+    ],
+    "equal_contributors": []
   },
   {
     "id": "adap",
@@ -184,7 +201,11 @@
     "overview_image": "collages/adap.png",
     "overview_width": 1500,
     "overview_height": 900,
-    "overview_alt": "Collage of original figures from ADAP: Adaptive & Dynamic Arc Padding for predicting seam profiles in Multi-Layer-Multi-Pass robotic welding."
+    "overview_alt": "Collage of original figures from ADAP: Adaptive & Dynamic Arc Padding for predicting seam profiles in Multi-Layer-Multi-Pass robotic welding.",
+    "corresponding_authors": [
+      "Fang Wan"
+    ],
+    "equal_contributors": []
   },
   {
     "id": "stable-quadrotor",
@@ -227,7 +248,11 @@
     "overview_image": "collages/stable-quadrotor.png",
     "overview_width": 1500,
     "overview_height": 900,
-    "overview_alt": "Collage of original figures from Stable High-Speed Quadrotor Flight using Differential Trajectory."
+    "overview_alt": "Collage of original figures from Stable High-Speed Quadrotor Flight using Differential Trajectory.",
+    "corresponding_authors": [
+      "Yun Xie"
+    ],
+    "equal_contributors": []
   },
   {
     "id": "parameter-adaptive-control",
@@ -268,7 +293,11 @@
     "overview_image": "collages/parameter-adaptive-control.png",
     "overview_width": 1500,
     "overview_height": 900,
-    "overview_alt": "Collage of original figures from Parameter Adaptive Control for a Quadrotor With a Suspended Unknown Payload Under External Disturbance."
+    "overview_alt": "Collage of original figures from Parameter Adaptive Control for a Quadrotor With a Suspended Unknown Payload Under External Disturbance.",
+    "corresponding_authors": [
+      "Yun Xie"
+    ],
+    "equal_contributors": []
   },
   {
     "id": "oral-care",
@@ -309,6 +338,14 @@
     "overview_image": "collages/oral-care.png",
     "overview_width": 1500,
     "overview_height": 900,
-    "overview_alt": "Collage of original figures from Teaching oral care via vision-based deformation perception."
+    "overview_alt": "Collage of original figures from Teaching oral care via vision-based deformation perception.",
+    "corresponding_authors": [
+      "Chaoyang Song",
+      "Fang Wan"
+    ],
+    "equal_contributors": [
+      "Chengxiao Dong",
+      "Xuanyi Dai"
+    ]
   }
 ]

@@ -164,9 +164,27 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
     return entries
 
 
+def author_legend():
+    return ('<p class="author-legend"><span># Equal contribution</span>'
+            ' <span aria-hidden="true">·</span> <span>* Corresponding author</span></p>')
+
+
 def authors(paper):
-    names = ['<strong>Sen Li</strong>' if name == 'Sen Li' else esc(name)
-             for name in paper['authors']]
+    names = []
+    for name in paper['authors']:
+        rendered = '<strong>Sen Li</strong>' if name == 'Sen Li' else esc(name)
+        symbols, labels = [], []
+        if name in paper.get('equal_contributors', []):
+            symbols.append('#')
+            labels.append('Equal contribution')
+        if name in paper.get('corresponding_authors', []):
+            symbols.append('*')
+            labels.append('Corresponding author')
+        if symbols:
+            label = esc('; '.join(labels))
+            rendered += (f'<sup class="author-marker" title="{label}" aria-label="{label}">'
+                         + ''.join(symbols) + '</sup>')
+        names.append(rendered)
     if paper.get('author_conjunction') and len(names) > 1:
         return ', '.join(names[:-1]) + (', and ' if len(names) > 2 else ' and ') + names[-1]
     return ', '.join(names)
@@ -300,6 +318,7 @@ def publication_overview(papers, reviews):
     return ('      <!-- PUBLICATION CONTENT START -->\n'
             '      <section id="publication" class="publications" aria-labelledby="publication-heading" tabindex="-1">\n'
             '        <h2 id="publication-heading">Publication</h2>\n'
+            + '        ' + author_legend() + '\n'
             + groups + '\n      </section>\n'
             + '      <!-- PUBLICATION CONTENT END -->')
 
@@ -496,7 +515,7 @@ def detail(p, homepage):
     <title>{esc(p['marker'])} | SenseDex Lab</title>
     <link rel="icon" href="../../assets/sensedex-mark-small.png" type="image/png">
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark-small.png">
-    <link rel="stylesheet" href="../../assets/styles.css?v=20261114-teaching-competitions">
+    <link rel="stylesheet" href="../../assets/styles.css?v=20261114-author-markers">
     <script src="../../assets/main.js?v=20261114-teaching-competitions" defer></script>
     <script src="../../assets/visits.js" defer></script>
   </head>
@@ -510,6 +529,7 @@ def detail(p, homepage):
           <p class="paper-eyebrow">{p['year']} <span aria-hidden="true">·</span> {esc(p['type'])}</p>
           <h1>{esc(p['title'])}</h1>
           <p class="paper-authors">{authors(p)}</p>
+          {author_legend()}
           <p class="paper-citation">{citation(p)}</p>
           {doi_html}
         </header>
@@ -552,6 +572,10 @@ def main():
     if len(ids) != len(set(ids)) or any(not re.fullmatch(r'[a-z0-9-]+', i) for i in ids):
         raise ValueError('Publication IDs must be unique lowercase URL slugs.')
     for paper in papers + reviews:
+        for role in ('corresponding_authors', 'equal_contributors'):
+            unknown = set(paper.get(role, [])) - set(paper.get('authors', []))
+            if unknown:
+                raise ValueError('Author role references unknown names: ' + ', '.join(sorted(unknown)))
         for key in ('image', 'pdf', 'preview_image', 'overview_image'):
             if paper.get(key) and not (ROOT / 'assets/publications' / paper[key]).is_file():
                 raise FileNotFoundError(paper[key])

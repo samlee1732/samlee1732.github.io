@@ -252,3 +252,10 @@ a { color: inherit; }
 /* Student competitions share the Teaching page. */
 .teaching-competitions { padding-top: 28px; border-top: 1px solid #e8e2eb; }
 .teaching-competitions > h2 { margin: 0 0 12px; color: #302c38; font-size: clamp(22px, 1.6vw, 36px); line-height: 1.35; font-weight: 600; }
+
+/* Author roles are stored separately from names and BibTeX metadata. */
+.author-marker { margin-left: .08em; font-size: .72em; line-height: 0; vertical-align: super; white-space: nowrap; }
+#publication > h2 { margin-bottom: 12px; }
+.author-legend { color: var(--muted); font-size: .88em; line-height: 1.6; }
+.publications > .author-legend { margin: 0 0 clamp(24px, 2vw, 40px); }
+.paper-heading > .author-legend { margin: 0 0 16px; }
