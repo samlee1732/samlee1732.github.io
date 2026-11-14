@@ -101,7 +101,6 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
 
     for patent in patents:
         description = ('发明人：' + '、'.join(patent['inventors'])
-                       + ' · 申请人：' + patent['applicant']
                        + ' · ' + patent['type'] + '（' + patent['status'] + '）')
         entries.append({
             'title': patent['title'],
@@ -306,12 +305,11 @@ def patent_overview(patents):
             <article id="{esc(patent['id'])}" class="patent-entry" aria-labelledby="{esc(patent['id'])}-title" tabindex="-1" lang="zh-CN">
               <p class="publication-authors">发明人：{inventors}</p>
               <h3 id="{esc(patent['id'])}-title" class="publication-title">{esc(patent['title'])} <span class="publication-type">{esc(patent['type'])}</span> <span class="publication-type review-status">{esc(patent['status'])}</span></h3>
-              <p>申请人：{esc(patent['applicant'])}</p>
             </article>
           </li>''')
     return ('      <!-- PATENT CONTENT START -->\n'
             '      <section id="patents" class="publications patents" aria-labelledby="patents-heading" tabindex="-1">\n'
-            '        <h2 id="patents-heading">Patents <span lang="zh-CN">· 专利</span></h2>\n'
+            '        <h2 id="patents-heading">Patents</h2>\n'
             '        <!-- Generated from data/patents.json by tools/build_publications.py. -->\n'
             '        <ol class="publication-list">\n'
             + '\n'.join(rows) + '\n        </ol>\n      </section>\n'
@@ -356,7 +354,7 @@ def project_overview(projects):
           </li>''')
     return ('      <!-- PROJECT CONTENT START -->\n'
             '      <section id="projects" class="publications projects" aria-labelledby="projects-heading" tabindex="-1">\n'
-            '        <h2 id="projects-heading">Projects <span lang="zh-CN">· 科研项目</span></h2>\n'
+            '        <h2 id="projects-heading">Projects</h2>\n'
             '        <p class="projects-intro" lang="zh-CN">近年主持及参与的纵向与横向科研项目。</p>\n'
             '        <!-- Generated from data/projects.json by tools/build_publications.py. -->\n'
             '        <ol class="publication-list">\n'
