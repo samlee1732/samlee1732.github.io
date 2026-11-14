@@ -21,6 +21,34 @@
     "equal_contributors": []
   },
   {
+    "id": "intrinsic-ai-industry-challenge",
+    "title": "Intrinsic AI for Industry Challenge: Towards Sim2Real Transfer for Cable Insertion and Wire Handling in Electronic Assembly",
+    "journal": "IEEE Robotics and Automation Practice",
+    "authors": [
+      "Dunxing Zhang",
+      "Yansong Wu",
+      "Xudong Han",
+      "Tianyu Wu",
+      "Sen Li",
+      "Haoran Sun",
+      "Jia Pan",
+      "Fang Wan",
+      "Chaoyang Song"
+    ],
+    "author_conjunction": true,
+    "image": "../news/asmagicforce-aic.gif",
+    "image_alt": "Animated simulation demonstration of robotic cable manipulation and insertion by the asMagicForce team.",
+    "image_width": 720,
+    "image_height": 480,
+    "image_caption": "Simulation demonstration; manuscript under review.",
+    "preview_image": "../news/asmagicforce-aic.webp",
+    "corresponding_authors": [
+      "Fang Wan",
+      "Chaoyang Song"
+    ],
+    "equal_contributors": []
+  },
+  {
     "id": "torsionally-tristable-metastructure",
     "title": "A Torsionally Tristable Metastructure with In-Plane Translational Actuation and Post-Fabrication Angle Tuning",
     "journal": "Materials & Design",
@@ -38,34 +66,6 @@
     "preview_image": "previews/tristable-metastructure-concept-2x1.webp",
     "corresponding_authors": [
       "Tao Luo"
-    ],
-    "equal_contributors": []
-  },
-  {
-    "id": "intrinsic-ai-industry-challenge",
-    "title": "Intrinsic AI for Industry Challenge: Towards Sim2Real Transfer for Cable Insertion and Wire Handling in Electronic Assembly",
-    "journal": "IEEE Robotics and Automation Practice",
-    "authors": [
-      "Dunxing Zhang",
-      "Yansong Wu",
-      "Xudong Han",
-      "Tianyu Wu",
-      "Sen Li",
-      "Haoran Sun",
-      "Jia Pan",
-      "Fang Wan",
-      "Chaoyang Song"
-    ],
-    "author_conjunction": true,
-    "image": "intrinsic-ai-industry-concept-2x1.jpg",
-    "image_alt": "Hand-drawn conceptual illustration of vision-guided robotic cable insertion and wire handling in electronic assembly.",
-    "image_width": 1200,
-    "image_height": 600,
-    "image_caption": "Conceptual illustration only; manuscript under review.",
-    "preview_image": "previews/intrinsic-ai-industry-concept-2x1.webp",
-    "corresponding_authors": [
-      "Fang Wan",
-      "Chaoyang Song"
     ],
     "equal_contributors": []
   }
