@@ -32,7 +32,11 @@
     "metadata_sources": [
       "./assets/publications/activespn.pdf"
     ],
-    "preview_image": "previews/activespn.webp"
+    "preview_image": "collages/activespn.webp",
+    "overview_image": "collages/activespn.png",
+    "overview_width": 1500,
+    "overview_height": 900,
+    "overview_alt": "Collage of original figures from ActiveSPN: Active Soft Polyhedral Networks With Pose Estimation for In-Finger Object Manipulation."
   },
   {
     "id": "activespn2",
@@ -65,7 +69,11 @@
       "./assets/publications/activespn2.pdf"
     ],
     "pdf_label": "PDF (article in press)",
-    "preview_image": "previews/activespn2.webp"
+    "preview_image": "collages/activespn2.webp",
+    "overview_image": "collages/activespn2.png",
+    "overview_width": 1500,
+    "overview_height": 900,
+    "overview_alt": "Collage of original figures from Multi-modal vision-based deformable perception for in-finger manipulation with soft active surfaces."
   },
   {
     "id": "active-surface",
@@ -95,7 +103,11 @@
     "metadata_sources": [
       "./assets/publications/active-surface.pdf"
     ],
-    "preview_image": "previews/active-surface.webp"
+    "preview_image": "collages/active-surface.webp",
+    "overview_image": "collages/active-surface.png",
+    "overview_width": 1500,
+    "overview_height": 900,
+    "overview_alt": "Collage of original figures from Active Surface with Passive Omni-Directional Adaptation for In-Hand Manipulation."
   },
   {
     "id": "flip-and-flap",
@@ -130,7 +142,12 @@
     "publication_date": "2021-03-31",
     "metadata_sources": [
       "./assets/publications/flip-and-flap.pdf"
-    ]
+    ],
+    "preview_image": "collages/flip-and-flap.webp",
+    "overview_image": "collages/flip-and-flap.png",
+    "overview_width": 1500,
+    "overview_height": 900,
+    "overview_alt": "Collage of original figures from Biomimetic Flip-and-Flap Strategy of Flying Objects for Perching on Inclined Surfaces."
   },
   {
     "id": "adap",
@@ -163,7 +180,11 @@
       "https://api.crossref.org/works/10.1016/j.aiopen.2025.10.003"
     ],
     "pdf": "adap.pdf",
-    "preview_image": "previews/adap.webp"
+    "preview_image": "collages/adap.webp",
+    "overview_image": "collages/adap.png",
+    "overview_width": 1500,
+    "overview_height": 900,
+    "overview_alt": "Collage of original figures from ADAP: Adaptive & Dynamic Arc Padding for predicting seam profiles in Multi-Layer-Multi-Pass robotic welding."
   },
   {
     "id": "stable-quadrotor",
@@ -201,7 +222,12 @@
     "abstract_source": "https://api.crossref.org/works/10.1155/2021/9825790",
     "abstract_license": "https://creativecommons.org/licenses/by/4.0/",
     "crossref_pages": "1--11",
-    "pdf": "stable-quadrotor.pdf"
+    "pdf": "stable-quadrotor.pdf",
+    "preview_image": "collages/stable-quadrotor.webp",
+    "overview_image": "collages/stable-quadrotor.png",
+    "overview_width": 1500,
+    "overview_height": 900,
+    "overview_alt": "Collage of original figures from Stable High-Speed Quadrotor Flight using Differential Trajectory."
   },
   {
     "id": "parameter-adaptive-control",
@@ -238,7 +264,11 @@
     "image_width": 946,
     "image_height": 696,
     "image_alt": "Quadrotor with a suspended payload, showing the body and earth coordinate frames, cable length, swing angles, and payload weight.",
-    "preview_image": "previews/parameter-adaptive-control.webp"
+    "preview_image": "collages/parameter-adaptive-control.webp",
+    "overview_image": "collages/parameter-adaptive-control.png",
+    "overview_width": 1500,
+    "overview_height": 900,
+    "overview_alt": "Collage of original figures from Parameter Adaptive Control for a Quadrotor With a Suspended Unknown Payload Under External Disturbance."
   },
   {
     "id": "oral-care",
@@ -275,6 +305,10 @@
     "metadata_sources": [
       "https://www.oaepublish.com/articles/ss.2025.14"
     ],
-    "preview_image": "previews/oral-care.webp"
+    "preview_image": "collages/oral-care.webp",
+    "overview_image": "collages/oral-care.png",
+    "overview_width": 1500,
+    "overview_height": 900,
+    "overview_alt": "Collage of original figures from Teaching oral care via vision-based deformation perception."
   }
 ]

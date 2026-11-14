@@ -209,6 +209,12 @@ def bibtex(paper):
 
 
 def image(paper, prefix, lazy=True, preview=False):
+    if preview and paper.get('overview_image'):
+        # Overview collages are separate from the original detail-page media.
+        paper = {**paper, 'image': paper['overview_image'],
+                 'image_width': paper['overview_width'],
+                 'image_height': paper['overview_height'],
+                 'image_alt': paper['overview_alt']}
     if not paper.get('image'):
         return ('<div class="publication-placeholder">'
                 '<span>Image / video coming soon</span>'
@@ -219,7 +225,7 @@ def image(paper, prefix, lazy=True, preview=False):
     fallback = (f'<img src="{prefix}assets/publications/{esc(paper["image"])}"'
                 f' alt="{esc(paper["image_alt"])}" decoding="async"{attrs}>')
     if preview and paper.get('preview_image'):
-        # Browsers select the compact preview; the original remains a fallback.
+        # Prefer the compact WebP, with the selected image as fallback.
         return (f'<picture><source srcset="{prefix}assets/publications/{esc(paper["preview_image"])}"'
                 f' type="image/webp">{fallback}</picture>')
     return fallback
@@ -544,7 +550,7 @@ def main():
     if len(ids) != len(set(ids)) or any(not re.fullmatch(r'[a-z0-9-]+', i) for i in ids):
         raise ValueError('Publication IDs must be unique lowercase URL slugs.')
     for paper in papers + reviews:
-        for key in ('image', 'pdf', 'preview_image'):
+        for key in ('image', 'pdf', 'preview_image', 'overview_image'):
             if paper.get(key) and not (ROOT / 'assets/publications' / paper[key]).is_file():
                 raise FileNotFoundError(paper[key])
     homepage_path = ROOT / 'index.html'

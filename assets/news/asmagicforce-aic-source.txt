@@ -1,0 +1,6 @@
+AI for Industry Challenge (asMagicForce)
+Original animation: https://github.com/asMagicForce/aic-newton/blob/main/docs/assets/auto.gif
+Downloaded from: https://hanxudong.cc/images/projects/asmagicforce-aic.gif
+The GIF is identical to repository blob 6b826aa4395d65d30795aa9331f6ce737175e77a.
+Repository license: Apache License 2.0 (asmagicforce-aic-LICENSE.txt).
+The WebP copy is a compressed format conversion; dimensions, frame timing and loop are preserved.
