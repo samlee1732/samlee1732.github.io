@@ -113,9 +113,6 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
 
     for project in projects:
         parts = [project['program'], project['status']]
-        period = project_period(project)
-        if period:
-            parts.append('执行期：' + period)
         parts.extend(['项目经费：' + str(project['funding_wan_cny']) + '万元',
                       project_role(project)])
         if project.get('contribution'):
@@ -341,19 +338,13 @@ def project_role(project):
 def project_overview(projects):
     rows = []
     for project in projects:
-        period = ''
-        if project_period(project):
-            period = (f'<span>执行期：<time datetime="{esc(project["start_date"])}">'
-                      f'{esc(project_month(project["start_date"]))}</time>—'
-                      f'<time datetime="{esc(project["end_date"])}">'
-                      f'{esc(project_month(project["end_date"]))}</time></span>')
         contribution = ('\n              <p>' + esc(project['contribution']) + '</p>'
                         if project.get('contribution') else '')
         rows.append(f'''          <li>
             <article id="{esc(project['id'])}" class="project-entry" aria-labelledby="{esc(project['id'])}-title" tabindex="-1" lang="zh-CN">
               <p class="project-program">{esc(project['program'])}</p>
               <h3 id="{esc(project['id'])}-title" class="publication-title">{esc(project['title'])} <span class="publication-type project-status">{esc(project['status'])}</span></h3>
-              <p class="project-meta">{period}<span>项目经费：{esc(str(project['funding_wan_cny']))}万元</span></p>
+              <p class="project-meta"><span>项目经费：{esc(str(project['funding_wan_cny']))}万元</span></p>
               <p>{esc(project_role(project))}</p>{contribution}
             </article>
           </li>''')
