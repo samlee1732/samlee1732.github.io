@@ -1,6 +1,6 @@
 # SenseDex Lab
 
-**Sensing and Dexterous Manipulation Lab · 感知与灵巧操作实验室**
+**Sensing and Dexterous Manipulation Laboratory · 感知与灵巧操作实验室**
 
 The academic website of **Sen Li, Ph.D.** and SenseDex Lab at Shenzhen Polytechnic University. It presents research publications, team members, teaching resources, student competitions, and news.
 
