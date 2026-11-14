@@ -396,6 +396,7 @@ def site_header(homepage, prefix, current):
 def content_page(homepage, content, slug, title, description, source=None):
     prefix = '../' * (slug.count('/') + 1)
     is_course = slug.startswith('teaching/')
+    styles_version = '20261114-course-links' if slug == 'teaching' else '20261114-teaching-competitions'
     current = 'teaching/' if is_course else slug + '/'
     header = site_header(homepage, prefix, current)
     back_url = prefix + 'teaching/' if is_course else prefix
@@ -414,7 +415,7 @@ def content_page(homepage, content, slug, title, description, source=None):
     <title>{esc(title)} | SenseDex Lab</title>
     <link rel="icon" href="{prefix}assets/sensedex-mark-small.png" type="image/png">
     <link rel="apple-touch-icon" href="{prefix}assets/sensedex-mark-small.png">
-    <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261114-teaching-competitions">{course_styles}
+    <link rel="stylesheet" href="{prefix}assets/styles.css?v={styles_version}">{course_styles}
     <script src="{prefix}assets/main.js?v=20261114-teaching-competitions" defer></script>
     <script src="{prefix}assets/visits.js" defer></script>
   </head>
