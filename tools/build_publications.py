@@ -622,7 +622,7 @@ def main():
         course_content = (ROOT / 'data' / (course_id + '.html')).read_text()
         course_folder = teaching_folder / course_id
         course_folder.mkdir(exist_ok=True)
-        description = (title + ' at Shenzhen Polytechnic University. Course overview, learning outcomes, robotics platform, assignments, and teaching resources.'
+        description = (title + ' at Shenzhen Polytechnic University. Course introduction, instructor information, teaching schedule, and robot platform resources.'
                        if course_id == 'robotics-applications' else title + ' at Shenzhen Polytechnic University. Course details and materials will be added.')
         (course_folder / 'index.html').write_text(content_page(homepage, course_content,
             'teaching/' + course_id, title, description, source=course_id))
