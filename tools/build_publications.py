@@ -139,7 +139,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
         ('competitions', 'Student Competitions · 指导学生竞赛', 'Teaching', '比赛 竞赛 学生 团队 指导教师 成果 图片'),
         ('news', 'News · 最新动态', 'News', '新闻 动态 消息'),
         ('team', 'Team · 团队', 'Team', '团队 成员 实验室 合作者 合作 collaborators affiliation'),
-        ('teaching', 'Teaching · 教学', 'Teaching', '教学 课程 授课 责任教师'),
+        ('teaching', 'Teaching', 'Teaching', '教学 课程 授课 责任教师'),
         ('robotics-applications', 'Robotics and Applications · 机器人学及应用', 'Teaching', '教学 课程 机器人学及应用'),
         ('automatic-control', 'Principles of Automatic Control · 自动控制原理', 'Teaching', '教学 课程 自动控制原理'),
     )
