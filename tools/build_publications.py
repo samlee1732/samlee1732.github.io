@@ -332,7 +332,7 @@ def project_period(project):
 def project_role(project):
     if project.get('principal_investigator'):
         return '主持：' + project['principal_investigator']
-    return '参与角色：' + project['role']
+    return project['role']
 
 
 def project_overview(projects):
