@@ -9,12 +9,12 @@
       "Chaoyang Song",
       "Fang Wan"
     ],
-    "image": "vista-concept.png",
+    "image": "vista-concept-2x1.jpg",
     "image_alt": "Conceptual illustration of robotic weld-seam sensing and trajectory adjustment using a compliant tactile sensor.",
-    "image_width": 1448,
-    "image_height": 1086,
+    "image_width": 1200,
+    "image_height": 600,
     "image_caption": "Conceptual illustration only; manuscript under review.",
-    "preview_image": "previews/vista.webp",
+    "preview_image": "previews/vista-concept-2x1.webp",
     "corresponding_authors": [
       "Fang Wan"
     ],
@@ -30,12 +30,12 @@
       "Tao Luo"
     ],
     "author_conjunction": true,
-    "image": "tristable-metastructure-concept.png",
+    "image": "tristable-metastructure-concept-2x1.jpg",
     "image_alt": "Hand-drawn conceptual illustration of a concentric-ring compliant metastructure in three stable rotational configurations.",
-    "image_width": 1619,
-    "image_height": 971,
+    "image_width": 1200,
+    "image_height": 600,
     "image_caption": "Conceptual illustration only; manuscript under review.",
-    "preview_image": "previews/torsionally-tristable-metastructure.webp",
+    "preview_image": "previews/tristable-metastructure-concept-2x1.webp",
     "corresponding_authors": [
       "Tao Luo"
     ],
@@ -57,12 +57,12 @@
       "Chaoyang Song"
     ],
     "author_conjunction": true,
-    "image": "intrinsic-ai-industry-concept.png",
+    "image": "intrinsic-ai-industry-concept-2x1.jpg",
     "image_alt": "Hand-drawn conceptual illustration of vision-guided robotic cable insertion and wire handling in electronic assembly.",
-    "image_width": 1619,
-    "image_height": 971,
+    "image_width": 1200,
+    "image_height": 600,
     "image_caption": "Conceptual illustration only; manuscript under review.",
-    "preview_image": "previews/intrinsic-ai-industry-challenge.webp",
+    "preview_image": "previews/intrinsic-ai-industry-concept-2x1.webp",
     "corresponding_authors": [
       "Fang Wan",
       "Chaoyang Song"
