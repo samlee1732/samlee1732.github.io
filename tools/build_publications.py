@@ -288,7 +288,7 @@ def review_overview(papers):
 
 
 def publication_overview(papers, reviews):
-    groups = review_overview(reviews) + '\n' + published_overview(papers)
+    groups = published_overview(papers) + '\n' + review_overview(reviews)
     groups = '\n'.join('  ' + line for line in groups.splitlines())
     return ('      <!-- PUBLICATION CONTENT START -->\n'
             '      <section id="publication" class="publications" aria-labelledby="publication-heading" tabindex="-1">\n'
