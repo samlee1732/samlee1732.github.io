@@ -1,37 +1,5 @@
 [
   {
-    "id": "activespn2",
-    "marker": "ActiveSPN2",
-    "title": "Multi-modal vision-based deformable perception for in-finger manipulation with soft active surfaces",
-    "authors": [
-      "Sen Li",
-      "Chaoyang Song",
-      "Fang Wan"
-    ],
-    "venue": "Biomimetic Intelligence and Robotics",
-    "year": 2026,
-    "type": "Journal Article",
-    "status": "Published online",
-    "paper": "https://doi.org/10.1016/j.birob.2026.100326",
-    "pdf": "activespn2.pdf",
-    "image": "activespn2.gif",
-    "summary": "We propose ActiveSPN2, a robot gripper with a soft active surface designed for in-finger manipulation in constrained environments, featuring multi-modal perception through a vision-based deformable perception architecture. By tracking the real-time deformation of the internal Soft Polyhedral Network, we achieve real-time, multi-modal vision-based perception that provides 6D forces and object pose estimation during in-hand manipulation.",
-    "image_width": 1203,
-    "image_height": 602,
-    "image_alt": "ActiveSPN2 soft active surface gripper demonstration",
-    "source": "http://www.senli.site/",
-    "abstract": "Enabling robots to manipulate objects dexterously within their grasp often requires complex multi-fingered hands with dense, multi-modal sensor arrays. This complexity can limit practicality and robustness, especially in confined spaces. This study challenges that paradigm by introducing a robust multi-modal perception method that derives 6D forces and poses from the large-scale deformation of a soft finger, using only a single internal camera. We propose ActiveSPN2, a robot gripper with a soft active surface designed for in-finger manipulation in constrained environments, featuring multi-modal perception through a vision-based deformable perception architecture. By tracking the real-time deformation of the internal Soft Polyhedral Network, we achieve real-time, multi-modal vision-based perception that provides 6D forces and object pose estimation during in-finger manipulation. Quantitatively, the proposed force perception model achieves an average accuracy of approximately 0.286 N on the test set, indicating reliable generalization under unseen manipulation conditions. A series of experiments were conducted on the ActiveSPN2 gripper using the proposed vision-based deformable perception approach, demonstrating the effectiveness and robustness of the strategy.",
-    "doi": "10.1016/j.birob.2026.100326",
-    "article_number": "100326",
-    "publication_date": "2026-03-14",
-    "metadata_sources": [
-      "https://www.sciencedirect.com/science/article/pii/S2667379726000549",
-      "https://api.crossref.org/works/10.1016/j.birob.2026.100326",
-      "./assets/publications/activespn2.pdf"
-    ],
-    "pdf_label": "PDF (article in press)"
-  },
-  {
     "id": "activespn",
     "marker": "ActiveSPN",
     "title": "ActiveSPN: Active Soft Polyhedral Networks With Pose Estimation for In-Finger Object Manipulation",
@@ -64,6 +32,38 @@
     "metadata_sources": [
       "./assets/publications/activespn.pdf"
     ]
+  },
+  {
+    "id": "activespn2",
+    "marker": "ActiveSPN2",
+    "title": "Multi-modal vision-based deformable perception for in-finger manipulation with soft active surfaces",
+    "authors": [
+      "Sen Li",
+      "Chaoyang Song",
+      "Fang Wan"
+    ],
+    "venue": "Biomimetic Intelligence and Robotics",
+    "year": 2026,
+    "type": "Journal Article",
+    "status": "Published online",
+    "paper": "https://doi.org/10.1016/j.birob.2026.100326",
+    "pdf": "activespn2.pdf",
+    "image": "activespn2.gif",
+    "summary": "We propose ActiveSPN2, a robot gripper with a soft active surface designed for in-finger manipulation in constrained environments, featuring multi-modal perception through a vision-based deformable perception architecture. By tracking the real-time deformation of the internal Soft Polyhedral Network, we achieve real-time, multi-modal vision-based perception that provides 6D forces and object pose estimation during in-hand manipulation.",
+    "image_width": 1203,
+    "image_height": 602,
+    "image_alt": "ActiveSPN2 soft active surface gripper demonstration",
+    "source": "http://www.senli.site/",
+    "abstract": "Enabling robots to manipulate objects dexterously within their grasp often requires complex multi-fingered hands with dense, multi-modal sensor arrays. This complexity can limit practicality and robustness, especially in confined spaces. This study challenges that paradigm by introducing a robust multi-modal perception method that derives 6D forces and poses from the large-scale deformation of a soft finger, using only a single internal camera. We propose ActiveSPN2, a robot gripper with a soft active surface designed for in-finger manipulation in constrained environments, featuring multi-modal perception through a vision-based deformable perception architecture. By tracking the real-time deformation of the internal Soft Polyhedral Network, we achieve real-time, multi-modal vision-based perception that provides 6D forces and object pose estimation during in-finger manipulation. Quantitatively, the proposed force perception model achieves an average accuracy of approximately 0.286 N on the test set, indicating reliable generalization under unseen manipulation conditions. A series of experiments were conducted on the ActiveSPN2 gripper using the proposed vision-based deformable perception approach, demonstrating the effectiveness and robustness of the strategy.",
+    "doi": "10.1016/j.birob.2026.100326",
+    "article_number": "100326",
+    "publication_date": "2026-03-14",
+    "metadata_sources": [
+      "https://www.sciencedirect.com/science/article/pii/S2667379726000549",
+      "https://api.crossref.org/works/10.1016/j.birob.2026.100326",
+      "./assets/publications/activespn2.pdf"
+    ],
+    "pdf_label": "PDF (article in press)"
   },
   {
     "id": "active-surface",
