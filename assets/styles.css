@@ -247,3 +247,7 @@ a { color: inherit; }
 .course-link .course-link-action { margin-top: 24px; color: var(--accent); font-size: .9em; }
 .course-page .course-subtitle { margin-bottom: 8px; color: var(--text); }
 .course-materials { margin-top: 36px; padding-top: 28px; border-top: 1px solid #e8e2eb; }
+
+/* Student competitions share the Teaching page. */
+.teaching-competitions { padding-top: 28px; border-top: 1px solid #e8e2eb; }
+.teaching-competitions > h2 { margin: 0 0 12px; color: #302c38; font-size: clamp(22px, 1.6vw, 36px); line-height: 1.35; font-weight: 600; }

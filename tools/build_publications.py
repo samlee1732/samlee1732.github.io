@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build publication, patent, project, team, teaching, news, and competition content, BibTeX, and site search."""
+"""Build publication, patent, project, team, teaching (including competitions), and news content, BibTeX, and site search."""
 import html
 import json
 import re
@@ -140,7 +140,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
     sections = (
         ('about', 'About SenseDex Lab · 实验室简介', 'About', '简介 关于 履历 教育 经历 科研 项目'),
         ('contact', 'Contact · 联系方式', 'Contact', '联系 联系方式 邮箱 邮件 地址 办公室'),
-        ('competitions', 'Student Competitions · 指导学生竞赛', 'Competitions', '比赛 竞赛 学生 团队 指导教师 成果 图片'),
+        ('competitions', 'Student Competitions · 指导学生竞赛', 'Teaching', '比赛 竞赛 学生 团队 指导教师 成果 图片'),
         ('news', 'News · 最新动态', 'News', '新闻 动态 消息'),
         ('team', 'Team · 团队', 'Team', '团队 成员 实验室 合作者 合作 collaborators affiliation'),
         ('teaching', 'Teaching · 教学', 'Teaching', '教学 课程 授课 责任教师'),
@@ -158,8 +158,10 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
                 description = ' · '.join(emails) + ' · ' + text
         if block in {'robotics-applications', 'automatic-control'}:
             url = 'teaching/' + block + '/'
+        elif block == 'competitions':
+            url = 'teaching/#competitions'
         else:
-            url = block + '/' if block in {'news', 'competitions', 'team', 'teaching'} else '#' + block
+            url = block + '/' if block in {'news', 'team', 'teaching'} else '#' + block
         entry = {'title': title, 'text': text + ' ' + keywords, 'description': description,
                  'url': url, 'kind': kind}
         entries.append(entry)
@@ -390,8 +392,8 @@ def content_page(homepage, content, slug, title, description, source=None):
     <title>{esc(title)} | SenseDex Lab</title>
     <link rel="icon" href="{prefix}assets/sensedex-mark.png" type="image/png">
     <link rel="apple-touch-icon" href="{prefix}assets/sensedex-mark.png">
-    <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261113-teaching">
-    <script src="{prefix}assets/main.js?v=20261113-publication-nav" defer></script>
+    <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261114-teaching-competitions">
+    <script src="{prefix}assets/main.js?v=20261114-teaching-competitions" defer></script>
     <script src="{prefix}assets/visits.js" defer></script>
   </head>
   <body>
@@ -413,8 +415,22 @@ def news_page(homepage, content):
 
 
 def competitions_page(homepage, content):
-    return content_page(homepage, content, 'competitions', 'Student Competitions',
-                        'Student competitions and faculty mentorship at SenseDex Lab. Details will be added as they become available.')
+    # Preserve existing bookmarks after moving competitions into Teaching.
+    return '''<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="0; url=../teaching/#competitions">
+    <link rel="canonical" href="https://www.sensedex.online/teaching/#competitions">
+    <title>Student Competitions | Teaching | SenseDex Lab</title>
+    <script>window.location.replace('../teaching/#competitions');</script>
+  </head>
+  <body>
+    <p>Student competitions are now part of Teaching. <a href="../teaching/#competitions">View student competitions</a>.</p>
+  </body>
+</html>
+'''
 
 
 
@@ -478,8 +494,8 @@ def detail(p, homepage):
     <title>{esc(p['marker'])} | SenseDex Lab</title>
     <link rel="icon" href="../../assets/sensedex-mark.png" type="image/png">
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark.png">
-    <link rel="stylesheet" href="../../assets/styles.css?v=20261113-quadrotor-image">
-    <script src="../../assets/main.js?v=20261113-publication-nav" defer></script>
+    <link rel="stylesheet" href="../../assets/styles.css?v=20261114-teaching-competitions">
+    <script src="../../assets/main.js?v=20261114-teaching-competitions" defer></script>
     <script src="../../assets/visits.js" defer></script>
   </head>
   <body>
@@ -571,8 +587,8 @@ def main():
     teaching_content = (ROOT / 'data/teaching.html').read_text()
     teaching_folder = ROOT / 'teaching'
     teaching_folder.mkdir(exist_ok=True)
-    (teaching_folder / 'index.html').write_text(content_page(homepage, teaching_content, 'teaching', 'Teaching',
-        'Courses taught by Sen Li at Shenzhen Polytechnic University.'))
+    (teaching_folder / 'index.html').write_text(content_page(homepage, teaching_content + '\n' + competitions_content, 'teaching', 'Teaching',
+        'Courses and student competition mentorship at Shenzhen Polytechnic University.'))
     for course_id, title in (
             ('robotics-applications', 'Robotics and Applications'),
             ('automatic-control', 'Principles of Automatic Control')):
@@ -590,7 +606,7 @@ def main():
     entries = search_index(papers, reviews, patents, projects, homepage, news_content, competitions_content, team_content, teaching_content)
     (ROOT / 'assets/search-index.json').write_text(
         json.dumps(entries, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f'Generated Team, Teaching, two course, News and Competitions pages, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(projects)} project entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
+    print(f'Generated Team, Teaching (including competitions), two course and News pages, a legacy competition redirect, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(projects)} project entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
 
 
 if __name__ == '__main__':

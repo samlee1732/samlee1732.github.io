@@ -7,8 +7,8 @@
     if (status) status.textContent = 'Local previews are not counted';
     return;
   }
-  // The former News anchor immediately redirects to its own page.
-  if (location.hash === '#news' && ['/', '/index.html'].includes(location.pathname)) return;
+  // Legacy homepage anchors redirect before the destination page records the visit.
+  if (['#news', '#competitions'].includes(location.hash) && ['/', '/index.html'].includes(location.pathname)) return;
 
   if (counter) {
     const values = ['site_pv', 'site_uv'].map(key =>

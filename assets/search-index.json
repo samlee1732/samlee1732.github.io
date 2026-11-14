@@ -122,8 +122,8 @@
     "title": "Student Competitions · 指导学生竞赛",
     "text": "Student Competitions 指导学生竞赛 Competition details, student teams, faculty mentors, results, and photos will be added here. 赛事信息、学生团队、指导教师、竞赛成果与图片将陆续补充。 比赛 竞赛 学生 团队 指导教师 成果 图片",
     "description": "Student Competitions 指导学生竞赛 Competition details, student teams, faculty mentors, results, and photos will be added here. 赛事信息、学生团队、指导教师、竞赛成果与图片将陆续补充。",
-    "url": "competitions/",
-    "kind": "Competitions"
+    "url": "teaching/#competitions",
+    "kind": "Teaching"
   },
   {
     "title": "News · 最新动态",
@@ -141,8 +141,8 @@
   },
   {
     "title": "Teaching · 教学",
-    "text": "Teaching · 教学 Courses taught by Sen Li at Shenzhen Polytechnic University. 课程介绍与教学资料将陆续补充。 Robotics and Applications 机器人学及应用 View course → Principles of Automatic Control 自动控制原理 View course → 教学 课程 授课 责任教师",
-    "description": "Teaching · 教学 Courses taught by Sen Li at Shenzhen Polytechnic University. 课程介绍与教学资料将陆续补充。 Robotics and Applications 机器人学及应用 View course → Principles of Automatic Control 自动控制原理 View course →",
+    "text": "Teaching · 教学 Teaching and student competition mentorship at Shenzhen Polytechnic University. 课程介绍与教学资料将陆续补充。 Robotics and Applications 机器人学及应用 View course → Principles of Automatic Control 自动控制原理 View course → 教学 课程 授课 责任教师",
+    "description": "Teaching · 教学 Teaching and student competition mentorship at Shenzhen Polytechnic University. 课程介绍与教学资料将陆续补充。 Robotics and Applications 机器人学及应用 View course → Principles of Automatic Control 自动控制原理 View course →",
     "url": "teaching/",
     "kind": "Teaching"
   },

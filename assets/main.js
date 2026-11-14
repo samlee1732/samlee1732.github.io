@@ -11,6 +11,7 @@ const siteRoot = new URL('../', document.currentScript.src);
 const legacyPageRoutes = new Map([
   ['team', 'team/'],
   ['teaching', 'teaching/'],
+  ['competitions', 'teaching/#competitions'],
   ['robotics-applications', 'teaching/robotics-applications/'],
   ['automatic-control', 'teaching/automatic-control/'],
 ]);
