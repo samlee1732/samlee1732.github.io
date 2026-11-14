@@ -30,5 +30,22 @@
     "image_width": 1619,
     "image_height": 971,
     "image_caption": "Conceptual illustration only; manuscript under review."
+  },
+  {
+    "id": "intrinsic-ai-industry-challenge",
+    "title": "Intrinsic AI for Industry Challenge: Towards Sim2Real Transfer for Cable Insertion and Wire Handling in Electronic Assembly",
+    "journal": "IEEE Robotics and Automation Practice",
+    "authors": [
+      "Dunxing Zhang",
+      "Yansong Wu",
+      "Xudong Han",
+      "Tianyu Wu",
+      "Sen Li",
+      "Haoran Sun",
+      "Jia Pan",
+      "Fang Wan",
+      "Chaoyang Song"
+    ],
+    "author_conjunction": true
   }
 ]
