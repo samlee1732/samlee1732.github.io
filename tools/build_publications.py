@@ -382,6 +382,8 @@ def content_page(homepage, content, slug, title, description, source=None):
     back_url = prefix + 'teaching/' if is_course else prefix
     back_label = 'Teaching' if is_course else 'Homepage'
     source = source or slug
+    course_styles = (f'\n    <link rel="stylesheet" href="{prefix}assets/course-syllabus.css?v=20261114">'
+                     if source == 'robotics-applications' else '')
     return f'''<!doctype html>
 <html lang="en">
   <head>
@@ -392,7 +394,7 @@ def content_page(homepage, content, slug, title, description, source=None):
     <title>{esc(title)} | SenseDex Lab</title>
     <link rel="icon" href="{prefix}assets/sensedex-mark-small.png" type="image/png">
     <link rel="apple-touch-icon" href="{prefix}assets/sensedex-mark-small.png">
-    <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261114-teaching-competitions">
+    <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261114-teaching-competitions">{course_styles}
     <script src="{prefix}assets/main.js?v=20261114-teaching-competitions" defer></script>
     <script src="{prefix}assets/visits.js" defer></script>
   </head>
@@ -595,8 +597,10 @@ def main():
         course_content = (ROOT / 'data' / (course_id + '.html')).read_text()
         course_folder = teaching_folder / course_id
         course_folder.mkdir(exist_ok=True)
+        description = (title + ' at Shenzhen Polytechnic University. Course overview, learning outcomes, robotics platform, assignments, and teaching resources.'
+                       if course_id == 'robotics-applications' else title + ' at Shenzhen Polytechnic University. Course details and materials will be added.')
         (course_folder / 'index.html').write_text(content_page(homepage, course_content,
-            'teaching/' + course_id, title, title + ' at Shenzhen Polytechnic University. Course details and materials will be added.', source=course_id))
+            'teaching/' + course_id, title, description, source=course_id))
         teaching_content += '\n' + course_content
     for paper in papers:
         folder = ROOT / 'publications' / paper['id']
