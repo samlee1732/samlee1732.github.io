@@ -4,7 +4,7 @@
 
   // Preview loads must not create counts for localhost or another domain.
   if (location.protocol !== 'https:' || location.hostname !== 'www.sensedex.online') {
-    if (status) status.textContent = '本地预览不计数';
+    if (status) status.textContent = 'Local previews are not counted';
     return;
   }
   // The former News anchor immediately redirects to its own page.
@@ -20,7 +20,7 @@
       observer.disconnect();
       clearTimeout(timeout);
       values.forEach((value, index) => {
-        value.textContent = Number(counts[index]).toLocaleString('zh-CN');
+        value.textContent = Number(counts[index]).toLocaleString('en-US');
       });
       counter.dataset.state = 'ready';
       status.textContent = '';
@@ -30,7 +30,7 @@
     timeout = setTimeout(() => {
       if (counter.dataset.state !== 'ready') {
         counter.dataset.state = 'unavailable';
-        status.textContent = '统计暂不可用';
+        status.textContent = 'Statistics temporarily unavailable';
       }
     }, 10000);
   }
@@ -43,7 +43,7 @@
   script.onerror = () => {
     if (status) {
       counter.dataset.state = 'unavailable';
-      status.textContent = '统计暂不可用';
+      status.textContent = 'Statistics temporarily unavailable';
     }
   };
   document.head.append(script);
