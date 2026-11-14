@@ -31,7 +31,8 @@
     "publication_date": "2025-06-26",
     "metadata_sources": [
       "./assets/publications/activespn.pdf"
-    ]
+    ],
+    "preview_image": "previews/activespn.webp"
   },
   {
     "id": "activespn2",
@@ -63,7 +64,8 @@
       "https://api.crossref.org/works/10.1016/j.birob.2026.100326",
       "./assets/publications/activespn2.pdf"
     ],
-    "pdf_label": "PDF (article in press)"
+    "pdf_label": "PDF (article in press)",
+    "preview_image": "previews/activespn2.webp"
   },
   {
     "id": "active-surface",
@@ -92,7 +94,8 @@
     "pages": "627--632",
     "metadata_sources": [
       "./assets/publications/active-surface.pdf"
-    ]
+    ],
+    "preview_image": "previews/active-surface.webp"
   },
   {
     "id": "flip-and-flap",
@@ -159,7 +162,8 @@
       "https://www.keaipublishing.com/en/journals/ai-open/recent-articles/?pageNumber=2",
       "https://api.crossref.org/works/10.1016/j.aiopen.2025.10.003"
     ],
-    "pdf": "adap.pdf"
+    "pdf": "adap.pdf",
+    "preview_image": "previews/adap.webp"
   },
   {
     "id": "stable-quadrotor",
@@ -233,7 +237,8 @@
     "image": "parameter-adaptive-control.png",
     "image_width": 946,
     "image_height": 696,
-    "image_alt": "Quadrotor with a suspended payload, showing the body and earth coordinate frames, cable length, swing angles, and payload weight."
+    "image_alt": "Quadrotor with a suspended payload, showing the body and earth coordinate frames, cable length, swing angles, and payload weight.",
+    "preview_image": "previews/parameter-adaptive-control.webp"
   },
   {
     "id": "oral-care",
@@ -269,6 +274,7 @@
     "publication_date": "2025-07-30",
     "metadata_sources": [
       "https://www.oaepublish.com/articles/ss.2025.14"
-    ]
+    ],
+    "preview_image": "previews/oral-care.webp"
   }
 ]

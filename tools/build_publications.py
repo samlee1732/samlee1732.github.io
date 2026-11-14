@@ -211,7 +211,7 @@ def bibtex(paper):
         '  ' + k + ' = {' + v + '}' for k, v in fields.items()) + '\n}\n'
 
 
-def image(paper, prefix, lazy=True):
+def image(paper, prefix, lazy=True, preview=False):
     if not paper.get('image'):
         return ('<div class="publication-placeholder">'
                 '<span>Image / video coming soon</span>'
@@ -219,8 +219,13 @@ def image(paper, prefix, lazy=True):
     attrs = ' loading="lazy"' if lazy else ''
     if paper.get('image_width') and paper.get('image_height'):
         attrs += f' width="{paper["image_width"]}" height="{paper["image_height"]}"'
-    return (f'<img src="{prefix}assets/publications/{esc(paper["image"])}"'
-            f' alt="{esc(paper["image_alt"])}" decoding="async"{attrs}>')
+    fallback = (f'<img src="{prefix}assets/publications/{esc(paper["image"])}"'
+                f' alt="{esc(paper["image_alt"])}" decoding="async"{attrs}>')
+    if preview and paper.get('preview_image'):
+        # Browsers select the compact preview; the original remains a fallback.
+        return (f'<picture><source srcset="{prefix}assets/publications/{esc(paper["preview_image"])}"'
+                f' type="image/webp">{fallback}</picture>')
+    return fallback
 
 
 def published_overview(papers):
@@ -245,7 +250,7 @@ def published_overview(papers):
                 </ul>
               </div>
               <div class="publication-media">
-                <a href="{url}" aria-label="Read about {esc(p['marker'])}">{image(p, './')}</a>
+                <a href="{url}" aria-label="Read about {esc(p['marker'])}">{image(p, './', preview=True)}</a>
               </div>
             </article>
           </li>''')
@@ -274,7 +279,7 @@ def review_overview(papers):
                 <h4 id="{p['id']}-title" class="publication-title">{esc(p['title'])} <span class="publication-type review-status">Under Review</span></h4>
                 <p class="publication-citation">Submitted to <cite>{esc(p['journal'])}</cite>.</p>{corresponding}
               </div>
-              <figure class="publication-media">{image(p, './')}{caption}</figure>
+              <figure class="publication-media">{image(p, './', preview=True)}{caption}</figure>
             </article>
           </li>''')
     return '''      <section id="under-review" class="publication-group under-review" aria-labelledby="under-review-heading" tabindex="-1">
@@ -388,8 +393,8 @@ def content_page(homepage, content, slug, title, description, source=None):
     <meta name="description" content="{esc(description)}">
     <meta name="theme-color" content="#92316f">
     <title>{esc(title)} | SenseDex Lab</title>
-    <link rel="icon" href="{prefix}assets/sensedex-mark.png" type="image/png">
-    <link rel="apple-touch-icon" href="{prefix}assets/sensedex-mark.png">
+    <link rel="icon" href="{prefix}assets/sensedex-mark-small.png" type="image/png">
+    <link rel="apple-touch-icon" href="{prefix}assets/sensedex-mark-small.png">
     <link rel="stylesheet" href="{prefix}assets/styles.css?v=20261114-teaching-competitions">
     <script src="{prefix}assets/main.js?v=20261114-teaching-competitions" defer></script>
     <script src="{prefix}assets/visits.js" defer></script>
@@ -490,8 +495,8 @@ def detail(p, homepage):
     <meta name="description" content="{esc(p['summary'])}">
     <meta name="theme-color" content="#92316f">
     <title>{esc(p['marker'])} | SenseDex Lab</title>
-    <link rel="icon" href="../../assets/sensedex-mark.png" type="image/png">
-    <link rel="apple-touch-icon" href="../../assets/sensedex-mark.png">
+    <link rel="icon" href="../../assets/sensedex-mark-small.png" type="image/png">
+    <link rel="apple-touch-icon" href="../../assets/sensedex-mark-small.png">
     <link rel="stylesheet" href="../../assets/styles.css?v=20261114-teaching-competitions">
     <script src="../../assets/main.js?v=20261114-teaching-competitions" defer></script>
     <script src="../../assets/visits.js" defer></script>
@@ -548,7 +553,7 @@ def main():
     if len(ids) != len(set(ids)) or any(not re.fullmatch(r'[a-z0-9-]+', i) for i in ids):
         raise ValueError('Publication IDs must be unique lowercase URL slugs.')
     for paper in papers + reviews:
-        for key in ('image', 'pdf'):
+        for key in ('image', 'pdf', 'preview_image'):
             if paper.get(key) and not (ROOT / 'assets/publications' / paper[key]).is_file():
                 raise FileNotFoundError(paper[key])
     homepage_path = ROOT / 'index.html'

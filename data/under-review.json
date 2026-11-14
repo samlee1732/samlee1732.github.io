@@ -13,7 +13,8 @@
     "image_alt": "Conceptual illustration of robotic weld-seam sensing and trajectory adjustment using a compliant tactile sensor.",
     "image_width": 1448,
     "image_height": 1086,
-    "image_caption": "Conceptual illustration only; manuscript under review."
+    "image_caption": "Conceptual illustration only; manuscript under review.",
+    "preview_image": "previews/vista.webp"
   },
   {
     "id": "torsionally-tristable-metastructure",
@@ -29,7 +30,8 @@
     "image_alt": "Hand-drawn conceptual illustration of a concentric-ring compliant metastructure in three stable rotational configurations.",
     "image_width": 1619,
     "image_height": 971,
-    "image_caption": "Conceptual illustration only; manuscript under review."
+    "image_caption": "Conceptual illustration only; manuscript under review.",
+    "preview_image": "previews/torsionally-tristable-metastructure.webp"
   },
   {
     "id": "intrinsic-ai-industry-challenge",
@@ -51,6 +53,7 @@
     "image_alt": "Hand-drawn conceptual illustration of vision-guided robotic cable insertion and wire handling in electronic assembly.",
     "image_width": 1619,
     "image_height": 971,
-    "image_caption": "Conceptual illustration only; manuscript under review."
+    "image_caption": "Conceptual illustration only; manuscript under review.",
+    "preview_image": "previews/intrinsic-ai-industry-challenge.webp"
   }
 ]
