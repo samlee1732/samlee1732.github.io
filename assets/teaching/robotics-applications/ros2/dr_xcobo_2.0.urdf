@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Dr_arm_6_desk">
+  <link
+    name="base_link">
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="Link1">
+    <inertial>
+      <origin
+        xyz="1.8639E-05 -0.0059719 0.051438"
+        rpy="0 0 0" />
+      <mass
+        value="0.612" />
+      <inertia
+        ixx="0.00023978"
+        ixy="-8.9132E-09"
+        ixz="1.6284E-07"
+        iyy="0.00028137"
+        iyz="8.2472E-06"
+        izz="0.00020186" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint1"
+    type="revolute">
+    <origin
+      xyz="0 0 0.096"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Link2">
+    <inertial>
+      <origin
+        xyz="4.7129E-05 0.0081702 0.10984"
+        rpy="0 0 0" />
+      <mass
+        value="0.739" />
+      <inertia
+        ixx="0.00047879"
+        ixy="-1.8964E-07"
+        ixz="4.6187E-07"
+        iyy="0.0005165"
+        iyz="2.9305E-05"
+        izz="0.00011438" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.49804 0.49804 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint2"
+    type="revolute">
+    <origin
+      xyz="0 0.019 0.075"
+      rpy="0 0 0" />
+    <parent
+      link="Link1" />
+    <child
+      link="Link2" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Link3">
+    <inertial>
+      <origin
+        xyz="1.9454E-05 -0.030602 0.10896"
+        rpy="0 0 0" />
+      <mass
+        value="0.760" />
+      <inertia
+        ixx="0.00026181"
+        ixy="5.607E-08"
+        ixz="5.1403E-08"
+        iyy="0.00031111"
+        iyz="1.9352E-05"
+        izz="0.00010391" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.49804 0.49804 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint3"
+    type="revolute">
+    <origin
+      xyz="0 -0.0306 0.16"
+      rpy="0 0 0" />
+    <parent
+      link="Link2" />
+    <child
+      link="Link3" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Link4">
+    <inertial>
+      <origin
+        xyz="4.9922E-07 0.044491 0.0022286"
+        rpy="0 0 0" />
+      <mass
+        value="0.535" />
+      <inertia
+        ixx="0.00012581"
+        ixy="6.9136E-10"
+        ixz="-6.0733E-10"
+        iyy="0.00012519"
+        iyz="-6.1065E-06"
+        izz="0.00014884" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.49804 0.49804 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint4"
+    type="revolute">
+    <origin
+      xyz="0 -0.0082 0.16"
+      rpy="0 0 0" />
+    <parent
+      link="Link3" />
+    <child
+      link="Link4" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Link5">
+    <inertial>
+      <origin
+        xyz="-0.00010106 -0.0066991 0.052756"
+        rpy="0 0 0" />
+      <mass
+        value="0.338" />
+      <inertia
+        ixx="0.00010966"
+        ixy="-2.2891E-07"
+        ixz="1.3557E-06"
+        iyy="0.00013751"
+        iyz="1.6579E-05"
+        izz="0.00013092" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.49804 0.49804 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint5"
+    type="revolute">
+    <origin
+      xyz="0 0.052499 0.031501"
+      rpy="0 0 0" />
+    <parent
+      link="Link4" />
+    <child
+      link="Link5" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Link_Cam">
+    <inertial>
+      <origin
+        xyz="-0.00088951 0.017604 -0.016102"
+        rpy="0 0 0" />
+      <mass
+        value="0.091" />
+      <inertia
+        ixx="4.3744E-05"
+        ixy="1.507E-08"
+        ixz="-4.0699E-10"
+        iyy="5.4743E-05"
+        iyz="1.1469E-08"
+        izz="1.4497E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link_Cam.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.49804 0.49804 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link_Cam.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Cam"
+    type="fixed">
+    <origin
+      xyz="0.00084487 -2.919E-05 0.1558"
+      rpy="0 0 0" />
+    <parent
+      link="Link5" />
+    <child
+      link="Link_Cam" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link6">
+    <inertial>
+      <origin
+        xyz="-4.1302E-06 -0.043795 0.0001545"
+        rpy="0 0 0" />
+      <mass
+        value="0.278" />
+      <inertia
+        ixx="1.7239E-05"
+        ixy="4.399E-09"
+        ixz="1.0989E-07"
+        iyy="9.9167E-05"
+        iyz="1.9506E-07"
+        izz="8.9489E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.49804 0.49804 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint6"
+    type="revolute">
+    <origin
+      xyz="0 -0.040499 0.0658"
+      rpy="0 0 0" />
+    <parent
+      link="Link5" />
+    <child
+      link="Link6" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Link_FingerR">
+    <inertial>
+      <origin
+        xyz="-0.015939 -0.03846 0.0030516"
+        rpy="0 0 0" />
+      <mass
+        value="0.028" />
+      <inertia
+        ixx="9.3404E-06"
+        ixy="1.868E-06"
+        ixz="2.8297E-07"
+        iyy="4.842E-06"
+        iyz="-9.575E-07"
+        izz="7.3474E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link_FingerR.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link_FingerR.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_FingerR"
+    type="prismatic">
+    <origin
+      xyz="0 -0.0609 0"
+      rpy="0 0 0" />
+    <parent
+      link="Link6" />
+    <child
+      link="Link_FingerR" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="0"
+      upper="0.04"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Link_FingerL">
+    <inertial>
+      <origin
+        xyz="0.015939 -0.03846 -0.0030516"
+        rpy="0 0 0" />
+      <mass
+        value="0.028" />
+      <inertia
+        ixx="9.3404E-06"
+        ixy="-1.868E-06"
+        ixz="2.8297E-07"
+        iyy="4.842E-06"
+        iyz="9.575E-07"
+        izz="7.3474E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link_FingerL.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://dr_xcobo_description/meshes/Link_FingerL.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_FingerL"
+    type="prismatic">
+    <origin
+      xyz="0 -0.0609 0"
+      rpy="0 0 0" />
+    <parent
+      link="Link6" />
+    <child
+      link="Link_FingerL" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0"
+      upper="0.04"
+      effort="0"
+      velocity="0" />
+  </joint>
+</robot>
