@@ -29,7 +29,7 @@ class SearchTextParser(HTMLParser):
         if self.active is None:
             block = None
             if tag == 'section':
-                if attrs.get('id') in {'contact', 'news', 'competitions', 'team', 'teaching', 'robotics-applications', 'automatic-control'}:
+                if attrs.get('id') in {'contact', 'research-interests', 'news', 'competitions', 'team', 'teaching', 'robotics-applications', 'automatic-control'}:
                     block = attrs['id']
                 elif 'biography' in attrs.get('class', '').split():
                     block = 'about'
@@ -135,6 +135,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
     parser.close()
     sections = (
         ('about', 'About SenseDex Lab · 实验室简介', 'About', '简介 关于 履历 教育 经历 科研 项目'),
+        ('research-interests', 'Research Interests', 'Research', '研究方向 研究兴趣'),
         ('contact', 'Contact · 联系方式', 'Contact', '联系 联系方式 邮箱 邮件 地址 办公室'),
         ('competitions', 'Student Competitions · 指导学生竞赛', 'Teaching', '比赛 竞赛 学生 团队 指导教师 成果 图片'),
         ('news', 'News · 最新动态', 'News', '新闻 动态 消息'),

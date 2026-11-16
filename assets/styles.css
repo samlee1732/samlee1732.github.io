@@ -79,8 +79,8 @@ a { color: inherit; }
 .contact-card a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
 .contact-card a:hover { color: var(--accent); }
 .contact-card .contact-email { font-style: italic; }
-.publications, .news { padding-block: clamp(8px, 1vw, 24px); font-size: clamp(16px, 1.15vw, 31.4px); line-height: 1.7; }
-.publications > h2, .news > h1 { margin: 0 0 clamp(26px, 2vw, 48px); color: #302c38; font-size: clamp(26px, 1.8vw, 44px); line-height: 1.25; font-weight: 600; }
+.publications, .research-interests, .news { padding-block: clamp(8px, 1vw, 24px); font-size: clamp(16px, 1.15vw, 31.4px); line-height: 1.7; }
+.publications > h2, .research-interests > h2, .news > h1 { margin: 0 0 clamp(26px, 2vw, 48px); color: #302c38; font-size: clamp(26px, 1.8vw, 44px); line-height: 1.25; font-weight: 600; }
 .news-page { min-height: calc(100svh - var(--header-offset, var(--header-height))); padding-bottom: 64px; }
 .news-page > .news { margin-top: 28px; }
 .news p { margin: 0; color: var(--muted); }
@@ -106,6 +106,8 @@ a { color: inherit; }
 .project-entry .project-program { margin: 0 0 8px; color: var(--muted); font-size: .9em; }
 .project-meta { display: flex; flex-wrap: wrap; gap: 4px 24px; }
 .project-status { background: #eaf4ee; color: #276342; }
+.research-interests-list { margin: 0; padding-inline-start: 1.5em; }
+.research-interests-list h3 { margin: .45em 0; color: #302c38; font-size: 1.05em; font-weight: 600; }
 .under-review .publication-title { color: #302c38; }
 .under-review .publication-media { margin: 0; }
 .under-review .publication-media-caption { margin-top: 8px; color: var(--muted); font-size: .75em; line-height: 1.5; text-align: center; }
