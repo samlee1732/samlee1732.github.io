@@ -23,6 +23,15 @@
   {
     "id": "intrinsic-ai-industry-challenge",
     "title": "Intrinsic AI for Industry Challenge: Towards Sim2Real Transfer for Cable Insertion and Wire Handling in Electronic Assembly",
+    "summary": "In the simulated workcell, a robot handles both ends of a fiber-optic cable. It inserts the SFP transceiver into the designated network card and the SC connector into its socket. The video pairs an overview of the workcell with three wrist-camera views, showing how the connectors line up with their ports. The asMagicForce team’s Newton simulation is linked below.",
+    "simulation_url": "https://github.com/asMagicForce/aic-newton",
+    "demo": {
+      "file": "intrinsic-ai-industry-challenge.mp4",
+      "poster": "intrinsic-ai-industry-challenge-poster.jpg",
+      "width": 1280,
+      "height": 720,
+      "label": "Intrinsic AI for Industry Challenge project video"
+    },
     "journal": "IEEE Robotics and Automation Practice",
     "authors": [
       "Dunxing Zhang",

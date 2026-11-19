@@ -95,7 +95,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
             'text': description + ' 在审 投稿 论文 稿件 通讯作者 共同作者'
                     + (' 李森' if 'Sen Li' in paper.get('authors', paper.get('co_authors', [])) else ''),
             'description': description,
-            'url': '#' + paper['id'],
+            'url': 'publications/' + paper['id'] + '/' if paper.get('demo') else '#' + paper['id'],
             'kind': 'Under Review',
         })
 
@@ -294,14 +294,23 @@ def review_overview(papers):
                          + esc(p['corresponding_author']) + '</p>') if p.get('corresponding_author') else ''
         caption = ('\n                <figcaption class="publication-media-caption">'
                    + esc(p['image_caption']) + '</figcaption>') if p.get('image_caption') else ''
+        title = esc(p['title'])
+        preview = image(p, './', preview=True)
+        figure = f'<figure class="publication-media">{preview}{caption}</figure>'
+        if p.get('demo'):
+            url = './publications/' + p['id'] + '/'
+            title = f'<a href="{url}">{title}</a>'
+            figure = (f'<a href="{url}" aria-label="View project and video: {esc(p["title"])}">'
+                      f'<figure class="publication-media">{preview}'
+                      '<figcaption class="publication-media-caption">View project and video</figcaption></figure></a>')
         rows.append(f'''          <li>
             <article id="{p['id']}" class="publication-row" aria-labelledby="{p['id']}-title" tabindex="-1">
               <div class="publication-details">
                 <p class="publication-authors">{author_line}</p>
-                <h4 id="{p['id']}-title" class="publication-title">{esc(p['title'])} <span class="publication-type review-status">Under Review</span></h4>
+                <h4 id="{p['id']}-title" class="publication-title">{title} <span class="publication-type review-status">Under Review</span></h4>
                 <p class="publication-citation">Submitted to <cite>{esc(p['journal'])}</cite>.</p>{corresponding}
               </div>
-              <figure class="publication-media">{image(p, './', preview=True)}{caption}</figure>
+              {figure}
             </article>
           </li>''')
     return '''      <section id="under-review" class="publication-group under-review" aria-labelledby="under-review-heading" tabindex="-1">
@@ -478,8 +487,69 @@ def pdf_section(p):
 '''
 
 
-def detail(p, homepage):
+def paper_document(homepage, title, description, article, styles_version='20261114-author-markers'):
     header = site_header(homepage, '../../', '#publication')
+    return f'''<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{esc(description)}">
+    <meta name="theme-color" content="#92316f">
+    <title>{esc(title)} | SenseDex Lab</title>
+    <link rel="icon" href="../../assets/sensedex-mark-small.png" type="image/png">
+    <link rel="apple-touch-icon" href="../../assets/sensedex-mark-small.png">
+    <link rel="stylesheet" href="../../assets/styles.css?v={styles_version}">
+    <script src="../../assets/main.js?v=20261114-teaching-competitions" defer></script>
+    <script src="../../assets/visits.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+{header}
+    <main id="main-content" class="container paper-page">
+      <a class="paper-back" href="../../#publication">← All publications</a>
+      <article>
+{article}      </article>
+      <a class="paper-back paper-back-bottom" href="../../#publication">← All publications</a>
+    </main>
+  </body>
+</html>
+'''
+
+
+def review_detail(p, homepage):
+    demo = p['demo']
+    prefix = '../../assets/publications/'
+    video = prefix + esc(demo['file'])
+    article = f'''        <header class="paper-heading">
+          <p class="paper-eyebrow"><span class="publication-type review-status">Under Review</span></p>
+          <h1>{esc(p['title'])}</h1>
+          <p class="paper-authors">{authors(p)}</p>
+          <p class="author-legend">* Corresponding author</p>
+          <p class="paper-citation">Submitted to <cite>{esc(p['journal'])}</cite>.</p>
+        </header>
+        <section class="paper-section paper-demo" id="video" aria-labelledby="video-heading">
+          <h2 id="video-heading">Video</h2>
+          <video controls playsinline preload="none" poster="{prefix}{esc(demo['poster'])}" width="{demo['width']}" height="{demo['height']}" aria-label="{esc(demo['label'])}">
+            <source src="{video}" type="video/mp4">
+          </video>
+          <p class="paper-note"><a href="{video}">Open video (MP4)</a></p>
+        </section>
+        <section class="paper-section" aria-labelledby="overview-heading">
+          <h2 id="overview-heading">Project overview</h2>
+          <p>{esc(p['summary'])}</p>
+        </section>
+        <section class="paper-section" aria-labelledby="resources-heading">
+          <h2 id="resources-heading">Links</h2>
+          <ul class="paper-links">
+            <li><a href="{esc(p['simulation_url'])}">Simulation code on GitHub</a></li>
+          </ul>
+        </section>
+'''
+    return paper_document(homepage, p['title'], p['summary'], article, '20261119-project-video')
+
+
+def detail(p, homepage):
     section_name = 'Abstract' if p.get('abstract') else 'Summary'
     paragraphs = p.get('abstract') or [p['summary']]
     if isinstance(paragraphs, str):
@@ -508,27 +578,7 @@ def detail(p, homepage):
         missing.append('Video')
     missing_html = '<p class="paper-note">' + ' / '.join(missing) + ' to be added.</p>' if missing else ''
     doi_html = (f'<p class="paper-doi">DOI: <a href="https://doi.org/{esc(p["doi"])}">{esc(p["doi"])}</a></p>' if p.get('doi') else '')
-    return f'''<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{esc(p['summary'])}">
-    <meta name="theme-color" content="#92316f">
-    <title>{esc(p['marker'])} | SenseDex Lab</title>
-    <link rel="icon" href="../../assets/sensedex-mark-small.png" type="image/png">
-    <link rel="apple-touch-icon" href="../../assets/sensedex-mark-small.png">
-    <link rel="stylesheet" href="../../assets/styles.css?v=20261114-author-markers">
-    <script src="../../assets/main.js?v=20261114-teaching-competitions" defer></script>
-    <script src="../../assets/visits.js" defer></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
-{header}
-    <main id="main-content" class="container paper-page">
-      <a class="paper-back" href="../../#publication">← All publications</a>
-      <article>
-        <header class="paper-heading">
+    article = f'''        <header class="paper-heading">
           <p class="paper-eyebrow">{p['year']} <span aria-hidden="true">·</span> {esc(p['type'])}</p>
           <h1>{esc(p['title'])}</h1>
           <p class="paper-authors">{authors(p)}</p>
@@ -557,12 +607,8 @@ def detail(p, homepage):
           </div>
           <pre class="bibtex"><code>{esc(bibtex(p))}</code></pre>
         </section>
-{pdf_section(p)}      </article>
-      <a class="paper-back paper-back-bottom" href="../../#publication">← All publications</a>
-    </main>
-  </body>
-</html>
-'''
+{pdf_section(p)}'''
+    return paper_document(homepage, p['marker'], p['summary'], article)
 
 
 def main():
@@ -582,6 +628,11 @@ def main():
         for key in ('image', 'pdf', 'preview_image', 'overview_image'):
             if paper.get(key) and not (ROOT / 'assets/publications' / paper[key]).is_file():
                 raise FileNotFoundError(paper[key])
+        if paper.get('demo'):
+            for key in ('file', 'poster'):
+                asset = ROOT / 'assets/publications' / paper['demo'][key]
+                if not asset.is_file():
+                    raise FileNotFoundError(asset)
     homepage_path = ROOT / 'index.html'
     homepage = homepage_path.read_text()
     homepage, count = re.subn(
@@ -634,10 +685,15 @@ def main():
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(detail(paper, homepage))
         (folder / 'citation.bib').write_text(bibtex(paper))
+    review_pages = [paper for paper in reviews if paper.get('demo')]
+    for paper in review_pages:
+        folder = ROOT / 'publications' / paper['id']
+        folder.mkdir(parents=True, exist_ok=True)
+        (folder / 'index.html').write_text(review_detail(paper, homepage))
     entries = search_index(papers, reviews, patents, projects, homepage, news_content, competitions_content, team_content, teaching_content)
     (ROOT / 'assets/search-index.json').write_text(
         json.dumps(entries, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f'Generated Team, Teaching (including competitions), two course and News pages, a legacy competition redirect, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(projects)} project entries, {len(papers)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
+    print(f'Generated Team, Teaching (including competitions), two course and News pages, a legacy competition redirect, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(projects)} project entries, {len(papers) + len(review_pages)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
 
 
 if __name__ == '__main__':

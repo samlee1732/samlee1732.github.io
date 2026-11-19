@@ -143,6 +143,8 @@ a { color: inherit; }
 .paper-page a { color: var(--accent); text-underline-offset: .2em; }
 .paper-figure { margin: 36px auto; padding: 24px; background: #faf9fb; border: 1px solid #ece7ef; border-radius: 4px; }
 .paper-figure img { display: block; width: 100%; height: auto; max-height: 520px; object-fit: contain; }
+.paper-demo { margin-top: 28px; }
+.paper-demo video { display: block; width: 100%; height: auto; background: #17171a; border-radius: 4px; }
 /* Fit the complete quadrotor diagram in a 5:3 frame without clipping its labels. */
 .publication-media img[src$="parameter-adaptive-control.png"],
 .paper-figure img[src$="parameter-adaptive-control.png"] { aspect-ratio: 5 / 3; object-fit: contain; object-position: center; background: #fff; }
