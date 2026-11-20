@@ -477,12 +477,6 @@ def pdf_section(p):
         publisher_url = '../../assets/publications/' + esc(p['article_in_press_pdf'])
         version_line = ('          <p class="paper-note">Author preprint · '
                         f'<a href="{publisher_url}">Publisher’s article-in-press PDF</a></p>\n')
-    elif p.get('original_pdf'):
-        original = p['original_pdf']
-        web_size = (ROOT / 'assets/publications' / p['pdf']).stat().st_size / 1_000_000
-        version_line = (f'          <p class="paper-note">Web-optimized PDF ({web_size:.2f} MB) · '
-                        f'<a href="{esc(original["url"])}">Publisher original ({original["size_bytes"] / 1_000_000:.1f} MB)</a> · '
-                        f'<a href="{esc(original["license_url"])}">{esc(original["license"])}</a></p>\n')
     return f'''        <section id="pdf" class="paper-section" aria-label="Read the {paper_name} paper" tabindex="-1">
 {version_line}          <iframe class="paper-pdf-viewer" src="../../assets/pdfjs/web/viewer.html?profile={p['id']}&amp;file=../../publications/{esc(p['pdf'])}#zoom=auto" title="PDF: {esc(p['title'])}" loading="lazy"></iframe>
           <noscript><p><a href="{esc(pdf_url)}">Open the {paper_name} PDF</a></p></noscript>
@@ -629,10 +623,6 @@ def detail(p, homepage):
     paragraphs_html = '\n'.join('          <p>' + esc(text) + '</p>' for text in paragraphs)
     if not p.get('abstract'):
         paragraphs_html += '\n          <p class="paper-note">Full abstract to be added.</p>'
-    elif p.get('abstract_license') and p.get('abstract_source'):
-        paragraphs_html += ('\n          <p class="paper-note"><a href="' + esc(p['abstract_source'])
-                            + '">Abstract source</a> · <a href="' + esc(p['abstract_license'])
-                            + '">CC BY 4.0</a></p>')
     article = f'''        <header class="paper-heading">
           <p class="paper-eyebrow">{p['year']} <span aria-hidden="true">·</span> {esc(p['type'])}</p>
           <h1>{esc(p['title'])}</h1>
