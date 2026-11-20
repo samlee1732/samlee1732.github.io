@@ -69,7 +69,8 @@
     "type": "Journal Article",
     "status": "Published online",
     "paper": "https://doi.org/10.1016/j.birob.2026.100326",
-    "pdf": "activespn2.pdf",
+    "pdf": "activespn2-author.pdf",
+    "article_in_press_pdf": "activespn2.pdf",
     "article_media": {
       "figure": "activespn2-figure-1.jpg",
       "figure_width": 2771,
@@ -96,9 +97,9 @@
     "metadata_sources": [
       "https://www.sciencedirect.com/science/article/pii/S2667379726000549",
       "https://api.crossref.org/works/10.1016/j.birob.2026.100326",
+      "http://www.senli.site/files/2025-J-BIROB-LiDeformable.pdf",
       "./assets/publications/activespn2.pdf"
     ],
-    "pdf_label": "PDF (article in press)",
     "preview_image": "collages/activespn2.webp",
     "overview_image": "collages/activespn2.png",
     "overview_width": 1500,

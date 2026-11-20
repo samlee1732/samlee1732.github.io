@@ -471,15 +471,19 @@ def pdf_section(p):
     if not p.get('pdf'):
         return ''
     pdf_url = '../../assets/publications/' + p['pdf']
-    version_label = ('<p class="paper-note">Article in press (2026).</p>' if p.get('pdf_label') == 'PDF (article in press)' else '')
     if p['id'] in ('activespn', 'activespn2'):
-        paper_name = 'ActiveSPN2' if p['id'] == 'activespn2' else 'ActiveSPN'
-        version_line = f'          {version_label}\n' if version_label else ''
+        paper_name = p['marker']
+        version_line = ''
+        if p.get('article_in_press_pdf'):
+            publisher_url = '../../assets/publications/' + esc(p['article_in_press_pdf'])
+            version_line = ('          <p class="paper-note">Author preprint · '
+                            f'<a href="{publisher_url}">Publisher’s article-in-press PDF</a></p>\n')
         return f'''        <section id="pdf" class="paper-section activespn-pdf" aria-label="Read the {paper_name} paper" tabindex="-1">
 {version_line}          <iframe class="paper-pdf-viewer" src="../../assets/pdfjs/web/viewer.html?profile={p['id']}&amp;file=../../publications/{esc(p['pdf'])}#zoom=auto" title="PDF: {esc(p['title'])}" loading="lazy"></iframe>
           <noscript><p><a href="{esc(pdf_url)}">Open the {paper_name} PDF</a></p></noscript>
         </section>
 '''
+    version_label = ('<p class="paper-note">Article in press (2026).</p>' if p.get('pdf_label') == 'PDF (article in press)' else '')
     return f'''        <section id="pdf" class="paper-section" aria-labelledby="pdf-heading" tabindex="-1">
           <div class="paper-section-heading">
             <h2 id="pdf-heading">PDF</h2>
@@ -686,7 +690,7 @@ def main():
             unknown = set(paper.get(role, [])) - set(paper.get('authors', []))
             if unknown:
                 raise ValueError('Author role references unknown names: ' + ', '.join(sorted(unknown)))
-        for key in ('image', 'pdf', 'preview_image', 'overview_image'):
+        for key in ('image', 'pdf', 'article_in_press_pdf', 'preview_image', 'overview_image'):
             if paper.get(key) and not (ROOT / 'assets/publications' / paper[key]).is_file():
                 raise FileNotFoundError(paper[key])
         if paper.get('article_media'):
