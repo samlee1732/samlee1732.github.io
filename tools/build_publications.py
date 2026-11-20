@@ -471,13 +471,15 @@ def pdf_section(p):
     if not p.get('pdf'):
         return ''
     pdf_url = '../../assets/publications/' + p['pdf']
-    if p['id'] == 'activespn':
-        return f'''        <section id="pdf" class="paper-section activespn-pdf" aria-label="Read the ActiveSPN paper" tabindex="-1">
-          <iframe class="paper-pdf-viewer" src="../../assets/pdfjs/web/viewer.html?profile=activespn&amp;file=../../publications/{esc(p['pdf'])}#zoom=auto" title="PDF: {esc(p['title'])}" loading="lazy"></iframe>
-          <noscript><p><a href="{esc(pdf_url)}">Open the ActiveSPN PDF</a></p></noscript>
+    version_label = ('<p class="paper-note">Article in press (2026).</p>' if p.get('pdf_label') == 'PDF (article in press)' else '')
+    if p['id'] in ('activespn', 'activespn2'):
+        paper_name = 'ActiveSPN2' if p['id'] == 'activespn2' else 'ActiveSPN'
+        version_line = f'          {version_label}\n' if version_label else ''
+        return f'''        <section id="pdf" class="paper-section activespn-pdf" aria-label="Read the {paper_name} paper" tabindex="-1">
+{version_line}          <iframe class="paper-pdf-viewer" src="../../assets/pdfjs/web/viewer.html?profile={p['id']}&amp;file=../../publications/{esc(p['pdf'])}#zoom=auto" title="PDF: {esc(p['title'])}" loading="lazy"></iframe>
+          <noscript><p><a href="{esc(pdf_url)}">Open the {paper_name} PDF</a></p></noscript>
         </section>
 '''
-    version_label = ('<p class="paper-note">Article in press (2026).</p>' if p.get('pdf_label') == 'PDF (article in press)' else '')
     return f'''        <section id="pdf" class="paper-section" aria-labelledby="pdf-heading" tabindex="-1">
           <div class="paper-section-heading">
             <h2 id="pdf-heading">PDF</h2>
@@ -563,8 +565,9 @@ def review_detail(p, homepage):
 def illustrated_detail(p, homepage):
     media = p['article_media']
     assets = '../../assets/publications/'
-    paragraphs = '\n'.join(f'          <p>{esc(t)}</p>' for t in p['abstract'])
+    abstract = p['abstract'] if isinstance(p['abstract'], str) else ' '.join(p['abstract'])
     doi_url = 'https://doi.org/' + esc(p['doi'])
+    code_item = f"            <li>\n{repository_link(p['code'])}\n            </li>\n" if p.get('code') else ''
     article = f'''        <header class="paper-heading">
           <p class="paper-eyebrow">{p['year']} · {esc(p['type'])}</p>
           <h1>{esc(p['title'])}</h1>
@@ -577,21 +580,18 @@ def illustrated_detail(p, homepage):
           <p class="author-legend">* Corresponding author</p>
         </div>
         <figure id="video" class="article-video">
-          <video width="1920" height="1080" controls playsinline controlslist="nodownload" preload="none" poster="{assets}{esc(media['poster'])}" aria-label="{esc(p['marker'])} supplementary video">
+          <video width="{media['video_width']}" height="{media['video_height']}" controls playsinline controlslist="nodownload" preload="none" poster="{assets}{esc(media['poster'])}" aria-label="{esc(p['marker'])} supplementary video">
             <source src="{assets}{esc(media['video'])}" type="video/mp4">
           </video>
         </figure>
         <section id="abstract" class="paper-section" aria-labelledby="abstract-heading" tabindex="-1">
           <h2 id="abstract-heading">Abstract</h2>
-{paragraphs}
+          <p>{esc(abstract)}</p>
         </section>
         <section id="links" class="paper-section paper-repository" aria-labelledby="links-heading" tabindex="-1">
           <h2 id="links-heading">Links</h2>
           <ul class="article-resources">
-            <li>
-{repository_link(p['code'])}
-            </li>
-            <li>
+{code_item}            <li>
               <a href="{doi_url}">
                 <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="currentColor"/><text x="8" y="10.5" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">doi</text></svg>
                 <span>doi:{esc(p['doi'])}</span>

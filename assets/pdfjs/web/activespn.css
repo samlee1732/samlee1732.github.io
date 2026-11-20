@@ -1,4 +1,4 @@
-/* This stylesheet is loaded only by the ActiveSPN reader profile. */
+/* This stylesheet is loaded only by the ActiveSPN and ActiveSPN2 reader profiles. */
 :root.activespn-reader {
   color-scheme: light;
   --body-bg-color: #d8d8d8;

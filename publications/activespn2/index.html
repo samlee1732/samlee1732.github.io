@@ -8,7 +8,7 @@
     <title>ActiveSPN2 | SenseDex Lab</title>
     <link rel="icon" href="../../assets/sensedex-mark-small.png" type="image/png">
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark-small.png">
-    <link rel="stylesheet" href="../../assets/styles.css?v=20261114-author-markers">
+    <link rel="stylesheet" href="../../assets/styles.css?v=20261120-activespn-links">
     <script src="../../assets/main.js?v=20261114-teaching-competitions" defer></script>
     <script src="../../assets/visits.js" defer></script>
   </head>
@@ -50,38 +50,42 @@
         </div>
       </div>
     </header>
-    <main id="main-content" class="container paper-page">
+    <main id="main-content" class="container paper-page illustrated-paper">
       <a class="paper-back" href="../../#publication">← All publications</a>
       <article>
         <header class="paper-heading">
-          <p class="paper-eyebrow">2026 <span aria-hidden="true">·</span> Journal Article</p>
+          <p class="paper-eyebrow">2026 · Journal Article</p>
           <h1>Multi-modal vision-based deformable perception for in-finger manipulation with soft active surfaces</h1>
-          <p class="paper-authors"><strong>Sen Li</strong>, Chaoyang Song, Fang Wan<sup class="author-marker" title="Corresponding author" aria-label="Corresponding author">*</sup></p>
-          <p class="author-legend"><span># Equal contribution</span> <span aria-hidden="true">·</span> <span>* Corresponding author</span></p>
-          <p class="paper-citation"><cite>Biomimetic Intelligence and Robotics</cite>, article 100326, 2026, Published online.</p>
-          <p class="paper-doi">DOI: <a href="https://doi.org/10.1016/j.birob.2026.100326">10.1016/j.birob.2026.100326</a></p>
         </header>
-        <figure class="paper-figure">
-          <img src="../../assets/publications/activespn2.gif" alt="ActiveSPN2 soft active surface gripper demonstration" decoding="async" width="1203" height="602">
+        <figure class="article-summary-figure">
+          <img src="../../assets/publications/activespn2-figure-1.jpg" alt="ActiveSPN2 gripper and its internal camera, with two image-processing paths for estimating contact forces and object pose." width="2771" height="1391" decoding="async">
+        </figure>
+        <div class="article-byline">
+          <p><strong>Sen Li</strong>, Chaoyang Song, Fang Wan<sup class="author-marker" title="Corresponding author" aria-label="Corresponding author">*</sup>. <a href="https://doi.org/10.1016/j.birob.2026.100326"><cite>Biomimetic Intelligence and Robotics</cite>, article 100326, 2026, Published online.</a></p>
+          <p class="author-legend">* Corresponding author</p>
+        </div>
+        <figure id="video" class="article-video">
+          <video width="1280" height="720" controls playsinline controlslist="nodownload" preload="none" poster="../../assets/publications/activespn2-video-poster.jpg" aria-label="ActiveSPN2 supplementary video">
+            <source src="../../assets/publications/activespn2-supplementary.mp4" type="video/mp4">
+          </video>
         </figure>
         <section id="abstract" class="paper-section" aria-labelledby="abstract-heading" tabindex="-1">
           <h2 id="abstract-heading">Abstract</h2>
           <p>Enabling robots to manipulate objects dexterously within their grasp often requires complex multi-fingered hands with dense, multi-modal sensor arrays. This complexity can limit practicality and robustness, especially in confined spaces. This study challenges that paradigm by introducing a robust multi-modal perception method that derives 6D forces and poses from the large-scale deformation of a soft finger, using only a single internal camera. We propose ActiveSPN2, a robot gripper with a soft active surface designed for in-finger manipulation in constrained environments, featuring multi-modal perception through a vision-based deformable perception architecture. By tracking the real-time deformation of the internal Soft Polyhedral Network, we achieve real-time, multi-modal vision-based perception that provides 6D forces and object pose estimation during in-finger manipulation. Quantitatively, the proposed force perception model achieves an average accuracy of approximately 0.286 N on the test set, indicating reliable generalization under unseen manipulation conditions. A series of experiments were conducted on the ActiveSPN2 gripper using the proposed vision-based deformable perception approach, demonstrating the effectiveness and robustness of the strategy.</p>
         </section>
-        <section id="links" class="paper-section" aria-labelledby="links-heading" tabindex="-1">
+        <section id="links" class="paper-section paper-repository" aria-labelledby="links-heading" tabindex="-1">
           <h2 id="links-heading">Links</h2>
-          <ul class="paper-links">
-            <li><a href="https://doi.org/10.1016/j.birob.2026.100326">Publisher</a></li>
-            <li><a href="https://doi.org/10.1016/j.birob.2026.100326">DOI: 10.1016/j.birob.2026.100326</a></li>
-            <li><a href="#pdf">PDF (article in press)</a></li>
+          <ul class="article-resources">
+            <li>
+              <a href="https://doi.org/10.1016/j.birob.2026.100326">
+                <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="currentColor"/><text x="8" y="10.5" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">doi</text></svg>
+                <span>doi:10.1016/j.birob.2026.100326</span>
+              </a>
+            </li>
           </ul>
-          <p class="paper-note">Video to be added.</p>
         </section>
         <section id="bibtex" class="paper-section" aria-labelledby="bibtex-heading" tabindex="-1">
-          <div class="paper-section-heading">
-            <h2 id="bibtex-heading">BibTeX</h2>
-            <a href="./citation.bib" download="activespn2.bib">Download .bib</a>
-          </div>
+          <h2 id="bibtex-heading">BibTeX <small>(<a href="./citation.bib" download="activespn2.bib">Download</a>)</small></h2>
           <pre class="bibtex"><code>@article{Li2026ActiveSPN2,
   title = {{Multi-modal vision-based deformable perception for in-finger manipulation with soft active surfaces}},
   author = {Sen Li and Chaoyang Song and Fang Wan},
@@ -94,17 +98,10 @@
 }
 </code></pre>
         </section>
-        <section id="pdf" class="paper-section" aria-labelledby="pdf-heading" tabindex="-1">
-          <div class="paper-section-heading">
-            <h2 id="pdf-heading">PDF</h2>
-            <ul class="paper-links paper-pdf-actions" aria-label="PDF options">
-              <li><a href="../../assets/publications/activespn2.pdf" target="_blank" rel="noopener">Open PDF</a></li>
-              <li><a href="../../assets/publications/activespn2.pdf" download="activespn2.pdf">Download PDF</a></li>
-            </ul>
-          </div>
+        <section id="pdf" class="paper-section activespn-pdf" aria-label="Read the ActiveSPN2 paper" tabindex="-1">
           <p class="paper-note">Article in press (2026).</p>
-          <iframe class="paper-pdf-viewer" src="../../assets/pdfjs/web/viewer.html?file=../../publications/activespn2.pdf#zoom=page-width" title="PDF: Multi-modal vision-based deformable perception for in-finger manipulation with soft active surfaces" loading="lazy"></iframe>
-          <p class="paper-note">If the preview does not load, <a href="../../assets/publications/activespn2.pdf" target="_blank" rel="noopener">open the PDF in a new tab</a> or download it.</p>
+          <iframe class="paper-pdf-viewer" src="../../assets/pdfjs/web/viewer.html?profile=activespn2&amp;file=../../publications/activespn2.pdf#zoom=auto" title="PDF: Multi-modal vision-based deformable perception for in-finger manipulation with soft active surfaces" loading="lazy"></iframe>
+          <noscript><p><a href="../../assets/publications/activespn2.pdf">Open the ActiveSPN2 PDF</a></p></noscript>
         </section>
       </article>
       <a class="paper-back paper-back-bottom" href="../../#publication">← All publications</a>
