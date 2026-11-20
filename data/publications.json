@@ -126,6 +126,12 @@
     "paper": "https://ieeexplore.ieee.org/document/10619925",
     "pdf": "active-surface.pdf",
     "video": "https://youtu.be/8DpCgMlrLU4",
+    "additional_links": [
+      {
+        "label": "BionicDL project page",
+        "url": "https://bionicdl.ancorasir.com/?p=1315"
+      }
+    ],
     "image": "active-surface.png",
     "summary": "In this study, we present the design of a soft robotic finger with an active surface on an omni-adaptive structure, which can be easily installed on existing grippers and achieve stability and dexterity for in-hand manipulation.",
     "image_width": 1476,
@@ -347,6 +353,19 @@
     "type": "Journal Article",
     "status": "Published",
     "paper": "https://www.oaepublish.com/articles/ss.2025.14",
+    "pdf": "oral-care.pdf",
+    "original_pdf": {
+      "url": "https://f.oaes.cc/xmlpdf/published/article/154f469a4e0a4347c19a3fbfb331db5b/ss5014.pdf",
+      "size_bytes": 99786653,
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "additional_links": [
+      {
+        "label": "Project page and videos",
+        "url": "https://bionicdl.ancorasir.com/?p=2120"
+      }
+    ],
     "image": "oral-care.gif",
     "summary": "This study presents a novel, cost-effective sensor platform based on Vision-based Deformation Perception for community oral health education. The system integrates a 3D-printed thermoplastic polyurethane soft structure with a rigid resin frame and an ArUco marker to encode interaction information, including the contact region and six-dimensional force and torque.",
     "image_width": 1230,

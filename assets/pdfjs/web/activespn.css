@@ -1,4 +1,4 @@
-/* This stylesheet is loaded only by the ActiveSPN and ActiveSPN2 reader profiles. */
+/* Shared by the explicitly selected publication reader profiles. */
 :root.activespn-reader {
   color-scheme: light;
   --body-bg-color: #d8d8d8;
@@ -12,6 +12,10 @@
 .activespn-reader #mainContainer { min-width: 0; }
 .activespn-reader #viewerContainer { background: #d8d8d8; }
 .activespn-reader #viewsManager { background: #f1f1f1; border-radius: 0; --sidebar-width: 200px; }
+.activespn-reader[data-reader-profile="parameter-adaptive-control"] #pageNumber {
+  width: 7ch;
+  padding-inline: 3px;
+}
 .activespn-reader #outlinesView .treeItem > a {
   white-space: normal;
   overflow-wrap: anywhere;

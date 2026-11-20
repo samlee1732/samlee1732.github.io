@@ -471,35 +471,26 @@ def pdf_section(p):
     if not p.get('pdf'):
         return ''
     pdf_url = '../../assets/publications/' + p['pdf']
-    if p['id'] in ('activespn', 'activespn2'):
-        paper_name = p['marker']
-        version_line = ''
-        if p.get('article_in_press_pdf'):
-            publisher_url = '../../assets/publications/' + esc(p['article_in_press_pdf'])
-            version_line = ('          <p class="paper-note">Author preprint · '
-                            f'<a href="{publisher_url}">Publisher’s article-in-press PDF</a></p>\n')
-        return f'''        <section id="pdf" class="paper-section activespn-pdf" aria-label="Read the {paper_name} paper" tabindex="-1">
+    paper_name = esc(p['marker'])
+    version_line = ''
+    if p.get('article_in_press_pdf'):
+        publisher_url = '../../assets/publications/' + esc(p['article_in_press_pdf'])
+        version_line = ('          <p class="paper-note">Author preprint · '
+                        f'<a href="{publisher_url}">Publisher’s article-in-press PDF</a></p>\n')
+    elif p.get('original_pdf'):
+        original = p['original_pdf']
+        web_size = (ROOT / 'assets/publications' / p['pdf']).stat().st_size / 1_000_000
+        version_line = (f'          <p class="paper-note">Web-optimized PDF ({web_size:.2f} MB) · '
+                        f'<a href="{esc(original["url"])}">Publisher original ({original["size_bytes"] / 1_000_000:.1f} MB)</a> · '
+                        f'<a href="{esc(original["license_url"])}">{esc(original["license"])}</a></p>\n')
+    return f'''        <section id="pdf" class="paper-section" aria-label="Read the {paper_name} paper" tabindex="-1">
 {version_line}          <iframe class="paper-pdf-viewer" src="../../assets/pdfjs/web/viewer.html?profile={p['id']}&amp;file=../../publications/{esc(p['pdf'])}#zoom=auto" title="PDF: {esc(p['title'])}" loading="lazy"></iframe>
           <noscript><p><a href="{esc(pdf_url)}">Open the {paper_name} PDF</a></p></noscript>
         </section>
 '''
-    version_label = ('<p class="paper-note">Article in press (2026).</p>' if p.get('pdf_label') == 'PDF (article in press)' else '')
-    return f'''        <section id="pdf" class="paper-section" aria-labelledby="pdf-heading" tabindex="-1">
-          <div class="paper-section-heading">
-            <h2 id="pdf-heading">PDF</h2>
-            <ul class="paper-links paper-pdf-actions" aria-label="PDF options">
-              <li><a href="{esc(pdf_url)}" target="_blank" rel="noopener">Open PDF</a></li>
-              <li><a href="{esc(pdf_url)}" download="{esc(p['pdf'])}">Download PDF</a></li>
-            </ul>
-          </div>
-          {version_label}
-          <iframe class="paper-pdf-viewer" src="../../assets/pdfjs/web/viewer.html?file=../../publications/{esc(p['pdf'])}#zoom=page-width" title="PDF: {esc(p['title'])}" loading="lazy"></iframe>
-          <p class="paper-note">If the preview does not load, <a href="{esc(pdf_url)}" target="_blank" rel="noopener">open the PDF in a new tab</a> or download it.</p>
-        </section>
-'''
 
 
-def paper_document(homepage, title, description, article, styles_version='20261114-author-markers', layout='paper-page'):
+def paper_document(homepage, title, description, article, layout='paper-page'):
     header = site_header(homepage, '../../', '#publication')
     return f'''<!doctype html>
 <html lang="en">
@@ -511,7 +502,7 @@ def paper_document(homepage, title, description, article, styles_version='202611
     <title>{esc(title)} | SenseDex Lab</title>
     <link rel="icon" href="../../assets/sensedex-mark-small.png" type="image/png">
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark-small.png">
-    <link rel="stylesheet" href="../../assets/styles.css?v={styles_version}">
+    <link rel="stylesheet" href="../../assets/styles.css?v=20261120-paper-resources">
     <script src="../../assets/main.js?v=20261114-teaching-competitions" defer></script>
     <script src="../../assets/visits.js" defer></script>
   </head>
@@ -529,12 +520,45 @@ def paper_document(homepage, title, description, article, styles_version='202611
 '''
 
 
-def repository_link(url):
-    repo_url = esc(url)
-    return f'''          <a class="repository-link" href="{repo_url}">
-            <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-            <span>{repo_url}</span>
-          </a>'''
+RESOURCE_ICONS = {
+    'code': '<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>',
+    'doi': '<circle cx="8" cy="8" r="7"/><text x="8" y="10.5" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">doi</text>',
+    'video': '<rect x="1" y="3" width="14" height="10" rx="3"/><path d="M7 5.5v5l4-2.5z" fill="white"/>',
+    'link': '<g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6.5 5 2-2a3 3 0 0 1 4.2 4.2l-2 2M9.5 11l-2 2a3 3 0 0 1-4.2-4.2l2-2M5.5 10.5l5-5"/></g>',
+}
+
+
+def resource_section(p):
+    resources = []
+    code = p.get('code') or p.get('simulation_url')
+    if code:
+        resources.append(('code', code, code))
+    if p.get('doi'):
+        resources.append(('doi', 'doi:' + p['doi'], 'https://doi.org/' + p['doi']))
+    elif p.get('paper'):
+        resources.append(('link', 'Publisher’s article', p['paper']))
+    if p.get('video') and not p.get('article_media'):
+        resources.append(('video', 'Video on YouTube', p['video']))
+    for resource in p.get('additional_links', []):
+        resources.append(('link', resource['label'], resource['url']))
+    if not resources:
+        return ''
+    rows = []
+    for kind, label, url in resources:
+        rows.append(f'''            <li>
+              <a href="{esc(url)}">
+                <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">{RESOURCE_ICONS[kind]}</svg>
+                <span>{esc(label)}</span>
+              </a>
+            </li>''')
+    items = '\n'.join(rows)
+    return f'''        <section id="links" class="paper-section" aria-labelledby="links-heading" tabindex="-1">
+          <h2 id="links-heading">Links</h2>
+          <ul class="article-resources">
+{items}
+          </ul>
+        </section>
+'''
 
 
 def review_detail(p, homepage):
@@ -558,20 +582,14 @@ def review_detail(p, homepage):
           <h2 id="overview-heading">Project overview</h2>
           <p>{esc(p['summary'])}</p>
         </section>
-        <section class="paper-section paper-repository" aria-labelledby="resources-heading">
-          <h2 id="resources-heading">Links</h2>
-{repository_link(p["simulation_url"])}
-        </section>
-'''
-    return paper_document(homepage, p['title'], p['summary'], article, '20261120-repository-link')
+{resource_section(p)}'''
+    return paper_document(homepage, p['title'], p['summary'], article)
 
 
 def illustrated_detail(p, homepage):
     media = p['article_media']
     assets = '../../assets/publications/'
     abstract = p['abstract'] if isinstance(p['abstract'], str) else ' '.join(p['abstract'])
-    doi_url = 'https://doi.org/' + esc(p['doi'])
-    code_item = f"            <li>\n{repository_link(p['code'])}\n            </li>\n" if p.get('code') else ''
     article = f'''        <header class="paper-heading">
           <p class="paper-eyebrow">{p['year']} · {esc(p['type'])}</p>
           <h1>{esc(p['title'])}</h1>
@@ -592,23 +610,12 @@ def illustrated_detail(p, homepage):
           <h2 id="abstract-heading">Abstract</h2>
           <p>{esc(abstract)}</p>
         </section>
-        <section id="links" class="paper-section paper-repository" aria-labelledby="links-heading" tabindex="-1">
-          <h2 id="links-heading">Links</h2>
-          <ul class="article-resources">
-{code_item}            <li>
-              <a href="{doi_url}">
-                <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="currentColor"/><text x="8" y="10.5" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">doi</text></svg>
-                <span>doi:{esc(p['doi'])}</span>
-              </a>
-            </li>
-          </ul>
-        </section>
-        <section id="bibtex" class="paper-section" aria-labelledby="bibtex-heading" tabindex="-1">
+{resource_section(p)}        <section id="bibtex" class="paper-section" aria-labelledby="bibtex-heading" tabindex="-1">
           <h2 id="bibtex-heading">BibTeX <small>(<a href="./citation.bib" download="{esc(p['id'])}.bib">Download</a>)</small></h2>
           <pre class="bibtex"><code>{esc(bibtex(p))}</code></pre>
         </section>
 {pdf_section(p)}'''
-    return paper_document(homepage, p['marker'], p['summary'], article, '20261120-activespn-links',
+    return paper_document(homepage, p['marker'], p['summary'], article,
                           layout='paper-page illustrated-paper')
 
 
@@ -626,30 +633,12 @@ def detail(p, homepage):
         paragraphs_html += ('\n          <p class="paper-note"><a href="' + esc(p['abstract_source'])
                             + '">Abstract source</a> · <a href="' + esc(p['abstract_license'])
                             + '">CC BY 4.0</a></p>')
-    links = [('Publisher', p['paper'])]
-    if p.get('doi'):
-        links.append(('DOI: ' + p['doi'], 'https://doi.org/' + p['doi']))
-    if p.get('pdf'):
-        links.append((p.get('pdf_label', 'PDF'), '#pdf'))
-    if p.get('video'):
-        links.append(('Video', p['video']))
-    if p.get('code'):
-        links.append(('Code', p['code']))
-    links_html = '\n'.join(f'            <li><a href="{esc(url)}">{esc(label)}</a></li>' for label, url in links)
-    missing = []
-    if not p.get('pdf'):
-        missing.append('PDF')
-    if not p.get('video'):
-        missing.append('Video')
-    missing_html = '<p class="paper-note">' + ' / '.join(missing) + ' to be added.</p>' if missing else ''
-    doi_html = (f'<p class="paper-doi">DOI: <a href="https://doi.org/{esc(p["doi"])}">{esc(p["doi"])}</a></p>' if p.get('doi') else '')
     article = f'''        <header class="paper-heading">
           <p class="paper-eyebrow">{p['year']} <span aria-hidden="true">·</span> {esc(p['type'])}</p>
           <h1>{esc(p['title'])}</h1>
           <p class="paper-authors">{authors(p)}</p>
           {author_legend()}
-          <p class="paper-citation">{citation(p)}</p>
-          {doi_html}
+          <p class="paper-citation"><a href="{esc(p['paper'])}">{citation(p)}</a></p>
         </header>
         <figure class="paper-figure">
           {image(p, '../../', lazy=False)}
@@ -658,14 +647,7 @@ def detail(p, homepage):
           <h2 id="abstract-heading">{section_name}</h2>
 {paragraphs_html}
         </section>
-        <section id="links" class="paper-section" aria-labelledby="links-heading" tabindex="-1">
-          <h2 id="links-heading">Links</h2>
-          <ul class="paper-links">
-{links_html}
-          </ul>
-          {missing_html}
-        </section>
-        <section id="bibtex" class="paper-section" aria-labelledby="bibtex-heading" tabindex="-1">
+{resource_section(p)}        <section id="bibtex" class="paper-section" aria-labelledby="bibtex-heading" tabindex="-1">
           <div class="paper-section-heading">
             <h2 id="bibtex-heading">BibTeX</h2>
             <a href="./citation.bib" download="{p['id']}.bib">Download .bib</a>
@@ -673,7 +655,7 @@ def detail(p, homepage):
           <pre class="bibtex"><code>{esc(bibtex(p))}</code></pre>
         </section>
 {pdf_section(p)}'''
-    return paper_document(homepage, p['marker'], p['summary'], article)
+    return paper_document(homepage, p['marker'], p['summary'], article, layout='paper-page publication-paper')
 
 
 def main():
