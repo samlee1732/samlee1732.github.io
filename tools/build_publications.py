@@ -565,7 +565,6 @@ def illustrated_detail(p, homepage):
     assets = '../../assets/publications/'
     paragraphs = '\n'.join(f'          <p>{esc(t)}</p>' for t in p['abstract'])
     doi_url = 'https://doi.org/' + esc(p['doi'])
-    code_note = f" <small>{esc(media['code_note'])}</small>" if media.get('code_note') else ''
     article = f'''        <header class="paper-heading">
           <p class="paper-eyebrow">{p['year']} · {esc(p['type'])}</p>
           <h1>{esc(p['title'])}</h1>
@@ -590,10 +589,14 @@ def illustrated_detail(p, homepage):
           <h2 id="links-heading">Links</h2>
           <ul class="article-resources">
             <li>
-{repository_link(p['code'])}{code_note}
+{repository_link(p['code'])}
             </li>
-            <li><a href="{doi_url}">doi:{esc(p['doi'])}</a></li>
-            <li><a href="{assets}{esc(p['pdf'])}">Published PDF</a></li>
+            <li>
+              <a href="{doi_url}">
+                <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="currentColor"/><text x="8" y="10.5" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="7.5" font-weight="bold">doi</text></svg>
+                <span>doi:{esc(p['doi'])}</span>
+              </a>
+            </li>
           </ul>
         </section>
         <section id="bibtex" class="paper-section" aria-labelledby="bibtex-heading" tabindex="-1">
@@ -601,7 +604,7 @@ def illustrated_detail(p, homepage):
           <pre class="bibtex"><code>{esc(bibtex(p))}</code></pre>
         </section>
 {pdf_section(p)}'''
-    return paper_document(homepage, p['marker'], p['summary'], article, '20261120-illustrated-paper',
+    return paper_document(homepage, p['marker'], p['summary'], article, '20261120-activespn-links',
                           layout='paper-page illustrated-paper')
 
 

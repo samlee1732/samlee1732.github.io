@@ -286,9 +286,10 @@ a { color: inherit; }
 .illustrated-paper .paper-section { border: 0; padding-block: 18px; }
 .illustrated-paper .paper-section h2 { font-size: clamp(25px, 2.3vw, 30px); font-weight: 500; }
 .illustrated-paper a:not(.paper-back) { color: #3658ce; }
-.article-resources { list-style: none; padding-inline-start: min(4vw, 48px); margin: 0; }
-.article-resources li + li { margin-top: 6px; }
-.article-resources .repository-link { margin: 0; max-width: 100%; }
-.article-resources small { color: #616972; }
+.illustrated-paper #links h2 { margin-bottom: 26px; }
+.article-resources { display: grid; gap: 10px; list-style: none; padding-inline-start: min(10vw, 50px); margin: 0; }
+.illustrated-paper .article-resources a { display: inline-grid; grid-template-columns: 14px minmax(0, 1fr); align-items: center; gap: 11px; margin: 0; max-width: 100%; color: #3857f1; font-size: 15px; line-height: 1.73; text-decoration: none; }
+.article-resources a svg { width: 14px; height: 14px; margin: 0; align-self: center; color: #30373e; }
+.article-resources a:hover span, .article-resources a:focus-visible span { text-decoration: underline; }
 .illustrated-paper h2 small { font-size: .65em; }
 .illustrated-paper .bibtex { background: #fafafa; border-color: #e4e4e4; }
