@@ -533,7 +533,6 @@ def review_detail(p, homepage):
           <video controls playsinline preload="none" poster="{prefix}{esc(demo['poster'])}" width="{demo['width']}" height="{demo['height']}" aria-label="{esc(demo['label'])}">
             <source src="{video}" type="video/mp4">
           </video>
-          <p class="paper-note"><a href="{video}">Open video (MP4)</a></p>
         </section>
         <section class="paper-section" aria-labelledby="overview-heading">
           <h2 id="overview-heading">Project overview</h2>
