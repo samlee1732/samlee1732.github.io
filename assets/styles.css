@@ -156,6 +156,10 @@ a { color: inherit; }
 .paper-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; padding: 0; list-style: none; }
 .paper-links a { display: inline-block; padding: 7px 16px; border: 1px solid #d9c9d6; border-radius: 3px; text-decoration: none; font-size: .9em; }
 .paper-links a:hover { background: #faf3f8; border-color: var(--accent); }
+.paper-repository h2 { font-weight: 500; }
+.paper-repository .repository-link { display: inline-flex; align-items: baseline; gap: 10px; margin-inline-start: min(4vw, 48px); max-width: calc(100% - min(4vw, 48px)); color: #3658ce; font-size: 1rem; text-decoration: none; }
+.repository-link svg { align-self: flex-start; flex: none; margin-top: .45em; color: #30363d; }
+.repository-link:hover span, .repository-link:focus-visible span { text-decoration: underline; }
 .paper-section .paper-note { margin-top: 18px; color: var(--muted); font-size: .85em; }
 .paper-section-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
 .paper-section-heading h2 { margin: 0; }
