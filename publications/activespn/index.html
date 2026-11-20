@@ -8,7 +8,7 @@
     <title>ActiveSPN | SenseDex Lab</title>
     <link rel="icon" href="../../assets/sensedex-mark-small.png" type="image/png">
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark-small.png">
-    <link rel="stylesheet" href="../../assets/styles.css?v=20261114-author-markers">
+    <link rel="stylesheet" href="../../assets/styles.css?v=20261120-illustrated-paper">
     <script src="../../assets/main.js?v=20261114-teaching-competitions" defer></script>
     <script src="../../assets/visits.js" defer></script>
   </head>
@@ -50,40 +50,47 @@
         </div>
       </div>
     </header>
-    <main id="main-content" class="container paper-page">
+    <main id="main-content" class="container paper-page illustrated-paper">
       <a class="paper-back" href="../../#publication">← All publications</a>
       <article>
         <header class="paper-heading">
-          <p class="paper-eyebrow">2025 <span aria-hidden="true">·</span> Journal Article</p>
+          <p class="paper-eyebrow">2025 · Journal Article</p>
           <h1>ActiveSPN: Active Soft Polyhedral Networks With Pose Estimation for In-Finger Object Manipulation</h1>
-          <p class="paper-authors"><strong>Sen Li</strong>, Chengxiao Dong, Chaoyang Song, Fang Wan<sup class="author-marker" title="Corresponding author" aria-label="Corresponding author">*</sup></p>
-          <p class="author-legend"><span># Equal contribution</span> <span aria-hidden="true">·</span> <span>* Corresponding author</span></p>
-          <p class="paper-citation"><cite>IEEE Robotics and Automation Letters</cite>, vol. 10, no. 8, pp. 8115–8122, 2025.</p>
-          <p class="paper-doi">DOI: <a href="https://doi.org/10.1109/LRA.2025.3583616">10.1109/LRA.2025.3583616</a></p>
         </header>
-        <figure class="paper-figure">
-          <img src="../../assets/publications/activespn.gif" alt="ActiveSPN demonstration of in-finger object manipulation" decoding="async" width="413" height="259">
+        <figure class="article-summary-figure">
+          <img src="../../assets/publications/activespn-summary.webp" alt="ActiveSPN gripper design, vision-based object pose estimation, manipulation experiments and performance measurements." width="1500" height="1125" decoding="async">
+        </figure>
+        <div class="article-byline">
+          <p><strong>Sen Li</strong>, Chengxiao Dong, Chaoyang Song, Fang Wan<sup class="author-marker" title="Corresponding author" aria-label="Corresponding author">*</sup>. <a href="https://ieeexplore.ieee.org/document/11052661"><cite>IEEE Robotics and Automation Letters</cite>, vol. 10, no. 8, pp. 8115–8122, 2025.</a></p>
+          <p class="author-legend">* Corresponding author</p>
+        </div>
+        <figure id="video" class="article-video">
+          <video width="1920" height="1080" controls playsinline controlslist="nodownload" preload="none" poster="../../assets/publications/activespn-video-poster.jpg" aria-label="ActiveSPN supplementary video">
+            <source src="../../assets/publications/activespn-supplementary.mp4" type="video/mp4">
+          </video>
         </figure>
         <section id="abstract" class="paper-section" aria-labelledby="abstract-heading" tabindex="-1">
           <h2 id="abstract-heading">Abstract</h2>
-          <p>Robotic grippers aim to replicate the remarkable functionalities of the human hand by providing advanced perception, adaptability, stability, and dexterity for complex tasks. Achieving these capabilities demands a sophisticated design hierarchy and robust perception mechanisms that ensure accurate manipulation. This letter introduces Active Soft Polyhedral Networks (ActiveSPN), a gripper design that leverages an active, non-biomimetic surface for precise in-hand manipulation. A vision system integrated directly into the fingers further facilitates accurate pose estimation of the in-finger object. The proposed system includes: (i) a soft polyhedral network featuring a transparent active belt to deliver complete three-dimensional adaptation and dexterous in-finger motion, and (ii) a generative learning-based pipeline for in-finger pose estimation. Experimental results demonstrate the ability of ActiveSPN to execute multi-degree-of-freedom in-finger manipulations, including two-axis rotation and one-axis translation. Moreover, the integrated vision-based pose estimation provides robust, real-time predictions, supporting consistent closed-loop control. Across diverse objects, the system achieves mean translational errors of 2.59 mm and rotational errors of 7°, highlighting a promising paradigm for compact, efficient, and dexterous robotic manipulation.</p>
+          <p>Robotic grippers aim to replicate the remarkable functionalities of the human hand by providing advanced perception, adaptability, stability, and dexterity for complex tasks. Achieving these capabilities demands a sophisticated design hierarchy and robust perception mechanisms that ensure accurate manipulation. This letter introduces Active Soft Polyhedral Networks (ActiveSPN), a gripper design that leverages an active, non-biomimetic surface for precise in-hand manipulation.</p>
+          <p>A vision system integrated directly into the fingers further facilitates accurate pose estimation of the in-finger object. The proposed system includes: (i) a soft polyhedral network featuring a transparent active belt to deliver complete three-dimensional adaptation and dexterous in-finger motion, and (ii) a generative learning-based pipeline for in-finger pose estimation.</p>
+          <p>Experimental results demonstrate the ability of ActiveSPN to execute multi-degree-of-freedom in-finger manipulations, including two-axis rotation and one-axis translation. Moreover, the integrated vision-based pose estimation provides robust, real-time predictions, supporting consistent closed-loop control.</p>
+          <p>Across diverse objects, the system achieves mean translational errors of 2.59 mm and rotational errors of 7°, highlighting a promising paradigm for compact, efficient, and dexterous robotic manipulation.</p>
         </section>
-        <section id="links" class="paper-section" aria-labelledby="links-heading" tabindex="-1">
+        <section id="links" class="paper-section paper-repository" aria-labelledby="links-heading" tabindex="-1">
           <h2 id="links-heading">Links</h2>
-          <ul class="paper-links">
-            <li><a href="https://ieeexplore.ieee.org/document/11052661">Publisher</a></li>
-            <li><a href="https://doi.org/10.1109/LRA.2025.3583616">DOI: 10.1109/LRA.2025.3583616</a></li>
-            <li><a href="#pdf">PDF</a></li>
-            <li><a href="https://youtu.be/2TNRdQrWji0">Video</a></li>
-            <li><a href="https://github.com/ancorasir/ActiveSPN">Code</a></li>
+          <ul class="article-resources">
+            <li>
+          <a class="repository-link" href="https://github.com/ancorasir/ActiveSPN">
+            <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+            <span>https://github.com/ancorasir/ActiveSPN</span>
+          </a> <small>(currently unavailable)</small>
+            </li>
+            <li><a href="https://doi.org/10.1109/LRA.2025.3583616">doi:10.1109/LRA.2025.3583616</a></li>
+            <li><a href="../../assets/publications/activespn.pdf">Published PDF</a></li>
           </ul>
-          
         </section>
         <section id="bibtex" class="paper-section" aria-labelledby="bibtex-heading" tabindex="-1">
-          <div class="paper-section-heading">
-            <h2 id="bibtex-heading">BibTeX</h2>
-            <a href="./citation.bib" download="activespn.bib">Download .bib</a>
-          </div>
+          <h2 id="bibtex-heading">BibTeX <small>(<a href="./citation.bib" download="activespn.bib">Download</a>)</small></h2>
           <pre class="bibtex"><code>@article{Li2025ActiveSPN,
   title = {{ActiveSPN: Active Soft Polyhedral Networks With Pose Estimation for In-Finger Object Manipulation}},
   author = {Sen Li and Chengxiao Dong and Chaoyang Song and Fang Wan},
@@ -97,17 +104,9 @@
 }
 </code></pre>
         </section>
-        <section id="pdf" class="paper-section" aria-labelledby="pdf-heading" tabindex="-1">
-          <div class="paper-section-heading">
-            <h2 id="pdf-heading">PDF</h2>
-            <ul class="paper-links paper-pdf-actions" aria-label="PDF options">
-              <li><a href="../../assets/publications/activespn.pdf" target="_blank" rel="noopener">Open PDF</a></li>
-              <li><a href="../../assets/publications/activespn.pdf" download="activespn.pdf">Download PDF</a></li>
-            </ul>
-          </div>
-          
-          <iframe class="paper-pdf-viewer" src="../../assets/pdfjs/web/viewer.html?file=../../publications/activespn.pdf#zoom=page-width" title="PDF: ActiveSPN: Active Soft Polyhedral Networks With Pose Estimation for In-Finger Object Manipulation" loading="lazy"></iframe>
-          <p class="paper-note">If the preview does not load, <a href="../../assets/publications/activespn.pdf" target="_blank" rel="noopener">open the PDF in a new tab</a> or download it.</p>
+        <section id="pdf" class="paper-section activespn-pdf" aria-label="Read the ActiveSPN paper" tabindex="-1">
+          <iframe class="paper-pdf-viewer" src="../../assets/pdfjs/web/viewer.html?profile=activespn&amp;file=../../publications/activespn.pdf#zoom=auto" title="PDF: ActiveSPN: Active Soft Polyhedral Networks With Pose Estimation for In-Finger Object Manipulation" loading="lazy"></iframe>
+          <noscript><p><a href="../../assets/publications/activespn.pdf">Open the ActiveSPN PDF</a></p></noscript>
         </section>
       </article>
       <a class="paper-back paper-back-bottom" href="../../#publication">← All publications</a>

@@ -166,8 +166,11 @@ a { color: inherit; }
 .paper-section-heading > a { font-size: .85em; }
 .paper-pdf-viewer { display: block; width: 100%; height: 80vh; min-height: 480px; max-height: 1000px; border: 1px solid #d9d5dd; border-radius: 4px; background: #f3f2f4; }
 .paper-pdf-actions { gap: 8px; }
+.activespn-pdf { padding-top: 0; border-top: 0; }
+.activespn-pdf .paper-pdf-viewer { height: 600px; min-height: 0; max-height: none; border-color: #c6c6c6; border-radius: 0; }
 @media (max-width: 800px) {
   .paper-pdf-viewer { height: 70vh; min-height: 360px; }
+  .activespn-pdf .paper-pdf-viewer { height: 70vh; min-height: 420px; max-height: 600px; }
 }
 
 .bibtex { margin: 0; padding: 24px; border: 1px solid #e8e2eb; border-radius: 4px; background: #faf9fb; white-space: pre-wrap; overflow-wrap: anywhere; font-size: .78em; line-height: 1.7; }
@@ -270,3 +273,22 @@ a { color: inherit; }
 .author-legend { color: var(--muted); font-size: .88em; line-height: 1.6; }
 .publications > .author-legend { margin: 0 0 clamp(24px, 2vw, 40px); }
 .paper-heading > .author-legend { margin: 0 0 16px; }
+
+.illustrated-paper { width: min(1100px, calc(100% - clamp(32px, 8vw, 100px))); font-size: 16px; line-height: 1.73; color: #30373e; }
+.illustrated-paper .paper-heading h1 { font-size: clamp(27px, 3vw, 38px); line-height: 1.16; }
+.illustrated-paper .article-summary-figure { margin: 28px 0 32px; }
+.article-summary-figure img, .article-video video { display: block; width: 100%; height: auto; }
+.article-byline { padding-block: 20px; border-block: 1px solid #dedfe2; }
+.article-byline p { margin: 0; }
+.article-byline .author-legend { margin-top: 4px; }
+.illustrated-paper .article-video { margin: 32px 0; }
+.article-video video { background: #18191b; }
+.illustrated-paper .paper-section { border: 0; padding-block: 18px; }
+.illustrated-paper .paper-section h2 { font-size: clamp(25px, 2.3vw, 30px); font-weight: 500; }
+.illustrated-paper a:not(.paper-back) { color: #3658ce; }
+.article-resources { list-style: none; padding-inline-start: min(4vw, 48px); margin: 0; }
+.article-resources li + li { margin-top: 6px; }
+.article-resources .repository-link { margin: 0; max-width: 100%; }
+.article-resources small { color: #616972; }
+.illustrated-paper h2 small { font-size: .65em; }
+.illustrated-paper .bibtex { background: #fafafa; border-color: #e4e4e4; }

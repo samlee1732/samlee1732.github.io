@@ -1,0 +1,24 @@
+/* This stylesheet is loaded only by the ActiveSPN reader profile. */
+:root.activespn-reader {
+  color-scheme: light;
+  --body-bg-color: #d8d8d8;
+  --toolbar-bg-color: #ededed;
+  --toolbar-border-color: #b8b8b8;
+  --toolbar-icon-bg-color: #4a4a4a;
+  --toolbar-icon-hover-bg-color: #171717;
+  --main-color: #252525;
+}
+.activespn-reader #toolbarContainer { border-bottom: 1px solid #b8b8b8; }
+.activespn-reader #mainContainer { min-width: 0; }
+.activespn-reader #viewerContainer { background: #d8d8d8; }
+.activespn-reader #viewsManager { background: #f1f1f1; border-radius: 0; --sidebar-width: 200px; }
+.activespn-reader #outlinesView .treeItem > a {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+@media (max-width: 480px) {
+  /* Prioritize page navigation and zoom when the embedded reader is narrow. */
+  .activespn-reader #editorModeButtons,
+  .activespn-reader #editorModeSeparator { display: none !important; }
+}

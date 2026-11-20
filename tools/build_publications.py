@@ -471,6 +471,12 @@ def pdf_section(p):
     if not p.get('pdf'):
         return ''
     pdf_url = '../../assets/publications/' + p['pdf']
+    if p['id'] == 'activespn':
+        return f'''        <section id="pdf" class="paper-section activespn-pdf" aria-label="Read the ActiveSPN paper" tabindex="-1">
+          <iframe class="paper-pdf-viewer" src="../../assets/pdfjs/web/viewer.html?profile=activespn&amp;file=../../publications/{esc(p['pdf'])}#zoom=auto" title="PDF: {esc(p['title'])}" loading="lazy"></iframe>
+          <noscript><p><a href="{esc(pdf_url)}">Open the ActiveSPN PDF</a></p></noscript>
+        </section>
+'''
     version_label = ('<p class="paper-note">Article in press (2026).</p>' if p.get('pdf_label') == 'PDF (article in press)' else '')
     return f'''        <section id="pdf" class="paper-section" aria-labelledby="pdf-heading" tabindex="-1">
           <div class="paper-section-heading">
@@ -487,7 +493,7 @@ def pdf_section(p):
 '''
 
 
-def paper_document(homepage, title, description, article, styles_version='20261114-author-markers'):
+def paper_document(homepage, title, description, article, styles_version='20261114-author-markers', layout='paper-page'):
     header = site_header(homepage, '../../', '#publication')
     return f'''<!doctype html>
 <html lang="en">
@@ -506,7 +512,7 @@ def paper_document(homepage, title, description, article, styles_version='202611
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 {header}
-    <main id="main-content" class="container paper-page">
+    <main id="main-content" class="container {layout}">
       <a class="paper-back" href="../../#publication">← All publications</a>
       <article>
 {article}      </article>
@@ -517,11 +523,18 @@ def paper_document(homepage, title, description, article, styles_version='202611
 '''
 
 
+def repository_link(url):
+    repo_url = esc(url)
+    return f'''          <a class="repository-link" href="{repo_url}">
+            <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+            <span>{repo_url}</span>
+          </a>'''
+
+
 def review_detail(p, homepage):
     demo = p['demo']
     prefix = '../../assets/publications/'
     video = prefix + esc(demo['file'])
-    repo_url = esc(p['simulation_url'])
     article = f'''        <header class="paper-heading">
           <p class="paper-eyebrow"><span class="publication-type review-status">Under Review</span></p>
           <h1>{esc(p['title'])}</h1>
@@ -541,16 +554,60 @@ def review_detail(p, homepage):
         </section>
         <section class="paper-section paper-repository" aria-labelledby="resources-heading">
           <h2 id="resources-heading">Links</h2>
-          <a class="repository-link" href="{repo_url}">
-            <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.65 7.65 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-            <span>{repo_url}</span>
-          </a>
+{repository_link(p["simulation_url"])}
         </section>
 '''
     return paper_document(homepage, p['title'], p['summary'], article, '20261120-repository-link')
 
 
+def illustrated_detail(p, homepage):
+    media = p['article_media']
+    assets = '../../assets/publications/'
+    paragraphs = '\n'.join(f'          <p>{esc(t)}</p>' for t in p['abstract'])
+    doi_url = 'https://doi.org/' + esc(p['doi'])
+    code_note = f" <small>{esc(media['code_note'])}</small>" if media.get('code_note') else ''
+    article = f'''        <header class="paper-heading">
+          <p class="paper-eyebrow">{p['year']} · {esc(p['type'])}</p>
+          <h1>{esc(p['title'])}</h1>
+        </header>
+        <figure class="article-summary-figure">
+          <img src="{assets}{esc(media['figure'])}" alt="{esc(media['figure_alt'])}" width="{media['figure_width']}" height="{media['figure_height']}" decoding="async">
+        </figure>
+        <div class="article-byline">
+          <p>{authors(p)}. <a href="{esc(p['paper'])}">{citation(p)}</a></p>
+          <p class="author-legend">* Corresponding author</p>
+        </div>
+        <figure id="video" class="article-video">
+          <video width="1920" height="1080" controls playsinline controlslist="nodownload" preload="none" poster="{assets}{esc(media['poster'])}" aria-label="{esc(p['marker'])} supplementary video">
+            <source src="{assets}{esc(media['video'])}" type="video/mp4">
+          </video>
+        </figure>
+        <section id="abstract" class="paper-section" aria-labelledby="abstract-heading" tabindex="-1">
+          <h2 id="abstract-heading">Abstract</h2>
+{paragraphs}
+        </section>
+        <section id="links" class="paper-section paper-repository" aria-labelledby="links-heading" tabindex="-1">
+          <h2 id="links-heading">Links</h2>
+          <ul class="article-resources">
+            <li>
+{repository_link(p['code'])}{code_note}
+            </li>
+            <li><a href="{doi_url}">doi:{esc(p['doi'])}</a></li>
+            <li><a href="{assets}{esc(p['pdf'])}">Published PDF</a></li>
+          </ul>
+        </section>
+        <section id="bibtex" class="paper-section" aria-labelledby="bibtex-heading" tabindex="-1">
+          <h2 id="bibtex-heading">BibTeX <small>(<a href="./citation.bib" download="{esc(p['id'])}.bib">Download</a>)</small></h2>
+          <pre class="bibtex"><code>{esc(bibtex(p))}</code></pre>
+        </section>
+{pdf_section(p)}'''
+    return paper_document(homepage, p['marker'], p['summary'], article, '20261120-illustrated-paper',
+                          layout='paper-page illustrated-paper')
+
+
 def detail(p, homepage):
+    if p.get('article_media'):
+        return illustrated_detail(p, homepage)
     section_name = 'Abstract' if p.get('abstract') else 'Summary'
     paragraphs = p.get('abstract') or [p['summary']]
     if isinstance(paragraphs, str):
@@ -629,6 +686,11 @@ def main():
         for key in ('image', 'pdf', 'preview_image', 'overview_image'):
             if paper.get(key) and not (ROOT / 'assets/publications' / paper[key]).is_file():
                 raise FileNotFoundError(paper[key])
+        if paper.get('article_media'):
+            for key in ('figure', 'poster', 'video'):
+                asset = ROOT / 'assets/publications' / paper['article_media'][key]
+                if not asset.is_file():
+                    raise FileNotFoundError(asset)
         if paper.get('demo'):
             for key in ('file', 'poster'):
                 asset = ROOT / 'assets/publications' / paper['demo'][key]
