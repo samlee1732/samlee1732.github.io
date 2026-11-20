@@ -5,6 +5,7 @@ import json
 import re
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
@@ -95,7 +96,10 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
             'text': description + ' 在审 投稿 论文 稿件 通讯作者 共同作者'
                     + (' 李森' if 'Sen Li' in paper.get('authors', paper.get('co_authors', [])) else ''),
             'description': description,
-            'url': 'publications/' + paper['id'] + '/' if paper.get('demo') else '#' + paper['id'],
+            # Search stays on public metadata; private workspace URLs are not indexed.
+            'url': ('publications/' + paper['id'] + '/'
+                    if has_public_review_page(paper)
+                    else '#' + paper['id']),
             'kind': 'Under Review',
         })
 
@@ -285,6 +289,24 @@ def published_overview(papers):
       </section>'''
 
 
+def private_workspace_url(paper):
+    """Validate an optional GitHub workspace link without reading its contents."""
+    url = paper.get('private_workspace_url')
+    if not url:
+        return None
+    if not isinstance(url, str):
+        raise ValueError('private_workspace_url must be a GitHub HTTPS URL.')
+    parts = urlsplit(url)
+    if (parts.scheme != 'https' or parts.netloc != 'github.com'
+            or len([part for part in parts.path.split('/') if part]) < 2):
+        raise ValueError('private_workspace_url must be a GitHub HTTPS repository URL.')
+    return url
+
+
+def has_public_review_page(paper):
+    return bool(paper.get('demo')) and not paper.get('private_workspace_url')
+
+
 def review_overview(papers):
     rows = []
     for p in papers:
@@ -292,17 +314,25 @@ def review_overview(papers):
             '<strong>Sen Li</strong>' if name == 'Sen Li' else esc(name) for name in p['co_authors']))
         corresponding = ('\n                <p>Corresponding author: '
                          + esc(p['corresponding_author']) + '</p>') if p.get('corresponding_author') else ''
-        caption = ('\n                <figcaption class="publication-media-caption">'
-                   + esc(p['image_caption']) + '</figcaption>') if p.get('image_caption') else ''
         title = esc(p['title'])
-        preview = image(p, './', preview=True)
-        figure = f'<figure class="publication-media">{preview}{caption}</figure>'
-        if p.get('demo'):
-            url = './publications/' + p['id'] + '/'
+        workspace_url = private_workspace_url(p)
+        if workspace_url:
+            url = esc(workspace_url)
             title = f'<a href="{url}">{title}</a>'
-            figure = (f'<a href="{url}" aria-label="View project and video: {esc(p["title"])}">'
-                      f'<figure class="publication-media">{preview}'
-                      '<figcaption class="publication-media-caption">View project and video</figcaption></figure></a>')
+            # A real, keyboard-accessible link with a deliberately empty media area.
+            figure = (f'<a class="publication-media publication-private-placeholder" href="{url}"'
+                      f' aria-label="Open private GitHub workspace: {esc(p["title"])}"></a>')
+        else:
+            caption = ('\n                <figcaption class="publication-media-caption">'
+                       + esc(p['image_caption']) + '</figcaption>') if p.get('image_caption') else ''
+            preview = image(p, './', preview=True)
+            figure = f'<figure class="publication-media">{preview}{caption}</figure>'
+            if has_public_review_page(p):
+                url = './publications/' + p['id'] + '/'
+                title = f'<a href="{url}">{title}</a>'
+                figure = (f'<a href="{url}" aria-label="View project and video: {esc(p["title"])}">'
+                          f'<figure class="publication-media">{preview}'
+                          '<figcaption class="publication-media-caption">View project and video</figcaption></figure></a>')
         rows.append(f'''          <li>
             <article id="{p['id']}" class="publication-row" aria-labelledby="{p['id']}-title" tabindex="-1">
               <div class="publication-details">
@@ -727,7 +757,7 @@ def main():
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(detail(paper, homepage))
         (folder / 'citation.bib').write_text(bibtex(paper))
-    review_pages = [paper for paper in reviews if paper.get('demo')]
+    review_pages = [paper for paper in reviews if has_public_review_page(paper)]
     for paper in review_pages:
         folder = ROOT / 'publications' / paper['id']
         folder.mkdir(parents=True, exist_ok=True)

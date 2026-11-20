@@ -77,5 +77,14 @@
       "Tao Luo"
     ],
     "equal_contributors": []
+  },
+  {
+    "id": "visuotactile-force-sensing",
+    "title": "Mechanisms of Flexible Force and Tactile Sensing via Visuotactile Fusion for Multifingered Dexterous Hands",
+    "authors": [
+      "Sen Li"
+    ],
+    "journal": "IEEE Robotics and Automation Letters (RA-L)",
+    "private_workspace_url": "https://github.com/samlee1732/ral-visuotactile-sensing"
   }
 ]
