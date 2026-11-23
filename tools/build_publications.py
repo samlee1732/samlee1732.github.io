@@ -436,7 +436,11 @@ def site_header(homepage, prefix, current):
 def content_page(homepage, content, slug, title, description, source=None):
     prefix = '../' * (slug.count('/') + 1)
     is_course = slug.startswith('teaching/')
-    styles_version = '20261114-course-links' if slug == 'teaching' else '20261114-teaching-competitions'
+    styles_version = {
+        'teaching': '20261114-course-links',
+        'team': '20261123-team-roster',
+    }.get(slug, '20261114-teaching-competitions')
+    script_version = styles_version if slug == 'team' else '20261114-teaching-competitions'
     current = 'teaching/' if is_course else slug + '/'
     header = site_header(homepage, prefix, current)
     back_url = prefix + 'teaching/' if is_course else prefix
@@ -456,7 +460,7 @@ def content_page(homepage, content, slug, title, description, source=None):
     <link rel="icon" href="{prefix}assets/sensedex-mark-small.png" type="image/png">
     <link rel="apple-touch-icon" href="{prefix}assets/sensedex-mark-small.png">
     <link rel="stylesheet" href="{prefix}assets/styles.css?v={styles_version}">{course_styles}
-    <script src="{prefix}assets/main.js?v=20261114-teaching-competitions" defer></script>
+    <script src="{prefix}assets/main.js?v={script_version}" defer></script>
     <script src="{prefix}assets/visits.js" defer></script>
   </head>
   <body>
@@ -735,7 +739,7 @@ def main():
     team_folder = ROOT / 'team'
     team_folder.mkdir(exist_ok=True)
     (team_folder / 'index.html').write_text(content_page(homepage, team_content, 'team', 'Team',
-        'People at SenseDex Lab: principal investigator, collaborators, and graduation project students.'))
+        'Meet the principal investigator, current students, collaborators, and alumni of SenseDex Lab.'))
     teaching_content = (ROOT / 'data/teaching.html').read_text()
     teaching_folder = ROOT / 'teaching'
     teaching_folder.mkdir(exist_ok=True)
