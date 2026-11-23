@@ -172,22 +172,15 @@ a { color: inherit; }
 .skip-link:focus { top: 12px; }
 .team-page h2 { margin: 0 0 14px; color: #302c38; font-size: 22px; line-height: 1.35; font-weight: 600; }
 .team-section + .team-section { margin-top: 26px; padding-top: 26px; border-top: 1px solid #e8e2eb; }
-.team-section > ul:not(.team-members), .team-students { margin: 0; padding-left: 22px; }
-.team-section > ul:not(.team-members) > li, .team-students > li { margin-block: 12px; overflow-wrap: anywhere; }
+.team-section > ul, .team-students { margin: 0; padding-left: 22px; }
+.team-section li { margin-block: 12px; overflow-wrap: anywhere; }
 .team-students { color: var(--muted); }
 .team-section-note { margin: 6px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
-.team-page { margin: 28px auto 0; max-width: 1100px; padding-block: clamp(8px, 1vw, 24px); font-size: clamp(16px, 1.15vw, 24px); line-height: 1.7; }
-.team-page > h1 { margin: 0 0 clamp(26px, 4vw, 52px); color: #302c38; font-size: clamp(34px, 4vw, 48px); line-height: 1.15; font-weight: 600; }
-.team-members { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 12px; margin: 0; padding: 0; list-style: none; }
-.team-member { text-align: center; overflow-wrap: anywhere; }
-.team-portrait { display: block; width: min(100%, clamp(60px, 12vw, 72px)); aspect-ratio: 1; margin-inline: auto; border: 1px solid #e1dae6; border-radius: 50%; background: #f4f1f6; object-fit: cover; }
-.team-member-name { margin: 12px 0 0; color: var(--accent); font-size: clamp(16px, 1.5vw, 20px); line-height: 1.25; font-weight: 600; overflow-wrap: anywhere; }
-.team-member .team-section-note { max-width: 24ch; margin-inline: auto; }
-#current-students .team-member-name { margin-top: 0; }
-
-@media (max-width: 540px) {
-  .team-members { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+.team-page { margin-top: 28px; max-width: 1100px; padding-block: clamp(8px, 1vw, 24px); font-size: clamp(16px, 1.15vw, 24px); line-height: 1.7; }
+.team-page > h1 { margin: 0 0 clamp(26px, 2vw, 48px); color: #302c38; font-size: clamp(26px, 1.8vw, 44px); line-height: 1.25; font-weight: 600; }
+.team-section > .team-collaborators { padding: 0; list-style: none; }
+.team-collaborators > li { display: flex; align-items: center; gap: 14px; }
+.team-portrait { display: block; flex: none; width: clamp(60px, 12vw, 72px); aspect-ratio: 1; border: 1px solid #e1dae6; border-radius: 50%; background: #f4f1f6; object-fit: cover; }
 
 
 @media (max-width: 1400px) {
