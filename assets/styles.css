@@ -172,8 +172,9 @@ a { color: inherit; }
 .skip-link:focus { top: 12px; }
 .team-page h2 { margin: 0 0 14px; color: #302c38; font-size: 22px; line-height: 1.35; font-weight: 600; }
 .team-section + .team-section { margin-top: 26px; padding-top: 26px; border-top: 1px solid #e8e2eb; }
-.team-section > ul:not(.team-members) { margin: 0; padding-left: 22px; }
-.team-section > ul:not(.team-members) > li { margin-block: 12px; overflow-wrap: anywhere; }
+.team-section > ul:not(.team-members), .team-students { margin: 0; padding-left: 22px; }
+.team-section > ul:not(.team-members) > li, .team-students > li { margin-block: 12px; overflow-wrap: anywhere; }
+.team-students { color: var(--muted); }
 .team-section-note { margin: 6px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
 .team-page { margin: 28px auto 0; max-width: 1100px; padding-block: clamp(8px, 1vw, 24px); font-size: clamp(16px, 1.15vw, 24px); line-height: 1.7; }
 .team-page > h1 { margin: 0 0 clamp(26px, 4vw, 52px); color: #302c38; font-size: clamp(34px, 4vw, 48px); line-height: 1.15; font-weight: 600; }
