@@ -438,7 +438,7 @@ def content_page(homepage, content, slug, title, description, source=None):
     is_course = slug.startswith('teaching/')
     styles_version = {
         'teaching': '20261114-course-links',
-        'team': '20261123-team-portraits-72',
+        'team': '20261123-student-names-only',
     }.get(slug, '20261114-teaching-competitions')
     script_version = styles_version if slug == 'team' else '20261114-teaching-competitions'
     current = 'teaching/' if is_course else slug + '/'
