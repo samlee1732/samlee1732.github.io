@@ -9,6 +9,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
+NAV_SCRIPT_VERSION = '20261123-publications'
 esc = html.escape
 
 
@@ -99,7 +100,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
             # Search stays on public metadata; private workspace URLs are not indexed.
             'url': ('publications/' + paper['id'] + '/'
                     if has_public_review_page(paper)
-                    else '#' + paper['id']),
+                    else 'publications/#' + paper['id']),
             'kind': 'Under Review',
         })
 
@@ -141,7 +142,8 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
         ('about', 'About SenseDex Lab · 实验室简介', 'About', '简介 关于 履历 教育 经历 科研 项目'),
         ('research-interests', 'Research Interests', 'Research', '研究方向 研究兴趣'),
         ('contact', 'Contact · 联系方式', 'Contact', '联系 联系方式 邮箱 邮件 地址 办公室'),
-        ('competitions', 'Student Competitions · 指导学生竞赛', 'Teaching', '比赛 竞赛 学生 团队 指导教师 成果 图片'),
+        ('competitions', 'Student Competitions · 指导学生竞赛', 'Teaching',
+         '比赛 竞赛 学生 团队 指导教师 成果 图片 数控机床装调与技术改造 吴雨清 宗德宁 邝伟源 魏胜 李森'),
         ('news', 'News · 最新动态', 'News', '新闻 动态 消息'),
         ('team', 'Team · 团队', 'Team', '团队 成员 实验室 合作者 合作 collaborators affiliation'),
         ('teaching', 'Teaching', 'Teaching', '教学 课程 授课 责任教师'),
@@ -257,7 +259,7 @@ def image(paper, prefix, lazy=True, preview=False):
 def published_overview(papers):
     rows = []
     for p in papers:
-        url = './publications/' + p['id'] + '/'
+        url = './' + p['id'] + '/'
         description = 'Abstract' if p.get('abstract') else 'Summary'
         links = [(description, url + '#abstract'), ('Links', url + '#links'), ('BibTeX', url + '#bibtex')]
         if p.get('pdf'):
@@ -269,19 +271,19 @@ def published_overview(papers):
             <article class="publication-row" aria-labelledby="{p['id']}-title">
               <div class="publication-details">
                 <p class="publication-authors">{authors(p)}</p>
-                <h4 id="{p['id']}-title" class="publication-title"><a href="{url}">{esc(p['title'])}</a> <span class="publication-type">{esc(p['type'])}</span></h4>
+                <h3 id="{p['id']}-title" class="publication-title"><a href="{url}">{esc(p['title'])}</a> <span class="publication-type">{esc(p['type'])}</span></h3>
                 <p class="publication-citation">{citation(p)}</p>
                 <ul class="publication-resources" aria-label="Resources for {esc(p['marker'])}">
 {resources}
                 </ul>
               </div>
               <div class="publication-media">
-                <a href="{url}" aria-label="Read about {esc(p['marker'])}">{image(p, './', preview=True)}</a>
+                <a href="{url}" aria-label="Read about {esc(p['marker'])}">{image(p, '../', preview=True)}</a>
               </div>
             </article>
           </li>''')
     return '''      <section id="published-papers" class="publication-group" aria-labelledby="published-papers-heading" tabindex="-1">
-        <h3 id="published-papers-heading">Published Papers</h3>
+        <h2 id="published-papers-heading">Published Papers</h2>
         <!-- Generated from data/publications.json by tools/build_publications.py. -->
         <ol class="publication-list">
 ''' + '\n'.join(rows) + '''
@@ -325,10 +327,10 @@ def review_overview(papers):
         else:
             caption = ('\n                <figcaption class="publication-media-caption">'
                        + esc(p['image_caption']) + '</figcaption>') if p.get('image_caption') else ''
-            preview = image(p, './', preview=True)
+            preview = image(p, '../', preview=True)
             figure = f'<figure class="publication-media">{preview}{caption}</figure>'
             if has_public_review_page(p):
-                url = './publications/' + p['id'] + '/'
+                url = './' + p['id'] + '/'
                 title = f'<a href="{url}">{title}</a>'
                 figure = (f'<a href="{url}" aria-label="View project and video: {esc(p["title"])}">'
                           f'<figure class="publication-media">{preview}'
@@ -337,14 +339,14 @@ def review_overview(papers):
             <article id="{p['id']}" class="publication-row" aria-labelledby="{p['id']}-title" tabindex="-1">
               <div class="publication-details">
                 <p class="publication-authors">{author_line}</p>
-                <h4 id="{p['id']}-title" class="publication-title">{title} <span class="publication-type review-status">Under Review</span></h4>
+                <h3 id="{p['id']}-title" class="publication-title">{title} <span class="publication-type review-status">Under Review</span></h3>
                 <p class="publication-citation">Submitted to <cite>{esc(p['journal'])}</cite>.</p>{corresponding}
               </div>
               {figure}
             </article>
           </li>''')
     return '''      <section id="under-review" class="publication-group under-review" aria-labelledby="under-review-heading" tabindex="-1">
-        <h3 id="under-review-heading">Under Review</h3>
+        <h2 id="under-review-heading">Under Review</h2>
         <!-- Generated from data/under-review.json by tools/build_publications.py. -->
         <ol class="publication-list">
 ''' + '\n'.join(rows) + '''
@@ -355,12 +357,10 @@ def review_overview(papers):
 def publication_overview(papers, reviews):
     groups = review_overview(reviews) + '\n' + published_overview(papers)
     groups = '\n'.join('  ' + line for line in groups.splitlines())
-    return ('      <!-- PUBLICATION CONTENT START -->\n'
-            '      <section id="publication" class="publications" aria-labelledby="publication-heading" tabindex="-1">\n'
-            '        <h2 id="publication-heading">Publication</h2>\n'
+    return ('      <section id="publication" class="publications" aria-labelledby="publication-heading" tabindex="-1">\n'
+            '        <h1 id="publication-heading">Publication</h1>\n'
             + '        ' + author_legend() + '\n'
-            + groups + '\n      </section>\n'
-            + '      <!-- PUBLICATION CONTENT END -->')
+            + groups + '\n      </section>')
 
 
 def patent_overview(patents):
@@ -436,21 +436,24 @@ def site_header(homepage, prefix, current):
 def content_page(homepage, content, slug, title, description, source=None):
     prefix = '../' * (slug.count('/') + 1)
     is_course = slug.startswith('teaching/')
+    is_publications = slug == 'publications'
     styles_version = {
         'teaching': '20261114-course-links',
         'team': '20261123-team-profiles',
+        'publications': '20261123-publications',
     }.get(slug, '20261114-teaching-competitions')
-    script_version = styles_version if slug == 'team' else '20261114-teaching-competitions'
     current = 'teaching/' if is_course else slug + '/'
     header = site_header(homepage, prefix, current)
     back_url = prefix + 'teaching/' if is_course else prefix
     back_label = 'Teaching' if is_course else 'Homepage'
     source = source or slug
+    source_notice = '' if is_publications else f'      <!-- Page content is maintained in data/{esc(source)}.html. -->\n'
+    html_class = ' class="compact-page"' if is_publications else ''
     course_layout = ' course-document' if source == 'robotics-applications' else ''
     course_styles = (f'\n    <link rel="stylesheet" href="{prefix}assets/course-syllabus.css?v=20261114-simple">'
                      if source == 'robotics-applications' else '')
     return f'''<!doctype html>
-<html lang="en">
+<html lang="en"{html_class}>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -460,7 +463,7 @@ def content_page(homepage, content, slug, title, description, source=None):
     <link rel="icon" href="{prefix}assets/sensedex-mark-small.png" type="image/png">
     <link rel="apple-touch-icon" href="{prefix}assets/sensedex-mark-small.png">
     <link rel="stylesheet" href="{prefix}assets/styles.css?v={styles_version}">{course_styles}
-    <script src="{prefix}assets/main.js?v={script_version}" defer></script>
+    <script src="{prefix}assets/main.js?v={NAV_SCRIPT_VERSION}" defer></script>
     <script src="{prefix}assets/visits.js" defer></script>
   </head>
   <body>
@@ -468,8 +471,7 @@ def content_page(homepage, content, slug, title, description, source=None):
 {header}
     <main id="main-content" class="container main-content news-page{course_layout}">
       <a class="paper-back" href="{back_url}">← {back_label}</a>
-      <!-- Page content is maintained in data/{esc(source)}.html. -->
-{content.rstrip()}
+{source_notice}{content.rstrip()}
     </main>
   </body>
 </html>
@@ -519,7 +521,7 @@ def pdf_section(p):
 
 
 def paper_document(homepage, title, description, article, layout='paper-page'):
-    header = site_header(homepage, '../../', '#publication')
+    header = site_header(homepage, '../../', 'publications/')
     return f'''<!doctype html>
 <html lang="en">
   <head>
@@ -531,17 +533,17 @@ def paper_document(homepage, title, description, article, layout='paper-page'):
     <link rel="icon" href="../../assets/sensedex-mark-small.png" type="image/png">
     <link rel="apple-touch-icon" href="../../assets/sensedex-mark-small.png">
     <link rel="stylesheet" href="../../assets/styles.css?v=20261120-paper-resources">
-    <script src="../../assets/main.js?v=20261114-teaching-competitions" defer></script>
+    <script src="../../assets/main.js?v={NAV_SCRIPT_VERSION}" defer></script>
     <script src="../../assets/visits.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 {header}
     <main id="main-content" class="container {layout}">
-      <a class="paper-back" href="../../#publication">← All publications</a>
+      <a class="paper-back" href="../">← All publications</a>
       <article>
 {article}      </article>
-      <a class="paper-back paper-back-bottom" href="../../#publication">← All publications</a>
+      <a class="paper-back paper-back-bottom" href="../">← All publications</a>
     </main>
   </body>
 </html>
@@ -711,11 +713,13 @@ def main():
                     raise FileNotFoundError(asset)
     homepage_path = ROOT / 'index.html'
     homepage = homepage_path.read_text()
+    publications = publication_overview(papers, reviews)
+    publication_anchors = ' '.join(re.findall(r' id="([^"]+)"', publications))
     homepage, count = re.subn(
-        r'      <!-- PUBLICATION CONTENT START -->.*?<!-- PUBLICATION CONTENT END -->',
-        lambda _: publication_overview(papers, reviews), homepage, count=1, flags=re.S)
+        r'data-publication-anchors="[^"]*"', f'data-publication-anchors="{esc(publication_anchors)}"',
+        homepage, count=1)
     if count != 1:
-        raise ValueError('Expected one marked Publication content block in index.html.')
+        raise ValueError('Expected the publication anchor list on the homepage.')
     homepage, count = re.subn(
         r'      <!-- PATENT CONTENT START -->.*?<!-- PATENT CONTENT END -->',
         lambda _: patent_overview(patents), homepage, count=1, flags=re.S)
@@ -727,6 +731,11 @@ def main():
     if count != 1:
         raise ValueError('Expected one marked project content block in index.html.')
     homepage_path.write_text(homepage)
+    publications_folder = ROOT / 'publications'
+    publications_folder.mkdir(exist_ok=True)
+    (publications_folder / 'index.html').write_text(content_page(
+        homepage, publications, 'publications', 'Publication',
+        'Published papers and manuscripts under review from SenseDex Lab.'))
     news_content = (ROOT / 'data/news.html').read_text()
     news_folder = ROOT / 'news'
     news_folder.mkdir(exist_ok=True)
@@ -757,19 +766,19 @@ def main():
             'teaching/' + course_id, title, description, source=course_id))
         teaching_content += '\n' + course_content
     for paper in papers:
-        folder = ROOT / 'publications' / paper['id']
+        folder = publications_folder / paper['id']
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(detail(paper, homepage))
         (folder / 'citation.bib').write_text(bibtex(paper))
     review_pages = [paper for paper in reviews if has_public_review_page(paper)]
     for paper in review_pages:
-        folder = ROOT / 'publications' / paper['id']
+        folder = publications_folder / paper['id']
         folder.mkdir(parents=True, exist_ok=True)
         (folder / 'index.html').write_text(review_detail(paper, homepage))
     entries = search_index(papers, reviews, patents, projects, homepage, news_content, competitions_content, team_content, teaching_content)
     (ROOT / 'assets/search-index.json').write_text(
         json.dumps(entries, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f'Generated Team, Teaching (including competitions), two course and News pages, a legacy competition redirect, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(projects)} project entries, {len(papers) + len(review_pages)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
+    print(f'Generated Publication, Team, Teaching (including competitions), two course and News pages, a legacy competition redirect, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(projects)} project entries, {len(papers) + len(review_pages)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
 
 
 if __name__ == '__main__':

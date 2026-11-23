@@ -80,12 +80,12 @@ a { color: inherit; }
 .contact-card a:hover { color: var(--accent); }
 .contact-card .contact-email { font-style: italic; }
 .publications, .research-interests, .news { padding-block: clamp(8px, 1vw, 24px); font-size: clamp(16px, 1.15vw, 31.4px); line-height: 1.7; }
-.publications > h2, .research-interests > h2, .news > h1 { margin: 0 0 clamp(26px, 2vw, 48px); color: #302c38; font-size: clamp(26px, 1.8vw, 44px); line-height: 1.25; font-weight: 600; }
+.publications > :is(h1, h2), .research-interests > h2, .news > h1 { margin: 0 0 clamp(26px, 2vw, 48px); color: #302c38; font-size: clamp(26px, 1.8vw, 44px); line-height: 1.25; font-weight: 600; }
 .news-page { min-height: calc(100svh - var(--header-offset, var(--header-height))); padding-bottom: 64px; }
 .news-page > .news { margin-top: 28px; }
 .news p { margin: 0; color: var(--muted); }
 .news .news-date { color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
-.publication-group > h3 { margin: 0 0 clamp(22px, 1.8vw, 40px); color: #302c38; font-size: clamp(21px, 1.45vw, 34px); line-height: 1.3; font-weight: 600; }
+.publication-group > h2 { margin: 0 0 clamp(22px, 1.8vw, 40px); color: #302c38; font-size: clamp(21px, 1.45vw, 34px); line-height: 1.3; font-weight: 600; }
 .publication-group + .publication-group { margin-top: clamp(36px, 3vw, 64px); padding-top: clamp(32px, 2.5vw, 56px); border-top: 1px solid #e8e2eb; }
 .publication-list { margin: 0; padding-left: 2em; }
 .publication-list > li { padding-left: .5em; }
@@ -241,28 +241,28 @@ a { color: inherit; }
 }
 
 @media (min-width: 1201px) {
-  .home-page { --header-height: clamp(99px, 6.12vw, 168px); }
-  .home-page .container { width: 63.75%; max-width: 1700px; }
-  .home-page .header-inner { gap: 19px; }
-  .home-page .brand-heading { gap: 8px; }
-  .home-page .brand-mark { width: clamp(29px, 2.04vw, 56px); }
-  .home-page .brand-name { font-size: clamp(23px, 1.666vw, 46px); }
-  .home-page .brand-subtitle { margin-top: clamp(6px, .46vw, 12px); font-size: clamp(13px, .85vw, 24px); }
-  .home-page .brand-subtitle-zh { font-size: clamp(13px, .7225vw, 20px); }
-  .home-page .main-navigation { gap: clamp(15px, 1.19vw, 37px); font-size: clamp(14px, .85vw, 23px); }
-  .home-page .search-toggle svg { width: 24px; height: 24px; }
+  .compact-page { --header-height: clamp(99px, 6.12vw, 168px); }
+  .compact-page .container { width: 63.75%; max-width: 1700px; }
+  .compact-page .header-inner { gap: 19px; }
+  .compact-page .brand-heading { gap: 8px; }
+  .compact-page .brand-mark { width: clamp(29px, 2.04vw, 56px); }
+  .compact-page .brand-name { font-size: clamp(23px, 1.666vw, 46px); }
+  .compact-page .brand-subtitle { margin-top: clamp(6px, .46vw, 12px); font-size: clamp(13px, .85vw, 24px); }
+  .compact-page .brand-subtitle-zh { font-size: clamp(13px, .7225vw, 20px); }
+  .compact-page .main-navigation { gap: clamp(15px, 1.19vw, 37px); font-size: clamp(14px, .85vw, 23px); }
+  .compact-page .search-toggle svg { width: 24px; height: 24px; }
 
-  .home-page .main-content { padding-top: clamp(39px, 2.805vw, 78px); }
-  .home-page :is(.biography, .publications, .research-interests) { font-size: clamp(16px, .867vw, 23.8px); }
-  .home-page :is(.publications, .research-interests) { padding-block: clamp(6px, .765vw, 19px); }
-  .home-page :is(.publications, .research-interests) > h2 { margin-bottom: clamp(20px, 1.53vw, 37px); font-size: clamp(20px, 1.36vw, 33px); }
-  .home-page .section-divider { margin-top: clamp(24px, 1.7vw, 48px); }
-  .home-page .section-divider:not(.closing-divider) { margin-bottom: clamp(24px, 1.7vw, 48px); }
-  .home-page .contact-card { padding-block: clamp(17px, 2.295vw, 54px); }
-  .home-page .publication-group > h3 { margin-bottom: clamp(17px, 1.36vw, 31px); font-size: clamp(16px, 1.105vw, 26px); }
-  .home-page .publication-group + .publication-group { margin-top: clamp(27px, 2.295vw, 49px); padding-top: clamp(25px, 1.9125vw, 43px); }
-  .home-page .publication-list > li + li { margin-top: clamp(25px, 2.295vw, 49px); padding-top: clamp(25px, 2.295vw, 49px); }
-  .home-page .publication-row { gap: clamp(19px, 1.9125vw, 46px); }
+  .compact-page .main-content { padding-top: clamp(39px, 2.805vw, 78px); }
+  .compact-page :is(.biography, .publications, .research-interests) { font-size: clamp(16px, .867vw, 23.8px); }
+  .compact-page :is(.publications, .research-interests) { padding-block: clamp(6px, .765vw, 19px); }
+  .compact-page :is(.publications, .research-interests) > :is(h1, h2) { margin-bottom: clamp(20px, 1.53vw, 37px); font-size: clamp(20px, 1.36vw, 33px); }
+  .compact-page .section-divider { margin-top: clamp(24px, 1.7vw, 48px); }
+  .compact-page .section-divider:not(.closing-divider) { margin-bottom: clamp(24px, 1.7vw, 48px); }
+  .compact-page .contact-card { padding-block: clamp(17px, 2.295vw, 54px); }
+  .compact-page .publication-group > h2 { margin-bottom: clamp(17px, 1.36vw, 31px); font-size: clamp(16px, 1.105vw, 26px); }
+  .compact-page .publication-group + .publication-group { margin-top: clamp(27px, 2.295vw, 49px); padding-top: clamp(25px, 1.9125vw, 43px); }
+  .compact-page .publication-list > li + li { margin-top: clamp(25px, 2.295vw, 49px); padding-top: clamp(25px, 2.295vw, 49px); }
+  .compact-page .publication-row { gap: clamp(19px, 1.9125vw, 46px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -287,7 +287,7 @@ a { color: inherit; }
 
 /* Author roles are stored separately from names and BibTeX metadata. */
 .author-marker { margin-left: .08em; font-size: .72em; line-height: 0; vertical-align: super; white-space: nowrap; }
-#publication > h2 { margin-bottom: 12px; }
+#publication > h1 { margin-bottom: 12px; }
 .author-legend { color: var(--muted); font-size: .88em; line-height: 1.6; }
 .publications > .author-legend { margin: 0 0 clamp(24px, 2vw, 40px); }
 .paper-heading > .author-legend { margin: 0 0 16px; }

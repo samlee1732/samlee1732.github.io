@@ -44,14 +44,6 @@ menuToggle.addEventListener('click', () => {
   navigation.classList.toggle('is-open', expanded);
 });
 
-document.querySelectorAll('.main-navigation a[href^="#"]').forEach(link => {
-  link.addEventListener('click', event => {
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    closeMenu();
-    document.getElementById(link.hash.slice(1))?.focus({ preventScroll: true });
-  });
-});
-
 document.addEventListener('click', event => {
   if (!search.contains(event.target)) closeSearch();
 });
@@ -68,32 +60,6 @@ document.addEventListener('keydown', event => {
 });
 
 window.matchMedia('(min-width: 1201px)').addEventListener('change', closeMenu);
-
-// The homepage shares one document with Publication and its subsection anchors.
-function syncHomepageNavigation() {
-  const publication = document.getElementById('publication');
-  const publicationLink = navigation.querySelector('a[href="#publication"]');
-  const homepageLink = navigation.querySelector('a[href="./"]');
-  if (!publication || !publicationLink || !homepageLink) return;
-
-  let targetId = location.hash.slice(1);
-  try { targetId = decodeURIComponent(targetId); } catch { /* Keep malformed hashes harmless. */ }
-  const target = document.getElementById(targetId);
-  const inPublication = Boolean(target && publication.contains(target));
-  const current = inPublication ? publicationLink : homepageLink;
-  navigation.querySelectorAll('.nav-link').forEach(link => {
-    link.classList.toggle('is-current', link === current);
-    if (link === current) {
-      link.setAttribute('aria-current', inPublication ? 'location' : 'page');
-    } else {
-      link.removeAttribute('aria-current');
-    }
-  });
-}
-
-window.addEventListener('hashchange', syncHomepageNavigation);
-window.addEventListener('pageshow', syncHomepageNavigation);
-syncHomepageNavigation();
 
 // Resolve URLs from this script so search works on the homepage and paper pages.
 function loadSearchIndex() {
@@ -228,6 +194,10 @@ new ResizeObserver(entries => {
 function redirectLegacyHash() {
   const id = location.hash.slice(1);
   let route = legacyPageRoutes.get(id);
+  const publicationAnchors = document.querySelector('[data-publication-anchors]')?.dataset.publicationAnchors;
+  if (id && publicationAnchors?.split(' ').includes(id)) {
+    route = id === 'publication' ? 'publications/' : 'publications/#' + id;
+  }
   if (id === 'news' && (location.pathname === siteRoot.pathname || location.pathname === siteRoot.pathname + 'index.html')) {
     route = 'news/';
   }
