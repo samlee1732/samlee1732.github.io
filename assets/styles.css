@@ -178,8 +178,8 @@ a { color: inherit; }
 .team-section-note { margin: 6px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
 .team-page { margin-top: 28px; max-width: 1100px; padding-block: clamp(8px, 1vw, 24px); font-size: clamp(16px, 1.15vw, 24px); line-height: 1.7; }
 .team-page > h1 { margin: 0 0 clamp(26px, 2vw, 48px); color: #302c38; font-size: clamp(26px, 1.8vw, 44px); line-height: 1.25; font-weight: 600; }
-.team-section > .team-collaborators { padding: 0; list-style: none; }
-.team-collaborators > li { display: flex; align-items: center; gap: 14px; }
+.team-section > .team-profiles { padding: 0; list-style: none; }
+.team-profiles > li { display: flex; align-items: center; gap: 14px; }
 .team-portrait { display: block; flex: none; width: clamp(60px, 12vw, 72px); aspect-ratio: 1; border: 1px solid #e1dae6; border-radius: 50%; background: #f4f1f6; object-fit: cover; }
 
 
