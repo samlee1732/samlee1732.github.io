@@ -179,7 +179,7 @@ a { color: inherit; }
 .team-page > h1 { margin: 0 0 clamp(26px, 4vw, 52px); color: #302c38; font-size: clamp(34px, 4vw, 48px); line-height: 1.15; font-weight: 600; }
 .team-members { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 12px; margin: 0; padding: 0; list-style: none; }
 .team-member { text-align: center; overflow-wrap: anywhere; }
-.team-portrait { display: block; width: min(100%, clamp(72px, 14.7vw, 88px)); aspect-ratio: 1; margin-inline: auto; border: 1px solid #e1dae6; border-radius: 50%; background: #f4f1f6; object-fit: cover; }
+.team-portrait { display: block; width: min(100%, clamp(60px, 12vw, 72px)); aspect-ratio: 1; margin-inline: auto; border: 1px solid #e1dae6; border-radius: 50%; background: #f4f1f6; object-fit: cover; }
 .team-member-name { margin: 12px 0 0; color: var(--accent); font-size: clamp(16px, 1.5vw, 20px); line-height: 1.25; font-weight: 600; overflow-wrap: anywhere; }
 .team-member .team-section-note { max-width: 24ch; margin-inline: auto; }
 
