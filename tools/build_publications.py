@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-patents-projects'
+NAV_SCRIPT_VERSION = '20261124-hide-research-interests'
 esc = html.escape
 
 
@@ -30,7 +30,7 @@ class SearchTextParser(HTMLParser):
         attrs = dict(attrs)
         if self.active is None:
             block = None
-            if tag == 'section':
+            if tag == 'section' and 'hidden' not in attrs:
                 if attrs.get('id') in {'contact', 'research-interests', 'news', 'competitions', 'team', 'teaching', 'robotics-applications', 'automatic-control'}:
                     block = attrs['id']
                 elif 'biography' in attrs.get('class', '').split():
@@ -153,6 +153,8 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
     for block, title, kind, keywords in sections:
         text = ' '.join(' '.join(parser.blocks.get(block, [])).split())
         if not text:
+            if block == 'research-interests':
+                continue
             raise ValueError('Missing site search content: ' + block)
         description = text
         if block == 'contact':
