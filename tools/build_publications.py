@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-smart-car-competition'
+NAV_SCRIPT_VERSION = '20261124-smart-car-slam'
 COURSES = {
     'robotics-applications': ('Robotics and Applications', '机器人学及应用'),
     'automatic-control': ('Principles of Automatic Control', '自动控制原理'),
@@ -150,7 +150,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
         ('research-interests', 'Research Interests', 'Research', '研究方向 研究兴趣'),
         ('contact', 'Contact · 联系方式', 'Contact', '联系 联系方式 邮箱 邮件 地址 办公室'),
         ('competitions', 'Student Competitions · 指导学生竞赛', 'Teaching',
-         '比赛 竞赛 学生 团队 指导教师 成果 图片 数控机床装调与技术改造 吴雨清 宗德宁 邝伟源 魏胜 李森'),
+         '比赛 竞赛 学生 团队 指导教师 成果 图片 数控机床装调与技术改造 吴雨清 宗德宁 邝伟源 魏胜 李森 全国大学生智能汽车竞赛'),
         ('news', 'News · 最新动态', 'News', '新闻 动态 消息'),
         ('team', 'Team · 团队', 'Team', '团队 成员 实验室 合作者 合作 collaborators affiliation'),
         ('teaching', 'Teaching', 'Teaching', '教学 课程 授课 责任教师'),
