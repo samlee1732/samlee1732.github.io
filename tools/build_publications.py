@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261123-publications'
+NAV_SCRIPT_VERSION = '20261124-patents-projects'
 esc = html.escape
 
 
@@ -112,7 +112,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
             'text': description + ' 专利 发明 申请 Patents Patent application'
                     + (' Sen Li' if '李森' in patent['inventors'] else ''),
             'description': description,
-            'url': '#' + patent['id'],
+            'url': 'publications/#' + patent['id'],
             'kind': 'Patent Application',
         })
 
@@ -127,7 +127,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
             'title': project['title'],
             'text': description + ' 李森 Sen Li 科研项目 Research Projects',
             'description': description,
-            'url': '#' + project['id'],
+            'url': 'publications/#' + project['id'],
             'kind': 'Research Project',
         })
 
@@ -354,15 +354,6 @@ def review_overview(papers):
       </section>'''
 
 
-def publication_overview(papers, reviews):
-    groups = review_overview(reviews) + '\n' + published_overview(papers)
-    groups = '\n'.join('  ' + line for line in groups.splitlines())
-    return ('      <section id="publication" class="publications" aria-labelledby="publication-heading" tabindex="-1">\n'
-            '        <h1 id="publication-heading">Publication</h1>\n'
-            + '        ' + author_legend() + '\n'
-            + groups + '\n      </section>')
-
-
 def patent_overview(patents):
     rows = []
     for patent in patents:
@@ -374,13 +365,13 @@ def patent_overview(patents):
               <h3 id="{esc(patent['id'])}-title" class="publication-title">{esc(patent['title'])} <span class="publication-type">{esc(patent['type'])}</span> <span class="publication-type review-status">{esc(patent['status'])}</span></h3>
             </article>
           </li>''')
-    return ('      <!-- PATENT CONTENT START -->\n'
-            '      <section id="patents" class="publications patents" aria-labelledby="patents-heading" tabindex="-1">\n'
-            '        <h2 id="patents-heading">Patents</h2>\n'
-            '        <!-- Generated from data/patents.json by tools/build_publications.py. -->\n'
-            '        <ol class="publication-list">\n'
-            + '\n'.join(rows) + '\n        </ol>\n      </section>\n'
-            + '      <!-- PATENT CONTENT END -->')
+    return '''      <section id="patents" class="publication-group patents" aria-labelledby="patents-heading" tabindex="-1">
+        <h2 id="patents-heading">Patents</h2>
+        <!-- Generated from data/patents.json by tools/build_publications.py. -->
+        <ol class="publication-list">
+''' + '\n'.join(rows) + '''
+        </ol>
+      </section>'''
 
 
 def project_month(value):
@@ -413,14 +404,28 @@ def project_overview(projects):
               <p>{esc(project_role(project))}</p>{contribution}
             </article>
           </li>''')
-    return ('      <!-- PROJECT CONTENT START -->\n'
-            '      <section id="projects" class="publications projects" aria-labelledby="projects-heading" tabindex="-1">\n'
-            '        <h2 id="projects-heading">Projects</h2>\n'
-            '        <p class="projects-intro" lang="zh-CN">近年主持及参与的纵向与横向科研项目。</p>\n'
-            '        <!-- Generated from data/projects.json by tools/build_publications.py. -->\n'
-            '        <ol class="publication-list">\n'
-            + '\n'.join(rows) + '\n        </ol>\n      </section>\n'
-            + '      <!-- PROJECT CONTENT END -->')
+    return '''      <section id="projects" class="publication-group projects" aria-labelledby="projects-heading" tabindex="-1">
+        <h2 id="projects-heading">Projects</h2>
+        <p class="projects-intro" lang="zh-CN">近年主持及参与的纵向与横向科研项目。</p>
+        <!-- Generated from data/projects.json by tools/build_publications.py. -->
+        <ol class="publication-list">
+''' + '\n'.join(rows) + '''
+        </ol>
+      </section>'''
+
+
+def publication_overview(papers, reviews, patents, projects):
+    groups = '\n'.join((
+        review_overview(reviews),
+        published_overview(papers),
+        patent_overview(patents),
+        project_overview(projects),
+    ))
+    groups = '\n'.join('  ' + line for line in groups.splitlines())
+    return ('      <section id="publication" class="publications" aria-labelledby="publication-heading" tabindex="-1">\n'
+            '        <h1 id="publication-heading">Publication</h1>\n'
+            + '        ' + author_legend() + '\n'
+            + groups + '\n      </section>')
 
 
 def site_header(homepage, prefix, current):
@@ -713,29 +718,19 @@ def main():
                     raise FileNotFoundError(asset)
     homepage_path = ROOT / 'index.html'
     homepage = homepage_path.read_text()
-    publications = publication_overview(papers, reviews)
+    publications = publication_overview(papers, reviews, patents, projects)
     publication_anchors = ' '.join(re.findall(r' id="([^"]+)"', publications))
     homepage, count = re.subn(
         r'data-publication-anchors="[^"]*"', f'data-publication-anchors="{esc(publication_anchors)}"',
         homepage, count=1)
     if count != 1:
         raise ValueError('Expected the publication anchor list on the homepage.')
-    homepage, count = re.subn(
-        r'      <!-- PATENT CONTENT START -->.*?<!-- PATENT CONTENT END -->',
-        lambda _: patent_overview(patents), homepage, count=1, flags=re.S)
-    if count != 1:
-        raise ValueError('Expected one marked patent content block in index.html.')
-    homepage, count = re.subn(
-        r'      <!-- PROJECT CONTENT START -->.*?<!-- PROJECT CONTENT END -->',
-        lambda _: project_overview(projects), homepage, count=1, flags=re.S)
-    if count != 1:
-        raise ValueError('Expected one marked project content block in index.html.')
     homepage_path.write_text(homepage)
     publications_folder = ROOT / 'publications'
     publications_folder.mkdir(exist_ok=True)
     (publications_folder / 'index.html').write_text(content_page(
         homepage, publications, 'publications', 'Publication',
-        'Published papers and manuscripts under review from SenseDex Lab.'))
+        'Published papers, manuscripts under review, patents, and research projects from SenseDex Lab.'))
     news_content = (ROOT / 'data/news.html').read_text()
     news_folder = ROOT / 'news'
     news_folder.mkdir(exist_ok=True)

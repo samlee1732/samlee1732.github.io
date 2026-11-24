@@ -10,8 +10,8 @@ The academic website of **Sen Li, Ph.D.** and SenseDex Lab at Shenzhen Polytechn
 
 | Section | Content |
 | --- | --- |
-| [Homepage](https://www.sensedex.online/) | Biography, research interests, contact information, patents, and research projects |
-| [Publication](https://www.sensedex.online/publications/) | Manuscripts under review followed by published papers; paper details, figures, available PDFs, and BibTeX |
+| [Homepage](https://www.sensedex.online/) | Biography, research interests, and contact information |
+| [Publication](https://www.sensedex.online/publications/) | Manuscripts under review, published papers and their resources, patents, and research projects |
 | [Team](https://www.sensedex.online/team/) | Principal investigator, collaborators, current students, and alumni |
 | [Teaching](https://www.sensedex.online/teaching/) | Course pages, learning resources, and student competitions |
 | [News](https://www.sensedex.online/news/) | Research, teaching, conference, and competition updates in reverse chronological order |
