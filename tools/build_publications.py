@@ -444,18 +444,15 @@ def content_page(homepage, content, slug, title, description, source=None):
     prefix = '../' * (slug.count('/') + 1)
     is_course = slug.startswith('teaching/')
     is_publications = slug == 'publications'
-    styles_version = {
-        'teaching': '20261114-course-links',
-        'team': '20261123-team-profiles',
-        'publications': '20261123-publications',
-    }.get(slug, '20261114-teaching-competitions')
+    compact = slug in {'publications', 'team', 'teaching', 'news'}
+    styles_version = '20261124-compact-pages' if compact else '20261114-teaching-competitions'
     current = 'teaching/' if is_course else slug + '/'
     header = site_header(homepage, prefix, current)
     back_url = prefix + 'teaching/' if is_course else prefix
     back_label = 'Teaching' if is_course else 'Homepage'
     source = source or slug
     source_notice = '' if is_publications else f'      <!-- Page content is maintained in data/{esc(source)}.html. -->\n'
-    html_class = ' class="compact-page"' if is_publications else ''
+    html_class = ' class="compact-page"' if compact else ''
     course_layout = ' course-document' if source == 'robotics-applications' else ''
     course_styles = (f'\n    <link rel="stylesheet" href="{prefix}assets/course-syllabus.css?v=20261114-simple">'
                      if source == 'robotics-applications' else '')
