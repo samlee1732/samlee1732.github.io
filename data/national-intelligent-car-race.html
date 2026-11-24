@@ -1,0 +1,59 @@
+      <section id="national-intelligent-car-race" class="news competition-guide" aria-labelledby="national-intelligent-car-race-heading" tabindex="-1">
+        <h1 id="national-intelligent-car-race-heading">National University Students Intelligent Car Race</h1>
+        <div lang="zh-CN">
+          <p>第 22 届（2027 年）备赛资料，更新于 <time datetime="2026-11-24">2026 年 11 月 24 日</time>。当前规则为编辑版，三个组别均为 3 人组队，本科与专科分别排名。车模、主控和器材选型以正式细则为准。<a href="https://blog.csdn.net/zhuoqingjoking97298/article/details/171017946">比赛总规则</a> · <a href="https://blog.csdn.net/zhuoqingjoking97298/article/details/171038777">答疑总入口</a></p>
+
+          <h2 id="preparation-overview">赛题难度与起步任务</h2>
+          <p>难度以三人队从原型做到稳定完赛为基准，满分 5 分。</p>
+          <table aria-labelledby="preparation-overview">
+            <thead>
+              <tr><th scope="col">赛题</th><th scope="col">难度</th><th scope="col">起步验证</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row"><a href="#qujing-tongyou">曲径通幽</a></th><td>3.5 / 5</td><td>低速稳定跑一圈，再加断口，验证能重新进入赛道。</td></tr>
+              <tr><th scope="row"><a href="#chuanzhen-yinxian">穿针引线</a></th><td>4 / 5</td><td>从不同方向稳定穿过单门，再练多门切换和过障碍。</td></tr>
+              <tr><th scope="row"><a href="#liyue-longmen">鲤跃龙门</a></th><td>5 / 5</td><td>先跑稳平地，再练起跳和落地恢复，最后接入单门导航。</td></tr>
+            </tbody>
+          </table>
+          <p>有 PVC 赛道和视觉基础时可优先考虑曲径通幽。有缩微车和电磁采集基础时可优先考虑穿针引线。鲤跃龙门适合已有轮腿样机和调试经验的队伍。</p>
+
+          <section id="qujing-tongyou" aria-labelledby="qujing-heading" tabindex="-1">
+            <h2 id="qujing-heading">曲径通幽</h2>
+            <p>当前总表采用三轮车模和 Infineon TRAVEO。车模从车库进入 PVC 赛道，完成一圈后驶离，再重新入场跑第二圈。技术难点在于断路后的导航恢复，以及进出赛道与八字环岛、十字路口的状态切换。</p>
+            <ul>
+              <li><strong>规则与答疑。</strong> 彩色摄像头可用，电磁门目前为可选辅助导航。车模、CYT 平台和比赛用门体安排仍待细则确认。<a href="https://blog.csdn.net/zhuoqingjoking97298/article/details/171079634">任务页</a> · <a href="https://blog.csdn.net/zhuoqingjoking97298/article/details/171081120">专项答疑</a></li>
+              <li><strong>主控开发。</strong> 先练定时器、PWM、ADC 和摄像头采集，例程需与实际芯片匹配。<a href="https://documentation.infineon.com/traveo/docs/sqb1678868258368">TRAVEO 官方例程</a> · <a href="https://gitee.com/seekfree/CYT4BB7_Library">逐飞 CYT4BB7 开源库</a></li>
+              <li><strong>往届整车与代码。</strong> 第 21 届「走马观碑」提供三轮布局、外设接入和可编辑 PCB。源码基于龙芯平台，移植时按本届主控适配。<a href="https://oshwhub.com/lukestery/project_udnldgrw">往届整车方案</a> · <a href="https://gitee.com/wuwusama/SmartCar_99Pai_OpenSource">代码与 PCB 工程</a></li>
+            </ul>
+          </section>
+
+          <section id="chuanzhen-yinxian" aria-labelledby="chuanzhen-heading" tabindex="-1">
+            <h2 id="chuanzhen-heading">穿针引线</h2>
+            <p>当前方案为 STC 自制缩微车，地面投影小于 15 × 15 cm。车模按交变电磁场信号随机穿门，场地包含坡道、圆柱障碍和颠簸路面。重点是在小车空间内布置电源、电机与传感器，并在车速和车身姿态变化时保持定向稳定。</p>
+            <ul>
+              <li><strong>规则与答疑。</strong> 总表列出电磁线圈、光电管和 ToF。专项答疑说明赛道不保留传统地面电磁引导线，训练可自制门，比赛使用组委会布置的门。<a href="https://blog.csdn.net/zhuoqingjoking97298/article/details/171078834">任务细则</a> · <a href="https://blog.csdn.net/zhuoqingjoking97298/article/details/171080730">专项答疑</a></li>
+              <li><strong>结构与电控。</strong> 参考轻量化车模的底盘布置和结构文件，以及 STC 工程的原理图、封装与基础例程。<a href="https://gitee.com/seekfree/Lightweight_Car_Chassis">逐飞缩微车模</a> · <a href="https://gitee.com/seekfree/STC32G144K246_100Pin_Library">STC32G 开源库</a></li>
+              <li><strong>定向与调试。</strong> 往届挑战赛资料含正交线圈布置、角度与信号强度输出和串口解析，可参考设计单门对准及多门切换。<a href="https://www.eet-china.com/mp/a505803.html">电磁门定向感应模块与示例</a></li>
+            </ul>
+          </section>
+
+          <section id="liyue-longmen" aria-labelledby="liyue-heading" tabindex="-1">
+            <h2 id="liyue-heading">鲤跃龙门</h2>
+            <p>当前总表采用 Infineon AURIX 和自制轮腿车。车模在室外对准电磁门，跳过门中的 5 cm 挡板，落地后恢复平衡。机构强度、执行器响应和跳跃时序需要联调。</p>
+            <ul>
+              <li><strong>规则与答疑。</strong> 当前答疑给出的导航方式为电磁感应与 GPS，并说明允许的电机范围会包括部分无刷系列。主控、电机和舵机的具体型号以正式细则为准。<a href="https://blog.csdn.net/zhuoqingjoking97298/article/details/171080539">任务细则</a> · <a href="https://blog.csdn.net/zhuoqingjoking97298/article/details/171081915">专项答疑</a></li>
+              <li><strong>结构与主控。</strong> 逐飞六无刷轮腿项目提供可编辑的 SolidWorks 文件和材料清单。AURIX 原厂例程覆盖定时器、PWM 和 ADC。<a href="https://gitee.com/seekfree/six_brushless_Wheel_Legged_Chassis">轮腿 CAD 与材料清单</a> · <a href="https://github.com/Infineon/AURIX_code_examples">AURIX 官方例程</a></li>
+              <li><strong>平衡与跳跃。</strong> 往届车队公开了 IMU 姿态估计、多环 PID、跳跃状态机和落地缓冲，可先从平衡回路和动作时序入手。<a href="https://github.com/boatchanting/Wheel-legged-autocar">第 21 届轮腿车队源码</a> · <a href="https://www.eet-china.com/mp/a525433.html">国赛车队调试经验</a></li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="shared-resources-heading">
+            <h2 id="shared-resources-heading">共用资料</h2>
+            <ul>
+              <li><strong>电磁门训练场地。</strong> 资料包括门体尺寸、线圈、接口和发射驱动，150 kHz 为文中的参考发射频率。新版门体模型库的开放进度见穿针引线专项答疑。<a href="https://www.eet-china.com/mp/a540577.html">第 22 届电磁门技术规格</a></li>
+              <li><strong>往届技术报告。</strong> 可查第 21 届「走马观碑」「飞檐走壁」和「轮腿穿越」，分别参考三轮视觉车、缩微电控和轮腿整车调试。<a href="https://www.eet-china.com/mp/a524048.html">技术报告下载索引</a></li>
+              <li><strong>PCB 教学样例。</strong> 可用嘉立创 EDA 工程和两套打样包了解主控、电源与双路 H 桥的集成。<a href="../pcb-design/motor-drive-control-board/#reference-designs">电机驱动与主控一体板小实践</a></li>
+            </ul>
+          </section>
+        </div>
+      </section>

@@ -48,6 +48,7 @@ Open [http://127.0.0.1:8080](http://127.0.0.1:8080). Use the local server so tha
 | `data/pcb-motor-drive-control-board.html` | Integrated motor drive and control board mini lab |
 | `data/pcb-raspberry-pi-usb-expansion-board.html` | Raspberry Pi multi-port USB expansion board mini lab |
 | `data/competitions.html` | Student competitions within Teaching |
+| `data/national-intelligent-car-race.html` | Intelligent car race preparation and reference resources |
 | `data/news.html` | News entries |
 | `assets/styles.css` | Shared styling and responsive layout |
 | `assets/course-syllabus.css` | Course syllabus styling |

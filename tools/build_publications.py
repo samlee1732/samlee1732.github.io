@@ -9,7 +9,9 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-robotics-lecture-resources'
+NAV_SCRIPT_VERSION = '20261124-smartcar-guide'
+CAR_RACE_SLUG = 'national-intelligent-car-race'
+CAR_RACE_TITLE = 'National University Students Intelligent Car Race'
 PCB_COURSE_ROUTE = 'teaching/pcb-design'
 PCB_PRACTICES = {
     'led-indicator-board': (
@@ -44,7 +46,8 @@ class SearchTextParser(HTMLParser):
 
     VOID_TAGS = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
                  'link', 'meta', 'param', 'source', 'track', 'wbr'}
-    SECTION_IDS = {'contact', 'research-interests', 'news', 'competitions', 'team', 'teaching'} | COURSES.keys() | PCB_PRACTICES.keys()
+    SECTION_IDS = {'contact', 'research-interests', 'news', 'competitions', 'team', 'teaching',
+                   CAR_RACE_SLUG} | COURSES.keys() | PCB_PRACTICES.keys()
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -171,6 +174,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
         ('contact', 'Contact · 联系方式', 'Contact', '联系 联系方式 邮箱 邮件 地址 办公室'),
         ('competitions', 'Student Competitions · 指导学生竞赛', 'Teaching',
          '比赛 竞赛 学生 团队 指导教师 成果 图片 数控机床装调与技术改造 吴雨清 宗德宁 邝伟源 魏胜 李森 全国大学生智能汽车竞赛'),
+        (CAR_RACE_SLUG, CAR_RACE_TITLE, 'Teaching', '全国大学生智能汽车竞赛 智能车 备赛 赛题'),
         ('news', 'News · 最新动态', 'News', '新闻 动态 消息'),
         ('team', 'Team · 团队', 'Team', '团队 成员 实验室 合作者 合作 collaborators affiliation'),
         ('teaching', 'Teaching', 'Teaching', '教学 课程 授课 责任教师'),
@@ -194,7 +198,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
             emails = re.findall(r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}', text)
             if emails:
                 description = ' · '.join(emails) + ' · ' + text
-        if block in COURSES:
+        if block in COURSES or block == CAR_RACE_SLUG:
             url = 'teaching/' + block + '/'
         elif block in PCB_PRACTICES:
             url = f'{PCB_COURSE_ROUTE}/{block}/'
@@ -485,7 +489,7 @@ def content_page(homepage, content, slug, title, description, source=None, back=
     styles_version = {
         'news': '20261124-news-images',
         'team': '20261124-team-collaborator',
-        'teaching': '20261124-pcb-lab-titles',
+        'teaching': '20261124-smartcar-guide',
     }.get(section, '20261124-compact-pages-2' if compact else '20261114-teaching-competitions')
     header = site_header(homepage, prefix, section + '/')
     back_path, back_label = back or (('teaching/', 'Teaching') if is_course else ('', 'Homepage'))
@@ -786,6 +790,14 @@ def main():
     teaching_folder.mkdir(exist_ok=True)
     (teaching_folder / 'index.html').write_text(content_page(homepage, teaching_content + '\n' + competitions_content, 'teaching', 'Teaching',
         'Courses and student competition mentorship at Shenzhen Polytechnic University.'))
+    car_race_content = (ROOT / 'data' / f'{CAR_RACE_SLUG}.html').read_text()
+    car_race_folder = teaching_folder / CAR_RACE_SLUG
+    car_race_folder.mkdir(exist_ok=True)
+    (car_race_folder / 'index.html').write_text(content_page(
+        homepage, car_race_content, f'teaching/{CAR_RACE_SLUG}', CAR_RACE_TITLE,
+        'Difficulty, preparation tasks, and reference resources for three events in the 22nd intelligent car race.',
+        source=CAR_RACE_SLUG, back=(f'teaching/#{CAR_RACE_SLUG}', 'Teaching')))
+    teaching_content += '\n' + car_race_content
     for course_id, (title, _) in COURSES.items():
         course_content = (ROOT / 'data' / (course_id + '.html')).read_text()
         course_folder = teaching_folder / course_id
