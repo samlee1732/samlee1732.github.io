@@ -283,12 +283,6 @@ a { color: inherit; }
   padding: 0;
   list-style: none;
 }
-@media (min-width: 1201px) {
-  .teaching-page .course-list { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 696px; }
-}
-@media (min-width: 2160px) {
-  .teaching-page .course-list { grid-template-columns: repeat(6, minmax(0, 1fr)); max-width: 1416px; }
-}
 .teaching-page .course-link {
   position: relative;
   isolation: isolate;
@@ -318,6 +312,15 @@ a { color: inherit; }
 .teaching-page .course-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
 .teaching-page .course-link-title { font: 700 clamp(1rem, 1.3vw, 1.25rem) / 1.2 Georgia, serif; }
 .teaching-page .course-link-subtitle { margin-top: 7px; color: #e3ecf3; font-size: clamp(.8125rem, .95vw, .875rem); line-height: 1.4; }
+@media (min-width: 801px) {
+  .teaching-page .course-list {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: clamp(10px, 1.1vw, 18px);
+    max-width: 1200px;
+  }
+  .teaching-page .course-link { padding: clamp(10px, .9vw, 16px) clamp(8px, .7vw, 16px); }
+  .teaching-page .course-link-title { font-size: clamp(.9375rem, 1.12vw, 1.125rem); }
+}
 .course-materials h2 { margin: 0 0 12px; color: #302c38; font-size: clamp(20px, 1.45vw, 28px); line-height: 1.4; }
 .course-page .course-subtitle { margin-bottom: 8px; color: var(--text); }
 .course-materials { margin-top: 36px; padding-top: 28px; border-top: 1px solid #e8e2eb; }
