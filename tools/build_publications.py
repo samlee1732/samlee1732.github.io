@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-new-courses'
+NAV_SCRIPT_VERSION = '20261124-competition-title'
 COURSES = {
     'robotics-applications': ('Robotics and Applications', '机器人学及应用'),
     'automatic-control': ('Principles of Automatic Control', '自动控制原理'),
