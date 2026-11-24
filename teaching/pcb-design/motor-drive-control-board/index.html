@@ -76,7 +76,17 @@
         </ol>
 
         <h2>提交与验收</h2>
-        <p>提交板级框图、器件选型记录、Altium 工程、DRC 报告及 Gerber 和钻孔文件。核对两路驱动与主控接口的对应关系。若已完成台架验证，记录电源电压与电机电流，并确认主控复位时电机停止、两路同时启动时主控正常运行。</p>
+        <p>提交板级框图、器件选型记录、可编辑的 EDA 工程（嘉立创 EDA 或 Altium Designer）、DRC 报告，以及从同一版 PCB 导出的 Gerber 和钻孔文件。核对两路驱动与主控接口的对应关系。若已完成台架验证，记录电源电压与电机电流，并确认主控复位时电机停止、两路同时启动时主控正常运行。</p>
+
+        <h2 id="reference-designs">参考工程与打样文件</h2>
+        <p><strong>Teensy 4.1 循迹小车控制板</strong>（DODA-2005）。该项目提供 DRV8833 和 TB6612FNG 两个双路有刷电机驱动版本。可在嘉立创 EDA 专业版导入工程，对照两个版本的原理图和 PCB 布局。两个打样包均包含 Gerber 和钻孔文件。</p>
+        <ul>
+          <li><a href="https://raw.githubusercontent.com/DODA-2005/teensy4.1-lfr-pcb/main/Hardware%20Files/easyeda_pro_files/Tb66_and_DRV88_Teensy_LFR_PCB.epro">下载嘉立创 EDA 专业版工程（.epro）</a></li>
+          <li><a href="https://raw.githubusercontent.com/DODA-2005/teensy4.1-lfr-pcb/main/Hardware%20Files/Gerber%20Files/DRV88_Teensy_LFRPCB.zip">下载 DRV8833 版打样文件（ZIP）</a></li>
+          <li><a href="https://raw.githubusercontent.com/DODA-2005/teensy4.1-lfr-pcb/main/Hardware%20Files/Gerber%20Files/TB6612FNG_Teensy_LFRPCB.zip">下载 TB6612FNG 版打样文件（ZIP）</a></li>
+          <li><a href="https://github.com/DODA-2005/teensy4.1-lfr-pcb">原项目与许可说明</a></li>
+        </ul>
+        <p><strong>STM32 N20 电机主控一体板</strong>。项目采用 STM32F103C8T6 和 TB6612，可参考主控、电源和电机接口的集成方式。原项目附有设计报告和嘉立创 EDA 工程文件（.eprj2）。<a href="https://oshwhub.com/team_aimpwouc/project_ieqcldmo#3">查看项目附件</a></p>
 
         <h2>参考资料</h2>
         <ul>
