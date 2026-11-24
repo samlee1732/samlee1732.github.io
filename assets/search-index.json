@@ -155,8 +155,8 @@
   },
   {
     "title": "Teaching",
-    "text": "Teaching Teaching and student competition mentorship at Shenzhen Polytechnic University. Robotics and Applications 机器人学及应用 Principles of Automatic Control 自动控制原理 Robot Vision 机器人视觉 Machine Learning 机器学习 教学 课程 授课 责任教师",
-    "description": "Teaching Teaching and student competition mentorship at Shenzhen Polytechnic University. Robotics and Applications 机器人学及应用 Principles of Automatic Control 自动控制原理 Robot Vision 机器人视觉 Machine Learning 机器学习",
+    "text": "Teaching Teaching and student competition mentorship at Shenzhen Polytechnic University. Robotics and Applications 机器人学及应用 Principles of Automatic Control 自动控制原理 Robot Vision 机器人视觉 Machine Learning 机器学习 Mechanical Design 机械设计 PCB Design 印制电路板设计 教学 课程 授课 责任教师",
+    "description": "Teaching Teaching and student competition mentorship at Shenzhen Polytechnic University. Robotics and Applications 机器人学及应用 Principles of Automatic Control 自动控制原理 Robot Vision 机器人视觉 Machine Learning 机器学习 Mechanical Design 机械设计 PCB Design 印制电路板设计",
     "url": "teaching/",
     "kind": "Teaching"
   },
@@ -186,6 +186,20 @@
     "text": "Machine Learning 机器学习 Shenzhen Polytechnic University Course Information & Materials · 课程资料 Course details and materials have not been added yet. 课程介绍与教学资料待补充。 教学 课程 机器学习",
     "description": "Machine Learning 机器学习 Shenzhen Polytechnic University Course Information & Materials · 课程资料 Course details and materials have not been added yet. 课程介绍与教学资料待补充。",
     "url": "teaching/machine-learning/",
+    "kind": "Teaching"
+  },
+  {
+    "title": "Mechanical Design · 机械设计",
+    "text": "Mechanical Design 机械设计 Shenzhen Polytechnic University Course Information & Materials · 课程资料 Course details and materials have not been added yet. 课程介绍与教学资料待补充。 教学 课程 机械设计",
+    "description": "Mechanical Design 机械设计 Shenzhen Polytechnic University Course Information & Materials · 课程资料 Course details and materials have not been added yet. 课程介绍与教学资料待补充。",
+    "url": "teaching/mechanical-design/",
+    "kind": "Teaching"
+  },
+  {
+    "title": "PCB Design · 印制电路板设计",
+    "text": "PCB Design 印制电路板设计 Shenzhen Polytechnic University Course Information & Materials · 课程资料 Course details and materials have not been added yet. 课程介绍与教学资料待补充。 教学 课程 印制电路板设计",
+    "description": "PCB Design 印制电路板设计 Shenzhen Polytechnic University Course Information & Materials · 课程资料 Course details and materials have not been added yet. 课程介绍与教学资料待补充。",
+    "url": "teaching/pcb-design/",
     "kind": "Teaching"
   }
 ]

@@ -9,12 +9,14 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-smart-car-slam'
+NAV_SCRIPT_VERSION = '20261124-design-courses'
 COURSES = {
     'robotics-applications': ('Robotics and Applications', '机器人学及应用'),
     'automatic-control': ('Principles of Automatic Control', '自动控制原理'),
     'robot-vision': ('Robot Vision', '机器人视觉'),
     'machine-learning': ('Machine Learning', '机器学习'),
+    'mechanical-design': ('Mechanical Design', '机械设计'),
+    'pcb-design': ('PCB Design', '印制电路板设计'),
 }
 esc = html.escape
 
@@ -458,7 +460,7 @@ def content_page(homepage, content, slug, title, description, source=None):
     compact = section in {'publications', 'team', 'teaching', 'news'}
     styles_version = {
         'news': '20261124-news-images',
-        'teaching': '20261124-teaching-catalog',
+        'teaching': '20261124-six-courses',
     }.get(section, '20261124-compact-pages-2' if compact else '20261114-teaching-competitions')
     header = site_header(homepage, prefix, section + '/')
     back_url = prefix + 'teaching/' if is_course else prefix
