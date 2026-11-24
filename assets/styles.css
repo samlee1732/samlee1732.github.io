@@ -92,7 +92,7 @@ a { color: inherit; }
 .publication-list > li { padding-left: .5em; }
 .publication-list > li + li { margin-top: clamp(32px, 3vw, 64px); padding-top: clamp(32px, 3vw, 64px); border-top: 1px solid #e8e2eb; }
 .publication-row { display: grid; grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr); align-items: start; gap: clamp(24px, 2.5vw, 60px); }
-.news-entry { grid-template-columns: minmax(0, 2.35fr) minmax(0, 1fr); }
+.news-entry { grid-template-columns: minmax(0, 2.72fr) minmax(0, 1fr); }
 .publication-details, .publication-media { min-width: 0; }
 .publication-details { overflow-wrap: anywhere; }
 .publication-details p, .patent-entry p { margin: 0; }
@@ -226,7 +226,7 @@ a { color: inherit; }
   .publication-list { padding-left: 1.5em; }
   .publication-list > li { padding-left: .2em; }
   .publication-row { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  .news-entry > .publication-media { width: 85%; }
+  .news-entry > .publication-media { width: 76.5%; }
   .publication-placeholder { font-size: 14px; }
   .paper-heading { margin-top: 24px; }
   .paper-figure { padding: 12px; margin-block: 24px; }

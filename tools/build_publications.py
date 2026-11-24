@@ -448,6 +448,8 @@ def content_page(homepage, content, slug, title, description, source=None):
     is_publications = slug == 'publications'
     compact = slug in {'publications', 'team', 'teaching', 'news'}
     styles_version = '20261124-compact-pages-2' if compact else '20261114-teaching-competitions'
+    if slug == 'news':
+        styles_version = '20261124-news-images'
     current = 'teaching/' if is_course else slug + '/'
     header = site_header(homepage, prefix, current)
     back_url = prefix + 'teaching/' if is_course else prefix
