@@ -446,20 +446,19 @@ def content_page(homepage, content, slug, title, description, source=None):
     prefix = '../' * (slug.count('/') + 1)
     is_course = slug.startswith('teaching/')
     is_publications = slug == 'publications'
-    compact = slug in {'publications', 'team', 'teaching', 'news'}
+    section = 'teaching' if is_course else slug
+    compact = section in {'publications', 'team', 'teaching', 'news'}
     styles_version = {
         'news': '20261124-news-images',
-        'teaching': '20261124-course-covers',
-    }.get(slug, '20261124-compact-pages-2' if compact else '20261114-teaching-competitions')
-    current = 'teaching/' if is_course else slug + '/'
-    header = site_header(homepage, prefix, current)
+        'teaching': '20261124-course-layout',
+    }.get(section, '20261124-compact-pages-2' if compact else '20261114-teaching-competitions')
+    header = site_header(homepage, prefix, section + '/')
     back_url = prefix + 'teaching/' if is_course else prefix
     back_label = 'Teaching' if is_course else 'Homepage'
     source = source or slug
     source_notice = '' if is_publications else f'      <!-- Page content is maintained in data/{esc(source)}.html. -->\n'
     html_class = ' class="compact-page"' if compact else ''
-    course_layout = ' course-document' if source == 'robotics-applications' else ''
-    course_styles = (f'\n    <link rel="stylesheet" href="{prefix}assets/course-syllabus.css?v=20261114-simple">'
+    course_styles = (f'\n    <link rel="stylesheet" href="{prefix}assets/course-syllabus.css?v=20261124-course-layout">'
                      if source == 'robotics-applications' else '')
     return f'''<!doctype html>
 <html lang="en"{html_class}>
@@ -478,7 +477,7 @@ def content_page(homepage, content, slug, title, description, source=None):
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 {header}
-    <main id="main-content" class="container main-content news-page{course_layout}">
+    <main id="main-content" class="container main-content news-page">
       <a class="paper-back" href="{back_url}">← {back_label}</a>
 {source_notice}{content.rstrip()}
     </main>
