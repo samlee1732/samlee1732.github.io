@@ -9,11 +9,11 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-stm32-sensor-pcb'
+NAV_SCRIPT_VERSION = '20261124-pcb-lab-titles'
 PCB_COURSE_ROUTE = 'teaching/pcb-design'
 PCB_PRACTICES = {
     'led-indicator-board': (
-        'Altium Designer 常见问题与电路焊接笔记',
+        'PCB Mini Lab · STM32 柔性传感器采集板设计',
         'Altium Designer troubleshooting and soldering notes for a two-layer PCB that acquires flexible sensor signals using an STM32 microcontroller.',
         'pcb-mini-lab',
     ),
@@ -480,7 +480,7 @@ def content_page(homepage, content, slug, title, description, source=None, back=
     styles_version = {
         'news': '20261124-news-images',
         'team': '20261124-team-collaborator',
-        'teaching': '20261124-motor-drive-practice',
+        'teaching': '20261124-pcb-lab-titles',
     }.get(section, '20261124-compact-pages-2' if compact else '20261114-teaching-competitions')
     header = site_header(homepage, prefix, section + '/')
     back_path, back_label = back or (('teaching/', 'Teaching') if is_course else ('', 'Homepage'))

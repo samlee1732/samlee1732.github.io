@@ -326,7 +326,8 @@ img.team-portrait { background: #fff; object-fit: contain; }
 .course-page .course-subtitle { margin-bottom: 8px; color: var(--text); }
 .course-materials { margin-top: 36px; padding-top: 28px; border-top: 1px solid #e8e2eb; }
 .pcb-practice > h2 { margin: 1.15em 0 .35em; color: #302c38; font-size: 1em; }
-#pcb-design .course-materials > h2 a { color: var(--accent); }
+#pcb-design .course-materials > h2 { font-size: clamp(16px, .9vw, 22px); }
+#pcb-design .course-materials > h2 > a { color: var(--accent); text-decoration: none; }
 .pcb-practice li + li { margin-top: .45em; }
 .pcb-practice a { color: var(--accent); }
 
