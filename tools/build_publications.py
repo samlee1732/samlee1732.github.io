@@ -331,24 +331,25 @@ def review_overview(papers):
         corresponding = ('\n                <p>Corresponding author: '
                          + esc(p['corresponding_author']) + '</p>') if p.get('corresponding_author') else ''
         title = esc(p['title'])
+        caption = ('\n                <figcaption class="publication-media-caption">'
+                   + esc(p['image_caption']) + '</figcaption>') if p.get('image_caption') else ''
+        preview = image(p, '../', preview=True)
+        figure = f'<figure class="publication-media">{preview}{caption}</figure>'
         workspace_url = private_workspace_url(p)
         if workspace_url:
             url = esc(workspace_url)
             title = f'<a href="{url}">{title}</a>'
-            # A real, keyboard-accessible link with a deliberately empty media area.
-            figure = (f'<a class="publication-media publication-private-placeholder" href="{url}"'
-                      f' aria-label="Open private GitHub workspace: {esc(p["title"])}"></a>')
-        else:
-            caption = ('\n                <figcaption class="publication-media-caption">'
-                       + esc(p['image_caption']) + '</figcaption>') if p.get('image_caption') else ''
-            preview = image(p, '../', preview=True)
-            figure = f'<figure class="publication-media">{preview}{caption}</figure>'
-            if has_public_review_page(p):
-                url = './' + p['id'] + '/'
-                title = f'<a href="{url}">{title}</a>'
-                figure = (f'<a href="{url}" aria-label="View project and video: {esc(p["title"])}">'
-                          f'<figure class="publication-media">{preview}'
-                          '<figcaption class="publication-media-caption">View project and video</figcaption></figure></a>')
+            label = f' aria-label="Open private GitHub workspace: {esc(p["title"])}"'
+            if p.get('image'):
+                figure = f'<a href="{url}"{label}>{figure}</a>'
+            else:
+                figure = f'<a class="publication-media publication-private-placeholder" href="{url}"{label}></a>'
+        elif has_public_review_page(p):
+            url = './' + p['id'] + '/'
+            title = f'<a href="{url}">{title}</a>'
+            figure = (f'<a href="{url}" aria-label="View project and video: {esc(p["title"])}">'
+                      f'<figure class="publication-media">{preview}'
+                      '<figcaption class="publication-media-caption">View project and video</figcaption></figure></a>')
         rows.append(f'''          <li>
             <article id="{p['id']}" class="publication-row" aria-labelledby="{p['id']}-title" tabindex="-1">
               <div class="publication-details">
