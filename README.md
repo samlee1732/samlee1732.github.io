@@ -40,6 +40,8 @@ Open [http://127.0.0.1:8080](http://127.0.0.1:8080). Use the local server so tha
 | `data/teaching.html` | Teaching overview |
 | `data/robotics-applications.html` | Robotics and Applications course |
 | `data/automatic-control.html` | Automatic Control course |
+| `data/robot-vision.html` | Robot Vision course |
+| `data/machine-learning.html` | Machine Learning course |
 | `data/competitions.html` | Student competitions within Teaching |
 | `data/news.html` | News entries |
 | `assets/styles.css` | Shared styling and responsive layout |

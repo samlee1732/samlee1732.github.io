@@ -9,7 +9,13 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-hide-research-interests'
+NAV_SCRIPT_VERSION = '20261124-new-courses'
+COURSES = {
+    'robotics-applications': ('Robotics and Applications', '机器人学及应用'),
+    'automatic-control': ('Principles of Automatic Control', '自动控制原理'),
+    'robot-vision': ('Robot Vision', '机器人视觉'),
+    'machine-learning': ('Machine Learning', '机器学习'),
+}
 esc = html.escape
 
 
@@ -18,6 +24,7 @@ class SearchTextParser(HTMLParser):
 
     VOID_TAGS = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
                  'link', 'meta', 'param', 'source', 'track', 'wbr'}
+    SECTION_IDS = {'contact', 'research-interests', 'news', 'competitions', 'team', 'teaching'} | COURSES.keys()
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -31,7 +38,7 @@ class SearchTextParser(HTMLParser):
         if self.active is None:
             block = None
             if tag == 'section' and 'hidden' not in attrs:
-                if attrs.get('id') in {'contact', 'research-interests', 'news', 'competitions', 'team', 'teaching', 'robotics-applications', 'automatic-control'}:
+                if attrs.get('id') in self.SECTION_IDS:
                     block = attrs['id']
                 elif 'biography' in attrs.get('class', '').split():
                     block = 'about'
@@ -147,8 +154,9 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
         ('news', 'News · 最新动态', 'News', '新闻 动态 消息'),
         ('team', 'Team · 团队', 'Team', '团队 成员 实验室 合作者 合作 collaborators affiliation'),
         ('teaching', 'Teaching', 'Teaching', '教学 课程 授课 责任教师'),
-        ('robotics-applications', 'Robotics and Applications · 机器人学及应用', 'Teaching', '教学 课程 机器人学及应用'),
-        ('automatic-control', 'Principles of Automatic Control · 自动控制原理', 'Teaching', '教学 课程 自动控制原理'),
+    ) + tuple(
+        (slug, f'{title} · {title_zh}', 'Teaching', f'教学 课程 {title_zh}')
+        for slug, (title, title_zh) in COURSES.items()
     )
     for block, title, kind, keywords in sections:
         # Preserve words and punctuation across inline links in the biography.
@@ -163,7 +171,7 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
             emails = re.findall(r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}', text)
             if emails:
                 description = ' · '.join(emails) + ' · ' + text
-        if block in {'robotics-applications', 'automatic-control'}:
+        if block in COURSES:
             url = 'teaching/' + block + '/'
         elif block == 'competitions':
             url = 'teaching/#competitions'
@@ -450,7 +458,7 @@ def content_page(homepage, content, slug, title, description, source=None):
     compact = section in {'publications', 'team', 'teaching', 'news'}
     styles_version = {
         'news': '20261124-news-images',
-        'teaching': '20261124-course-layout',
+        'teaching': '20261124-teaching-catalog',
     }.get(section, '20261124-compact-pages-2' if compact else '20261114-teaching-competitions')
     header = site_header(homepage, prefix, section + '/')
     back_url = prefix + 'teaching/' if is_course else prefix
@@ -752,9 +760,7 @@ def main():
     teaching_folder.mkdir(exist_ok=True)
     (teaching_folder / 'index.html').write_text(content_page(homepage, teaching_content + '\n' + competitions_content, 'teaching', 'Teaching',
         'Courses and student competition mentorship at Shenzhen Polytechnic University.'))
-    for course_id, title in (
-            ('robotics-applications', 'Robotics and Applications'),
-            ('automatic-control', 'Principles of Automatic Control')):
+    for course_id, (title, _) in COURSES.items():
         course_content = (ROOT / 'data' / (course_id + '.html')).read_text()
         course_folder = teaching_folder / course_id
         course_folder.mkdir(exist_ok=True)
@@ -776,7 +782,7 @@ def main():
     entries = search_index(papers, reviews, patents, projects, homepage, news_content, competitions_content, team_content, teaching_content)
     (ROOT / 'assets/search-index.json').write_text(
         json.dumps(entries, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f'Generated Publication, Team, Teaching (including competitions), two course and News pages, a legacy competition redirect, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(projects)} project entries, {len(papers) + len(review_pages)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
+    print(f'Generated Publication, Team, Teaching (including competitions), News, {len(COURSES)} course pages, a legacy competition redirect, {len(reviews)} under-review entries, {len(patents)} patent entries, {len(projects)} project entries, {len(papers) + len(review_pages)} detail pages, {len(papers)} BibTeX files, and {len(entries)} search records.')
 
 
 if __name__ == '__main__':

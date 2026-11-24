@@ -155,8 +155,8 @@
   },
   {
     "title": "Teaching",
-    "text": "Teaching Teaching and student competition mentorship at Shenzhen Polytechnic University. Robotics and Applications 机器人学及应用 Principles of Automatic Control 自动控制原理 教学 课程 授课 责任教师",
-    "description": "Teaching Teaching and student competition mentorship at Shenzhen Polytechnic University. Robotics and Applications 机器人学及应用 Principles of Automatic Control 自动控制原理",
+    "text": "Teaching Teaching and student competition mentorship at Shenzhen Polytechnic University. Robotics and Applications 机器人学及应用 Principles of Automatic Control 自动控制原理 Robot Vision 机器人视觉 Machine Learning 机器学习 教学 课程 授课 责任教师",
+    "description": "Teaching Teaching and student competition mentorship at Shenzhen Polytechnic University. Robotics and Applications 机器人学及应用 Principles of Automatic Control 自动控制原理 Robot Vision 机器人视觉 Machine Learning 机器学习",
     "url": "teaching/",
     "kind": "Teaching"
   },
@@ -172,6 +172,20 @@
     "text": "Principles of Automatic Control 自动控制原理 Shenzhen Polytechnic University Course Information & Materials · 课程资料 Course details and materials have not been added yet. 课程介绍与教学资料待补充。 教学 课程 自动控制原理",
     "description": "Principles of Automatic Control 自动控制原理 Shenzhen Polytechnic University Course Information & Materials · 课程资料 Course details and materials have not been added yet. 课程介绍与教学资料待补充。",
     "url": "teaching/automatic-control/",
+    "kind": "Teaching"
+  },
+  {
+    "title": "Robot Vision · 机器人视觉",
+    "text": "Robot Vision 机器人视觉 Shenzhen Polytechnic University Course Information & Materials · 课程资料 Course details and materials have not been added yet. 课程介绍与教学资料待补充。 教学 课程 机器人视觉",
+    "description": "Robot Vision 机器人视觉 Shenzhen Polytechnic University Course Information & Materials · 课程资料 Course details and materials have not been added yet. 课程介绍与教学资料待补充。",
+    "url": "teaching/robot-vision/",
+    "kind": "Teaching"
+  },
+  {
+    "title": "Machine Learning · 机器学习",
+    "text": "Machine Learning 机器学习 Shenzhen Polytechnic University Course Information & Materials · 课程资料 Course details and materials have not been added yet. 课程介绍与教学资料待补充。 教学 课程 机器学习",
+    "description": "Machine Learning 机器学习 Shenzhen Polytechnic University Course Information & Materials · 课程资料 Course details and materials have not been added yet. 课程介绍与教学资料待补充。",
+    "url": "teaching/machine-learning/",
     "kind": "Teaching"
   }
 ]
