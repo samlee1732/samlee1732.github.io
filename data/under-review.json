@@ -86,10 +86,10 @@
     ],
     "journal": "IEEE Robotics and Automation Letters (RA-L)",
     "private_workspace_url": "https://github.com/samlee1732/ral-visuotactile-sensing",
-    "image": "previews/visuotactile-force-sensing-door.webp",
+    "image": "previews/visuotactile-force-sensing-door-ur.webp",
     "image_width": 1200,
     "image_height": 600,
-    "image_alt": "Conceptual illustration of a LEAP Hand gripping a lever handle on a partly open door.",
+    "image_alt": "Conceptual illustration of a UR-mounted LEAP Hand gripping a door handle with the fingertip pads lightly pixelated.",
     "image_caption": "Conceptual illustration of door opening."
   }
 ]
