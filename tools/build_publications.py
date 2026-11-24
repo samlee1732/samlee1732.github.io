@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-pcb-notes'
+NAV_SCRIPT_VERSION = '20261124-team-collaborator'
 PCB_COURSE_ROUTE = 'teaching/pcb-design'
 PCB_PRACTICES = {
     'led-indicator-board': (
@@ -479,6 +479,7 @@ def content_page(homepage, content, slug, title, description, source=None, back=
     compact = section in {'publications', 'team', 'teaching', 'news'}
     styles_version = {
         'news': '20261124-news-images',
+        'team': '20261124-team-collaborator',
         'teaching': '20261124-motor-drive-practice',
     }.get(section, '20261124-compact-pages-2' if compact else '20261114-teaching-competitions')
     header = site_header(homepage, prefix, section + '/')
