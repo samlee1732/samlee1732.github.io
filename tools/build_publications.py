@@ -151,7 +151,9 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
         ('automatic-control', 'Principles of Automatic Control · 自动控制原理', 'Teaching', '教学 课程 自动控制原理'),
     )
     for block, title, kind, keywords in sections:
-        text = ' '.join(' '.join(parser.blocks.get(block, [])).split())
+        # Preserve words and punctuation across inline links in the biography.
+        separator = '' if block == 'about' else ' '
+        text = ' '.join(separator.join(parser.blocks.get(block, [])).split())
         if not text:
             if block == 'research-interests':
                 continue
