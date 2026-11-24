@@ -9,9 +9,20 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-led-practice-page'
-PCB_LAB_ROUTE = 'teaching/pcb-design/led-indicator-board'
-PCB_LAB_TITLE = 'PCB Mini Lab · 5 V LED 指示灯板'
+NAV_SCRIPT_VERSION = '20261124-motor-drive-practice'
+PCB_COURSE_ROUTE = 'teaching/pcb-design'
+PCB_PRACTICES = {
+    'led-indicator-board': (
+        'PCB Mini Lab · 5 V LED 指示灯板',
+        'An Altium Designer mini lab on designing and verifying a 5 V LED indicator board.',
+        'pcb-mini-lab',
+    ),
+    'motor-drive-control-board': (
+        'PCB Mini Lab · 电机驱动与主控一体板设计',
+        'A PCB mini lab on integrating a microcontroller and two motor drive channels for an intelligent car.',
+        'pcb-motor-drive-lab',
+    ),
+}
 COURSES = {
     'robotics-applications': ('Robotics and Applications', '机器人学及应用'),
     'automatic-control': ('Principles of Automatic Control', '自动控制原理'),
@@ -28,8 +39,7 @@ class SearchTextParser(HTMLParser):
 
     VOID_TAGS = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
                  'link', 'meta', 'param', 'source', 'track', 'wbr'}
-    SECTION_IDS = {'contact', 'research-interests', 'news', 'competitions', 'team', 'teaching',
-                   'led-indicator-board'} | COURSES.keys()
+    SECTION_IDS = {'contact', 'research-interests', 'news', 'competitions', 'team', 'teaching'} | COURSES.keys() | PCB_PRACTICES.keys()
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -159,7 +169,9 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
         ('news', 'News · 最新动态', 'News', '新闻 动态 消息'),
         ('team', 'Team · 团队', 'Team', '团队 成员 实验室 合作者 合作 collaborators affiliation'),
         ('teaching', 'Teaching', 'Teaching', '教学 课程 授课 责任教师'),
-        ('led-indicator-board', PCB_LAB_TITLE, 'Teaching', '教学 PCB 印制电路板 实践'),
+    ) + tuple(
+        (slug, title, 'Teaching', '教学 PCB 印制电路板 实践')
+        for slug, (title, _, _) in PCB_PRACTICES.items()
     ) + tuple(
         (slug, f'{title} · {title_zh}', 'Teaching', f'教学 课程 {title_zh}')
         for slug, (title, title_zh) in COURSES.items()
@@ -179,8 +191,8 @@ def search_index(papers, reviews, patents, projects, homepage, news_content, com
                 description = ' · '.join(emails) + ' · ' + text
         if block in COURSES:
             url = 'teaching/' + block + '/'
-        elif block == 'led-indicator-board':
-            url = PCB_LAB_ROUTE + '/'
+        elif block in PCB_PRACTICES:
+            url = f'{PCB_COURSE_ROUTE}/{block}/'
         elif block == 'competitions':
             url = 'teaching/#competitions'
         else:
@@ -467,7 +479,7 @@ def content_page(homepage, content, slug, title, description, source=None, back=
     compact = section in {'publications', 'team', 'teaching', 'news'}
     styles_version = {
         'news': '20261124-news-images',
-        'teaching': '20261124-led-practice-page',
+        'teaching': '20261124-motor-drive-practice',
     }.get(section, '20261124-compact-pages-2' if compact else '20261114-teaching-competitions')
     header = site_header(homepage, prefix, section + '/')
     back_path, back_label = back or (('teaching/', 'Teaching') if is_course else ('', 'Homepage'))
@@ -774,20 +786,22 @@ def main():
         course_folder.mkdir(exist_ok=True)
         summary = {
             'robotics-applications': 'Course introduction, instructor information, teaching schedule, and robot platform resources.',
-            'pcb-design': 'An Altium Designer mini lab on designing and verifying a 5 V LED indicator board.',
+            'pcb-design': 'PCB mini labs on an LED indicator board and an integrated motor drive and control board.',
         }.get(course_id, 'Course details and materials will be added.')
         description = f'{title} at Shenzhen Polytechnic University. {summary}'
         (course_folder / 'index.html').write_text(content_page(homepage, course_content,
             'teaching/' + course_id, title, description, source=course_id))
         teaching_content += '\n' + course_content
-    lab_content = (ROOT / 'data/pcb-led-indicator-board.html').read_text()
-    lab_folder = ROOT / PCB_LAB_ROUTE
-    lab_folder.mkdir(parents=True, exist_ok=True)
-    (lab_folder / 'index.html').write_text(content_page(
-        homepage, lab_content, PCB_LAB_ROUTE, PCB_LAB_TITLE,
-        'An Altium Designer mini lab on designing and verifying a 5 V LED indicator board.',
-        source='pcb-led-indicator-board', back=('teaching/pcb-design/#pcb-mini-lab', 'PCB Design')))
-    teaching_content += '\n' + lab_content
+    for lab_id, (title, description, course_anchor) in PCB_PRACTICES.items():
+        source = f'pcb-{lab_id}'
+        lab_content = (ROOT / 'data' / (source + '.html')).read_text()
+        route = f'{PCB_COURSE_ROUTE}/{lab_id}'
+        lab_folder = ROOT / route
+        lab_folder.mkdir(parents=True, exist_ok=True)
+        (lab_folder / 'index.html').write_text(content_page(
+            homepage, lab_content, route, title, description,
+            source=source, back=(f'{PCB_COURSE_ROUTE}/#{course_anchor}', 'PCB Design')))
+        teaching_content += '\n' + lab_content
     for paper in papers:
         folder = publications_folder / paper['id']
         folder.mkdir(parents=True, exist_ok=True)

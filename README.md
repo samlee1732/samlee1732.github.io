@@ -45,6 +45,7 @@ Open [http://127.0.0.1:8080](http://127.0.0.1:8080). Use the local server so tha
 | `data/mechanical-design.html` | Mechanical Design course |
 | `data/pcb-design.html` | PCB Design course |
 | `data/pcb-led-indicator-board.html` | LED indicator board mini lab |
+| `data/pcb-motor-drive-control-board.html` | Integrated motor drive and control board mini lab |
 | `data/competitions.html` | Student competitions within Teaching |
 | `data/news.html` | News entries |
 | `assets/styles.css` | Shared styling and responsive layout |

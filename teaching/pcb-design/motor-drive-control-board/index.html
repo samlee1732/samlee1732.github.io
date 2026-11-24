@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" class="compact-page">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A PCB mini lab on integrating a microcontroller and two motor drive channels for an intelligent car.">
+    <meta name="theme-color" content="#92316f">
+    <title>PCB Mini Lab · 电机驱动与主控一体板设计 | SenseDex Lab</title>
+    <link rel="icon" href="../../../assets/sensedex-mark-small.png" type="image/png">
+    <link rel="apple-touch-icon" href="../../../assets/sensedex-mark-small.png">
+    <link rel="stylesheet" href="../../../assets/styles.css?v=20261124-motor-drive-practice">
+    <script src="../../../assets/main.js?v=20261124-motor-drive-practice" defer></script>
+    <script src="../../../assets/visits.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../../" aria-label="SenseDex Lab homepage">
+          <span class="brand-heading">
+            <img class="brand-mark" src="../../../assets/sensedex-mark-small.png" alt="" width="192" height="192">
+            <span class="brand-name">SenseDex Lab</span>
+          </span>
+          <span class="brand-subtitle">Sensing and Dexterous Manipulation Laboratory</span>
+          <span class="brand-subtitle-zh" lang="zh-CN">感知与灵巧操作实验室</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" aria-label="Open navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <nav id="main-navigation" class="main-navigation" aria-label="Main navigation">
+          <a class="nav-link" href="../../../">Homepage</a>
+          <a class="nav-link" href="../../../publications/">Publication</a>
+          <a class="nav-link" href="../../../team/">Team</a>
+          <a class="nav-link is-current" href="../../../teaching/" aria-current="page">Teaching</a>
+          <a class="nav-link" href="../../../news/">News</a>
+        </nav>
+        <div class="site-search">
+          <button class="search-toggle" type="button" aria-expanded="false" aria-controls="site-search-panel" aria-label="Open search">
+            <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><defs><linearGradient id="search-gradient" x1="0" x2="1"><stop offset="0" stop-color="#d41465"/><stop offset="1" stop-color="#1756a5"/></linearGradient></defs><circle cx="13.5" cy="13.5" r="9.5"/><path d="m21 21 7 7"/></svg>
+          </button>
+          <div id="site-search-panel" class="search-panel" hidden>
+            <form class="search-form" role="search">
+              <label class="visually-hidden" for="site-search-input">Search this website / 搜索本站</label>
+              <input id="site-search-input" type="search" name="q" placeholder="Search…" autocomplete="off" spellcheck="false" maxlength="200" aria-describedby="search-status">
+              <button class="search-submit" type="submit" aria-label="Search"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="m9 4 8 8-8 8"/></svg></button>
+            </form>
+            <p id="search-status" class="search-status" role="status" aria-live="polite" hidden></p>
+            <ol class="search-results" aria-label="Search results" hidden></ol>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main id="main-content" class="container main-content news-page">
+      <a class="paper-back" href="../../../teaching/pcb-design/#pcb-motor-drive-lab">← PCB Design</a>
+      <!-- Page content is maintained in data/pcb-motor-drive-control-board.html. -->
+      <section id="motor-drive-control-board" class="news course-page pcb-practice" aria-labelledby="motor-drive-board-heading" tabindex="-1" lang="zh-CN">
+        <h1 id="motor-drive-board-heading"><span lang="en">PCB Mini Lab</span> · 电机驱动与主控一体板设计</h1>
+        <p lang="en">Integrated Motor Drive and Control Board Design</p>
+        <p>以 <a href="../../#national-intelligent-car-race" lang="en">National University Students Intelligent Car Race</a> 的轮腿式智能车为背景，选取车轮驱动子系统开展台架练习。在同一块 PCB 上集成主控、稳压电源和两路电机驱动。</p>
+
+        <h2>设计输入</h2>
+        <p>练习以两台 6 V 有刷直流减速电机和一个 3.3 V 主控为例，电机分别对应两路车轮驱动。先记录电机的额定电压、正常工作电流和堵转电流，再核对驱动器的供电范围、限流方式及散热条件。DRV8833 可作为双 H 桥驱动器的选型参考。</p>
+
+        <h2>板级结构</h2>
+        <ul>
+          <li><strong>电源。</strong> 电源输入分成两路，一路给 H 桥供电，另一路稳压到 3.3 V 给主控供电。电机端和主控端共地，并预留电源测试点。</li>
+          <li><strong>主控。</strong> 保留下载调试接口，输出 PWM 和方向控制信号。预留两路编码器反馈接口，核对编码器与主控的信号电平。</li>
+          <li><strong>电机驱动。</strong> 两路 H 桥分别连接电机端子。按所选器件的数据手册设计去耦、限流和使能电路，使主控上电和复位时默认禁止驱动。</li>
+        </ul>
+
+        <h2>实践步骤</h2>
+        <ol>
+          <li><strong>画原理图。</strong> 按电源、主控和驱动三部分整理原理图，标出各接口的电压、电流及引脚功能，并核对器件封装。</li>
+          <li><strong>完成布局与布线。</strong> 让驱动器靠近电机端子，供电电容靠近驱动器的电源引脚。按预计电流确定功率走线宽度及过孔数量，缩短电机电流回路，让电机回流远离主控复位和编码器信号。</li>
+          <li><strong>检查与验证。</strong> 运行 ERC 和 DRC，检查网表、极性及间距。若制作样板，在限流电源下先测稳压输出和主控复位状态，再固定电机，分别验证单路和双路空载启停、正反转及 PWM 调速。</li>
+        </ol>
+
+        <h2>提交与验收</h2>
+        <p>提交板级框图、器件选型记录、Altium 工程、DRC 报告及 Gerber 和钻孔文件。核对两路驱动与主控接口的对应关系。若已完成台架验证，记录电源电压与电机电流，并确认主控复位时电机停止、两路同时启动时主控正常运行。</p>
+
+        <h2>参考资料</h2>
+        <ul>
+          <li><a href="https://jwc.xjtu.edu.cn/info/1172/10131.htm">全国大学生智能汽车竞赛通知与竞速规则入口</a></li>
+          <li><a href="https://www.ti.com/lit/ds/symlink/drv8833.pdf">TI DRV8833 双 H 桥驱动器数据手册</a></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
