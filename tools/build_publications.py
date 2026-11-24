@@ -9,12 +9,12 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-motor-drive-practice'
+NAV_SCRIPT_VERSION = '20261124-pcb-notes'
 PCB_COURSE_ROUTE = 'teaching/pcb-design'
 PCB_PRACTICES = {
     'led-indicator-board': (
-        'PCB Mini Lab · 5 V LED 指示灯板',
-        'An Altium Designer mini lab on designing and verifying a 5 V LED indicator board.',
+        'Altium Designer 常见问题与电路焊接笔记',
+        'Altium Designer troubleshooting and soldering notes using a 5 V LED indicator board as an example.',
         'pcb-mini-lab',
     ),
     'motor-drive-control-board': (
@@ -786,7 +786,7 @@ def main():
         course_folder.mkdir(exist_ok=True)
         summary = {
             'robotics-applications': 'Course introduction, instructor information, teaching schedule, and robot platform resources.',
-            'pcb-design': 'PCB mini labs on an LED indicator board and an integrated motor drive and control board.',
+            'pcb-design': 'Altium Designer troubleshooting and soldering notes, plus an integrated motor drive and control board mini lab.',
         }.get(course_id, 'Course details and materials will be added.')
         description = f'{title} at Shenzhen Polytechnic University. {summary}'
         (course_folder / 'index.html').write_text(content_page(homepage, course_content,
