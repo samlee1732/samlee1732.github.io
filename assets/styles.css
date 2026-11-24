@@ -65,6 +65,7 @@ a { color: inherit; }
 .main-content { padding-top: clamp(52px, 3.72vw, 102px); padding-bottom: 18px; }
 .biography { font-size: clamp(16px, 1.15vw, 31.4px); line-height: 1.66; overflow-wrap: break-word; }
 .biography p { margin: 0; }
+#about a { text-decoration: none; }
 .section-divider { border: 0; border-top: 3px solid var(--line); margin: clamp(31px, 2.27vw, 62px) 0 clamp(31px, 2.27vw, 62px); }
 .closing-divider { margin-bottom: 0; }
 .site-footer { padding-block: 8px 30px; color: var(--muted); font-size: 13px; line-height: 1.8; text-align: center; }
