@@ -1,26 +1,27 @@
       <section id="led-indicator-board" class="news course-page pcb-practice" aria-labelledby="pcb-mini-lab-heading" tabindex="-1" lang="zh-CN">
         <h1 id="pcb-mini-lab-heading"><span lang="en">Altium Designer</span> 常见问题与电路焊接笔记</h1>
-        <p>以 5 V 双层 LED 指示灯板为例，记录 Altium Designer 中原理图与封装核对、布线、铺铜及生产文件导出的要点，以及电路板焊接和上电检查的方法。</p>
+        <p>以一块基于 STM32 的柔性传感器控制与采集板为例，介绍在 Altium Designer 中完成原理图设计、双层 PCB 布局布线、生产文件导出及焊接调试的流程。板上集成柔性传感器接口、模拟信号调理电路和 STM32 主控，并使用 STM32 片内模数转换器（ADC）采集传感器信号。</p>
 
         <h2>电路与器件</h2>
-        <p><strong>+5 V → R1（470 Ω）→ D1（红色 LED）→ GND</strong></p>
-        <p>用两针接头 J1 引入 5 V 和 GND，R1 和 D1 选用 0805 封装。若 D1 的正向压降约为 2.0 V，串联电流约为 (5.0 − 2.0) / 470 ≈ 6.4 mA。实际选型时以所用器件的数据手册为准。</p>
+        <p><strong>柔性传感器 → 模拟信号调理 → STM32 片内 ADC → 采样数据</strong></p>
+        <p>以电阻型柔性传感器为例，用传感器与固定电阻组成分压电路，把阻值变化转换为电压变化，再经低通滤波送入 ADC。根据传感器阻值范围和所选 STM32 的数据手册确定分压电阻与滤波参数，核对 ADC 输入电压范围，并根据调理电路的输出阻抗设置 ADC 采样时间。</p>
 
         <h2>实践步骤</h2>
         <ol>
-          <li><strong>建立工程并绘制原理图。</strong> 新建 PCB 工程，以及原理图和 PCB 文件。给器件分配位号和封装，对照数据手册核对符号引脚与焊盘编号的对应关系，重点检查 J1 和 D1 的极性。</li>
-          <li><strong>同步原理图并布局。</strong> 验证原理图后执行 <span lang="en">Design → Update PCB Document</span>，检查并应用工程变更指令（ECO）。按板厂工艺设定线宽、间距和过孔规则。将 J1 放在板边，R1 靠近 D1，在丝印上标明电源端子和 LED 阴极。</li>
-          <li><strong>布线与铺铜。</strong> 在顶层完成电源和 LED 的串联走线。将 D1 阴极通过 GND 过孔接到底层 GND 铜皮。重铺铜皮并移除孤立铜区，确认 D1 阴极与 J1 的 GND 引脚连通。可尝试在走线与焊盘的连接处添加泪滴，再检查间距。</li>
+          <li><strong>建立工程并绘制原理图。</strong> 新建 PCB 工程、原理图和 PCB 文件。按电源、传感器接口、信号调理及 STM32 主控划分原理图。对照数据手册核对引脚与焊盘编号，重点检查 ADC 通道、模拟供电与参考电压的接法，并预留调试接口和模拟信号测试点。</li>
+          <li><strong>同步原理图并布局。</strong> 验证原理图后执行 <span lang="en">Design → Update PCB Document</span>，检查并应用工程变更指令（ECO）。按板厂工艺设定线宽、间距和过孔规则。将传感器连接器放在板边，滤波元件靠近 ADC 输入引脚，电源去耦电容靠近对应供电引脚。在丝印上标明接口方向与测试点。</li>
+          <li><strong>布线与铺铜。</strong> 缩短模拟信号走线，并使其远离时钟及高电流开关走线。底层尽量保留连续的地平面，为模拟信号提供完整的回流路径。重铺铜后检查孤立铜区和接地连通性。</li>
           <li><strong>检查与导出。</strong> 运行批量设计规则检查（DRC），处理未布线、短路、线宽或间距违规。导出 Gerber 和 NC Drill 文件，复核板框和孔位。</li>
         </ol>
 
         <h2>提交与验收</h2>
-        <p>提交 Altium 工程（含原理图、PCB 文件和用到的自建封装库）、DRC 报告及生产文件。验收时检查引脚映射、丝印极性和 GND 连通性。</p>
-        <p>若已制作样板，可先给一个焊盘预上少量焊锡，定位并固定 0805 器件后再焊另一端。检查焊点有无连锡、电源与地之间有无短路后，用限流的 5 V 电源上电。观察 LED 是否亮起，并测量 R1 两端压降，用压降除以 470 Ω 得到实测电流。</p>
+        <p>提交 Altium 工程（含原理图、PCB 文件和用到的自建封装库）、DRC 报告及生产文件。验收时检查传感器接口引脚、ADC 通道分配、丝印标识和接地连通性。</p>
+        <p>手焊贴片电阻或电容时，可先给一个焊盘上锡，固定元件后再焊另一端。样板焊接完成后，检查器件方向、焊点有无连锡及电源对地有无短路，再用限流电源上电并核对各路供电。先用处于 ADC 输入范围内的已知电压验证采样读数，再接入柔性传感器，记录无负载和受力时的 ADC 数据，检查信号变化及是否出现饱和或异常波动。</p>
 
         <h2>参考资料</h2>
         <ul>
           <li><a href="https://zhuanlan.zhihu.com/p/48495826">森森不息《Altium designer_Buglist/焊接电路笔记》</a></li>
           <li>Altium Designer 官方文档 · <a href="https://www.altium.com/documentation/altium-designer/tutorial/creating-configuring-pcb-document">原理图与 PCB 同步</a> · <a href="https://www.altium.com/documentation/altium-designer/pcb/signal-layer-polygons">铺铜</a> · <a href="https://www.altium.com/documentation/altium-designer/pcb/drc/setting-up-running">DRC</a></li>
+          <li><a href="https://www.st.com/resource/en/application_note/an2834-how-to-optimize-the-adc-accuracy-in-the-stm32-mcus-stmicroelectronics.pdf">STMicroelectronics AN2834 · STM32 ADC 精度优化</a></li>
         </ul>
       </section>

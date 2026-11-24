@@ -9,12 +9,12 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-team-collaborator'
+NAV_SCRIPT_VERSION = '20261124-stm32-sensor-pcb'
 PCB_COURSE_ROUTE = 'teaching/pcb-design'
 PCB_PRACTICES = {
     'led-indicator-board': (
         'Altium Designer 常见问题与电路焊接笔记',
-        'Altium Designer troubleshooting and soldering notes using a 5 V LED indicator board as an example.',
+        'Altium Designer troubleshooting and soldering notes for a two-layer PCB that acquires flexible sensor signals using an STM32 microcontroller.',
         'pcb-mini-lab',
     ),
     'motor-drive-control-board': (
