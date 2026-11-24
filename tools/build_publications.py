@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-design-courses'
+NAV_SCRIPT_VERSION = '20261124-pcb-mini-lab'
 COURSES = {
     'robotics-applications': ('Robotics and Applications', '机器人学及应用'),
     'automatic-control': ('Principles of Automatic Control', '自动控制原理'),
@@ -461,7 +461,7 @@ def content_page(homepage, content, slug, title, description, source=None):
     compact = section in {'publications', 'team', 'teaching', 'news'}
     styles_version = {
         'news': '20261124-news-images',
-        'teaching': '20261124-course-row',
+        'teaching': '20261124-pcb-mini-lab',
     }.get(section, '20261124-compact-pages-2' if compact else '20261114-teaching-competitions')
     header = site_header(homepage, prefix, section + '/')
     back_url = prefix + 'teaching/' if is_course else prefix
@@ -767,8 +767,11 @@ def main():
         course_content = (ROOT / 'data' / (course_id + '.html')).read_text()
         course_folder = teaching_folder / course_id
         course_folder.mkdir(exist_ok=True)
-        description = (title + ' at Shenzhen Polytechnic University. Course introduction, instructor information, teaching schedule, and robot platform resources.'
-                       if course_id == 'robotics-applications' else title + ' at Shenzhen Polytechnic University. Course details and materials will be added.')
+        summary = {
+            'robotics-applications': 'Course introduction, instructor information, teaching schedule, and robot platform resources.',
+            'pcb-design': 'An Altium Designer mini lab on designing and verifying a 5 V LED indicator board.',
+        }.get(course_id, 'Course details and materials will be added.')
+        description = f'{title} at Shenzhen Polytechnic University. {summary}'
         (course_folder / 'index.html').write_text(content_page(homepage, course_content,
             'teaching/' + course_id, title, description, source=course_id))
         teaching_content += '\n' + course_content

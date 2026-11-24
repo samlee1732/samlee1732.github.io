@@ -2,9 +2,30 @@
         <h1 id="course-heading">PCB Design</h1>
         <p class="course-subtitle" lang="zh-CN">印制电路板设计</p>
         <p>Shenzhen Polytechnic University</p>
-        <section class="course-materials" aria-labelledby="course-materials-heading">
-          <h2 id="course-materials-heading">Course Information &amp; Materials <span lang="zh-CN">· 课程资料</span></h2>
-          <p>Course details and materials have not been added yet.</p>
-          <p lang="zh-CN">课程介绍与教学资料待补充。</p>
+        <section id="pcb-mini-lab" class="course-materials pcb-practice" aria-labelledby="pcb-mini-lab-heading" tabindex="-1" lang="zh-CN">
+          <h2 id="pcb-mini-lab-heading"><span lang="en">PCB Mini Lab</span> · 5 V LED 指示灯板</h2>
+          <p>用 Altium Designer 设计一块双层 LED 指示灯板，练习从原理图和封装核对到布线、铺铜及生产文件导出的流程。</p>
+
+          <h3>电路与器件</h3>
+          <p><strong>+5 V → R1（470 Ω）→ D1（红色 LED）→ GND</strong></p>
+          <p>用两针接头 J1 引入 5 V 和 GND，R1 和 D1 选用 0805 封装。若 D1 的正向压降约为 2.0 V，串联电流约为 (5.0 − 2.0) / 470 ≈ 6.4 mA。实际选型时以所用器件的数据手册为准。</p>
+
+          <h3>实践步骤</h3>
+          <ol>
+            <li><strong>建立工程并绘制原理图。</strong> 新建 PCB 工程，以及原理图和 PCB 文件。给器件分配位号和封装，对照数据手册核对符号引脚与焊盘编号的对应关系，重点检查 J1 和 D1 的极性。</li>
+            <li><strong>同步原理图并布局。</strong> 验证原理图后执行 <span lang="en">Design → Update PCB Document</span>，检查并应用工程变更指令（ECO）。按板厂工艺设定线宽、间距和过孔规则。将 J1 放在板边，R1 靠近 D1，在丝印上标明电源端子和 LED 阴极。</li>
+            <li><strong>布线与铺铜。</strong> 在顶层完成电源和 LED 的串联走线。将 D1 阴极通过 GND 过孔接到底层 GND 铜皮。重铺铜皮并移除孤立铜区，确认 D1 阴极与 J1 的 GND 引脚连通。可尝试在走线与焊盘的连接处添加泪滴，再检查间距。</li>
+            <li><strong>检查与导出。</strong> 运行批量设计规则检查（DRC），处理未布线、短路、线宽或间距违规。导出 Gerber 和 NC Drill 文件，复核板框和孔位。</li>
+          </ol>
+
+          <h3>提交与验收</h3>
+          <p>提交 Altium 工程（含原理图、PCB 文件和用到的自建封装库）、DRC 报告及生产文件。验收时检查引脚映射、丝印极性和 GND 连通性。</p>
+          <p>若已制作样板，可先给一个焊盘预上少量焊锡，定位并固定 0805 器件后再焊另一端。检查焊点有无连锡、电源与地之间有无短路后，用限流的 5 V 电源上电。观察 LED 是否亮起，并测量 R1 两端压降，用压降除以 470 Ω 得到实测电流。</p>
+
+          <h3>参考资料</h3>
+          <ul>
+            <li><a href="https://zhuanlan.zhihu.com/p/48495826">森森不息《Altium designer_Buglist/焊接电路笔记》</a></li>
+            <li>Altium Designer 官方文档 · <a href="https://www.altium.com/documentation/altium-designer/tutorial/creating-configuring-pcb-document">原理图与 PCB 同步</a> · <a href="https://www.altium.com/documentation/altium-designer/pcb/signal-layer-polygons">铺铜</a> · <a href="https://www.altium.com/documentation/altium-designer/pcb/drc/setting-up-running">DRC</a></li>
+          </ul>
         </section>
       </section>
