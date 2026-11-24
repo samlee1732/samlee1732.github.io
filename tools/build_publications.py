@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-raspberry-pi-usb-lab'
+NAV_SCRIPT_VERSION = '20261124-robotics-lecture-resources'
 PCB_COURSE_ROUTE = 'teaching/pcb-design'
 PCB_PRACTICES = {
     'led-indicator-board': (
@@ -492,7 +492,7 @@ def content_page(homepage, content, slug, title, description, source=None, back=
     source = source or slug
     source_notice = '' if is_publications else f'      <!-- Page content is maintained in data/{esc(source)}.html. -->\n'
     html_class = ' class="compact-page"' if compact else ''
-    course_styles = (f'\n    <link rel="stylesheet" href="{prefix}assets/course-syllabus.css?v=20261124-course-layout">'
+    course_styles = (f'\n    <link rel="stylesheet" href="{prefix}assets/course-syllabus.css?v=20261124-robotics-lecture-resources">'
                      if source == 'robotics-applications' else '')
     return f'''<!doctype html>
 <html lang="en"{html_class}>

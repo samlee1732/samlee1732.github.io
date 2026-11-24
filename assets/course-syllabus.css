@@ -19,6 +19,7 @@
 .course-syllabus .course-resource-list { margin-bottom: 14px; }
 .course-syllabus .course-schedule-list { margin: 24px 0 0; padding: 0; list-style: none; }
 .course-syllabus .course-schedule-list > li { margin: 0 0 24px; padding: 0; }
+.course-syllabus .course-schedule-list > li > .course-note { margin: 3px 0 0; }
 .course-syllabus .course-schedule-list .course-milestone { margin: 30px 0; }
 .course-syllabus .course-milestone p { margin: 3px 0 0; color: #6e6874; font-size: 16px; }
 @media (max-width: 600px) {
