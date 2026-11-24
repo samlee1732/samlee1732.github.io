@@ -46,6 +46,7 @@ Open [http://127.0.0.1:8080](http://127.0.0.1:8080). Use the local server so tha
 | `data/pcb-design.html` | PCB Design course |
 | `data/pcb-led-indicator-board.html` | Altium Designer troubleshooting and soldering notes |
 | `data/pcb-motor-drive-control-board.html` | Integrated motor drive and control board mini lab |
+| `data/pcb-raspberry-pi-usb-expansion-board.html` | Raspberry Pi multi-port USB expansion board mini lab |
 | `data/competitions.html` | Student competitions within Teaching |
 | `data/news.html` | News entries |
 | `assets/styles.css` | Shared styling and responsive layout |

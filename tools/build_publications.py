@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data/publications.json'
-NAV_SCRIPT_VERSION = '20261124-pcb-lab-titles'
+NAV_SCRIPT_VERSION = '20261124-raspberry-pi-usb-lab'
 PCB_COURSE_ROUTE = 'teaching/pcb-design'
 PCB_PRACTICES = {
     'led-indicator-board': (
@@ -21,6 +21,11 @@ PCB_PRACTICES = {
         'PCB Mini Lab · 电机驱动与主控一体板设计',
         'A PCB mini lab on integrating a microcontroller and two motor drive channels for an intelligent car.',
         'pcb-motor-drive-lab',
+    ),
+    'raspberry-pi-usb-expansion-board': (
+        'PCB Mini Lab · 树莓派多端口 USB 扩展板设计',
+        'A PCB mini lab on designing a multi-port USB expansion board for Raspberry Pi.',
+        'pcb-usb-expansion-lab',
     ),
 }
 COURSES = {
@@ -787,7 +792,7 @@ def main():
         course_folder.mkdir(exist_ok=True)
         summary = {
             'robotics-applications': 'Course introduction, instructor information, teaching schedule, and robot platform resources.',
-            'pcb-design': 'Altium Designer troubleshooting and soldering notes, plus an integrated motor drive and control board mini lab.',
+            'pcb-design': 'PCB mini labs on STM32 sensor acquisition, integrated motor drive and control, and USB expansion for Raspberry Pi.',
         }.get(course_id, 'Course details and materials will be added.')
         description = f'{title} at Shenzhen Polytechnic University. {summary}'
         (course_folder / 'index.html').write_text(content_page(homepage, course_content,
