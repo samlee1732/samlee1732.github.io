@@ -183,6 +183,7 @@ a { color: inherit; }
 .team-profiles > li { display: flex; align-items: center; gap: 14px; }
 .team-portrait { display: block; flex: none; width: clamp(60px, 12vw, 72px); aspect-ratio: 1; border: 1px solid #e1dae6; border-radius: 50%; background: #f4f1f6; }
 img.team-portrait { background: #fff; object-fit: contain; }
+.team-portrait--headroom { padding-top: clamp(6px, 1.2vw, 8px); }
 .team-portrait-crop { position: relative; overflow: hidden; }
 .team-portrait-crop > img { position: absolute; top: 0; left: 50%; width: 160%; max-width: none; height: auto; transform: translateX(-50%); }
 
